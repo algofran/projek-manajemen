@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectList extends Model
+class UserProductivity extends Model
 {
     use HasFactory;
-    protected $table = 'project_lists';
+    protected $table = 'user_productivitys';
     protected $primaryKey = 'id';
 }
