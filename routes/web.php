@@ -29,9 +29,8 @@ Route::middleware([
     })->name('dashboard');
 
     //Projek
-    Route::get('/project_lists', function () {
-        return view('project/lists');
-    });
+    Route::get('/project_lists', [ProjectController::class, 'index']);
+
     Route::get('/add_project', function () {
         return view('project/add');
     });
@@ -76,11 +75,3 @@ Route::middleware([
         return view('laporan/laporan');
     });
 });
-
-
-Route::resource('checkout', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([
-    'index'   => 'lists',
-    'store'   => 'store',
-    'update'  => 'confirm',
-    'destroy' => 'destroy',
-])->middleware('auth');
