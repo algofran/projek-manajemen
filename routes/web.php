@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,3 +76,11 @@ Route::middleware([
         return view('laporan/laporan');
     });
 });
+
+
+Route::resource('checkout', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([
+    'index'   => 'lists',
+    'store'   => 'store',
+    'update'  => 'confirm',
+    'destroy' => 'destroy',
+])->middleware('auth');
