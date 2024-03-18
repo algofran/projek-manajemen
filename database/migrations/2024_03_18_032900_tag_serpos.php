@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_lists', function (Blueprint $table) {
+        Schema::create('tag_serpos', function (Blueprint $table) {
             $table->id();
+            $table->integer('serpo_id');
+            $table->string('uraian', 100);
+            $table->text('user_id');
+            $table->date('date')->nullable();
+            $table->string('tagihan', 100);
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_lists');
+        Schema::dropIfExists('tag_serpos');
     }
 };
