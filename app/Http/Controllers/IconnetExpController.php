@@ -13,7 +13,8 @@ class IconnetExpController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('icon_plus.lists_iconnet');
     }
 
     /**
@@ -35,7 +36,7 @@ class IconnetExpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(IconnetExp $iconnetExp)
+    public function show(IconnetExpController $iconnetExp)
     {
         //
     }
@@ -43,7 +44,7 @@ class IconnetExpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(IconnetExp $iconnetExp)
+    public function edit(IconnetExpController $iconnetExp)
     {
         //
     }
@@ -51,7 +52,7 @@ class IconnetExpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIconnetExpRequest $request, IconnetExp $iconnetExp)
+    public function update(UpdateIconnetExpRequest $request, IconnetExpController $iconnetExp)
     {
         //
     }
@@ -59,7 +60,7 @@ class IconnetExpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(IconnetExp $iconnetExp)
+    public function destroy(IconnetExpController $iconnetExp)
     {
         //
     }
