@@ -39,90 +39,87 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($serpos as $serpo)
+                                    @php
+                                    $prog = ($serpo->PA / 30) * 100;
+                                    $prog = $prog > 0 ? number_format($prog) : $prog;
+                                    $tagIndex = $serpo->paket;
+                                    $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
+                                    @endphp
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $i++ }}</td>
                                     <td class="">
-                                        <div class="row">
-                                            <div class="col">
-                                                Konawe - Serpo SBU
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">Sulawesi & IBT 2022-2025 </div>
-                                        </div>
-    
+                                        {{ $paket }}
                                     </td>
-                                    <td>Februari 2023</td>
-                                    <td>Rp.100.000</td>
-                                    <td>
-                                        <span class="badge badge-success">Complate</span><br>
-                                        <span class="badge badge-danger">On-Hold</span><br>
-                                        <span class="badge badge-info">On-Progress</span>
+                                    <td>{{ ucwords($serpo->periode) }}</td>
+                                    <td>Rp. {{ number_format($serpo->tagihan, 0, ',', '.') }}</td>
+                                    <td class="text-center">
+                                        @php
+                                        $status = $stat[$iconnet->status];
+                                        @endphp
+                                        @switch($status)
+                                        @case('Pending')
+                                            <span class="badge badge-default">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('On-Progress')
+                                            <span class="badge badge-primary">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('On-Hold')
+                                            <span class="badge badge-warning">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('Complete')
+                                            <span class="badge badge-success">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('Finish')
+                                            <span class="badge badge-danger">{{ $status }}</span>
+                                            @break
+                                        
+                                        @default
+                                            <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
                                     </td>
-                                    <td>
-                                        <span class="badge badge-success">Sudah Dibayar</span><br>
-                                        <span class="badge badge-primary">Belum Ditagih</span><br>
-                                        <span class="badge badge-info">Sudah Ditagih</span>
-                                    </td>
-                                    <td class="text-end">
-                                        <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light me-2">
-                                                <i class="feather-edit"></i>
-                                            </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light">
-                                                <i class="feather-trash-2"></i>
-                                            </a>
-    
-    
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">
-                                                Papua 2 - Serpo SBU
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                Sulawesi & IBT 2022-2025
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Februari 2023</td>
-                                    <td>Rp.100.000</td>
-                                    <td>
-                                        <span class="badge badge-success">Complate</span><br>
-                                        <span class="badge badge-danger">On-Hold</span><br>
-                                        <span class="badge badge-info">On-Progress</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success">Sudah Dibayar</span><br>
-                                        <span class="badge badge-primary">Belum Ditagih</span><br>
-                                        <span class="badge badge-info">Sudah Ditagih</span>
+                                    <td class="text-center">
+                                        @php
+                                        $bayar = $pay[$serpo->payment];
+                                        @endphp
+                                    
+                                        @switch($bayar)
+                                            @case('Sudah Terbayar')
+                                                <span class="badge badge-success">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Belum Ditagih')
+                                                <span class="badge badge-danger">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Sudah Ditagih')
+                                                <span class="badge badge-info">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            
+                                            @default
+                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
                                     </td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                            <a href="{{ route('serpos.detail', ['pid' => $serpo->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light me-2">
+                                            <a href="{{ route('serpos.edit', ['id' => $serpo->id]) }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light">
+                                            <a href="{{ route('_serpos.del', ['id' => $serpo->id, 'periode' => $serpo->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
                                                 <i class="feather-trash-2"></i>
                                             </a>
-    
-    
                                         </div>
                                     </td>
                                 </tr>
-    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

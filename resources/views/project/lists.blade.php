@@ -122,6 +122,7 @@
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
