@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SerpoExpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +83,11 @@ Route::middleware([
     Route::get('/projects/{pid}/detail', [ProjectController::class, 'show'])->name('project.detail');
     Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
     Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
+
+    Route::get('/lists_serpo', [SerpoExpController::class, 'index'])->name('icon_plus.lists_serpo');
+    Route::get('/serpos/{pid}/detail', [SerpoExpController::class, 'show'])->name('serpos.detail');
+    Route::get('/serpos/{id}/edit', [SerpoExpController::class, 'edit'])->name('serpos.edit');
+    Route::get('/serpos/{id}/delete', [SerpoExpController::class, 'destroy'])->name('_serpos.del');
 });
 
 Route::resource('project', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([
