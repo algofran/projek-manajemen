@@ -3,6 +3,7 @@
 use App\Http\Controllers\IconnetExpController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SerpoExpController;
+use App\Http\Controllers\TelkomAksesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +96,10 @@ Route::middleware([
     Route::get('/serpos/{id}/edit', [SerpoExpController::class, 'edit'])->name('serpos.edit');
     Route::get('/serpos/{id}/delete', [SerpoExpController::class, 'destroy'])->name('_serpos.del');
 
+    Route::get('/lists_telkom', [TelkomAksesController::class, 'index'])->name('telkomakses.index');
+    Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
+    Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
+    Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('telkomakses.del');
 });
 
 Route::resource('project', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([
