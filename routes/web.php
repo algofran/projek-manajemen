@@ -77,6 +77,11 @@ Route::middleware([
     // Route::get('/laporan', function () {
     //     return view('laporan/laporan');
     // });
+
+    Route::get('/project_lists', [ProjectController::class, 'index'])->name('projec.lists');
+    Route::get('/projects/{pid}/detail', [ProjectController::class, 'show'])->name('project.detail');
+    Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
 });
 
 Route::resource('project', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([

@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectList extends Model
+class TaskLists extends Model
 {
     use HasFactory;
-    protected $tabel = 'project_lists';
+    protected $tabel = 'task_lists';
     protected $primaryKey = 'id';
 }

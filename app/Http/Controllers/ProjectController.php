@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProjectList;
+use App\Models\TaskLists;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -9,9 +11,37 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $i = 1;
+        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
+        $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
+        $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
+
+        if (isset($request->status)) {
+            $projects = ProjectList::where('status', $request->status)->orderByDesc('end_date')->get();
+        } else {
+            $projects = ProjectList::whereYear('end_date', date('Y'))->orderByDesc('end_date')->get();
+        }
+
+        foreach ($projects as $project) {
+            $tprog = TaskLists::where('project_id', $project->id)->count();
+            $cprog = TaskLists::where('project_id', $project->id)->where('status', 3)->count();
+            $prog = $tprog > 0 ? ($cprog / $tprog) * 100 : 0;
+            $prog = $prog > 0 ? number_format($prog, 2) : $prog;
+
+            $status = $stat[$project->status];
+            $paymentStatus = $pay[$project->payment_status];
+
+            $project->progress = $prog;
+            $project->status_label = $status;
+            $project->payment_label = $paymentStatus;
+            $project->tag = $tag[$project->pembayaran];
+            $project->vendor_tag = $vendor_tag[$project->vendor];
+        }
+
+        return view('project.lists', compact('i', 'projects'));
     }
 
     /**
