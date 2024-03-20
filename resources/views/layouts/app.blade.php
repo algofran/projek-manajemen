@@ -258,6 +258,9 @@
         
                             </ul>
                         </li>
+                        <li>
+                            <a href="{{ __('lists_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
+                        </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-book"></i> <span> Laporan</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">

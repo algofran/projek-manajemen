@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IconnetExpController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SerpoExpController;
 use App\Http\Controllers\TelkomAksesController;
@@ -100,6 +101,9 @@ Route::middleware([
     Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
     Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
     Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('telkomakses.del');
+
+    Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('sales.index');
+    Route::get('/sales/{id}/delete', [PenjualanController::class, 'destroy'])->name('sales.del');
 });
 
 Route::resource('project', ProjectController::class)->only(['index', 'store', 'update', 'destroy'])->names([
