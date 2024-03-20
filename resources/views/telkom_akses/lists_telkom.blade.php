@@ -41,86 +41,89 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($telkomAkses as $data)
+                                @php
+                                $prog = ($data->PA / 300) * 100;
+                                $prog = $prog > 0 ? number_format($prog) : $prog;
+                                @endphp
                                 <tr>
-                                    <td>1</td>
-                                    <td>Februari 2023</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ ucwords($data->periode) }}</td>
+                                    <td>{{ $data->keterangan }}</td>
+                                    <td>{{ $data->PA }}</td>
                                     <td>
                                         <div class="progress m-none mt-xs dark">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                                                25%%
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: {{ $prog }}%;">
+                                                {{ $prog }} %
                                             </div>
                                         </div>
                                     </td>
-                                    <td>Rp.100.000</td>
+                                    <td>Rp. {{ number_format($data->tagihan, 0, ',', '.') }}</td>
                                     <td>
-                                        <span class="badge badge-success">Complate</span><br>
-                                        <span class="badge badge-danger">On-Hold</span><br>
-                                        <span class="badge badge-info">On-Progress</span>
+                                        @php
+                                        $status = $stat[$data->status];
+                                        @endphp
+                                        @switch($status)
+                                        @case('Pending')
+                                            <span class="badge badge-default">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('On-Progress')
+                                            <span class="badge badge-primary">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('On-Hold')
+                                            <span class="badge badge-warning">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('Complete')
+                                            <span class="badge badge-success">{{ $status }}</span>
+                                            @break
+                                        
+                                        @case('Finish')
+                                            <span class="badge badge-danger">{{ $status }}</span>
+                                            @break
+                                        
+                                        @default
+                                            <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
                                     </td>
                                     <td>
-                                        <span class="badge badge-success">Sudah Dibayar</span><br>
-                                        <span class="badge badge-primary">Belum Ditagih</span><br>
-                                        <span class="badge badge-info">Sudah Ditagih</span>
+                                        @php
+                                        $bayar = $pay[$data->payment];
+                                        @endphp
+                                    
+                                        @switch($bayar)
+                                            @case('Sudah Terbayar')
+                                                <span class="badge badge-success">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Belum Ditagih')
+                                                <span class="badge badge-danger">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Sudah Ditagih')
+                                                <span class="badge badge-info">{{ $bayar }}</span>
+                                                @break
+                                            @default
+                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
                                     </td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                            <a href="{{ route('telkomakses.detail', ['pid' => $data->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light me-2">
+                                            <a href="{{ route('telkomakses.edit', ['id' => $data->id]) }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light">
+                                            <a href="{{ route('telkomakses.del', ['id' => $data->id, 'periode' => $data->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
                                                 <i class="feather-trash-2"></i>
                                             </a>
-    
-    
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Februari 2023</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-    
-                                        <div class="progress m-none mt-xs dark">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                50%
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Rp.150.000</td>
-                                    <td>
-                                        <span class="badge badge-success">Complate</span><br>
-                                        <span class="badge badge-danger">On-Hold</span><br>
-                                        <span class="badge badge-info">On-Progress</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success">Sudah Dibayar</span><br>
-                                        <span class="badge badge-primary">Belum Ditagih</span><br>
-                                        <span class="badge badge-info">Sudah Ditagih</span>
-                                    </td>
-                                    <td class="text-end">
-                                        <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light me-2">
-                                                <i class="feather-edit"></i>
-                                            </a>
-                                            <a href="edit-sports.html" class="btn btn-sm bg-danger-light">
-                                                <i class="feather-trash-2"></i>
-                                            </a>
-    
-    
-                                        </div>
-                                    </td>
-                                </tr>
-    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
