@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="assets/plugins/alertify/alertify.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="assets/select/select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    {{-- <link rel="stylesheet" href="assets/select2/select2.css" /> --}}
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
         <!-- Styles -->
@@ -333,6 +335,8 @@
             <script src="assets/js/jquery-ui.min.js"></script>
             <script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
             <script src="assets/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+
+            <script src="assets/select/select.js"></script>
             
             <script src="assets/js/script.js"></script>
             @livewireScripts

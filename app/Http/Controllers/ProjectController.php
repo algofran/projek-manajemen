@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectList;
 use App\Models\TaskLists;
+use App\Models\User;
+use App\Models\UserEmploye;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -51,13 +53,68 @@ class ProjectController extends Controller
     {
         //
     }
+    public function inputprojek()
+    {
+        $employees = UserEmploye::where('type', '>', 0)->orderBy('firstname')->get();
+        $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+        return view('project.add', [
+            'employees' => $employees,
+            'managers' => $managers,
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'po_number' => 'nullable|string|max:255',
+            'manager_id' => 'nullable|integer',
+            'invoice' => 'nullable|string|max:255',
+            'invoice_date' => 'nullable|date',
+            'pembayaran' => 'nullable|string|max:255',
+            'vendor' => 'nullable|string|max:255',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'user_ids' => 'nullable|array',
+            'user_ids.*' => 'integer',
+            'payment_status' => 'nullable|integer',
+            'status' => 'nullable|integer',
+            'fakturpajak' => 'nullable|string|max:255',
+            'fp_date' => 'nullable|date',
+            'description' => 'nullable|string',
+        ]);
+
+        $userIds = $request->input('user_ids');
+        $userIdsString = implode(',', $userIds); // Mengonversi array menjadi string
+
+        // Buat objek Project baru
+        $project = new ProjectList([
+            'name' => $request->input('name'),
+            'po_number' => $request->input('po_number'),
+            'manager_id' => $request->input('manager_id'),
+            'user_ids' => $userIdsString,
+            'invoice' => $request->input('invoice'),
+            'inv_date' => $request->input('invoice_date'),
+            'pembayaran' => $request->input('pembayaran'),
+            'vendor' => $request->input('vendor'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'payment_status' => $request->input('payment_status'),
+            'status' => $request->input('status'),
+            'fakturpajak' => $request->input('fakturpajak'),
+            'fp_date' => $request->input('fp_date'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Simpan proyek
+        $project->save();
+
+        // Redirect ke halaman yang sesuai atau beri respons JSON
+        return redirect()->route('project.store')->with('success', 'Project created successfully!');
     }
 
     /**

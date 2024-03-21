@@ -38,9 +38,9 @@ Route::middleware([
 
 
     // });
-    // Route::get('/add_project', function () {
-    //     return view('project/add');
-    // });
+    Route::get('/add_project', function () {
+        return view('project/add');
+    });
 
     // //Icon Plus
     // Route::get('/lists_serpo', function () {
@@ -83,7 +83,9 @@ Route::middleware([
     // });
 
     Route::get('/project_lists', [ProjectController::class, 'index'])->name('projec.lists');
-    Route::get('/projects/{pid}/detail', [ProjectController::class, 'show'])->name('project.detail');
+    Route::get('/add_project', [ProjectController::class, 'inputprojek'])->name('project.lists');
+    Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
+    Route::post('/project_lists', [ProjectController::class, 'store'])->name('project.store');
     Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
     Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
 

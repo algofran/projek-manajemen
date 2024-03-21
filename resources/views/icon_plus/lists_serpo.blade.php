@@ -55,7 +55,7 @@
                                     <td>Rp. {{ number_format($serpo->tagihan, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         @php
-                                        $status = $stat[$iconnet->status];
+                                        $status = $stat[$serpo->status];
                                         @endphp
                                         @switch($status)
                                         @case('Pending')
