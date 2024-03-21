@@ -82,17 +82,18 @@ Route::middleware([
     //     return view('laporan/laporan');
     // });
 
-    Route::get('/project_lists', [ProjectController::class, 'index'])->name('projec.lists');
+    Route::get('/project_lists', [ProjectController::class, 'index'])->name('project.lists');
     Route::get('/add_project', [ProjectController::class, 'inputprojek'])->name('project.lists');
     Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
     Route::post('/project_lists', [ProjectController::class, 'store'])->name('project.store');
-    Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::get('/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::post('/{id}', [ProjectController::class, 'update'])->name('project.update');
     Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
 
     Route::get('/lists_iconnet', [IconnetExpController::class, 'index'])->name('icon_plus.lists_iconnet');
-    Route::get('/projects/{pid}/detail', [IconnetExpController::class, 'show'])->name('project.detail');
-    Route::get('/projects/{id}/edit', [IconnetExpController::class, 'edit'])->name('project.edit');
-    Route::get('/projects/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_project.del');
+    Route::get('/iconnet/{pid}/detail', [IconnetExpController::class, 'show'])->name('project.detail');
+    Route::get('/iconnet/{id}/edit', [IconnetExpController::class, 'edit'])->name('iconnet.edit');
+    Route::get('/iconnet/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_iconnet.del');
 
     Route::get('/lists_serpo', [SerpoExpController::class, 'index'])->name('icon_plus.lists_serpo');
     Route::get('/serpos/{pid}/detail', [SerpoExpController::class, 'show'])->name('serpos.detail');
