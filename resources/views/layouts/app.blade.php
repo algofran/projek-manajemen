@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Dashboard</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/feather/feather.css">
-    <link rel="stylesheet" href="assets/plugins/icons/flags/flags.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-    <link rel="stylesheet" href="assets/plugins/alertify/alertify.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assets/select/select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    {{-- <link rel="stylesheet" href="assets/select2/select2.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/feather/feather.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icons/flags/flags.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/alertify/alertify.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/select/select.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/select2/select2.css" /> --}}
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
         <!-- Styles -->
@@ -39,7 +39,7 @@
                     <h2 class="">LOGO</h2>
                 </a>
                 <a href="index.php?page=dashboard" class="logo logo-small">
-                    <!-- <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30"> -->
+                    <!-- <img src="{{ asset('assets/img/logo-small.png ' ) }}" alt="Logo" width="30" height="30"> -->
                     <h2 class="">LOGO</h2>
                 </a>
             </div>
@@ -64,7 +64,7 @@
 
                 <li class="nav-item dropdown noti-dropdown me-2">
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="assets/img/icons/header-icon-05.svg" alt="">
+                        <img src="{{ asset('assets/img/icons/header-icon-05.svg ' ) }}" alt="">
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
@@ -77,7 +77,7 @@
                                     <a href="#">
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-02.jpg ' ) }}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
@@ -92,7 +92,7 @@
                                     <a href="#">
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-11.jpg">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-11.jpg ' ) }}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">International Software
@@ -107,7 +107,7 @@
                                     <a href="#">
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-17.jpg">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-17.jpg' ) }}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">John Hendry</span> sent
@@ -123,7 +123,7 @@
                                     <a href="#">
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-13.jpg">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-13.jpg' ) }}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Mercury Software
@@ -145,14 +145,14 @@
 
                 <li class="nav-item zoom-screen me-2">
                     <a href="#" class="nav-link header-nav-list win-maximize">
-                        <img src="assets/img/icons/header-icon-04.svg" alt="">
+                        <img src="{{ asset('assets/img/icons/header-icon-04.svg' ) }}" alt="">
                     </a>
                 </li>
 
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Soeng Souy">
+                            <img class="rounded-circle" src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" width="31" alt="Soeng Souy">
                             <div class="user-text">
                                 <h6>Leonardo</h6>
                                 <p class="text-muted mb-0">Administrator</p>
@@ -162,7 +162,7 @@
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
                                 <h6>Leonardo</h6>
@@ -192,7 +192,7 @@
                             <span>Main Menu</span>
                         </li>
                         <li>
-                            <a href="{{ __('dashboard') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
+                            <a href="{{ route('dashboard') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fas fa-clipboard-list"></i> <span> Project</span> <span class="menu-arrow"></span></a>
@@ -219,12 +219,12 @@
                             <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
-                                    <a href="{{ __('lists_serpo') }}">
+                                    <a href="{{ 'lists_serpo' }}">
                                         SERPO
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ __('lists_iconnet') }}">
+                                    <a href="{{ 'lists_iconnet' }}">
                                         Iconnet
                                     </a>
                                 </li>
@@ -320,25 +320,25 @@
             </div>
             </div>
             
-            <script src="assets/js/jquery-3.6.0.min.js"></script>
-            <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="assets/js/feather.min.js"></script>
-            <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-            <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
-            <script src="assets/plugins/apexchart/chart-data.js"></script>
-            <script src="assets/plugins/select2/js/select2.min.js"></script>
-            <script src="assets/plugins/datatables/datatables.min.js"></script>
-            <script src="assets/plugins/alertify/alertify.min.js"></script>
-            <script src="assets/plugins/alertify/custom-alertify.min.js"></script>
-            <script src="assets/js/moment.min.js"></script>
-            <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-            <script src="assets/js/jquery-ui.min.js"></script>
-            <script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
-            <script src="assets/plugins/fullcalendar/jquery.fullcalendar.js"></script>
+            <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
+            <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/alertify/alertify.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/alertify/custom-alertify.min.js') }}"></script>
+            <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+            <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+            <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script>
 
-            <script src="assets/select/select.js"></script>
+            <script src="{{ asset('assets/select/select.js') }}"></script>
             
-            <script src="assets/js/script.js"></script>
+            <script src="{{ asset('assets/js/script.js') }}"></script>
             @livewireScripts
             
             </body>

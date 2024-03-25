@@ -9,5 +9,5 @@ class TblSerpos extends Model
 {
     use HasFactory;
     protected $table = 'tbl_serpos';
-    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 }

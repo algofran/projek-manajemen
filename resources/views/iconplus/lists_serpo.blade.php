@@ -12,7 +12,8 @@
     
                             <div class="col-auto text-end float-end ms-auto download-grp">
                                 <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                <a href="index.php?page=serpo_add" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                <a href="{{ route('serpo.add') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -22,6 +23,11 @@
     
                         </div>
                     </div>
+                    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     
     
                     <div class="table-responsive">
