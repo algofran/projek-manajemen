@@ -97,7 +97,8 @@ Route::middleware([
     Route::get('/add_serpo', [SerpoExpController::class, 'inputserpo'])->name('serpo.add');
     Route::post('/add_serpo', [SerpoExpController::class, 'store'])->name('serpo.store');
     Route::get('/serpos/{pid}/detail', [SerpoExpController::class, 'show'])->name('serpos.detail');
-    Route::get('/serpos/{id}/edit', [SerpoExpController::class, 'edit'])->name('serpos.edit');
+    Route::get('/serpo/{id}/edit', [SerpoExpController::class, 'edit'])->name('serpo.edit');
+    Route::put('/serpo/{id}', [SerpoExpController::class, 'update'])->name('serpo.update');
     Route::get('/serpos/{id}/delete', [SerpoExpController::class, 'destroy'])->name('_serpos.del');
 
     // Route::get('/lists_iconnet', [IconnetExpController::class, 'index'])->name('icon_plus.lists_iconnet');

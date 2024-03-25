@@ -107,17 +107,40 @@ class SerpoExpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $serpo = TblSerpos::findOrFail($id);
+        $managers = UserEmploye::all(); // Mendapatkan semua data manajer
+
+        return view('iconplus.edit_serpo', compact('serpo', 'managers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'paket' => 'nullable|integer',
+            'periode' => 'nullable|string|max:255',
+            'tagihan' => 'nullable|numeric',
+            'status' => 'nullable|integer',
+            'payment' => 'nullable|integer',
+            'manager_id' => 'nullable|integer',
+        ]);
+
+        $serpo = TblSerpos::findOrFail($id);
+
+        $serpo->update([
+            'paket' => $request->input('paket'),
+            'periode' => $request->input('periode'),
+            'tagihan' => $request->input('tagihan'),
+            'status' => $request->input('status'),
+            'payment' => $request->input('payment'),
+            'manager_id' => $request->input('manager_id'),
+        ]);
+
+        return redirect()->route('lists_serpo')->with('success', 'Serpo berhasil diperbarui!');
     }
 
     /**
@@ -125,6 +148,12 @@ class SerpoExpController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = TblSerpos::findOrFail($id);
+
+        // Hapus proyek
+        $project->delete();
+
+        // Redirect ke halaman yang sesuai atau beri respons JSON
+        return redirect()->route('lists_serpo')->with('success', 'Project deleted successfully!');
     }
 }

@@ -109,7 +109,7 @@
                             <label class="col-form-label col-md-2">Serpo Manager</label>
                             <div class="col-md-10">
                                 <select class="form-control form-select" name="manager_id">
-                                    <option></option>
+                                    <option>Pilih Manager</option>
                                    
                                         @foreach ($managers as $manager)
                                             <option value="{{ $manager->id }}">{{ ucwords($manager->username) }}</option>

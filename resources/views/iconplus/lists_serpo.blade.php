@@ -23,14 +23,15 @@
     
                         </div>
                     </div>
-                    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                    
     
     
                     <div class="table-responsive">
+                        @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
     
                             <thead class="student-thread">
@@ -65,7 +66,7 @@
                                         @endphp
                                         @switch($status)
                                         @case('Pending')
-                                            <span class="badge badge-default">{{ $status }}</span>
+                                            <span class="badge badge-danger">{{ $status }}</span>
                                             @break
                                         
                                         @case('On-Progress')
@@ -116,7 +117,7 @@
                                             <a href="{{ route('serpos.detail', ['pid' => $serpo->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a href="{{ route('serpos.edit', ['id' => $serpo->id]) }}" class="btn btn-sm bg-danger-light me-2">
+                                            <a href="{{ route('serpo.edit', ['id' => $serpo->id]) }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <a href="{{ route('_serpos.del', ['id' => $serpo->id, 'periode' => $serpo->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
