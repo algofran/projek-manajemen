@@ -101,10 +101,11 @@ Route::middleware([
     Route::put('/serpo/{id}', [SerpoExpController::class, 'update'])->name('serpo.update');
     Route::get('/serpos/{id}/delete', [SerpoExpController::class, 'destroy'])->name('_serpos.del');
 
-    // Route::get('/lists_iconnet', [IconnetExpController::class, 'index'])->name('icon_plus.lists_iconnet');
-    // Route::get('/iconnet/{pid}/detail', [IconnetExpController::class, 'show'])->name('iconnet.detail');
-    // Route::get('/iconnet/{id}/edit', [IconnetExpController::class, 'edit'])->name('iconnet.edit');
-    // Route::get('/iconnet/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_iconnet.del');
+    Route::get('/lists_iconnet', [IconnetExpController::class, 'index'])->name('icon_plus.lists_iconnet');
+    Route::post('/lists_iconnet', [IconnetExpController::class, 'store'])->name('iconnet.store');
+    Route::get('/iconnet/{pid}/detail', [IconnetExpController::class, 'show'])->name('iconnet.detail');
+    Route::post('/iconnet/{id}', [IconnetExpController::class, 'update'])->name('iconnet.update');
+    Route::get('/iconnet/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_iconnet.del');
 
     // Route::get('/lists_telkom', [TelkomAksesController::class, 'index'])->name('telkomakses.index');
     // Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
