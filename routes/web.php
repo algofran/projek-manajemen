@@ -114,6 +114,13 @@ Route::middleware([
     Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
     Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('_telkom.del');
 
+    Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('list_penjualan');
+    Route::post('/lists_penjualan', [PenjualanController::class, 'store'])->name('penjualan.store');
+    Route::get('/penjualan/{id}/edit', [PenjualanController::class, 'update'])->name('penjualan.edit');
+    Route::get('/penjualan/{pid}/detail', [PenjualanController::class, 'detail'])->name('penjualan.detail');
+    Route::post('/penjualan/{id}', [PenjualanController::class, 'update'])->name('penjualan.update');
+    Route::get('/penjualan/{id}/delete', [PenjualanController::class, 'destroy'])->name('_penjualan.del');
+
     // Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('sales.index');
     // Route::get('/sales/{id}/delete', [PenjualanController::class, 'destroy'])->name('sales.del');
 });

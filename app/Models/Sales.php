@@ -9,5 +9,6 @@ class sales extends Model
 {
     use HasFactory;
     protected $table = 'sales';
-    protected $primaryKey = 'idsales ';
+    protected $primaryKey = 'idsales';
+    protected $guarded = ['idsales'];
 }
