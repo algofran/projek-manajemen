@@ -9,5 +9,5 @@ class TblTelkomakse extends Model
 {
     use HasFactory;
     protected $table = 'tbl_telkomakses';
-    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 }

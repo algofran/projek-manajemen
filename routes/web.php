@@ -107,10 +107,12 @@ Route::middleware([
     Route::post('/iconnet/{id}', [IconnetExpController::class, 'update'])->name('iconnet.update');
     Route::get('/iconnet/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_iconnet.del');
 
-    // Route::get('/lists_telkom', [TelkomAksesController::class, 'index'])->name('telkomakses.index');
-    // Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
-    // Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
-    // Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('telkomakses.del');
+    Route::get('/lists_telkom', [TelkomAksesController::class, 'index'])->name('list_telkomakses');
+    Route::post('/lists_telkom', [TelkomAksesController::class, 'store'])->name('telkom.store');
+    Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
+    Route::post('/telkom_akses/{id}', [TelkomAksesController::class, 'update'])->name('telkom.update');
+    Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
+    Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('_telkom.del');
 
     // Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('sales.index');
     // Route::get('/sales/{id}/delete', [PenjualanController::class, 'destroy'])->name('sales.del');

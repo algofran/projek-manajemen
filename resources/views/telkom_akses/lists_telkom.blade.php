@@ -25,6 +25,12 @@
     
     
                     <div class="table-responsive">
+                        <div class="table-responsive">
+                            @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
     
                             <thead class="student-thread">
@@ -65,7 +71,7 @@
                                         @endphp
                                         @switch($status)
                                         @case('Pending')
-                                            <span class="badge badge-default">{{ $status }}</span>
+                                            <span class="badge badge-danger">{{ $status }}</span>
                                             @break
                                         
                                         @case('On-Progress')
@@ -114,15 +120,108 @@
                                             <a href="{{ route('telkomakses.detail', ['pid' => $data->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a href="{{ route('telkomakses.edit', ['id' => $data->id]) }}" class="btn btn-sm bg-danger-light me-2">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditTelkom'.$data->id }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a href="{{ route('telkomakses.del', ['id' => $data->id, 'periode' => $data->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
+                                            <a href="{{ route('_telkom.del', ['id' => $data->id, 'periode' => $data->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this Telkom Akses?')">
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
+                                <div class="modal custom-modal fade bank-details" id="{{ 'EditTelkom'.$data->id }}" role="dialog">
+                                
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="form-header text-start mb-0">
+                                                    <h4 class="mb-0">Add Telkom Akses</h4>
+                                                </div>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('telkom.update', $data->id) }}" method="post">
+                                                @csrf
+                                            <div class="modal-body">
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Periode</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" class="form-control" placeholder="Periode (Contoh : JANUARI 2024)..." value="{{ old('periode',$data->periode) }}" name="periode" required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Keterangan</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan', $data->keterangan) }}"placeholder="Keterangan/Area..." required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Jumlah PA</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="PA" class="form-control" value="{{ old('PA', $data->PA) }}" placeholder="Jumlah Aktivasi (PA)..." required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Tagihan</label>
+                                                        <div class="col-md-10">
+                                                            <input type="number" class="form-control" placeholder="Jumlah tagihan..." name="tagihan" value="{{ old('tagihan', $data->tagihan) }}">
+                                                        </div>
+                                                    </div>
+                        
+                        
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Status Perkerjaan</label>
+                                                        <div class="col-md-10">
+                                                            <select class="form-control form-select" name="status">
+                        
+                                                                <option value="0" {{ old('status',$data->status) == 0 ? 'selected' : '' }}>Pending</option>
+                                                                <option value="1" {{ old('status',$data->status) == 1 ? 'selected' : '' }}>On-Progress</option>
+                                                                <option value="2" {{ old('status',$data->status) == 2 ? 'selected' : '' }}>Complete</option>
+                        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Status Pembayaran</label>
+                                                        <div class="col-md-10">
+                                                            <select class="form-control form-select" name="payment" required>
+                                                                <option value="">Pilih Status Perkerjaan</option>
+                                                                <option value="0" {{ old('payment',$data->payment) == 0 ? 'selected' : '' }}>Belum Ditagih</option>
+                                                                <option value="1" {{ old('payment',$data->payment) == 1 ? 'selected' : '' }}>Proses Penagihan</option>
+                                                                <option value="2" {{ old('payment',$data->payment) == 2 ? 'selected' : '' }}>Sudah Terbayar</option>
+                                                            </select>
+                                                            @if ($errors->has('status'))
+                                                                <span class="text-danger">{{ $errors->first('status') }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">data Manager</label>
+                                                        <div class="col-md-10">
+                                                            <select class="form-control form-select" name="manager_id">
+                                                                <option value="">Pilih data Manager</option>
+                                                                @foreach ($managers as $manager)
+                                                                <option value="{{ $manager->id }}" {{ old('manager_id', $data->manager_id) == $manager->id ? 'selected' : '' }}>{{ ucwords($manager->username) }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                        
+                                            <div class="modal-footer">
+                                                <div class="bank-details-btn">
+                    
+                                                    <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                                        
+                                                    </a>
+                                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>  
                                 @endforeach
                             </tbody>
                         </table>
@@ -142,30 +241,30 @@
                         </div>
                         <div class="modal-body">
     
-                            <form action="#">
-    
+                            <form action="{{ route('telkom.store') }}" method="post">
+                                @csrf
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Periode</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="Periode (Contoh : JANUARI 2024)..." required="">
+                                        <input type="text" class="form-control" placeholder="Periode (Contoh : JANUARI 2024)..." value="{{ old('periode') }}" name="periode" required="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Keterangan</label>
                                     <div class="col-md-10">
-                                        <input type="text" name="keterangan" class="form-control" value="<?php echo isset($keterangan) ? $keterangan : '' ?>" placeholder="Keterangan..." required="">
+                                        <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Jumlah WO</label>
                                     <div class="col-md-10">
-                                        <input type="text" name="PA" class="form-control" value="<?php echo isset($PA) ? $PA : '' ?>" placeholder="Jumlah Work Order (WO)..." required="">
+                                        <input type="text" name="PA" class="form-control" value="{{ old('PA') }}" placeholder="Jumlah Work Order (WO)..." required="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Tagihan</label>
                                     <div class="col-md-10">
-                                        <input type="number" class="form-control" placeholder="Jumlah tagihan...">
+                                        <input type="number" class="form-control" placeholder="Jumlah tagihan..." name="tagihan" value="{{ old('tagihan') }}">
                                     </div>
                                 </div>
     
@@ -173,11 +272,11 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Status Perkerjaan</label>
                                     <div class="col-md-10">
-                                        <select class="form-control form-select">
+                                        <select class="form-control form-select" name="status">
     
-                                            <option>Pending</option>
-                                            <option>On-Progress</option>
-                                            <option>Complate</option>
+                                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Pending</option>
+                                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>On-Progress</option>
+                                            <option value="2" {{ old('status') == 2 ? 'selected' : '' }}>Complete</option>
     
                                         </select>
                                     </div>
@@ -185,21 +284,35 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Status Pembayaran</label>
                                     <div class="col-md-10">
-                                        <select class="form-control form-select">
-    
-                                            <option>Belum Ditagih</option>
-                                            <option>Progress Pembayaran</option>
-                                            <option>Sudah Bayar</option>
-    
+                                        <select class="form-control form-select" name="payment" required>
+                                            <option value="">Pilih Status Perkerjaan</option>
+                                            <option value="0" {{ old('payment') == 0 ? 'selected' : '' }}>Belum Ditagih</option>
+                                            <option value="1" {{ old('payment') == 1 ? 'selected' : '' }}>Proses Penagihan</option>
+                                            <option value="2" {{ old('payment') == 2 ? 'selected' : '' }}>Sudah Terbayar</option>
                                         </select>
+                                        @if ($errors->has('status'))
+                                            <span class="text-danger">{{ $errors->first('status') }}</span>
+                                        @endif
                                     </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">Telkom Manager</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control form-select" name="manager_id">
+                                            <option>Pilih Manager</option>                                          
+                                                @foreach ($managers as $manager)
+                                                    <option value="{{ $manager->id }}">{{ ucwords($manager->username) }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>                               
                                 </div>
                         </div>
     
                         <div class="modal-footer">
                             <div class="bank-details-btn">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#save_invocies_details" class="btn save-invoice-btn btn-primary">
-                                    Save
+
+                                <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                    
                                 </a>
                                 <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
                             </div>
@@ -213,7 +326,7 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <div class="form-header">
-                                <h3>Submit Iconnet Details</h3>
+                                <h3>Submit data Details</h3>
                                 <p>Are you sure want to save?</p>
                             </div>
                             <div class="modal-btn delete-action">

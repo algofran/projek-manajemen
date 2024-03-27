@@ -231,7 +231,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ __('lists_telkom') }}"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
+                            <a href="{{ 'lists_telkom' }}"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Keuangan</span> <span class="menu-arrow"></span></a>

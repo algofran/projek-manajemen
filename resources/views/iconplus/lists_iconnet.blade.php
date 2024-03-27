@@ -128,7 +128,7 @@
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditIconnet'.$iconnet->id }}" class="btn btn-sm bg-danger-light me-2">
                                                     <i class="feather-edit"></i>
                                                 </a>
-                                                <a href="{{ route('_iconnet.del', ['id' => $iconnet->id, 'periode' => $iconnet->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
+                                                <a href="{{ route('_iconnet.del', ['id' => $iconnet->id, 'periode' => $iconnet->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this iconnet?')">
                                                     <i class="feather-trash-2"></i>
                                                 </a>
                                             </div>
