@@ -63,7 +63,7 @@
                                     
                                         @switch($status)
                                             @case('Pending')
-                                                <span class="badge badge-default">{{ $status }}</span>
+                                                <span class="badge badge-info">{{ $status }}</span>
                                                 @break
                                             
                                             @case('On-Progress')
@@ -112,7 +112,7 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="{{ route('project.detail', ['pid' => $project->id]) }}" class="btn btn-sm bg-success-light me-2 ">
+                                            <a href="{{ route('project.detail', ['id' => $project->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
                                             <a href="{{ route('project.edit', ['id' => $project->id]) }}" class="btn btn-sm bg-danger-light me-2">

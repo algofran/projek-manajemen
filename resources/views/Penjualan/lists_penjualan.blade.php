@@ -39,12 +39,10 @@
                                     <td>{{ ucwords($data->pembeli) }}</td>
                                     <td>{{ $data->keterangan }}</td>
                                     <td>Rp. {{ number_format($data->jual, 0, ',', '.') }}</td>
-                                   
                                     <td>
                                         @php
                                         $bayar = $pay[$data->status];
                                         @endphp
-                                    
                                         @switch($bayar)
                                             @case('Belum Terbayar')
                                                 <span class="badge badge-danger">{{ $bayar }}</span>

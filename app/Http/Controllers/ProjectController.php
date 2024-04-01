@@ -6,6 +6,7 @@ use App\Models\ProjectList;
 use App\Models\TaskLists;
 use App\Models\User;
 use App\Models\UserEmploye;
+use App\Models\UserProductivity;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -123,8 +124,48 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $i = 1;
+        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
+        $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
+        $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
+
+        $project = ProjectList::findOrFail($id);
+        $tasks = TaskLists::where('project_id', $id)->orderBy('id', 'asc')->get();
+        $activities = UserProductivity::where('project_id', $id)->orderBy('date', 'desc')->get();
+
+        $totalTasks = $tasks->count();
+        $completedTasks = $tasks->where('status', 3)->count();
+        $progress = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
+
+        $manager = UserEmploye::findOrFail($project->manager_id);
+        $totalExpense = UserProductivity::where('project_id', $id)->sum('cost');
+
+        $tprog = TaskLists::where('project_id', $project->id)->count();
+        $cprog = TaskLists::where('project_id', $project->id)->where('status', 3)->count();
+        $prog = $tprog > 0 ? ($cprog / $tprog) * 100 : 0;
+        $prog = $prog > 0 ? number_format($prog, 2) : $prog;
+
+        $status = $stat[$project->status];
+        $paymentStatus = $pay[$project->payment_status];
+        $project->progress = $prog;
+        $project->status_label = $status;
+        $project->payment_label = $paymentStatus;
+        $project->tag = $tag[$project->pembayaran];
+        $project->vendor_tag = $vendor_tag[$project->vendor];
+        $end_date = date('Y-m-d');
+
+        // Ambil pengguna terkait setiap tugas secara terpisah
+        foreach ($tasks as $task) {
+            $task->user = UserEmploye::findOrFail($task->user_id);
+        }
+        foreach ($activities as $activiti) {
+            $activiti->user = UserEmploye::findOrFail($activiti->user_id);
+        }
+
+        return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

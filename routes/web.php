@@ -90,7 +90,7 @@ Route::middleware([
     Route::get('edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
     Route::post('update/{id}', [ProjectController::class, 'update'])->name('project.update');
     Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
-    Route::get('/project_detail', [ProjectController::class, 'destroy'])->name('project.detail');
+    Route::get('detail/{id}', [ProjectController::class, 'show'])->name('project.detail');
 
     // SERPO Routes
     Route::get('/lists_serpo', [SerpoExpController::class, 'index'])->name('lists_serpo');
