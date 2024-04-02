@@ -203,7 +203,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ 'project_lists' }}">
+                                    <a href="{{ __('project_lists') }}">
                                         Project List
                                     </a>
                                 </li>
@@ -219,12 +219,12 @@
                             <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
-                                    <a href="{{ 'lists_serpo' }}">
+                                    <a href="{{ __('lists_serpo') }}">
                                         SERPO
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ 'lists_iconnet' }}">
+                                    <a href="{{ __('lists_iconnet') }}">
                                         Iconnet
                                     </a>
                                 </li>
