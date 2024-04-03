@@ -16,8 +16,7 @@
                             <div class=" text-center">
                                 <h6>Project Manager/Staff</h6>
                                 <img src="{{ asset('assets/img/user.png') }}" alt="" width="90">
-                                <p>{{ $manager->firstname.' '.$manager->lastname }}</p>
-                               
+                                <p>{{ $manager->firstname.' '.$manager->lastname }}</p>                   
                                 
                             </div><br>
                             <h6 class="invoice-name">Pendapatan Projek</h6>
@@ -130,7 +129,7 @@
                                 <h3 class="page-title">Daftar Tugas</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-plus"> Tambah Tugas</i></a>
+                                <a href="{{ route('project.task', ['id' => $project->id]) }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah Tugas</i></a>
                             </div>
     
                         </div>
@@ -152,7 +151,7 @@
                                 <tbody>
                                     <tr id="{{ $task->id }}">
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="fw-bolder text-info">
+                                        <td class=" text-info">
                                             
                                                 {{ ucwords($task->task) }}</></td>
                                             
@@ -174,12 +173,92 @@
                                                     @break
                                             @endswitch
                                         </td>
-                                        <td class="center actions-hover actions-fade">
-                                            {{-- <a href="{{ route('task.edit', ['tid' => $task->id]) }}"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('_task_del', ['id' => $task->id, 'pid' => $id]) }}" onclick="return confirm('Are you sure want to delete this task?')"><i class="fa fa-trash-o remove"></i></a> --}}
+                                        <td class="text-end">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditTask'.$task->id }}" class="btn btn-sm bg-danger-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a href="{{ route('_task.del', ['id' => $task->id]) }}" onclick="return confirm('Are you sure want to delete this task?')" class="btn btn-sm bg-success-light me-2 "> <i class="feather-trash-2"></i></i></a>
+                                            </div>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>
+
+                                <div class="modal custom-modal fade bank-details" id="{{ 'EditTask'.$task->id }}" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="form-header text-start mb-0">
+                                                    <h4 class="mb-0">Edit Tugas</h4>
+                                                </div>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('task.update', $task->id) }}" method="post">
+                                                @csrf
+                                            <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="hidden" name="project_id" value="{{ $task->project_id }}">
+                                                            <div class="form-group">
+                                                                <label>Nama Pekerjaan</label>
+                                                                <input type="text" class="form-control" name="task" required value="{{ $task->task }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Penanggung jawab</label><br>
+                                                                <select class="form-control form-select" name="user_id">
+                                                                    <option>Pilih Penanggunjawab</option>
+                                                                    @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->id }}"  {{ in_array($employee->id, explode(',', $task->user_id)) ? 'selected' : '' }}>{{ ucwords($employee->firstname.' '.$employee->lastname) }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Jadwal Pelaksana</label>
+                                                                <div class="col-md">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="date" class="form-control" placeholder="Mulai" name="date_created" required value="{{ $task->date_created }}">
+                                                                        <span class="input-group-text">s/d</span>
+                                                                        <input type="date" class="form-control" placeholder="Selesai" name="due_date" required value="{{ $task->due_date }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Project Status</label>
+                                                                <div class="border">
+                                                                    <select class="form-control form-select" name="status">
+                                                                        <option value="0" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
+                                                                        <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                                                                        <option value="3" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Keterangan</label>
+                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark" name="description" required>{{ $task->description }}</textarea>
+                                                    </div>
+                                        </div>
+                                        
+                    
+                                        <div class="modal-footer">
+                                            <div class="bank-details-btn">
+                
+                                                <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                                    
+                                                </a>
+                                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>  
                                 @endforeach
                         </table>
                     </div>

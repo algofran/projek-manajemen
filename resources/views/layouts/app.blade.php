@@ -198,12 +198,12 @@
                             <a href="#"><i class="fas fa-clipboard-list"></i> <span> Project</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children ">
                                 <li>
-                                    <a href="{{ 'add_project' }}">
+                                    <a href="/add_project">
                                         Add Project
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ __('project_lists') }}">
+                                    <a href="/project_lists">
                                         Project List
                                     </a>
                                 </li>
@@ -219,19 +219,19 @@
                             <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
-                                    <a href="{{ __('lists_serpo') }}">
+                                    <a href="../lists_serpo">
                                         SERPO
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ __('lists_iconnet') }}">
+                                    <a href="../lists_iconnet">
                                         Iconnet
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ 'lists_telkom' }}"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
+                            <a href="../lists_telkom"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Keuangan</span> <span class="menu-arrow"></span></a>
@@ -248,7 +248,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ __('pengluaran_iconnet') }}">
+                                    <a href="{{ __('pengeluaran_iconnet') }}">
                                         Pengeluaran Iconnet
                                     </a>
                                 </li>

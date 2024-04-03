@@ -9,5 +9,5 @@ class TaskLists extends Model
 {
     use HasFactory;
     protected $table = 'task_lists';
-    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 }

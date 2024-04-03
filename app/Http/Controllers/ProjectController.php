@@ -139,6 +139,7 @@ class ProjectController extends Controller
         $progress = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
 
         $manager = UserEmploye::findOrFail($project->manager_id);
+        $employees = UserEmploye::where('type', '>', 0)->get();
         $totalExpense = UserProductivity::where('project_id', $id)->sum('cost');
 
         $tprog = TaskLists::where('project_id', $project->id)->count();
@@ -153,7 +154,8 @@ class ProjectController extends Controller
         $project->payment_label = $paymentStatus;
         $project->tag = $tag[$project->pembayaran];
         $project->vendor_tag = $vendor_tag[$project->vendor];
-        $end_date = date('Y-m-d');
+        $end_date = $project->end_date;
+
 
         // Ambil pengguna terkait setiap tugas secara terpisah
         foreach ($tasks as $task) {
@@ -163,7 +165,7 @@ class ProjectController extends Controller
             $activiti->user = UserEmploye::findOrFail($activiti->user_id);
         }
 
-        return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense'));
+        return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees'));
     }
 
 

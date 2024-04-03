@@ -3,7 +3,7 @@
 use App\Http\Controllers\IconnetExpController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
-
+use App\Http\Controllers\ProjectTugasController;
 use App\Http\Controllers\SerpoExpController;
 
 use App\Http\Controllers\TelkomAksesController;
@@ -91,6 +91,12 @@ Route::middleware([
     Route::post('update/{id}', [ProjectController::class, 'update'])->name('project.update');
     Route::get('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('_project.del');
     Route::get('detail/{id}', [ProjectController::class, 'show'])->name('project.detail');
+    Route::get('project_task/{id}', [ProjectTugasController::class, 'index'])->name('project.task');
+    Route::post('/project_task', [ProjectTugasController::class, 'store'])->name('task.store');
+    Route::get('/project_task/{id}/delete', [ProjectTugasController::class, 'destroy'])->name('_task.del');
+    Route::post('task/{id}', [ProjectTugasController::class, 'update'])->name('task.update');
+
+
 
     // SERPO Routes
     Route::get('/lists_serpo', [SerpoExpController::class, 'index'])->name('lists_serpo');
