@@ -273,7 +273,7 @@
                                 <h3 class="page-title">Daftar Pengeluaran</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-plus"> Tambah Pengeluaran</i></a>
+                                <a href="{{ route('project.pengeluaran', ['id' => $project->id]) }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah Pengeluaran</i></a>
                             </div>
     
                         </div>
@@ -281,6 +281,7 @@
                     <div class="table-responsive">
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                             <thead class="student-thread">
+                                
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal</th>
@@ -291,8 +292,8 @@
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
+                            @foreach($activities as $activity)
                             <tbody>
-                                @foreach($activities as $activity)
                                 <tr id="{{ $activity->id }}">
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ date("d M Y", strtotime($activity->date)) }}</td>
@@ -303,12 +304,99 @@
                                     <td>{{ ucwords($activity->user->firstname . ' ' . $activity->user->lastname) }}</td>
                                     <td>{{ "Rp. " . number_format($activity->cost, 0, ',', '.') }}</td>
                                     <td class="center actions-hover actions-fade">
-                                        {{-- <a href="{{ route('activity.edit', ['id' => $activity->id]) }}"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('_activity_del', ['id' => $activity->id, 'pid' => $id]) }}" onclick="return confirm('Are you sure want to delete this task?')"><i class="fa fa-trash-o remove"></i></a> --}}
-                                    </td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPengeluaran'.$activity->id }}" class="btn btn-sm bg-danger-light me-2">
+                                            <i class="feather-edit"></i>
+                                        </a>
+                                        <a href="{{ route('_pengeluaran.del', ['id' => $activity->id]) }}" onclick="return confirm('Are you sure want to delete this pengeluaran?')" class="btn btn-sm bg-success-light me-2 "> <i class="feather-trash-2"></i></i></a>
+                                        </div>
+                                       </td>
                                 </tr>
-                                @endforeach
                             </tbody>
+                            
+                            <div class="modal custom-modal fade bank-details" id="{{ 'EditPengeluaran'.$activity->id }}" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="form-header text-start mb-0">
+                                                <h4 class="mb-0">Edit Pengeluaran</h4>
+                                            </div>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('pengeluaran.update', $activity->id) }}" method="post">
+                                            @csrf
+                                        <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="hidden" name="project_id" value="{{ $activity->project_id }}">
+                                                        <div class="form-group">
+                                                            <label>Project Status</label>
+                                                            <div class="border">
+                                                                <select class="select" name="subject">
+                                                                    @foreach($subjectOptions as $option)
+                                                                    <option value="{{ $option }}" {{ $activity->subject == $option ? 'selected' : '' }}>{{ $option }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            @error('subject')
+                                                            <span class="alert alert-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Pengguna</label>
+                                                            <select class="form-control form-select" name="user_id">
+                                                                <option>Pilih Pengguna</option>
+                                                                @foreach ($employees as $employee)
+                                                                <option value="{{ $employee->id }}"  {{ in_array($employee->id, explode(',', $activity->user_id)) ? 'selected' : '' }}>{{ ucwords($employee->firstname.' '.$employee->lastname) }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('user_id')
+    <span class="alert alert-danger">>{{ $message }}</span>
+    @enderror
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tanggal</label>
+                                                            <div class="col-md">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="date" class="form-control" name="date" value="{{ $activity->date }}" required>
+                                                                </div>
+                                                            </div>
+                                                            @error('date')
+    <span class="alert alert-danger">{{ $message }}</span>
+    @enderror
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Activity Cost</label>
+                                                            <input type="number" class="form-control" name="cost" value="{{ $activity->cost }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Keterangan</label>
+                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark" name="comment" required value="comment">{{ $activity->comment }}</textarea>
+                                                        @error('comment')
+                                                        <span class="alert alert-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                    </div>
+                                    
+                
+                                    <div class="modal-footer">
+                                        <div class="bank-details-btn">
+            
+                                            <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                                
+                                            </a>
+                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>  
+                            @endforeach
                         </table>
                     </div>
                 </div>

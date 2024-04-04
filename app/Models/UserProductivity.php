@@ -9,5 +9,6 @@ class UserProductivity extends Model
 {
     use HasFactory;
     protected $table = 'user_productivitys';
+    protected $guarded = ['id', 'task_id'];
     protected $primaryKey = 'id';
 }

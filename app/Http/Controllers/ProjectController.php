@@ -129,6 +129,8 @@ class ProjectController extends Controller
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
+        $subjectOptions = ["Biaya Operasional", "Biaya Material", "Biaya Tools", "Biaya Gaji/Fee", "Biaya Lainnya"];
+
 
         $project = ProjectList::findOrFail($id);
         $tasks = TaskLists::where('project_id', $id)->orderBy('id', 'asc')->get();
@@ -165,7 +167,7 @@ class ProjectController extends Controller
             $activiti->user = UserEmploye::findOrFail($activiti->user_id);
         }
 
-        return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees'));
+        return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions'));
     }
 
 

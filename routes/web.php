@@ -5,6 +5,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
 use App\Http\Controllers\SerpoExpController;
+use App\Http\Controllers\ProjectPengeluaranController;
 
 use App\Http\Controllers\TelkomAksesController;
 use Illuminate\Support\Facades\Route;
@@ -95,6 +96,10 @@ Route::middleware([
     Route::post('/project_task', [ProjectTugasController::class, 'store'])->name('task.store');
     Route::get('/project_task/{id}/delete', [ProjectTugasController::class, 'destroy'])->name('_task.del');
     Route::post('task/{id}', [ProjectTugasController::class, 'update'])->name('task.update');
+    Route::get('project_pengeluaran/{id}', [ProjectPengeluaranController::class, 'index'])->name('project.pengeluaran');
+    Route::post('/project_pengeluaran', [ProjectPengeluaranController::class, 'store'])->name('pengeluaran.store');
+    Route::get('/project_pengeluaran/{id}/delete', [ProjectPengeluaranController::class, 'destroy'])->name('_pengeluaran.del');
+    Route::post('pengeluaran/{id}', [ProjectPengeluaranController::class, 'update'])->name('pengeluaran.update');
 
 
 
