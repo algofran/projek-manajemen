@@ -167,6 +167,9 @@ class ProjectController extends Controller
             $activiti->user = UserEmploye::findOrFail($activiti->user_id);
         }
 
+        $data = compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions');
+
+        // return $data;
         return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions'));
     }
 

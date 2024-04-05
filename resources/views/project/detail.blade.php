@@ -5,6 +5,7 @@
     
                 <div class="card-header fw-bolder fs-6 bg-info text-white">
                     Detail Projek
+                    
                 </div>
     
             </div>
@@ -326,6 +327,7 @@
                                         </div>
                                         <form action="{{ route('pengeluaran.update', $activity->id) }}" method="post">
                                             @csrf
+                                            {{-- @method('PATCH') --}}
                                         <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -333,7 +335,7 @@
                                                         <div class="form-group">
                                                             <label>Project Status</label>
                                                             <div class="border">
-                                                                <select class="select" name="subject">
+                                                                <select class="form-control form-select" name="subject">
                                                                     @foreach($subjectOptions as $option)
                                                                     <option value="{{ $option }}" {{ $activity->subject == $option ? 'selected' : '' }}>{{ $option }}</option>
                                                                     @endforeach

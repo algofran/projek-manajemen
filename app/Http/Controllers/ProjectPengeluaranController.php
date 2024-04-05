@@ -77,20 +77,9 @@ class ProjectPengeluaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'subject' => 'required',
-            'user_id' => 'required',
-            'date' => 'required|date',
-            'cost' => 'required|numeric',
-            'description' => 'required',
-        ]);
+        //dd($request);
 
         // Jika validasi gagal, kembali ke form dengan pesan kesalahan
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
         $pengeluaran = UserProductivity::findOrFail($id);
 
         $pengeluaran->update([
@@ -101,7 +90,7 @@ class ProjectPengeluaranController extends Controller
             'date' => $request->input('date'),
             'cost' => $request->input('cost'),
         ]);
-        return redirect()->back()->with('success', 'Pengeluaran berhasil diperbarui!')->compact('pengeluaran');
+        return redirect()->back()->with('success', 'Pengeluaran berhasil diperbarui!');
     }
 
     /**
