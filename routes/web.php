@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
 use App\Http\Controllers\SerpoExpController;
 use App\Http\Controllers\ProjectPengeluaranController;
+use App\Http\Controllers\MitraIntituteController;
 
 use App\Http\Controllers\TelkomAksesController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $companies = App\Models\InstituteData::all();
     return view('welcome');
 });
 
@@ -100,6 +102,13 @@ Route::middleware([
     Route::post('/project_pengeluaran', [ProjectPengeluaranController::class, 'store'])->name('pengeluaran.store');
     Route::get('/project_pengeluaran/{id}/delete', [ProjectPengeluaranController::class, 'destroy'])->name('_pengeluaran.del');
     Route::post('pengeluaran/{id}', [ProjectPengeluaranController::class, 'update'])->name('pengeluaran.update');
+
+
+    // Perusahaan
+
+    Route::get('/perusahaan/{id}', [MitraIntituteController::class, 'index'])->name('company.show');
+
+
 
 
 

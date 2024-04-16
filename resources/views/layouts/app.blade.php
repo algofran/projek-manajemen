@@ -215,6 +215,23 @@
         
                             </ul>
                         </li>
+                        
+                        @php
+                            $companies = App\Models\InstituteData::all();
+                        @endphp
+
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan</span> <span class="menu-arrow"></span></a>
+                            <ul class="nav nav-children">
+                                @foreach ($companies as $company)
+                                    <li>
+                                        <a href="{{ route('company.show', $company->id) }}">
+                                            {{ $company->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
