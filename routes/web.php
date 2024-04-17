@@ -107,6 +107,7 @@ Route::middleware([
     // Perusahaan
 
     Route::get('/perusahaan/{id}', [MitraIntituteController::class, 'index'])->name('company.show');
+    Route::get('/mitra/{id}/{name}', [MitraIntituteController::class, 'show'])->name('mitra.menu');
 
 
 

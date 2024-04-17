@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="card card-table">
                 <div class="card-header fw-bolder fs-6 bg-info text-white">
-                    Menu Mitra Perusahaan
+                    Menu Perusahaan
                 </div>
             </div>
                 <div class="row">
@@ -20,8 +20,9 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <button class="btn btn-info text-white mx-4" type="button">+ KLIK</button>
+                                    <a href="{{ route('mitra.menu', ['id' => $item->id, 'name' => $item->mitra]) }}" class="btn btn-info mx-4 text-white">+ KLIK</a>
                                 </div>
+                                
                             </div>
                             <div class="card-body text-center">
                             </div>

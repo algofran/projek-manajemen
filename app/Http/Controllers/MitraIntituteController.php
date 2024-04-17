@@ -35,9 +35,10 @@ class MitraIntituteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MitraIntitute $mitraIntitute)
+    public function show(string $id, string $name)
     {
-        //
+        $mitra = MitraIntitute::where('id', $id)->orderBy('id', 'asc')->get();
+        return view('perusahaan.menu_mitra', compact('mitra'));
     }
 
     /**
