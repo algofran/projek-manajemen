@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MitraIntitute;
+use App\Models\UserEmploye;
+use App\Models\InstituteProyek;
 use Illuminate\Http\Request;
 
 class MitraIntituteController extends Controller
@@ -15,13 +17,51 @@ class MitraIntituteController extends Controller
         $perusahaan = MitraIntitute::where('id_inst', $id)->orderBy('id', 'asc')->get();;
         return view('perusahaan.menu_perusahaan', compact('perusahaan'));
     }
+    public function list(string $id, Request $request)
+    {
+        $i = 1;
+        $stat = ["Pending", "On-Progress", "Complete"];
+        $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
+
+        $paket = $request->input('paket');
+        $periode = $request->input('periode');
+        $sektor = $request->input('sektor');
+        $PA = $request->input('PA');
+        $tagihan = $request->input('tagihan');
+        $status = $request->input('status');
+        $payment = $request->input('payment');
+        $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+
+
+        if ($request->has('tahun')) {
+            $proyeks = InstituteProyek::where('periode', 'like', '%' . date('Y'))->orderBy('id', 'desc')->get();
+        } else {
+            $proyeks = InstituteProyek::where('id_inst', $id)->orderBy('id', 'desc')->get();
+        }
+
+        // dd($proyeks);
+
+        $list_proyeks = MitraIntitute::where('id_inst', $id)->orderBy('id', 'asc')->get();;
+        return view('perusahaan.list_proyek', compact('list_proyeks', 'i', 'stat', 'pay', 'proyeks', 'paket', 'periode', 'sektor', 'PA', 'tagihan', 'status', 'payment', 'managers'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id, Request $request)
     {
-        //
+        $mitra = MitraIntitute::where('id', $id)->orderBy('id', 'asc')->get();
+
+        $paket = $request->input('paket');
+        $id_inst = $request->input('id_inst');
+        $periode = $request->input('periode');
+        $sektor = $request->input('sektor');
+        $tagihan = $request->input('tagihan');
+        $status = $request->input('status');
+        $payment = $request->input('payment');
+        $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+
+        return view('perusahaan.tambah_proyek', compact('mitra', 'id_inst', 'paket', 'periode', 'sektor', 'tagihan', 'status', 'payment', 'managers'));
     }
 
     /**
@@ -29,8 +69,36 @@ class MitraIntituteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'PA' => 'nullable|integer',
+            'target' => 'nullable|integer',
+            'tagihan' => 'nullable|numeric',
+            'status' => 'nullable|integer',
+            'payment' => 'nullable|integer',
+            'manager_id' => 'nullable|integer',
+        ]);
+
+        $iconnet = new InstituteProyek([
+            'id_inst' => $request->input('id_inst'),
+            'periode' => $request->input('periode'),
+            'paket' => $request->input('paket'),
+            'sektor' => $request->input('sektor'),
+            'PA' =>  $request->input('PA'),
+            'target' => $request->input('target'),
+            'tagihan' => $request->input('tagihan'),
+            'status' => $request->input('status'),
+            'payment' => $request->input('payment'),
+            'manager_id' => $request->input('manager_id'),
+        ]);
+
+        if ($iconnet->save()) {
+            return redirect()->route('perusahaan.list_proyek', ['id' => $request->input('id_inst')])->with('success', 'Iconnet berhasil dibuat!');
+        } else {
+            $errorMessage = 'Gagal membuat Iconnet. Silakan coba lagi.';
+            return redirect()->route('icon_plus.lists_iconnet')->with('error', $errorMessage)->withInput($request->except('password', 'password_confirmation'));
+        }
     }
+
 
     /**
      * Display the specified resource.

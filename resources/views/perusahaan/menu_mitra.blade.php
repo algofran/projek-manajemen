@@ -22,7 +22,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <button class="btn btn-info text-white mx-4" type="button">+ KLIK</button>
+                                    <a href="{{ route('list.proyeks', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIKS</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">
@@ -34,7 +34,7 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="ms-4 mt-3">
-                                        <h5 class="card-title">Tambah Proyek</h5>
+                                        <h5 class="card-title">Tambah Aktivitas</h5>
                                         <div class="db-icon bg-info mt-3">
                                             <i class="fa fa-plus-square"></i>
                                         </div>
@@ -42,7 +42,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <button class="btn btn-info text-white mx-4" type="button">+ KLIK</button>
+                                    <a href="{{ route('add.proyek', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIKS</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">
