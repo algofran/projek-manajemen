@@ -22,7 +22,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <a href="{{ route('list.proyeks', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIKS</a>
+                                    <a href="{{ route('list.proyeks', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIK</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">
@@ -42,7 +42,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <a href="{{ route('add.proyek', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIKS</a>
+                                    <a href="{{ route('add.proyek', ['id' => $item->id]) }}" class="btn btn-info mx-4 text-white">+ KLIK</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">

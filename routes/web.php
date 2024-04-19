@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IconnetExpController;
+use App\Http\Controllers\InstituteProyekController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProjectPengeluaranController;
 use App\Http\Controllers\MitraIntituteController;
 
 use App\Http\Controllers\TelkomAksesController;
+use App\Models\InstituteProyek;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,6 +113,12 @@ Route::middleware([
     Route::get('/list/{id}', [MitraIntituteController::class, 'list'])->name('list.proyeks');
     Route::get('/add/{id}', [MitraIntituteController::class, 'create'])->name('add.proyek');
     Route::post('/tambah', [MitraIntituteController::class, 'store'])->name('add.store');
+    Route::post('/edit/{id}', [MitraIntituteController::class, 'update'])->name('update');
+    Route::get('/hapus/{id}', [MitraIntituteController::class, 'destroy'])->name('_del.proyek');
+    Route::get('/detail_proyek/{id}', [InstituteProyekController::class, 'index'])->name('_detail.proyek');
+    // Route::get('/detail_proyek', function () {
+    //     return view('perusahaan/_detail.proyek')->name('show.proyek');
+    // });
 
 
 

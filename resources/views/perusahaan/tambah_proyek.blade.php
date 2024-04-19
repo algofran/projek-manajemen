@@ -40,10 +40,8 @@
                 <div class="card-body">
                     <form action="{{ route('add.store') }}" method="post">
                         @csrf
-                        
-                        @foreach ($mitra as $item)
-                        <input type="hidden" name="id_inst" value="{{ $item->id_inst}}">
-                        @endforeach
+                    
+                        <input type="" name="id_inst" value="{{ $id}}">
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Periode</label>
                             <div class="col-md-10">
@@ -60,6 +58,12 @@
                                 @if ($errors->has('sektor'))
                                     <span class="text-danger">{{ $errors->first('sektor') }}</span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Keterangan</label>
+                            <div class="col-md-10">
+                                <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required="">
                             </div>
                         </div>
                         <div class="form-group row">

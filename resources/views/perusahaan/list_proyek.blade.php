@@ -7,7 +7,7 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">item</h3>
+                                <h3 class="page-title">List Proyeks Mitra</h3>
                             </div>
     
                             <div class="col-auto text-end float-end ms-auto download-grp">
@@ -38,6 +38,8 @@
                                     <th>Periode</th>
                                     <th>Sektor</th>
                                     <th>Jumlah PA</th>
+                                    <th>Paket</th>
+                                    <th>Keterangan</th>
                                     <th>Target</th>
                                     <th>Tagihan</th>
                                     <th>Status</th>
@@ -52,6 +54,8 @@
                                 
                                 $prog = ($item->PA / 30) * 100;
                                 $prog = $prog > 0 ? number_format($prog) : $prog;
+                                $tagIndex = $item->paket;
+                                $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
                                 @endphp
 
                                  <tr id="{{ $item->id }}">
@@ -59,6 +63,8 @@
                                     <td>{{ ucwords($item->periode) }}</></td>
                                     <td>{{ $item->sektor }}</td>
                                     <td>{{ $item->PA }}</td>
+                                    <td>{{ $paket }}</td>
+                                    <td>{{ $item->keterangan }}</td>
                                     <td>
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="{{ $prog }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $prog }}%;">
@@ -122,13 +128,13 @@
                                     <td class="text-end">
                                         <div class="actions ">
                                             <div class="actions ">
-                                                <a href="#" class="btn btn-sm bg-success-light me-2 ">
+                                                <a href="{{ route('_detail.proyek', ['id' => $item->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                     <i class="feather-eye"></i>
                                                 </a>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#Edititem'.$item->id }}" class="btn btn-sm bg-danger-light me-2">
                                                     <i class="feather-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this item?')">
+                                                <a href="{{ route('_del.proyek', ['id' => $item->id, 'periode' => $item->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this item?')">
                                                     <i class="feather-trash-2"></i>
                                                 </a>
                                             </div>
@@ -146,10 +152,11 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="#" method="post">
+                                            <form action="{{ route('update', $item->id) }}" method="post">
                                                 @csrf
                                     
                                             <div class="modal-body">
+                                                <input type="" name="id_inst" value="{{ old('id_inst',$item->id_inst) }}">
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-2">Periode</label>
                                                         <div class="col-md-10">
@@ -166,6 +173,28 @@
                                                         <label class="col-form-label col-md-2">Jumlah PA</label>
                                                         <div class="col-md-10">
                                                             <input type="text" name="PA" class="form-control" value="{{ old('PA', $item->PA) }}" placeholder="Jumlah Aktivasi (PA)..." required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Keterangan</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="keterangan" class="form-control" value="{{ old('keteragan', $item->keterangan) }}" placeholder="Ketarangan..." required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Paket Serpo</label>
+                                                        <div class="col-md-10">
+                                                            <select class="form-control mb-md" name="paket" required>
+                                                                <option value="">Pilih Paket Serpo</option>
+                                                                <option value="0" {{ old('paket', $item->paket) == 0 ? 'selected' : '' }}>Tidak Menggunakan Paket</option>
+                                                                <option value="1" {{ old('paket', $item->paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                                                <option value="2" {{ old('paket', $item->paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                                                <option value="3" {{ old('paket', $item->paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                                                <option value="4" {{ old('paket', $item->paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
+                                                                <option value="5" {{ old('paket', $item->paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
+                                                                <option value="6" {{ old('paket', $item->paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
+                                                                <!-- Tambahkan opsi lainnya di sini -->
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
