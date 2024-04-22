@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\IconnetExpController;
+use App\Http\Controllers\InstitutePengeluaranController;
 use App\Http\Controllers\InstituteProyekController;
+use App\Http\Controllers\InstituteTagihanController;
+use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
@@ -10,7 +13,10 @@ use App\Http\Controllers\ProjectPengeluaranController;
 use App\Http\Controllers\MitraIntituteController;
 
 use App\Http\Controllers\TelkomAksesController;
+use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyek;
+use App\Models\InstituteTagihan;
+use App\Models\InstituteTugas;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -116,6 +122,18 @@ Route::middleware([
     Route::post('/edit/{id}', [MitraIntituteController::class, 'update'])->name('update');
     Route::get('/hapus/{id}', [MitraIntituteController::class, 'destroy'])->name('_del.proyek');
     Route::get('/detail_proyek/{id}', [InstituteProyekController::class, 'index'])->name('_detail.proyek');
+    Route::get('/add_task/{id}', [InstituteTagihanController::class, 'index'])->name('_add.task');
+    Route::post('/add_task', [InstituteTagihanController::class, 'store'])->name('_store.task');
+    Route::get('/task/{id}/delete', [InstituteTagihanController::class, 'destroy'])->name('_del.task');
+    Route::post('task/{id}/update', [InstituteTagihanController::class, 'update'])->name('_update.task');
+    Route::get('task_pengeluaran/{id}', [InstitutePengeluaranController::class, 'index'])->name('_add.pengeluaran');
+    Route::post('/task_pengeluaran', [InstitutePengeluaranController::class, 'store'])->name('_add.store');
+    Route::get('/task_pengeluaran/{id}/delete', [InstitutePengeluaranController::class, 'destroy'])->name('_del.pengeluaran');
+    Route::post('edit_pengeluaran/{id}', [InstitutePengeluaranController::class, 'update'])->name('_update.pengeluaran');
+
+    Route::get('/list_keuangan', [KeuanganController::class, 'index'])->name('keuangan');
+
+
     // Route::get('/detail_proyek', function () {
     //     return view('perusahaan/_detail.proyek')->name('show.proyek');
     // });

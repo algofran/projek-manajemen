@@ -158,7 +158,6 @@ class ProjectController extends Controller
         $project->vendor_tag = $vendor_tag[$project->vendor];
         $end_date = $project->end_date;
 
-
         // Ambil pengguna terkait setiap tugas secara terpisah
         foreach ($tasks as $task) {
             $task->user = UserEmploye::findOrFail($task->user_id);
@@ -172,7 +171,6 @@ class ProjectController extends Controller
         // return $data;
         return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

@@ -62,7 +62,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <button class="btn btn-info text-white mx-4" type="button">+ KLIK</button>
+                                        <a href="{{ route('keuangan')}}" class="btn btn-info mx-4 text-white">+ KLIK</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">

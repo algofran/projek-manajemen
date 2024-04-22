@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\InstituteProyek;
+use App\Models\InstituteTagihan;
+use App\Models\InstituteTugas;
+use App\Models\MitraIntitute;
 use App\Models\TaskLists;
 use App\Models\UserEmploye;
 use App\Models\UserProductivity;
@@ -22,9 +25,20 @@ class InstituteProyekController extends Controller
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
         $subjectOptions = ["Biaya Operasional", "Biaya Material", "Biaya Tools", "Biaya Gaji/Fee", "Biaya Lainnya"];
 
-
         $project = InstituteProyek::findOrFail($id);
-        $tasks = TaskLists::where('project_id', $id)->orderBy('id', 'asc')->get();
+        $id_inst = $project->id_inst;
+        $name = $project->keterangan;
+        $paket_tag = [
+            $name,
+            "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Papua 1 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Papua 2 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
+        ];
+        $mitra = MitraIntitute::where('id', $id_inst)->pluck('mitra')->first();
+        $tasks = InstituteTugas::where('id_inst', $id)->orderBy('id', 'asc')->get();
         $activities = UserProductivity::where('project_id', $id)->orderBy('date', 'desc')->get();
 
         $totalTasks = $tasks->count();
@@ -41,7 +55,10 @@ class InstituteProyekController extends Controller
         $prog = $prog > 0 ? number_format($prog, 2) : $prog;
 
         $status = $stat[$project->status];
-
+        $project->status_label = $status;
+        $project->progress = $prog;
+        $paymentStatus = $pay[$project->payment];
+        $project->payment_label = $paymentStatus;
 
         $end_date = $project->end_date;
 
@@ -57,7 +74,7 @@ class InstituteProyekController extends Controller
         $data = compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions');
 
         // return $data;
-        return view('perusahaan.detail_proyek', ['id' => $id], compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions'));
+        return view('perusahaan.detail_proyek', ['id' => $id], compact('project', 'end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions', 'mitra', 'paket_tag'));
     }
 
     /**

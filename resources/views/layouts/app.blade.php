@@ -232,7 +232,7 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
@@ -249,7 +249,7 @@
                         </li>
                         <li>
                             <a href="../lists_telkom"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
-                        </li>
+                        </li> --}}
                         <li class="submenu">
                             <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Keuangan</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
