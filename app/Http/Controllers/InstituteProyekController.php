@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyek;
 use App\Models\InstituteTagihan;
 use App\Models\InstituteTugas;
@@ -38,21 +39,25 @@ class InstituteProyekController extends Controller
             "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
         ];
         $mitra = MitraIntitute::where('id', $id_inst)->pluck('mitra')->first();
-        $tasks = InstituteTugas::where('id_inst', $id)->orderBy('id', 'asc')->get();
-        $activities = UserProductivity::where('project_id', $id)->orderBy('date', 'desc')->get();
+        $activities = InstitutePengeluaran::where('id_inst', $id)->orderBy('date', 'desc')->get();
 
+
+        $project = InstituteProyek::findOrFail($id);
+        $tasks = InstituteTugas::where('id_inst', $id)->orderBy('id', 'asc')->get();
         $totalTasks = $tasks->count();
         $completedTasks = $tasks->where('status', 3)->count();
         $progress = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
 
         $manager = UserEmploye::findOrFail($project->manager_id);
         $employees = UserEmploye::where('type', '>', 0)->get();
-        $totalExpense = UserProductivity::where('project_id', $id)->sum('cost');
+        $totalExpense = InstitutePengeluaran::where('id_inst', $id)->sum('cost');
 
-        $tprog = TaskLists::where('project_id', $project->id)->count();
-        $cprog = TaskLists::where('project_id', $project->id)->where('status', 3)->count();
+
+        $tprog = InstituteTugas::where('id_inst', $project->id)->count();
+        $cprog = InstituteTugas::where('id_inst', $project->id)->where('status', 3)->count();
         $prog = $tprog > 0 ? ($cprog / $tprog) * 100 : 0;
         $prog = $prog > 0 ? number_format($prog, 2) : $prog;
+
 
         $status = $stat[$project->status];
         $project->status_label = $status;

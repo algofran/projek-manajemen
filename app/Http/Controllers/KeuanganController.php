@@ -3,20 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\InstitutePengeluaran;
+use App\Models\InstituteProyek;
+use App\Models\InstituteTugas;
 use App\Models\UserEmploye;
 use Illuminate\Http\Request;
 
 class KeuanganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request, string $id)
     {
-        // $project_id = InstitutePengeluaran::findOrFail($id);
-        // $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
-        // $employees = UserEmploye::where('type', '>', 0)->get();
-        return view('perusahaan.list_keuangan');
+        $i = 1;
+        $stat = ["Pending", "On-Progress", "Complete"];
+        $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
+        $paket_tag = [
+            "Tidak Menggunakan Paket",
+            "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Papua 1 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Papua 2 - Serpo SBU Sulawesi & IBT 2022-2025",
+            "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
+        ];
+        if ($request->has('status')) {
+            $projects = InstituteProyek::where('id_inst', $id)->where('status', $request->status)->get();
+        } else {
+            $projects = InstituteProyek::where('id_inst', $id)->get();
+        }
+        // dd($projects);
+
+        foreach ($projects as $project) {
+            $tprog = InstituteTugas::where('id_inst', $project->id)->count();
+            $cprog = InstituteTugas::where('id_inst', $project->id)->where('status', 3)->count();
+            $prog = $tprog > 0 ? ($cprog / $tprog) * 100 : 0;
+            $prog = $prog > 0 ? number_format($prog, 2) : $prog;
+            $project->prog = $prog; // Tambahkan progres ke objek proyek
+        }
+
+        return view('perusahaan.list_keuangan', compact('projects', 'stat', 'pay', 'paket_tag', 'i'));
     }
 
     /**

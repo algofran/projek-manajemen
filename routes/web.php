@@ -131,7 +131,7 @@ Route::middleware([
     Route::get('/task_pengeluaran/{id}/delete', [InstitutePengeluaranController::class, 'destroy'])->name('_del.pengeluaran');
     Route::post('edit_pengeluaran/{id}', [InstitutePengeluaranController::class, 'update'])->name('_update.pengeluaran');
 
-    Route::get('/list_keuangan', [KeuanganController::class, 'index'])->name('keuangan');
+    Route::get('/list_keuangan/{id}', [KeuanganController::class, 'index'])->name('keuangan');
 
 
     // Route::get('/detail_proyek', function () {

@@ -209,7 +209,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ __('Dashboard') }}">
-                                        Search Project
+                                        Laporan Keuangan
                                     </a>
                                 </li>
         
@@ -230,6 +230,11 @@
                                         </a>
                                     </li>
                                 @endforeach
+                                <li>
+                                    <a href="">
+                                        Laporan Keuangan
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         {{-- <li class="submenu">
@@ -250,7 +255,7 @@
                         <li>
                             <a href="../lists_telkom"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
                         </li> --}}
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Keuangan</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
         
@@ -276,11 +281,11 @@
                                 </li>
         
                             </ul>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ 'lists_penjualan' }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
                         </li>
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fa fa-book"></i> <span> Laporan</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
@@ -305,7 +310,7 @@
                                 </li>
         
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="submenu">
                             <a href="#"><i class="fas fa-address-card"></i> <span>Pengguna</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
