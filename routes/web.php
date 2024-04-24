@@ -132,6 +132,7 @@ Route::middleware([
     Route::post('edit_pengeluaran/{id}', [InstitutePengeluaranController::class, 'update'])->name('_update.pengeluaran');
 
     Route::get('/list_keuangan/{id}', [KeuanganController::class, 'index'])->name('keuangan');
+    Route::get('/detail_keuangan/{id}', [KeuanganController::class, 'show'])->name('_detail.keuangan');
 
 
     // Route::get('/detail_proyek', function () {

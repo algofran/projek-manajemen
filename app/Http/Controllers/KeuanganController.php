@@ -64,7 +64,7 @@ class KeuanganController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('perusahaan.detail_keuangan');
     }
 
     /**

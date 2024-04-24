@@ -112,7 +112,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                     @php
-                                    //dd($project->paket);
+                                        $prog= 0;
+                                        $prog = ($project->PA/30) * 100;
+                                        $prog = $prog > 0 ?  number_format($prog) : $prog;
+                                            //dd($project->paket);
                                         if ($project->paket != 0){
                                             echo $paket_tag[$project->paket];
                                         } else {
@@ -126,8 +129,8 @@
                                    @endphp --}}
                                         <td>
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ $project->prog }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $project->prog }}%;">
-                                                    {{ $project->prog }} %
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ $prog }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $prog }}%;">
+                                                    {{ $prog }} %
                                                 </div>
                                             </div>
                                         </td>
@@ -163,7 +166,7 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="javascript:;" class="btn btn-sm bg-success-light me-2 ">
+                                            <a href="{{ route('_detail.keuangan', ['id' => $project->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
                                             {{-- <a href="edit-sports.html" class="btn btn-sm bg-danger-light me-2">

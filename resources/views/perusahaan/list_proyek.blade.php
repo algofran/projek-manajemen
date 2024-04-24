@@ -52,7 +52,9 @@
                                 @foreach ($proyeks as $item)
                                 @php
                                 
-                                
+                                $prog= 0;
+                                $prog = ($item->PA/30) * 100;
+                                $prog = $prog > 0 ?  number_format($prog) : $prog;
                                 $tagIndex = $item->paket;
                                 $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
                                 @endphp
@@ -65,15 +67,17 @@
                                     <td>{{ $paket }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td>
-                                        @php
+                                        {{-- @php
                                             dd( $project );
-                                        @endphp
-                                        <div class="progress">
+                                        @endphp --}}
+                                       
                                             
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ $item ? $item->progress : 0 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $item && $item->progress == 100 ? '100%' : ($item && $item->progress == 0 ? '0%' : $item->progress.'%') }}">
-                                                {{ $item ? $item->progress : 0 }} %
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ $prog }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $prog }}%;">
+                                                    {{ $prog }} %
+                                                </div>
                                             </div>
-                                        </div>
+                                        
                                     </td>
                                     <td>Rp. {{ number_format($item->tagihan, 0, ',', '.') }}</td>
                                     <td>
