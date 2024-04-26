@@ -205,7 +205,7 @@ class ProjectController extends Controller
             'user_ids.*' => 'integer',
             'payment_status' => 'nullable|integer',
             'status' => 'nullable|integer',
-            'fakturpajak' => 'nullable|string|max:255',
+            'fakturpajak' => 'nullable|stri ng|max:255',
             'fp_date' => 'nullable|date',
             'description' => 'nullable|string',
         ]);
@@ -236,7 +236,6 @@ class ProjectController extends Controller
         // Redirect ke halaman yang sesuai atau beri respons JSON
         return redirect()->route('project.lists')->with('success', 'Project updated successfully!');
     }
-
 
     /**
      * Remove the specified resource from storage.

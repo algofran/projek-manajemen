@@ -5,6 +5,7 @@ use App\Http\Controllers\InstitutePengeluaranController;
 use App\Http\Controllers\InstituteProyekController;
 use App\Http\Controllers\InstituteTagihanController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\KeuanganProjectController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
@@ -110,6 +111,9 @@ Route::middleware([
     Route::post('/project_pengeluaran', [ProjectPengeluaranController::class, 'store'])->name('pengeluaran.store');
     Route::get('/project_pengeluaran/{id}/delete', [ProjectPengeluaranController::class, 'destroy'])->name('_pengeluaran.del');
     Route::post('pengeluaran/{id}', [ProjectPengeluaranController::class, 'update'])->name('pengeluaran.update');
+
+    Route::get('/list_keuangan_project', [KeuanganProjectController::class, 'index'])->name('keuangan_project');
+    Route::get('/detail_keuangan_project/{id}', [KeuanganProjectController::class, 'show'])->name('_detail.keuangan_project');
 
 
     // Perusahaan

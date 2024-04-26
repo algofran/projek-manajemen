@@ -208,8 +208,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ __('Dashboard') }}">
+                                    <a href="{{ route('keuangan_project')}}">
                                         Laporan Keuangan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ __('Dashboard') }}">
+                                        Laporan Keuangan Pertahun
                                     </a>
                                 </li>
         

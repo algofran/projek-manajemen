@@ -62,9 +62,22 @@ class KeuanganController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('perusahaan.detail_keuangan');
+        $project = InstituteProyek::findOrFail($id);
+        $manager = UserEmploye::findOrFail($project->manager_id);
+        $type = $request->query('type');
+        if ($type) {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->where('subject', $type)
+                ->orderBy('date', 'asc')
+                ->get();
+        } else {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->orderBy('date', 'asc')
+                ->get();
+        }
+        return view('perusahaan.detail_keuangan', compact('project', 'manager', 'tasks'));
     }
 
     /**

@@ -37,7 +37,7 @@ class InstitutePengeluaranController extends Controller
             'project_id' => 'required|numeric',
             'subject' => 'required|string',
             'user_id' => 'required|numeric',
-            'date' => 'required|date',
+            'date' => 'required|dat e',
             'cost' => 'required|numeric',
             'comment' => 'required|string',
         ]);
