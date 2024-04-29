@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InstituteData;
-use App\Models\MitraIntitute;
+use App\Models\UserEmploye;
 use Illuminate\Http\Request;
 
-class InstituteDataController extends Controller
+class UserEmployeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,9 @@ class InstituteDataController extends Controller
     public function index()
     {
         $i = 1;
-        $perusahaan = InstituteData::orderBy('name')->get();
-        $mitra = MitraIntitute::orderBy('mitra')->get();
-        return view('perusahaan.add_perusahaan', compact('perusahaan', 'i', 'mitra'));
+        $role = ["Administrator", "Manager", "Staff"];
+        $user = UserEmploye::orderBy('firstname')->get();
+        return view('user.list_user', compact('i', 'user', 'role'));
     }
 
     /**
@@ -38,7 +37,7 @@ class InstituteDataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InstituteData $instituteData)
+    public function show(string $id)
     {
         //
     }
@@ -46,7 +45,7 @@ class InstituteDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InstituteData $instituteData)
+    public function edit(string $id)
     {
         //
     }
@@ -54,7 +53,7 @@ class InstituteDataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InstituteData $instituteData)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -62,7 +61,7 @@ class InstituteDataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InstituteData $instituteData)
+    public function destroy(string $id)
     {
         //
     }

@@ -101,6 +101,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-form-label col-md-2">Start Date</label>
+                            <div class="col-md-10">
+                                <input type="date" name="start_date" class="form-control" value="{{ old('start_date', now()->format('Y-m-d')) }}" required>
+                                @if ($errors->has('start_date'))
+                                    <span class="text-danger">{{ $errors->first('start_date') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">End Date</label>
+                            <div class="col-md-10">
+                                <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                                @if ($errors->has('end_date'))
+                                    <span class="text-danger">{{ $errors->first('end_date') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-form-label col-md-2">Status Perkerjaan</label>
                             <div class="col-md-10">
                                 <select class="form-control form-select" name="status" required>

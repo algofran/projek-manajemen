@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IconnetExpController;
+use App\Http\Controllers\InstituteDataController;
 use App\Http\Controllers\InstitutePengeluaranController;
 use App\Http\Controllers\InstituteProyekController;
 use App\Http\Controllers\InstituteTagihanController;
@@ -14,11 +15,14 @@ use App\Http\Controllers\ProjectPengeluaranController;
 use App\Http\Controllers\MitraIntituteController;
 
 use App\Http\Controllers\TelkomAksesController;
+use App\Http\Controllers\UserEmployeController;
 use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyek;
 use App\Models\InstituteTagihan;
 use App\Models\InstituteTugas;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +37,37 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $companies = App\Models\InstituteData::all();
+    session(['key' => 'value']);
     return view('welcome');
 });
+
+// Route::get('/check-session', function () {
+//     dd(Session::all());
+// });
+
+// Route::get('/toggle-zoom', function () {
+//     if (Session::has('zoomActive')) {
+//         Session::forget('zoomActive'); // Toggle status pengaktifan
+//     } else {
+//         Session::put('zoomActive', true); // Toggle status pengaktifan
+//     }
+
+//     return redirect()->back(); // Redirect kembali ke halaman sebelumnya
+// })->name('toggleZoom');
+// // routes/web.php
+
+
+
+// Route::get('/toggle-zoom', function () {
+//     if (Session::has('zoomActive')) {
+//         Session::forget('zoomActive'); // Toggle status pengaktifan
+//     } else {
+//         Session::put('zoomActive', true); // Toggle status pengaktifan
+//     }
+
+//     return redirect()->back(); // Redirect kembali ke halaman sebelumnya
+// })->name('toggleZoom');
+
 
 Route::middleware([
     'auth:sanctum',
@@ -137,6 +170,15 @@ Route::middleware([
 
     Route::get('/list_keuangan/{id}', [KeuanganController::class, 'index'])->name('keuangan');
     Route::get('/detail_keuangan/{id}', [KeuanganController::class, 'show'])->name('_detail.keuangan');
+    Route::get('/add_perusahaan', [InstituteDataController::class, 'index'])->name('_list.perusahaan');
+    // Route::get('/download-pdf/{id}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
+
+
+    Route::get('/list_user', [UserEmployeController::class, 'index'])->name('_list.user');
+    Route::get('/hapus_user/{id}', [UserEmployeController::class, 'destroy'])->name('_del.user');
+    Route::get('/Edit_user/{id}', [UserEmployeController::class, 'update'])->name('_update.user');
+
+
 
 
     // Route::get('/detail_proyek', function () {
@@ -178,4 +220,7 @@ Route::middleware([
 
     // Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('sales.index');
     // Route::get('/sales/{id}/delete', [PenjualanController::class, 'destroy'])->name('sales.del');
+
+
+
 });

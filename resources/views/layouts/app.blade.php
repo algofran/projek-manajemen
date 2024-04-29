@@ -142,13 +142,13 @@
                         </div>
                     </div>
                 </li>
-
+{{-- 
                 <li class="nav-item zoom-screen me-2">
-                    <a href="#" class="nav-link header-nav-list win-maximize">
+                    <a href="{{ route('toggleZoom') }}" class="nav-link header-nav-list win-maximize {{ session('zoomActive') ? 'active' : '' }}">
                         <img src="{{ asset('assets/img/icons/header-icon-04.svg' ) }}" alt="">
                     </a>
-                </li>
-
+                </li> --}}
+                
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <span class="user-img">
@@ -228,6 +228,11 @@
                         <li class="submenu">
                             <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
+                                <li>
+                                    <a href="{{ route('_list.perusahaan') }}">
+                                        Tambah Perusahaan
+                                    </a>
+                                </li>
                                 @foreach ($companies as $company)
                                     <li>
                                         <a href="{{ route('company.show', $company->id) }}">
@@ -235,11 +240,11 @@
                                         </a>
                                     </li>
                                 @endforeach
-                                <li>
+                                {{-- <li>
                                     <a href="">
                                         Laporan Keuangan
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                         {{-- <li class="submenu">
@@ -288,7 +293,15 @@
                             </ul>
                         </li> --}}
                         <li>
-                            <a href="{{ 'lists_penjualan' }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
+                            <a href="{{ route('list_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
+                        </li>   
+
+                        {{-- <li>
+                            <a href="{{ route('_list.user') }}"><i class="fa fa-credit-card"></i><span>Bank</span></a>
+                        </li> --}}
+
+                        <li>
+                            <a href="{{ route('_list.user') }}"><i class="fas fa-address-card"></i><span>pengguna</span></a>
                         </li>
                         {{-- <li class="submenu">
                             <a href="#"><i class="fa fa-book"></i> <span> Laporan</span> <span class="menu-arrow"></span></a>
@@ -316,7 +329,7 @@
         
                             </ul>
                         </li> --}}
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fas fa-address-card"></i> <span>Pengguna</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children">
                                 <li>
@@ -325,12 +338,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="./index.php?page=users_list">
+                                    <a href="{{ route('_list.user') }}">
                                         Daftar Pengguna
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

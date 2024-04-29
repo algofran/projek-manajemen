@@ -29,8 +29,10 @@
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                             <thead class="student-thread">
                                 <tr>
+                                    
                                     <th>No</th>
                                     <th>Project</th>
+                                    <th>Manager</th>
                                     <th>No.Kontak/PO</th>
                                     <th>Progres</th>
                                     <th>Status</th>
@@ -46,6 +48,11 @@
                                         <p>{{ ucwords($project->name) }}</p>
                                         <p class="truncate text-danger">{{ $project->tag }}</p>
                                         <p class="truncate text-info">{{ $project->vendor_tag }}</p>
+                                    </td>
+                                    <td>
+                                        @foreach ($managers->where('id', $project->manager_id) as $data)
+                                            {{ $data->firstname .' '.$data->lastname}}
+                                        @endforeach
                                     </td>
                                     <td class="center">{{ $project->po_number }}</td>
                                     <td>

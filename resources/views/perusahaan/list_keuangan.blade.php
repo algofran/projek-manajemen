@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     
-                    <div class="card report-card">
+                    {{-- <div class="card report-card">
                         <div class="card-body pb-0">
                             <div class="row">
                                 <div class="col-md-12">
@@ -41,33 +41,33 @@
                                                         </div>
                                                         <div class="selectBox-cont">
                                                             <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Advertising
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Food
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Marketing
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Repairs
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Software
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Stationary
-    </label>
-                                                            <label class="custom_check w-100">
-    <input type="checkbox" name="category">
-    <span class="checkmark"></span> Travel
-    </label>
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Advertising
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Food
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Marketing
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Repairs
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Software
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Stationary
+                                                            </label>
+                                                                                                                    <label class="custom_check w-100">
+                                                            <input type="checkbox" name="category">
+                                                            <span class="checkmark"></span> Travel
+                                                            </label>
                                                         </div>
                                                         <button type="submit" class="btn w-100 btn-primary">Apply</button>
                                                         <button type="reset" class="btn w-100 btn-grey">Reset</button>
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                    
     
     
@@ -123,7 +123,7 @@
                                         }
                                     @endphp
                                     </td>   
-                                    <td>12-12-2002</td>
+                                    <td>{{ $project->end_date }}</td>
                                    {{-- @php
                                        dd($project->prog);
                                    @endphp --}}

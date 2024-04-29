@@ -7,57 +7,43 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">Penjualan</h3>
+                                <h3 class="page-title">List User</h3>
                             </div>
+    
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-primary">Tambah User <i class="fas fa-plus"></i></a>
                             </div>
                         </div>
+                       
                     </div>
+    
+    
                     <div class="table-responsive">
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+    
                             <thead class="student-thread">
                                 <tr>
-                                    <th>Tanggal</th>
-                                    <th>Pembeli</th>
-                                    <th>Keterangan</th>
-                                    <th>Jumlah</th>
-                                    <th>Status</th>
+                                    <th>No</th>
+                                    <th>Employe Name</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sales as $data)
+                                @foreach ($user as $data)
                                 <tr>
-                                    <td>{{ $data->tgl }}</td>
-                                    <td>{{ ucwords($data->pembeli) }}</td>
-                                    <td>{{ $data->keterangan }}</td>
-                                    <td>Rp. {{ number_format($data->jual, 0, ',', '.') }}</td>
-                                    <td>
-                                        @php
-                                        $bayar = $pay[$data->status];
-                                        @endphp
-                                        @switch($bayar)
-                                            @case('Belum Terbayar')
-                                                <span class="badge badge-danger">{{ $bayar }}</span>
-                                                @break
-                                            @case('Sudah Terbayar')
-                                                <span class="badge badge-success">{{ $bayar }}</span>
-                                                @break                                         
-                                            @default
-                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
-                                        @endswitch
-                                    </td>
+                                    <td>{{  $loop->iteration }}</td>
+                                    <td>{{ ucwords($data->firstname.' '.$data->lastname) }}</td>
+                                    <td>{{ $data->username}}</td>
+                                    <td>{{ $role[$data->type] }}</td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="{{ route('penjualan.detail', ['pid' => $data->idsales]) }}" class="btn btn-sm bg-success-light me-2 ">
-                                                <i class="feather-eye"></i>
-                                            </a>
+                                            
                                             <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.$data->idsales }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
-                                            <a href="{{ route('_penjualan.del', ['id' => $data->idsales, 'periode' => $data->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this Penjualan?')">
+                                            <a href="{{ route('_del.user', ['id' => $data->id]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this User?')">
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
@@ -76,7 +62,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            <form action="{{ route('penjualan.update', $data->idsales) }}" method="post">
+                                            <form action="{{ route('_update.user', $data->id) }}" method="post">
                                                 @csrf
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-md-2">Tanggal</label>
@@ -108,17 +94,7 @@
                                                                 <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual',$data->jual) }}" required>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Nama Pengguna</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control form-select" name="user" required>
-                                                                    <option>Pilih Pengguna</option>                                          
-                                                                    @foreach ($employees as $user)
-                                                                    <option value="{{ $user->id }}" {{ old('user', $data->user) == $user->id ? 'selected' : '' }}>{{ ucwords($user->username) }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-md-2">Status Pembayaran</label>
                                                             <div class="col-md-10">
@@ -193,17 +169,7 @@
                                         <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual') }}" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Nama Pengguna</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control form-select" name="user" required>
-                                            <option>Pilih Pengguna</option>                                          
-                                                @foreach ($employees as $employees)
-                                                    <option value="{{ $employees->id }}">{{ ucwords($employees->username) }}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                               
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Status Pembayaran</label>
                                     <div class="col-md-10">

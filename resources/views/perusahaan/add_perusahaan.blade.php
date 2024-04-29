@@ -7,19 +7,13 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="page-title">List Proyeks {{ $mitra->mitra }}</h3>
+                                <h3 class="page-title">List Perusahaan</h3>
                             </div>
     
                             <div class="col-auto text-end float-end ms-auto download-grp">
                                 {{-- <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a> --}}
-                                <a href="{{ route('add.proyek', ['id' => $mitra->id]) }}" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-primary"><i class="fas fa-plus"> Tambah Project</i></a>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-primary"><i class="fas fa-plus"> Tambah Perusahaan</i></a>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-    
-                            <a href="./index.php?page=serpo&tahun=true"><button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Tahun Ini</button></a>
-                            <a href="./index.php?page=serpo"><button type="button" class="mb-xs mt-xs mr-xs btn btn-danger">Tagihan Aktif</button></a>
-    
                         </div>
                     </div>
     
@@ -35,109 +29,38 @@
                             <thead class="student-thread">
                                 <tr>
                                     <th>No</th>
-                                    <th>Periode</th>
-                                    <th>Sektor</th>
-                                    <th>Jumlah PA</th>
-                                    <th>Paket</th>
+                                    <th>Nama Perusahaan</th>
+                                    <th>Alamat</th>
                                     <th>Keterangan</th>
-                                    <th>Target</th>
-                                    <th>Tagihan</th>
-                                    <th>Status</th>
-                                    <th>Pembayaran</th>
+                                    <th>Mitra</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 
-                                @foreach ($proyeks as $item)
-                                @php
-                                
-                                $prog= 0;
-                                $prog = ($item->PA/30) * 100;
-                                $prog = $prog > 0 ?  number_format($prog) : $prog;
-                                $tagIndex = $item->paket;
-                                $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
-                                @endphp
+                                @foreach ($perusahaan as $item)
 
                                  <tr id="{{ $item->id }}">
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ ucwords($item->periode) }}</></td>
-                                    <td>{{ $item->sektor }}</td>
-                                    <td>{{ $item->PA }}</td>
-                                    <td>{{ $paket }}</td>
+                                    <td>{{ $item->name }}</></td>
+                                    <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td>
-                                        {{-- @php
-                                            dd( $project );
-                                        @endphp --}}
-                                       
-                                            
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ $prog }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $prog }}%;">
-                                                    {{ $prog }} %
-                                                </div>
-                                            </div>
-                                        
+
+                                    <ul style="list-style-type:disc">
+                                        @foreach ($mitra->where('id_inst', $item->id) as $data)
+                                        <li>
+                                            <a href="{{ route('mitra.menu', ['id' => $data->id, 'name' => $data->mitra]) }}" class="text-primary">{{ $data->mitra }}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                     </td>
-                                    <td>Rp. {{ number_format($item->tagihan, 0, ',', '.') }}</td>
-                                    <td>
-                                        @php
-                                        $status = $stat[$item->status];
-                                        @endphp
-                                        @switch($status)
-                                        @case('Pending')
-                                            <span class="badge badge-danger">{{ $status }}</span>
-                                            @break
-                                        
-                                        @case('On-Progress')
-                                            <span class="badge badge-primary">{{ $status }}</span>
-                                            @break
-                                        
-                                        @case('On-Hold')
-                                            <span class="badge badge-warning">{{ $status }}</span>
-                                            @break
-                                        
-                                        @case('Complete')
-                                            <span class="badge badge-success">{{ $status }}</span>
-                                            @break
-                                        
-                                        @case('Finish')
-                                            <span class="badge badge-danger">{{ $status }}</span>
-                                            @break
-                                        
-                                        @default
-                                            <!-- Tindakan jika tidak ada kasus yang cocok -->
-                                        @endswitch
-                                    </td>
-                                    <td>
-                                        @php
-                                        $bayar = $pay[$item->payment];
-                                        @endphp
-                                    
-                                        @switch($bayar)
-                                            @case('Sudah Terbayar')
-                                                <span class="badge badge-success">{{ $bayar }}</span>
-                                                @break
-                                            
-                                            @case('Belum Ditagih')
-                                                <span class="badge badge-danger">{{ $bayar }}</span>
-                                                @break
-                                            
-                                            @case('Sudah Ditagih')
-                                                <span class="badge badge-info">{{ $bayar }}</span>
-                                                @break
-                                            
-                                            
-                                            @default
-                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
-                                        @endswitch
-                                    </td>
-                                    <td class="text-end">
+                                      <td class="text-end">
                                         <div class="actions ">
                                             <div class="actions ">
-                                                <a href="{{ route('_detail.proyek', ['id' => $item->id]) }}" class="btn btn-sm bg-success-light me-2 ">
+                                                {{-- <a href="{{ route('_detail.proyek', ['id' => $item->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                     <i class="feather-eye"></i>
-                                                </a>
+                                                </a> --}}
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#Edititem'.$item->id }}" class="btn btn-sm bg-danger-light me-2">
                                                     <i class="feather-edit"></i>
                                                 </a>
@@ -251,17 +174,7 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">item Manager</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control form-select" name="manager_id">
-                                                                    <option value="">Pilih item Manager</option>
-                                                                    @foreach ($managers as $manager)
-                                                                    <option value="{{ $manager->id }}" {{ old('manager_id', $item->manager_id) == $manager->id ? 'selected' : '' }}>{{ ucwords($manager->username) }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                       
                                                 </div>
                             
                                                 <div class="modal-footer">
@@ -289,7 +202,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="form-header text-start mb-0">
-                                <h4 class="mb-0">Add item {{ $mitra->mitra }}</h4>
+                                <h4 class="mb-0">Add Perusahaan</h4>
                             </div>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -298,7 +211,7 @@
                         <form action="{{ route('add.store') }}" method="post">
                             @csrf
                         <div class="modal-body">
-                            <input type="" name="id_inst" value="{{ $mitra->id}}">
+                            <input type="" name="id_inst" value="">
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Periode</label>
                                 <div class="col-md-10">
@@ -331,22 +244,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Paket Serpo</label>
-                                <div class="col-md-10">
-                                    <select class="form-control mb-md" name="paket">
-                                        <option value="">Pilih Paket Untuk Serpo</option>
-                                        <option value="0" {{ old('paket', $paket) == 0 ? 'selected' : '' }}>Tidak menggunkan paket</option>
-                                        <option value="1" {{ old('paket', $paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                        <option value="2" {{ old('paket', $paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                        <option value="3" {{ old('paket', $paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                        <option value="4" {{ old('paket', $paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
-                                        <option value="5" {{ old('paket', $paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
-                                        <option value="6" {{ old('paket', $paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
-                                        <!-- Tambahkan opsi lainnya di sini -->
-                                    </select>
-                                    @if ($errors->has('paket'))
-                                        <span class="text-danger">{{ $errors->first('paket') }}</span>
-                                    @endif
-                                </div>
+                                
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Tagihan</label>
@@ -404,19 +302,7 @@
                                 </div>
                             </div>
                             
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Manager</label>
-                                <div class="col-md-10">
-                                    <select class="form-control form-select" name="manager_id">
-                                        <option>Pilih Manager</option>
-                                       
-                                            @foreach ($managers as $manager)
-                                                <option value="{{ $manager->id }}">{{ ucwords($manager->username) }}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-                               
-                            </div>
+                          
                         </div>
     
                         <div class="modal-footer">

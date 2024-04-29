@@ -6,6 +6,7 @@ use App\Models\MitraIntitute;
 use App\Models\UserEmploye;
 use App\Models\InstituteProyek;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MitraIntituteController extends Controller
 {
@@ -41,6 +42,7 @@ class MitraIntituteController extends Controller
         $status = $request->input('status');
         $payment = $request->input('payment');
         $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+        $mitra = MitraIntitute::findOrFail($id);
 
 
         if ($request->has('tahun')) {
@@ -63,7 +65,7 @@ class MitraIntituteController extends Controller
         // dd($proyeks);
 
         $list_proyeks = MitraIntitute::where('id_inst', $id)->orderBy('id', 'asc')->get();
-        return view('perusahaan.list_proyek', compact('list_proyeks', 'i', 'stat', 'pay', 'proyeks', 'paket', 'periode', 'sektor', 'PA', 'tagihan', 'status', 'payment', 'managers', 'paket_tag', 'keterangan'));
+        return view('perusahaan.list_proyek', compact('list_proyeks', 'i', 'stat', 'pay', 'proyeks', 'paket', 'periode', 'sektor', 'PA', 'tagihan', 'status', 'payment', 'managers', 'paket_tag', 'keterangan', 'mitra'));
     }
 
     /**
@@ -107,6 +109,8 @@ class MitraIntituteController extends Controller
             'PA' =>  $request->input('PA'),
             'target' => $request->input('target'),
             'tagihan' => $request->input('tagihan'),
+            'start_date' => Carbon::now(),
+            'end_date' => $request->input('end_date'),
             'status' => $request->input('status'),
             'payment' => $request->input('payment'),
             'manager_id' => $request->input('manager_id'),
@@ -162,13 +166,15 @@ class MitraIntituteController extends Controller
             'PA' =>  $request->input('PA'),
             'target' => $request->input('target'),
             'tagihan' => $request->input('tagihan'),
+            'start_date' => $iconnet->start_date,
+            'end_date' => $request->input('end_date'),
             'status' => $request->input('status'),
             'payment' => $request->input('payment'),
             'manager_id' => $request->input('manager_id'),
         ]);
 
         if ($iconnet->save()) {
-            return redirect()->route('list.proyeks', ['id' => $request->input('id_inst')])->with('success', 'proyek berhasil dibuat!');
+            return redirect()->route('list.proyeks', ['id' => $request->input('id_inst')])->with('success', 'proyek berhasil di Edit!');
         } else {
             $errorMessage = 'Gagal. Silakan coba lagi.';
             return redirect()->route('list.proyek')->with('error', $errorMessage)->withInput($request->except('password', 'password_confirmation'));
