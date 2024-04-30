@@ -47,15 +47,73 @@
                                     <td>{{ $item->keterangan }}</td>
                                     <td>
 
-                                    <ul style="list-style-type:disc">
-                                        @foreach ($mitra->where('id_inst', $item->id) as $data)
+                                        <ul style="list-style-type:disc">
+                                            @foreach ($mitra->where('id_inst', $item->id) as $data)
                                         <li>
-                                            <a href="{{ route('mitra.menu', ['id' => $data->id, 'name' => $data->mitra]) }}" class="text-primary">{{ $data->mitra }}</a>
+                                            <a href="{{ route('mitra.menu', ['id' => $data->id, 'name' => $data->mitra]) }}" class="text-primary">{{ $data->mitra }}</a> 
+
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#Editmitra'.$data->id }}" class="text-success mb-2 ms-2"><i class="far fa-edit me-1"></i></a>
+
+                                            <a class="text-danger mb-2" href="{{ route('_del.mitra', ['id' => $data->id]) }}" onclick="return confirm('Are you sure want to delete this item?')"><i class="far fa-trash-alt"></i></a>
+
+
+                                            <div class="modal custom-modal fade bank-details" id="{{ 'Editmitra'.$data->id }}" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="form-header text-start mb-0">
+                                                            <h4 class="mb-0">Add item</h4>
+                                                        </div>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{ route('_edit.mitra', $item->id) }}" method="post">
+                                                        @csrf
+                                            
+                                                    <div class="modal-body">  
+                                                                <div class="col-md-10">
+                                                                    <input type="" class="form-control" placeholder="" value="{{ old('name',$data->id_inst) }}" name="id_inst" required="">
+                                                                </div>
+                                                        
+                                                            <div class="form-group row">
+                                                                <label class="col-form-label col-md-2">Mitra</label>
+                                                                <div class="col-md-10">
+                                                                    <input type="text" name="mitra" class="form-control" value="{{ old('mitras', $data->mitra) }}" placeholder="" required="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-form-label col-md-2">Keterangan</label>
+                                                                <div class="col-md-10">
+                                                                    <input type="text" name="keterangan" class="form-control" value="{{ old('keteragan', $data->keterangan) }}" placeholder="Ketarangan..." required="">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        
+                                                    </div>
+                                
+                                                    <div class="modal-footer">
+                                                        <div class="bank-details-btn">
+                            
+                                                            <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                                                
+                                                            </a>
+                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                    
+                                        
                                         </li>
-                                        @endforeach
+                                        
+                                        @endforeach 
                                     </ul>
+                                    
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addmitra'.$item->id }}" class="btn-sm btn-info text-white"><i class="fas fa-plus"> tambah</i></a>
                                     </td>
-                                      <td class="text-end">
+                                    <td class="text-end">
                                         <div class="actions ">
                                             <div class="actions ">
                                                 {{-- <a href="{{ route('_detail.proyek', ['id' => $item->id]) }}" class="btn btn-sm bg-success-light me-2 ">
@@ -64,7 +122,7 @@
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#Edititem'.$item->id }}" class="btn btn-sm bg-danger-light me-2">
                                                     <i class="feather-edit"></i>
                                                 </a>
-                                                <a href="{{ route('_del.proyek', ['id' => $item->id, 'periode' => $item->periode]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this item?')">
+                                                <a href="{{ route('_del.institute', ['id' => $item->id]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this item?')">
                                                     <i class="feather-trash-2"></i>
                                                 </a>
                                             </div>
@@ -76,33 +134,33 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div class="form-header text-start mb-0">
-                                                        <h4 class="mb-0">Add item</h4>
+                                                        <h4 class="mb-0">Edit Perusahaan</h4>
                                                     </div>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('update', $item->id) }}" method="post">
+                                                <form action="{{ route('_update.institute', $item->id) }}" method="post">
                                                     @csrf
                                         
                                                 <div class="modal-body">
-                                                    <input type="" name="id_inst" value="{{ old('id_inst',$item->id_inst) }}">
+                                                    
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Periode</label>
+                                                            <label class="col-form-label col-md-2">Name</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control" placeholder="Periode (Contoh : JANUARI 2024)..." value="{{ old('periode',$item->periode) }}" name="periode" required="">
+                                                                <input type="text" class="form-control" placeholder="" value="{{ old('name',$item->name) }}" name="name" required="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Sektor</label>
+                                                            <label class="col-form-label col-md-2">Id Institute</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" name="sektor" class="form-control" value="{{ old('sektor', $item->sektor) }}"placeholder="Sektor/Area..." required="">
+                                                                <input type="text" name="institute" class="form-control" value="{{ old('institute', $item->institute) }}"placeholder="" required="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Jumlah PA</label>
+                                                            <label class="col-form-label col-md-2">Alamat</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" name="PA" class="form-control" value="{{ old('PA', $item->PA) }}" placeholder="Jumlah Aktivasi (PA)..." required="">
+                                                                <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $item->alamat) }}" placeholder="Jumlah Aktivasi (alamat)..." required="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -111,69 +169,7 @@
                                                                 <input type="text" name="keterangan" class="form-control" value="{{ old('keteragan', $item->keterangan) }}" placeholder="Ketarangan..." required="">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Paket Serpo</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control mb-md" name="paket" required>
-                                                                    <option value="">Pilih Paket Serpo</option>
-                                                                    <option value="0" {{ old('paket', $item->paket) == 0 ? 'selected' : '' }}>Tidak Menggunakan Paket</option>
-                                                                    <option value="1" {{ old('paket', $item->paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <option value="2" {{ old('paket', $item->paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <option value="3" {{ old('paket', $item->paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <option value="4" {{ old('paket', $item->paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <option value="5" {{ old('paket', $item->paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <option value="6" {{ old('paket', $item->paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
-                                                                    <!-- Tambahkan opsi lainnya di sini -->
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Tagihan</label>
-                                                            <div class="col-md-10">
-                                                                <input type="number" class="form-control" placeholder="Jumlah tagihan..." name="tagihan" value="{{ old('tagihan', $item->tagihan) }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Start Date</label>
-                                                            <div class="col-md-10">
-                                                                <input type="date" class="form-control" name="start_date" value="{{ old('start_date', $item->start_date) }}" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">End Date</label>
-                                                            <div class="col-md-10">
-                                                                <input type="date" class="form-control" name="end_date" value="{{ old('end_date', $item->end_date) }}" required>
-                                                            </div>
-                                                        </div>
-                                    
-                            
-                            
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Status Perkerjaan</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control form-select" name="status">
-                            
-                                                                    <option value="0" {{ old('status',$item->status) == 0 ? 'selected' : '' }}>Pending</option>
-                                                                    <option value="1" {{ old('status',$item->status) == 1 ? 'selected' : '' }}>On-Progress</option>
-                                                                    <option value="2" {{ old('status',$item->status) == 2 ? 'selected' : '' }}>Complete</option>
-                            
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Status Pembayaran</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control form-select" name="payment" required>
-                                                                    <option value="">Pilih Status Perkerjaan</option>
-                                                                    <option value="0" {{ old('payment',$item->payment) == 0 ? 'selected' : '' }}>Belum Ditagih</option>
-                                                                    <option value="1" {{ old('payment',$item->payment) == 1 ? 'selected' : '' }}>Proses Penagihan</option>
-                                                                    <option value="2" {{ old('payment',$item->payment) == 2 ? 'selected' : '' }}>Sudah Terbayar</option>
-                                                                </select>
-                                                                @if ($errors->has('status'))
-                                                                    <span class="text-danger">{{ $errors->first('status') }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
+                                                        
                                                        
                                                 </div>
                             
@@ -190,7 +186,66 @@
                                             </div>
                                         </div>
                                     </div>  
+                                    <div class="modal custom-modal fade bank-details" id="{{ 'addmitra'.$item->id }}" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="form-header text-start mb-0">
+                                                        <h4 class="mb-0">Add Mitra</h4>
+                                                    </div>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('_add.mitra') }}" method="post">
+                                                    @csrf
+                                                <div class="modal-body">
+                                                    
+                                                   
+                                                        <div class="col-md-10">
+                                                            <input type="hidden" name="id_inst" class="form-control" value="{{ $item->id }}" required>
+                                                            @if ($errors->has('id_inst'))
+                                                                <span class="text-danger">{{ $errors->first('id_inst') }}</span>
+                                                            @endif
+                                                        </div>
+                                                   
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Mitra</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="mitra" class="form-control" value="{{ old('mitras') }}" placeholder="" required>
+                                                            @if ($errors->has('mitras'))
+                                                                <span class="text-danger">{{ $errors->first('mitras') }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">Keterangan</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required="">
+                                                        </div>
+                                                        @if ($errors->has('keterangan'))
+                                                            <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                  
+                                                </div>
+                            
+                                                <div class="modal-footer">
+                                                    <div class="bank-details-btn">
+                        
+                                                        <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                                            
+                                                        </a>
+                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -208,25 +263,90 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('add.store') }}" method="post">
+                        <form action="{{ route('_add.perusahaan') }}" method="post">
                             @csrf
                         <div class="modal-body">
                             <input type="" name="id_inst" value="">
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2">Periode</label>
+                                <label class="col-form-label col-md-2">Nama</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="periode" class="form-control" value="{{ old('periode') }}" placeholder="Periode (Contoh : JANUARI 2024)..." required>
-                                    @if ($errors->has('periode'))
-                                        <span class="text-danger">{{ $errors->first('periode') }}</span>
+                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2">Sektor</label>
+                                <label class="col-form-label col-md-2">Id Institute</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="sektor" class="form-control" value="{{ old('sektor') }}" placeholder="Sektor/Area" required>
-                                    @if ($errors->has('sektor'))
-                                        <span class="text-danger">{{ $errors->first('sektor') }}</span>
+                                    <input type="text" name="institute" class="form-control" value="{{ old('institute') }}" placeholder="" required>
+                                    @if ($errors->has('institute'))
+                                        <span class="text-danger">{{ $errors->first('institute') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Alamat</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}" placeholder="" required="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Keterangan</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required="">
+                                </div>
+                                @if ($errors->has('keterangan'))
+                                    <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                @endif
+                            </div>
+                            
+                          
+                        </div>
+    
+                        <div class="modal-footer">
+                            <div class="bank-details-btn">
+
+                                <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                    
+                                </a>
+                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal custom-modal fade bank-details" id="{{ 'add.mitra'.$item->id }}" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="form-header text-start mb-0">
+                                <h4 class="mb-0">Add Mitra</h4>
+                            </div>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('_add.perusahaan') }}" method="post">
+                            @csrf
+                        <div class="modal-body">
+                            <input type="" name="id_inst" value="">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Institute</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="id_inst" class="form-control" value="{{ old('id_inst') }}" required>
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Mitra</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="institute" class="form-control" value="{{ old('mitras') }}" placeholder="" required>
+                                    @if ($errors->has('mitras'))
+                                        <span class="text-danger">{{ $errors->first('mitras') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -235,71 +355,9 @@
                                 <div class="col-md-10">
                                     <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required="">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Jumlah PA</label>
-                                <div class="col-md-10">
-                                    <input type="text" name="PA" class="form-control" value="{{ old('PA') }}" placeholder="Jumlah Aktivasi (PA)..." required="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Paket Serpo</label>
-                                
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Tagihan</label>
-                                <div class="col-md-10">
-                                    <input type="number" name="tagihan" class="form-control" value="{{ old('tagihan') }}" placeholder="Jumlah tagihan..." required>
-                                    @if ($errors->has('tagihan'))
-                                        <span class="text-danger">{{ $errors->first('tagihan') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Start Date</label>
-                                <div class="col-md-10">
-                                    <input type="date" name="start_date" class="form-control" value="{{ old('start_date', now()->format('Y-m-d')) }}" required>
-                                    @if ($errors->has('start_date'))
-                                        <span class="text-danger">{{ $errors->first('start_date') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">End Date</label>
-                                <div class="col-md-10">
-                                    <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
-                                    @if ($errors->has('end_date'))
-                                        <span class="text-danger">{{ $errors->first('end_date') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Status Perkerjaan</label>
-                                <div class="col-md-10">
-                                    <select class="form-control form-select" name="status" required>
-                                        <option value="">Pilih Status Perkerjaan</option>
-                                        <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Pending</option>
-                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>On-Progress</option>
-                                        <option value="2" {{ old('status') == 2 ? 'selected' : '' }}>Complete</option>
-                                    </select>
-                                    @if ($errors->has('status'))
-                                        <span class="text-danger">{{ $errors->first('status') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">Status Pembayaran</label>
-                                <div class="col-md-10">
-                                    <select class="form-control form-select"  name="payment" required>
-                                        <option value="">Pilih Status Pembayaran</option>
-                                        <option value="0" {{ old('payment') == 0 ? 'selected' : '' }}>Belum Ditagih</option>
-                                        <option value="1" {{ old('payment') == 1 ? 'selected' : '' }}>Proses Penagihan</option>
-                                        <option value="2" {{ old('payment') == 2 ? 'selected' : '' }}>Sudah Terbayar</option>
-                                    </select>
-                                    @if ($errors->has('payment'))
-                                        <span class="text-danger">{{ $errors->first('payment') }}</span>
-                                    @endif
-                                </div>
+                                @if ($errors->has('keterangan'))
+                                    <span class="text-danger">{{ $errors->first('keterangan') }}</span>
+                                @endif
                             </div>
                             
                           

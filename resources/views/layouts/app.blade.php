@@ -194,7 +194,10 @@
                         <li>
                             <a href="{{ route('dashboard') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
                         </li>
-                        <li class="submenu">
+                        <li>
+                            <a href="{{ route('menu.project') }}"><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>
+                        </li>
+                        {{-- <li class="submenu">
                             <a href="#"><i class="fas fa-clipboard-list"></i> <span> Project</span> <span class="menu-arrow"></span></a>
                             <ul class="nav nav-children ">
                                 <li>
@@ -219,7 +222,7 @@
                                 </li>
         
                             </ul>
-                        </li>
+                        </li> --}}
                         
                         @php
                             $companies = App\Models\InstituteData::all();

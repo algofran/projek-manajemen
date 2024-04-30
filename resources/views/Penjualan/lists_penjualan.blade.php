@@ -51,9 +51,9 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                            <a href="{{ route('penjualan.detail', ['pid' => $data->idsales]) }}" class="btn btn-sm bg-success-light me-2 ">
+                                            {{-- <a href="{{ route('penjualan.detail', ['pid' => $data->idsales]) }}" class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
-                                            </a>
+                                            </a> --}}
                                             <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.$data->idsales }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>

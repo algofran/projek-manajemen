@@ -48,6 +48,11 @@ class ProjectController extends Controller
         return view('project.lists', compact('i', 'projects', 'managers'));
     }
 
+    public function menu()
+    {
+        return view('project.menu');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

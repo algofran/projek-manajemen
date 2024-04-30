@@ -129,6 +129,7 @@ Route::middleware([
     // });
 
     // Project Routes
+    Route::get('/Menu_Project', [ProjectController::class, 'menu'])->name('menu.project');
     Route::get('/project_lists', [ProjectController::class, 'index'])->name('project.lists');
     Route::get('/add_project', [ProjectController::class, 'inputprojek'])->name('project.add');
     Route::post('/project_lists', [ProjectController::class, 'store'])->name('project.store');
@@ -171,6 +172,14 @@ Route::middleware([
     Route::get('/list_keuangan/{id}', [KeuanganController::class, 'index'])->name('keuangan');
     Route::get('/detail_keuangan/{id}', [KeuanganController::class, 'show'])->name('_detail.keuangan');
     Route::get('/add_perusahaan', [InstituteDataController::class, 'index'])->name('_list.perusahaan');
+    Route::post('/add_perusahaan', [InstituteDataController::class, 'store'])->name('_add.perusahaan');
+    Route::get('/perusahaan/{id}/delete', [InstituteDataController::class, 'destroy'])->name('_del.institute');
+    Route::post('/perusahaan/{id}/edit', [InstituteDataController::class, 'update'])->name('_update.institute');
+    Route::post('/add_mitra', [InstituteDataController::class, 'create'])->name('_add.mitra');
+    Route::get('perusahaan/delete/{id}/', [InstituteDataController::class, 'hapus'])->name('_del.mitra');
+    Route::post('perusahaan/edit/{id}/', [InstituteDataController::class, 'edit'])->name('_edit.mitra');
+
+
     // Route::get('/download-pdf/{id}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
 
 
