@@ -18,11 +18,11 @@
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id, 'type' => 'Biaya Opersional']) }}">Operasional</a></li>
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id, 'type' => 'Biaya Material']) }}">Material</a></li>
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id, 'type' => 'Biaya Tools']) }}">Tools</a></li>
-                        <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id, 'type' => 'Biaya Gaji/Fee']) }}">Gaji/Fees</a></li>  
+                        <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id, 'type' => 'Biaya Gaji']) }}">Gaji/Fees</a></li>  
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id,   'type' => 'Biaya Lainnya']) }}">Biaya Lainnya</a></li>  
                     </ul>
                     <div class="col-auto text-end float-end download-grp">
-                        <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
+                        <a href="{{ route('download.project.pdf', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
                     </div>  
                 </div>
                   

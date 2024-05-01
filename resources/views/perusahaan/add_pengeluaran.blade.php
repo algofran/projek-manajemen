@@ -18,7 +18,7 @@
                                             <option value="Biaya Operasional" {{ isset($subject) && $subject == "Biaya Operasional" ? 'selected' : '' }}>Biaya Operasional</option>
                                             <option value="Biaya Material" {{ isset($subject) && $subject == "Biaya Material" ? 'selected' : '' }}>Biaya Material</option>
                                             <option value="Biaya Tools" {{ isset($subject) && $subject == "Biaya Tools" ? 'selected' : '' }}>Biaya Tools</option>
-                                            <option value="Biaya Gaji/Fee" {{ isset($subject) && $subject == "Biaya Gaji/Fee" ? 'selected' : '' }}>Biaya Gaji/Fees</option>
+                                            <option value="Biaya Gaji" {{ isset($subject) && $subject == "Biaya Gaji" ? 'selected' : '' }}>Biaya Gaji</option>
                                             <option value="Biaya Lainnya" {{ isset($subject) && $subject == "Biaya Lainnya" ? 'selected' : '' }}>Biaya Lainnya</option>
                                         </select>
                                     </div>

@@ -7,6 +7,7 @@ use App\Models\TaskLists;
 use App\Models\UserEmploye;
 use App\Models\UserProductivity;
 use Illuminate\Http\Request;
+use Mpdf\Mpdf;
 
 class KeuanganProjectController extends Controller
 {
@@ -74,10 +75,10 @@ class KeuanganProjectController extends Controller
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
-
+        $type = $request->query('type');
         $project = ProjectList::findOrFail($id);
         $manager = UserEmploye::findOrFail($project->manager_id);
-        $type = $request->query('type');
+
         if ($type) {
             $tasks = UserProductivity::where('project_id', $project->id)
                 ->where('subject', $type)
@@ -86,6 +87,7 @@ class KeuanganProjectController extends Controller
         } else {
             $tasks = UserProductivity::where('project_id', $project->id)
                 ->get();
+            $type = 'null';
         }
         foreach ($project as $projects) {
             $tprog = TaskLists::where('project_id', $id)->count();
@@ -102,9 +104,9 @@ class KeuanganProjectController extends Controller
             $project->tag = $tag[$project->pembayaran];
             $project->vendor_tag = $vendor_tag[$project->vendor];
         }
-        // dd($tasks);
+        // dd($type);
         // dd($project);
-        return view('project.detail_keuangan', compact('project', 'manager', 'tasks'));
+        return view('project.detail_keuangan', compact('project', 'manager', 'tasks', 'type'));
     }
 
 
@@ -130,5 +132,53 @@ class KeuanganProjectController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function downloadPDF(Request $request, string $id, string $type)
+    {
+        // $cacheKey = 'pdf_' . $id;
+        // $cachedPdf = Cache::get($cacheKey);
+
+        // if ($cachedPdf) {
+        //     return response()->streamDownload(function () use ($cachedPdf) {
+        //         echo $cachedPdf;
+        //     }, 'Detail_Laporan_Keuangan.pdf');
+        // }
+
+
+
+        $project = ProjectList::findOrFail($id);
+        $manager = UserEmploye::findOrFail($project->manager_id);
+
+        if ($type == 'null') {
+            $tasks = UserProductivity::where('project_id', $project->id)
+                ->get();
+        } else {
+            $tasks = UserProductivity::where('project_id', $project->id)
+                ->where('subject', $type)
+                ->orderBy('date', 'asc')
+                ->get();
+        }
+
+        // Render view to HTML
+        $html = view('project.cetak_keuangan', compact('project', 'manager', 'tasks'))->render();
+
+        // Create new mPDF instance
+        $mpdf = new Mpdf();
+
+        // Write HTML content to PDF
+        $mpdf->WriteHTML($html);
+
+        $mpdf->Output();
+        // Get the PDF content
+        // $pdfContent = $mpdf->Output('', 'S');
+
+        // // Store PDF content in cache
+        // Cache::put($cacheKey, $pdfContent, now()->addHours(1));
+
+        // // Output the PDF as a file (force download)
+        // return response()->streamDownload(function () use ($pdfContent) {
+        //     echo $pdfContent;
+        // }, 'Detail_Laporan_Keuangan.pdf');
     }
 }

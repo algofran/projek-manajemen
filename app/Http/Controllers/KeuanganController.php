@@ -83,57 +83,61 @@ class KeuanganController extends Controller
             $tasks = InstitutePengeluaran::where('id_inst', $project->id)
                 ->orderBy('date', 'asc')
                 ->get();
+            $type = 'null';
         }
 
-        return view('perusahaan.detail_keuangan', compact('project', 'manager', 'tasks', 'stat', 'pay'));
+
+        return view('perusahaan.detail_keuangan', compact('project', 'manager', 'tasks', 'stat', 'pay', 'type'));
     }
 
-    // public function downloadPDF(Request $request, string $id)
-    // {
-    //     $cacheKey = 'pdf_' . $id;
-    //     $cachedPdf = Cache::get($cacheKey);
+    public function downloadPDF(Request $request, string $id, string $type)
+    {
+        // $cacheKey = 'pdf_' . $id;
+        // $cachedPdf = Cache::get($cacheKey);
 
-    //     if ($cachedPdf) {
-    //         return response()->streamDownload(function () use ($cachedPdf) {
-    //             echo $cachedPdf;
-    //         }, 'Detail_Laporan_Keuangan.pdf');
-    //     }
+        // if ($cachedPdf) {
+        //     return response()->streamDownload(function () use ($cachedPdf) {
+        //         echo $cachedPdf;
+        //     }, 'Detail_Laporan_Keuangan.pdf');
+        // }
 
-    //     $project = InstituteProyek::findOrFail($id);
-    //     $manager = UserEmploye::findOrFail($project->manager_id);
-    //     $type = $request->query('type');
 
-    //     if ($type) {
-    //         $tasks = InstitutePengeluaran::where('id_inst', $project->id)
-    //             ->where('subject', $type)
-    //             ->orderBy('date', 'asc')
-    //             ->get();
-    //     } else {
-    //         $tasks = InstitutePengeluaran::where('id_inst', $project->id)
-    //             ->orderBy('date', 'asc')
-    //             ->get();
-    //     }
 
-    //     // Render view to HTML
-    //     $html = view('perusahaan.detail_keuangan', compact('project', 'manager', 'tasks'))->render();
+        $project = InstituteProyek::findOrFail($id);
+        $manager = UserEmploye::findOrFail($project->manager_id);
 
-    //     // Create new mPDF instance
-    //     $mpdf = new Mpdf();
+        if ($type == 'null') {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->orderBy('date', 'asc')
+                ->get();
+        } else {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->where('subject', $type)
+                ->orderBy('date', 'asc')
+                ->get();
+        }
 
-    //     // Write HTML content to PDF
-    //     $mpdf->WriteHTML($html);
+        // Render view to HTML
+        $html = view('perusahaan.cetak_keuangan', compact('project', 'manager', 'tasks'))->render();
 
-    //     // Get the PDF content
-    //     $pdfContent = $mpdf->Output('', 'S');
+        // Create new mPDF instance
+        $mpdf = new Mpdf();
 
-    //     // Store PDF content in cache
-    //     Cache::put($cacheKey, $pdfContent, now()->addHours(1));
+        // Write HTML content to PDF
+        $mpdf->WriteHTML($html);
 
-    //     // Output the PDF as a file (force download)
-    //     return response()->streamDownload(function () use ($pdfContent) {
-    //         echo $pdfContent;
-    //     }, 'Detail_Laporan_Keuangan.pdf');
-    // }
+        $mpdf->Output();
+        // Get the PDF content
+        // $pdfContent = $mpdf->Output('', 'S');
+
+        // // Store PDF content in cache
+        // Cache::put($cacheKey, $pdfContent, now()->addHours(1));
+
+        // // Output the PDF as a file (force download)
+        // return response()->streamDownload(function () use ($pdfContent) {
+        //     echo $pdfContent;
+        // }, 'Detail_Laporan_Keuangan.pdf');
+    }
 
 
 

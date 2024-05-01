@@ -73,9 +73,21 @@ class InstitutePengeluaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InstitutePengeluaran $institutePengeluaran)
+    public function update(Request $request, $id)
     {
-        //
+
+
+        $iconnet = InstitutePengeluaran::findOrFail($id);
+        $iconnet->update([
+            'project_id' => $request->input('project_id'),
+            'subject' => $request->input('subject'),
+            'user_id' => $request->input('user_id'),
+            'date' => $request->input('date'),
+            'cost' => $request->input('cost'),
+            'comment' => $request->input('comment'),
+        ]);
+
+        return redirect()->back()->with('success', 'Pengeluaran berhasil diperbarui!');
     }
 
     /**

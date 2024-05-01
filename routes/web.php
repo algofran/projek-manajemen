@@ -149,6 +149,8 @@ Route::middleware([
     Route::get('/list_keuangan_project', [KeuanganProjectController::class, 'index'])->name('keuangan_project');
     Route::get('/detail_keuangan_project/{id}', [KeuanganProjectController::class, 'show'])->name('_detail.keuangan_project');
 
+    Route::get('/download-project-pdf/{id}/{type}', [KeuanganProjectController::class, 'downloadPDF'])->name('download.project.pdf');
+
 
     // Perusahaan
 
@@ -180,7 +182,7 @@ Route::middleware([
     Route::post('perusahaan/edit/{id}/', [InstituteDataController::class, 'edit'])->name('_edit.mitra');
 
 
-    // Route::get('/download-pdf/{id}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
+    Route::get('/download-pdf/{id}/{type}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
 
 
     Route::get('/list_user', [UserEmployeController::class, 'index'])->name('_list.user');

@@ -344,7 +344,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{ route('pengeluaran.update', $activity->id) }}" method="post">
+                                        <form action="{{ route('_update.pengeluaran', $activity->id) }}" method="post">
                                             @csrf
                                             {{-- @method('PATCH') --}}
                                         <div class="modal-body">
