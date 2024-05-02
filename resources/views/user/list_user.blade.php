@@ -40,7 +40,7 @@
                                     <td class="text-end">
                                         <div class="actions ">
                                             
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.$data->idsales }}" class="btn btn-sm bg-danger-light me-2">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.$data->id }}" class="btn btn-sm bg-danger-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             <a href="{{ route('_del.user', ['id' => $data->id]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this User?')">
@@ -49,7 +49,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <div class="modal custom-modal fade bank-details" id="{{ 'EditPenjualan'.$data->idsales }}" role="dialog">
+                                <div class="modal custom-modal fade bank-details" id="{{ 'EditPenjualan'.$data->id }}" role="dialog">
                                 
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
@@ -62,49 +62,51 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            <form action="{{ route('_update.user', $data->id) }}" method="post">
+                                            <form action="{{ route('update_user', $data->id) }}" method="post">
                                                 @csrf
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Tanggal</label>
+                                                            <label class="col-form-label col-md-2">First Name</label>
                                                             <div class="col-md-10">
-                                                                <input type="date" class="form-control" value="{{ old('tgl',$data->tgl) }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" required>
+                                                                <input type="text" class="form-control" placeholder="Andi" value="{{ $data->firstname }}" name="firstname" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Nama Pembeli</label>
+                                                            <label class="col-form-label col-md-2">Last Name</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control" placeholder="Andi Amalia" value="{{ old('pembeli',$data->pembeli) }}" name="pembeli" required>
+                                                                <input type="text" class="form-control" placeholder="Amalia" value="{{ $data->lastname }}" name="lastname" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Keterangan</label>
+                                                            <label class="col-form-label col-md-2">User Name</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan',$data->keterangan) }}"placeholder="Keterangan.." required>
+                                                                <input type="text" class="form-control" placeholder="Mell" value="{{ $data->username }}" name="username" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Harga Pembelian</label>
+                                                            <label class="col-form-label col-md-2">User Authority</label>
                                                             <div class="col-md-10">
-                                                                <input type="number" class="form-control" placeholder="Biaya Pembelian..." name="beli" value="{{ old('beli',$data->beli) }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Harga Penjualam</label>
-                                                            <div class="col-md-10">
-                                                                <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual',$data->jual) }}" required>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label class="col-form-label col-md-2">Status Pembayaran</label>
-                                                            <div class="col-md-10">
-                                                                <select class="form-control form-select" name="status" required>
+                                                                <select class="form-control form-select" name="type" required>
                             
-                                                                    <option value="0" {{ old('status',$data->status) == 0 ? 'selected' : '' }}>Belum Terbayar</option>
-                                                                    <option value="1" {{ old('status',$data->status) == 1 ? 'selected' : '' }}>Sudah Terbayar</option>
+                                                                    <option value="0" {{ $data->type == 0 ? 'selected' : '' }}>Administrator</option>
+                                                                    <option value="1" {{ $data->type == 1 ? 'selected' : '' }}>Manager</option>
+                                                                    <option value="2" {{ $data->type == 2 ? 'selected' : '' }}>Staff</option>
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Password</label>
+                                                            <div class="col-md-10">
+                                                                <input type="password" name="password" class="form-control" value="" placeholder="******" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Konfirmasi Password</label>
+                                                            <div class="col-md-10">
+                                                                <input type="password" name="cpassword" class="form-control" value="" placeholder="******" required>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
                                                 </div>
                             
                                                 <div class="modal-footer">
@@ -137,47 +139,47 @@
                         </div>
                         <div class="modal-body">
     
-                            <form action="{{ route('penjualan.store') }}" method="post">
+                            <form action="{{ route('add_user') }}" method="post">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Tanggal</label>
+                                    <label class="col-form-label col-md-2">First Name</label>
                                     <div class="col-md-10">
-                                        <input type="date" class="form-control" value="{{ old('tgl') }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" required>
+                                        <input type="text" class="form-control" placeholder="Andi" value="{{ old('firstname') }}" name="firstname" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Nama Pembeli</label>
+                                    <label class="col-form-label col-md-2">Last Name</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="Andi Amalia" value="{{ old('pembeli') }}" name="pembeli" required>
+                                        <input type="text" class="form-control" placeholder="Amalia" value="{{ old('lastname') }}" name="lastname" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Keterangan</label>
+                                    <label class="col-form-label col-md-2">User Name</label>
                                     <div class="col-md-10">
-                                        <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan') }}"placeholder="Keterangan.." required>
+                                        <input type="text" class="form-control" placeholder="Mell" value="{{ old('username') }}" name="username" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Harga Pembelian</label>
+                                    <label class="col-form-label col-md-2">User Authority</label>
                                     <div class="col-md-10">
-                                        <input type="number" class="form-control" placeholder="Biaya Pembelian..." name="beli" value="{{ old('beli') }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Harga Penjualam</label>
-                                    <div class="col-md-10">
-                                        <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual') }}" required>
-                                    </div>
-                                </div>
-                               
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Status Pembayaran</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control form-select" name="status" required>
+                                        <select class="form-control form-select" name="type" required>
     
-                                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Belum Terbayar</option>
-                                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Sudah Terbayar</option>
+                                            <option value="0" {{ old('type') == 0 ? 'selected' : '' }}>Administrator</option>
+                                            <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Manager</option>
+                                            <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Staff</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">Password</label>
+                                    <div class="col-md-10">
+                                        <input type="password" name="password" class="form-control" value="{{ old('password') }}"placeholder="******" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">Konfirmasi Password</label>
+                                    <div class="col-md-10">
+                                        <input type="password" name="cpassword" class="form-control" value="{{ old('cpassword') }}"placeholder="******" required>
                                     </div>
                                 </div>
                         </div>

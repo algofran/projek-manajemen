@@ -187,7 +187,8 @@ Route::middleware([
 
     Route::get('/list_user', [UserEmployeController::class, 'index'])->name('_list.user');
     Route::get('/hapus_user/{id}', [UserEmployeController::class, 'destroy'])->name('_del.user');
-    Route::get('/Edit_user/{id}', [UserEmployeController::class, 'update'])->name('_update.user');
+    Route::post('/list_user/add', [UserEmployeController::class, 'store'])->name('add_user');
+    Route::post('/user/update/{id}', [UserEmployeController::class, 'update'])->name('update_user');
 
 
 

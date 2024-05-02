@@ -53,7 +53,7 @@
                     <div class="row container">
                         <div class="col-md-6 col-sm-4 col-12">                            
                             <h6 class="invoice-name">Project Name</h6>
-                            <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
+                            <p class="bg-secondary border rounded-pill d-flex text-white px-3">
                                {{ $project->name }}
                             </p>
                         </div>

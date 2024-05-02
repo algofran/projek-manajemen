@@ -53,7 +53,7 @@
                     <div class="row container">
                         <div class="col-md-6 col-sm-4 col-12">                            
                             <h6 class="invoice-name">Project Name</h6>
-                            <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
+                            <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white px-3">
                                 @php
                                     $paket_tag = [
                                     $project->keterangan,
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="row container">
-                        <div class="col-md-3 col-sm-4 col-6">                            
+                        {{-- <div class="col-md-3 col-sm-4 col-6">                            
                             <h6 class="invoice-name">No.PO/Kontrak</h6>
                             <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
                                hallo hallo
@@ -136,7 +136,7 @@
                             <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
                                hallo hallo
                             </p>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3 col-sm-4 col-6">                            
                             <h6 class="invoice-name">Nama Bank</h6>
                             <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">

@@ -170,6 +170,8 @@ class KeuanganProjectController extends Controller
         $mpdf->WriteHTML($html);
 
         $mpdf->Output();
+        // response()->streamDownload('Detail_Laporan_Keuangan.pdf');
+
         // Get the PDF content
         // $pdfContent = $mpdf->Output('', 'S');
 

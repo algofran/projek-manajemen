@@ -127,6 +127,7 @@ class KeuanganController extends Controller
         $mpdf->WriteHTML($html);
 
         $mpdf->Output();
+
         // Get the PDF content
         // $pdfContent = $mpdf->Output('', 'S');
 
