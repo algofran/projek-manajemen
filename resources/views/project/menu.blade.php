@@ -81,7 +81,7 @@
                                     
                                 </div>
                                 <div class="mt-3 d-grid gap-2 mx-auto">
-                                        <a href="{{ route('keuangan_project')}}" class="btn btn-info mx-4 text-white">+ KLIK</a>
+                                        <a href="{{ route('_laporan.tahun.project')}}" class="btn btn-info mx-4 text-white">+ KLIK</a>
                                 </div>
                             </div>
                             <div class="card-body text-center">

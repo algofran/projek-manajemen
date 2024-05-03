@@ -7,6 +7,7 @@ use App\Http\Controllers\InstituteProyekController;
 use App\Http\Controllers\InstituteTagihanController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KeuanganProjectController;
+use App\Http\Controllers\LaporanPertahunController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
@@ -150,6 +151,7 @@ Route::middleware([
     Route::get('/detail_keuangan_project/{id}', [KeuanganProjectController::class, 'show'])->name('_detail.keuangan_project');
 
     Route::get('/download-project-pdf/{id}/{type}', [KeuanganProjectController::class, 'downloadPDF'])->name('download.project.pdf');
+    Route::get('/Laporan_Keuangan_Pertahun', [LaporanPertahunController::class, 'index'])->name('_laporan.tahun.project');
 
 
     // Perusahaan
