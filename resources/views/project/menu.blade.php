@@ -8,7 +8,7 @@
             </div>
                 <div class="row">
                     
-                    <div class="col-12 col-lg-3 col-xl-3">
+                    <div class="col-12 col-lg-6 col-xl-6">
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-xl-3">
+                    <div class="col-12 col-lg-6 col-xl-6">
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-xl-3">
+                    <div class="col-12 col-lg-6 col-xl-6">
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-xl-3">
+                    <div class="col-12 col-lg-6 col-xl-6">
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <div class="row align-items-center">

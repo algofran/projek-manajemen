@@ -8,6 +8,7 @@ use App\Http\Controllers\InstituteTagihanController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KeuanganProjectController;
 use App\Http\Controllers\LaporanPertahunController;
+use App\Http\Controllers\LaporanPertahunInstitute;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTugasController;
@@ -183,8 +184,13 @@ Route::middleware([
     Route::get('perusahaan/delete/{id}/', [InstituteDataController::class, 'hapus'])->name('_del.mitra');
     Route::post('perusahaan/edit/{id}/', [InstituteDataController::class, 'edit'])->name('_edit.mitra');
 
-
     Route::get('/download-pdf/{id}/{type}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
+
+    Route::get('/Laporan_Keuangan_Pertahun_Perusahaan/{id}', [LaporanPertahunInstitute::class, 'index'])->name('_laporan.tahun.perusahaan');
+
+
+
+
 
 
     Route::get('/list_user', [UserEmployeController::class, 'index'])->name('_list.user');
