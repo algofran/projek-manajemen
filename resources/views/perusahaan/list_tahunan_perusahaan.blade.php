@@ -133,14 +133,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('add.store') }}" method="post">
+                    <form action="{{ route('_add.list.laporan') }}" method="post">
                         @csrf
                         <input type="hidden" name="id_inst" value="{{ $mitra->id}}">
                     <div class="modal-body">
                       <div class="form-group row">
                         <label class="col-form-label col-md-2">Author</label>
                         <div class="col-md-10">
-                            <select class="form-control form-select" name="manager_id">
+                            <select class="form-control form-select" name="user_id">
                                 <option>Pilih Author</option>
                                
                                     @foreach ($employees as $manager)
@@ -151,37 +151,33 @@
                        
                     </div>
                     <div class="form-group row">
-                      <label class="col-form-label col-md-2">Project {{ $mitra->mitra }}</label>
-                      <div class="col-md-10">
-                          <select class="form-control mb-md" name="paket">
-                            @if ($mitra->id == 2)
-                            <option value="">Pilih Paket Untuk Serpo</option>
-                            <option value="1" {{ old('paket', $paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                            <option value="2" {{ old('paket', $paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                            <option value="3" {{ old('paket', $paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
-                            <option value="4" {{ old('paket', $paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
-                            <option value="5" {{ old('paket', $paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
-                            <option value="6" {{ old('paket', $paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
-                           
-                            @elseif($mitra->id != 2)
-                                @foreach ($projek as $item)
-                                <option value="">{{ $item->keterangan }}</option>
-                                @endforeach
-                            @else
-                              Tidak Memiliki Paket
-                            @endif
-
-                          </select>
-                        
-                      </div>
-                      
-                  </div>
-                        
+                        <label class="col-form-label col-md-2">Project {{ $mitra->mitra }}</label>
+                        <div class="col-md-10">
+                            <select class="form-control mb-md" name="deskripsi">
+                                @if ($mitra->id == 2)
+                                    <option value="">Pilih Paket Untuk Serpo</option>
+                                    <option value="1" {{ old('deskripsi', $paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                    <option value="2" {{ old('deskripsi', $paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                    <option value="3" {{ old('deskripsi', $paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                                    <option value="4" {{ old('deskripsi', $paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
+                                    <option value="5" {{ old('deskripsi', $paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
+                                    <option value="6" {{ old('deskripsi', $paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
+                                @elseif ($mitra->id != 2)
+                                    @foreach ($projek as $item)
+                                        <option value="{{ $item->keterangan }}">{{ $item->keterangan }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="">Tidak Memiliki Paket</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                    
                         
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Tahun</label>
                             <div class="col-md-10">
-                                <input type="text" name="tahun" class="form-control" value="{{ old('tahun') }}" placeholder="" required>
+                                <input type="number" name="tahun" class="form-control" value="{{ old('tahun') }}" placeholder="" required>
                               
                             </div>
                         </div>
@@ -190,7 +186,7 @@
                         <div class="form-group row">
                           <label class="col-form-label col-md-2">Attachment</label>
                           <div class="col-md-10">
-                              <input type="file" name="file_path" class="form-control" value="{{ old('file_path') }}" placeholder="" required>
+                              <input type="file" name="file_path" class="form-control" value="{{ old('file_path') }}" placeholder="">
                               
                           </div>
                       </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InstituteProyek;
+use App\Models\InstituteTahun;
 use App\Models\InstituteTugas;
 use App\Models\MitraIntitute;
 use App\Models\TaskLists;
@@ -41,9 +42,20 @@ class LaporanPertahunInstitute extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        // dd($request);
+        $institute = new InstituteTahun([
+            'id_inst' => $request->input('id_inst'),
+            'user_id' => $request->input('user_id'),
+            'deskripsi' => $request->input('deskripsi'),
+            'tahun' => $request->input('tahun'),
+        ]);
+        $institute->save();
+
+
+        return redirect()->back()->with('success', 'Institute created successfully!');
     }
 
     /**

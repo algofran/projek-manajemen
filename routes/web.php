@@ -21,6 +21,7 @@ use App\Http\Controllers\UserEmployeController;
 use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyek;
 use App\Models\InstituteTagihan;
+use App\Models\InstituteTahun;
 use App\Models\InstituteTugas;
 use Illuminate\Support\Facades\Route;
 
@@ -187,6 +188,8 @@ Route::middleware([
     Route::get('/download-pdf/{id}/{type}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
 
     Route::get('/Laporan_Keuangan_Pertahun_Perusahaan/{id}', [LaporanPertahunInstitute::class, 'index'])->name('_laporan.tahun.perusahaan');
+    Route::post('/tambah_list_laporan', [LaporanPertahunInstitute::class, 'create'])->name('_add.list.laporan');
+
 
 
 
@@ -197,6 +200,7 @@ Route::middleware([
     Route::get('/hapus_user/{id}', [UserEmployeController::class, 'destroy'])->name('_del.user');
     Route::post('/list_user/add', [UserEmployeController::class, 'store'])->name('add_user');
     Route::post('/user/update/{id}', [UserEmployeController::class, 'update'])->name('update_user');
+
 
 
 
