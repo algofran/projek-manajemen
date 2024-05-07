@@ -47,7 +47,7 @@
                       </div>
                   </div>
                   <div class="col-auto text-end float-end ms-auto download-grp">
-                      <a href="" class="btn btn-primary"><i class="fas fa-plus"> Tambah Laporan</i></a>
+                      <a href="{{ route('add.proyek', ['id' => $mitra->id]) }}" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-primary"><i class="fas fa-plus"> Tambah Laporan</i></a>
                   </div>
               </div>
           </div>
@@ -117,11 +117,110 @@
                               </div>
                           </div>
                       </div>
-                     
-                  
-                 
               </div>
           </div>
+
+
+
+          <div class="modal custom-modal fade bank-details" id="bank_details" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="form-header text-start mb-0">
+                            <h4 class="mb-0">Add item {{ $mitra->mitra }}</h4>
+                        </div>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('add.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id_inst" value="{{ $mitra->id}}">
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <label class="col-form-label col-md-2">Author</label>
+                        <div class="col-md-10">
+                            <select class="form-control form-select" name="manager_id">
+                                <option>Pilih Author</option>
+                               
+                                    @foreach ($employees as $manager)
+                                        <option value="{{ $manager->id }}">{{ ucwords($manager->username) }}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+                       
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-2">Project {{ $mitra->mitra }}</label>
+                      <div class="col-md-10">
+                          <select class="form-control mb-md" name="paket">
+                            @if ($mitra->id == 2)
+                            <option value="">Pilih Paket Untuk Serpo</option>
+                            <option value="1" {{ old('paket', $paket) == 1 ? 'selected' : '' }}>Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                            <option value="2" {{ old('paket', $paket) == 2 ? 'selected' : '' }}>Paket 3 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                            <option value="3" {{ old('paket', $paket) == 3 ? 'selected' : '' }}>Paket 7 - Serpo SBU Sulawesi & IBT 2022-2025</option>
+                            <option value="4" {{ old('paket', $paket) == 4 ? 'selected' : '' }}>Serpo URC Papua 1 - SBU Sulawesi & IBT 2022-2025</option>
+                            <option value="5" {{ old('paket', $paket) == 5 ? 'selected' : '' }}>Serpo URC Papua 2 - SBU Sulawesi & IBT 2022-2025</option>
+                            <option value="6" {{ old('paket', $paket) == 6 ? 'selected' : '' }}>Serpo URC Konawe - SBU Sulawesi & IBT 2022-2025</option>
+                           
+                            @elseif($mitra->id != 2)
+                                @foreach ($projek as $item)
+                                <option value="">{{ $item->keterangan }}</option>
+                                @endforeach
+                            @else
+                              Tidak Memiliki Paket
+                            @endif
+
+                          </select>
+                        
+                      </div>
+                      
+                  </div>
+                        
+                        
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Tahun</label>
+                            <div class="col-md-10">
+                                <input type="text" name="tahun" class="form-control" value="{{ old('tahun') }}" placeholder="" required>
+                              
+                            </div>
+                        </div>
+                        
+                       
+                        <div class="form-group row">
+                          <label class="col-form-label col-md-2">Attachment</label>
+                          <div class="col-md-10">
+                              <input type="file" name="file_path" class="form-control" value="{{ old('file_path') }}" placeholder="" required>
+                              
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-md-2">Choose License</label>
+                          <div class="col-md-10">
+                            <select class="form-control mb-md" name="license">
+                              <option value="0">Public Domain</option>
+                              <option value="1">Private Domain</option>
+                              <option value="1">Permissive Domain</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="bank-details-btn">
+
+                            <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
+                                
+                            </a>
+                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
+
       </div>
   </div>
 </x-app-layout>
