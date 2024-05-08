@@ -11,7 +11,7 @@ class InstituteTahun extends Model
     protected $table = 'list_dokumen_institutes';
     protected $guarded = ['id'];
 
-    public function InstituteDokumen()
+    public function instituteDokumen()
     {
         return $this->hasMany(InstituteDokumen::class);
     }

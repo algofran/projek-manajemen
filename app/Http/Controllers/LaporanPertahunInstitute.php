@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InstituteDokumen;
 use App\Models\InstituteProyek;
 use App\Models\InstituteTahun;
 use App\Models\InstituteTugas;
@@ -25,6 +26,7 @@ class LaporanPertahunInstitute extends Controller
         $projek = InstituteProyek::where('id_inst', $id)
             ->orderBy('id', 'desc')
             ->get();
+        $dokumen = InstituteDokumen::where('id_inst', $id)->orderBy('id')->get();
         $paket = [
             "",
             "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",
@@ -34,9 +36,11 @@ class LaporanPertahunInstitute extends Controller
             "Papua 2 - Serpo SBU Sulawesi & IBT 2022-2025",
             "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
         ];
+        $laporantahun = InstituteTahun::where('id_inst', $id)->orderBy('created_at')->get();
+        // dd($laporantahun);
 
 
-        return view('perusahaan.list_tahunan_perusahaan', compact('mitra', 'employees', 'paket', 'projek'));
+        return view('perusahaan.list_tahunan_perusahaan', compact('mitra', 'employees', 'paket', 'projek', 'laporantahun', 'dokumen'));
     }
 
     /**
@@ -63,7 +67,27 @@ class LaporanPertahunInstitute extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $file           = $request->file('file_path');
+
+        //mengambil nama file
+        $nama_file      = $file->getClientOriginalName();
+
+        //memindahkan file ke folder tujuan
+        $file->move(public_path('PDF'), $nama_file);
+
+
+        $upload = new InstituteDokumen();
+
+        $upload->id_inst       = $request->input('id_inst');
+        $upload->id_dokumen      = $request->input('id_dokumen');
+        $upload->file_path       = $nama_file;
+        $upload->license = $request->input('license');
+
+        //menyimpan data ke database
+        $upload->save();
+
+        return back();
     }
 
     /**

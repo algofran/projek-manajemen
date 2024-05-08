@@ -189,6 +189,7 @@ Route::middleware([
 
     Route::get('/Laporan_Keuangan_Pertahun_Perusahaan/{id}', [LaporanPertahunInstitute::class, 'index'])->name('_laporan.tahun.perusahaan');
     Route::post('/tambah_list_laporan', [LaporanPertahunInstitute::class, 'create'])->name('_add.list.laporan');
+    Route::post('/tambah_list_pdf', [LaporanPertahunInstitute::class, 'store'])->name('_add.pdf.laporan');
 
 
 

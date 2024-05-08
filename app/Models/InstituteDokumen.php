@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InstituteDokumen extends Model
 {
     use HasFactory;
-    protected $table = 'dokumens';
+    protected $table = 'dokumens_institute';
     protected $guarded = ['id'];
 
     public function InstituteTahun()
