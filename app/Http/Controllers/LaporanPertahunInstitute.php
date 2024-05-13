@@ -9,7 +9,9 @@ use App\Models\InstituteTugas;
 use App\Models\MitraIntitute;
 use App\Models\TaskLists;
 use App\Models\UserEmploye;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use File;
 
 class LaporanPertahunInstitute extends Controller
 {
@@ -90,6 +92,25 @@ class LaporanPertahunInstitute extends Controller
         return back();
     }
 
+    public function download($id)
+    {
+        // Cari dokumen berdasarkan id dokumen
+        $dokumen = InstituteDokumen::findOrFail($id);
+
+        // Path lengkap ke file
+        $file_path = public_path('PDF/') . $dokumen->file_path;
+
+        // Pastikan file ada
+        if (file_exists($file_path)) {
+            // Download file
+            return response()->download($file_path);
+        } else {
+            // File tidak ditemukan
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        }
+    }
+
+
     /**
      * Display the specified resource.
      */
@@ -119,6 +140,18 @@ class LaporanPertahunInstitute extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari dokumen berdasarkan id dokumen
+        $hapus = InstituteDokumen::findOrfail($id);
+
+        $file = public_path('/PDF/') . $hapus->file_path;
+
+        // Pastikan dokumen ada
+        if (file_exists($file)) {
+
+            @unlink($file);
+        }
+        $hapus->delete();
+
+        return redirect()->back()->with('success', 'Dokumen berhasil dihapus.');
     }
 }

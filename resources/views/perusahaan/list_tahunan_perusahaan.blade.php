@@ -1,6 +1,6 @@
 <style>
   .scrollbar {
-          height: 165px;
+          height: 160px;
           width: 100%;
           overflow: auto;
           padding: 0 10px;
@@ -22,6 +22,8 @@
           background-color: #008cff;
       }
 </style>
+
+
 <x-app-layout>
   <div class="row">
       <div class="col-sm-12">
@@ -32,8 +34,6 @@
           </div>
           <div class="page-header">
               <div class="row align-items-center">
-                  
-                  
                   <div class="col">
                       <div class="dropdown">
                           <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,6 +59,20 @@
               @endif
           </div>
           <div class="row">
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            
 
             @foreach ($laporantahun as $item)
             <div class="col-12 col-md-6 col-lg-6 d-flex">
@@ -96,30 +110,33 @@
                             </div>
                             </div>
                           </div>
-                          
-                            
-                          
+
                             <div class="scrollbar" id="scrollbar2">
-                                <div class="table-responsive">
-                                    <table class="table border-0 star-student table-hover table-center mb-0">
-                                        <tbody>
-                                        
-                                          @foreach ($dokumen->where('id_dokumen', $item->id) as $data)
-                                                <td>
-                                                  {{ $data->file_path }}
-                                                </td>
-                                                <td class="text-end">
-                                                  <a href="#" class="btn btn-sm bg-primary-light me-2">
-                                                    <i class="fa fa-download"></i>
-                                                  </a>
-                                                </td>
-                                                
-                                              </tr>
-                                          @endforeach
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
+                              <table class="table star-student table-hover table-responsive table-center mb-0 table-striped">
+                                  <thead>
+                                    <th>Dokumen</th>
+                                    <th class="text-end">Action</th>
+                                  </thead>
+                                  <tbody>
+                                  @foreach ($dokumen->where('id_dokumen', $item->id) as $data)
+                                  <tr>
+                                  <td>
+                                    {{ $data->file_path }}
+                                  </td>
+                                  <td class="text-end">  
+                                    <a href="{{ route('_download.pdf.laporan', $data->id) }}" class="btn btn-sm btn-outline-info">
+                                      <i class="fa fa-download text-dark"></i>
+                                    </a>
+                                    <a href="{{ route('_del.pdf.laporan', ['id' => $data->id, 'periode' => $item->periode]) }}" class="btn btn-sm btn-outline-danger">
+                                      <i class="feather-trash-2 text-dark"></i>
+                                    </a>
+                                  </td>
+                              
+                                </tr>
+                                @endforeach
+                                  
+                              </tbody>
+                          </table>
                             </div>
                         </div>
                     </div>
@@ -166,6 +183,7 @@
                               <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
                           </div>
                       </div>
+                      <form action=""></form>
                   </form>
                 </div>
             </div>

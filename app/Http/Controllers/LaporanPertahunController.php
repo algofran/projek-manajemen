@@ -19,7 +19,9 @@ class LaporanPertahunController extends Controller
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
-        $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+        $employees = UserEmploye::orderBy('firstname')->get();
+
+        $laporantahun = ProjectList::orderBy('created_at')->get();
 
         if (isset($request->status)) {
             $projects = ProjectList::where('status', $request->status)->orderByDesc('end_date')->get();
@@ -43,7 +45,7 @@ class LaporanPertahunController extends Controller
             $project->vendor_tag = $vendor_tag[$project->vendor];
         }
 
-        return view('project.list_tahunan', compact('projects', 'managers'));
+        return view('project.list_tahunan', compact('projects', 'laporantahun', 'employees'));
     }
 
     /**

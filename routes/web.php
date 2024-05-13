@@ -44,33 +44,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/check-session', function () {
-//     dd(Session::all());
-// });
-
-// Route::get('/toggle-zoom', function () {
-//     if (Session::has('zoomActive')) {
-//         Session::forget('zoomActive'); // Toggle status pengaktifan
-//     } else {
-//         Session::put('zoomActive', true); // Toggle status pengaktifan
-//     }
-
-//     return redirect()->back(); // Redirect kembali ke halaman sebelumnya
-// })->name('toggleZoom');
-// // routes/web.php
-
-
-
-// Route::get('/toggle-zoom', function () {
-//     if (Session::has('zoomActive')) {
-//         Session::forget('zoomActive'); // Toggle status pengaktifan
-//     } else {
-//         Session::put('zoomActive', true); // Toggle status pengaktifan
-//     }
-
-//     return redirect()->back(); // Redirect kembali ke halaman sebelumnya
-// })->name('toggleZoom');
-
 
 Route::middleware([
     'auth:sanctum',
@@ -82,54 +55,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    // //Projek
-    // Route::get('/project_lists', function () {
-    //     return view('project/lists');
-
-    // });
-    // Route::get('/add_project', function () {
-    //     return view('project/add');
-    // });
-
-    // //Icon Plus
-    // Route::get('/lists_serpo', function () {
-    //     return view('icon_plus/lists_serpo');
-    // });
-    // Route::get('/add_serpo', function () {
-    //     return view('icon_plus/add_serpo');
-    // });
-    // Route::get('/lists_iconnet', function () {
-    //     return view('icon_plus/lists_iconnet');
-    // });
-    // Route::get('/add_iconnet', function () {
-    //     return view('icon_plus/add_iconnet');
-    // });
-
-    // //Telkom akses
-    // Route::get('/lists_telkom', function () {
-    //     return view('telkom_akses/lists_telkom');
-    // });
-    // Route::get('/add_telkom', function () {
-    //     return view('telkom_akses/add_telkom');
-    // });
-
-    // //Keuangan
-    // Route::get('/pengeluaran_projek', function () {
-    //     return view('keuangan/pengeluaran_projek');
-    // });
-    // Route::get('/pengeluaran_serpo', function () {
-    //     return view('keuangan/pengeluaran_serpo');
-    // });
-    // Route::get('/pengeluaran_iconnet', function () {
-    //     return view('keuangan/pengeluaran_iconnet');
-    // });
-    // Route::get('/pengeluaran_telkom', function () {
-    //     return view('keuangan/pengeluaran_telkom');
-    // });
-
-    // Route::get('/laporan', function () {
-    //     return view('laporan/laporan');
-    // });
 
     // Project Routes
     Route::get('/Menu_Project', [ProjectController::class, 'menu'])->name('menu.project');
@@ -190,11 +115,11 @@ Route::middleware([
     Route::get('/Laporan_Keuangan_Pertahun_Perusahaan/{id}', [LaporanPertahunInstitute::class, 'index'])->name('_laporan.tahun.perusahaan');
     Route::post('/tambah_list_laporan', [LaporanPertahunInstitute::class, 'create'])->name('_add.list.laporan');
     Route::post('/tambah_list_pdf', [LaporanPertahunInstitute::class, 'store'])->name('_add.pdf.laporan');
+    Route::get('/download_pdf_institute/{id}', [LaporanPertahunInstitute::class, 'download'])->name('_download.pdf.laporan');
+    Route::get('/hapus/{id}', [LaporanPertahunInstitute::class, 'destroy'])->name('_del.pdf.laporan');
 
 
-
-
-
+    //user
 
 
     Route::get('/list_user', [UserEmployeController::class, 'index'])->name('_list.user');
