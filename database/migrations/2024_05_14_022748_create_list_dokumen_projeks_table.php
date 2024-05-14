@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('list_dokumen_perusahaans', function (Blueprint $table) {
+        Schema::create('dokumens_projeks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_inst');
-            $table->foreign('id_inst')->references('id')->on('mitra_institutes')->onDelete('cascade');
             $table->unsignedBigInteger('id_dokumen');
-            $table->foreign('id_dokumen')->references('id')->on('dokumens')->onDelete('cascade');
-            $table->year('tahun');
-
+            $table->foreign('id_dokumen')->references('id')->on('list_dokumen_projeks')->onDelete('cascade');
+            $table->string('file_path');
+            $table->string('license');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('list_dokumen_perusahaans');
+        Schema::dropIfExists('dokumens_projeks');
     }
 };

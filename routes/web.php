@@ -78,8 +78,12 @@ Route::middleware([
     Route::get('/detail_keuangan_project/{id}', [KeuanganProjectController::class, 'show'])->name('_detail.keuangan_project');
 
     Route::get('/download-project-pdf/{id}/{type}', [KeuanganProjectController::class, 'downloadPDF'])->name('download.project.pdf');
-    Route::get('/Laporan_Keuangan_Pertahun', [LaporanPertahunController::class, 'index'])->name('_laporan.tahun.project');
 
+    Route::get('/Laporan_Keuangan_Pertahun', [LaporanPertahunController::class, 'index'])->name('_laporan.tahun.project');
+    Route::post('/tambah_list_laporan_projek', [LaporanPertahunController::class, 'create'])->name('_add.list.laporan.projek');
+    Route::post('/tambah_list_pdf_projek', [LaporanPertahunController::class, 'store'])->name('_add.pdf.laporan.projek');
+    Route::get('/download_pdf_projek/{id}', [LaporanPertahunController::class, 'download'])->name('_download.pdf.laporan.projek');
+    Route::get('/hapus_dokumen/{id}', [LaporanPertahunController::class, 'destroy'])->name('_del.pdf.laporan.projek');
 
     // Perusahaan
 

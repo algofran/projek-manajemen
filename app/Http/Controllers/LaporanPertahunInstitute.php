@@ -21,8 +21,7 @@ class LaporanPertahunInstitute extends Controller
     public function index(Request $request, $id)
     {
         $i = 1;
-        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
-        $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
+
         $employees = UserEmploye::where('type', '>', 0)->get();
         $mitra = MitraIntitute::findOrFail($id);
         $projek = InstituteProyek::where('id_inst', $id)
@@ -81,7 +80,7 @@ class LaporanPertahunInstitute extends Controller
 
         $upload = new InstituteDokumen();
 
-        $upload->id_inst       = $request->input('id_inst');
+        $upload->id_inst         = $request->input('id_inst');
         $upload->id_dokumen      = $request->input('id_dokumen');
         $upload->file_path       = $nama_file;
         $upload->license = $request->input('license');

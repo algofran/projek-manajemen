@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TblSerpos extends Model
+class DokumenTahun extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_serpos';
+    protected $table = 'dokumens_projeks';
     protected $guarded = ['id'];
+
+    public function listDokumen()
+    {
+        return $this->belongsTo(ListDokumen::class);
+    }
 }

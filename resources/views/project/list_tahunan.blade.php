@@ -81,12 +81,11 @@
                           <div class="row">
                               <div class="col">
                                   <h4 class="mb-0 ms-4">
-                                    {{-- {{ $item->id }} --}}
+                                     {{-- {{ $item->id }} --}}
                                     
-                                    {{-- @foreach ($employees->where('id', $item->user_id) as $data)
-                                    {{ $data->firstname .' '.$data->lastname}}
-                                    
-                                @endforeach --}}
+                                    @foreach ($employees->where('id', $item->user_id) as $data)
+                                    {{ $data->firstname .' '.$data->lastname}} 
+                                    @endforeach 
                                   </h4>
                               </div>
                               <div class="col">
@@ -99,14 +98,14 @@
                       <div class="card-body">
                           <div class="container">
                             <div class="row">
-                              <div class="col">
+                              <div class="col-8 col-md-7 col-lg-9">
                                 <p> Nama : {{ $item->deskripsi }} <br>
                                   Tahun : {{ $item->tahun }}
                                 </p>
                               </div>
-                              <div class="col">
-                                <div class="col-auto text-end float-end ms-auto download-grp">
-                                  <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addpdf'.$item->id }}" class="btn btn-info text-white"><i class="fas fa-plus"> PDF</i></a>
+                              <div class="col-auto ms-auto">
+                                <div class="text-end float-end ms-auto download-grp">
+                                  <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addpdf'.$item->id }}" class="btn btn-info text-white"><i class="fas fa-plus"></i></a>
                               </div>
                               </div>
                             </div>
@@ -118,21 +117,21 @@
                                       <th class="text-end">Action</th>
                                     </thead>
                                     <tbody>
-                                    {{-- @foreach ($dokumen->where('id_dokumen', $item->id) as $data)
+                                    @foreach ($dokumen->where('id_dokumen', $item->id) as $data)
                                     <td>
                                       {{ $data->file_path }}
                                     </td>
                                     <td class="text-end">  
-                                      <a href="{{ route('_download.pdf.laporan', $data->id) }}" class="btn btn-sm btn-outline-info">
+                                      <a href="{{ route('_download.pdf.laporan.projek', $data->id) }}" class="btn btn-sm btn-outline-info">
                                         <i class="fa fa-download text-dark"></i>
                                       </a>
-                                      <a href="{{ route('_del.pdf.laporan', ['id' => $data->id, 'periode' => $item->periode]) }}" class="btn btn-sm btn-outline-danger">
+                                      <a href="{{ route('_del.pdf.laporan.projek', ['id' => $data->id]) }}" class="btn btn-sm btn-outline-danger">
                                         <i class="feather-trash-2 text-dark"></i>
                                       </a>
                                     </td>
                                 
                                   </tr>
-                                  @endforeach --}}
+                                  @endforeach
                                     
                                 </tbody>
                             </table>
@@ -154,9 +153,8 @@
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
-                      <form action="{{ route('_add.pdf.laporan') }}" method="post" enctype="multipart/form-data">
+                      <form action="{{ route('_add.pdf.laporan.projek') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id_inst" value="{{ $item->id_inst }}">
                         <input type="" name="id_dokumen" value="{{ $item->id }}">
                         <div class="modal-body">
                             <div class="form-group row">
@@ -201,7 +199,7 @@
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
-                      <form action="{{ route('_add.list.laporan') }}" method="post">
+                      <form action="{{ route('_add.list.laporan.projek') }}" method="post">
                           @csrf
                           {{-- <input type="hidden" name="id_inst" value="{{ $mitra->id}}"> --}}
                       <div class="modal-body">
@@ -221,11 +219,11 @@
                       <div class="form-group row">
                           <label class="col-form-label col-md-2">Project</label>
                           <div class="col-md-10">
-                              <select class="form-control mb-md" name="deskripsi">
-                                
-                                      <option value="">Tidak Memiliki Paket</option>
-                                  
-                              </select>
+                            <select class="form-control mb-md" name="deskripsi">
+                              @foreach ($projects as $item)
+                                <option value="{{ $item->name }}">{{ ucwords($item->name) }}</option>
+                              @endforeach
+                            </select>
                           </div>
                       </div>
                       
