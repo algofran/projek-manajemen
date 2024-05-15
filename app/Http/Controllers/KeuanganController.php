@@ -7,6 +7,8 @@ use App\Models\InstituteProyek;
 use App\Models\InstituteTugas;
 use App\Models\UserEmploye;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\View;
 use Mpdf\Mpdf;
 use Illuminate\Support\Facades\Cache;
 
@@ -138,6 +140,46 @@ class KeuanganController extends Controller
         // return response()->streamDownload(function () use ($pdfContent) {
         //     echo $pdfContent;
         // }, 'Detail_Laporan_Keuangan.pdf');
+    }
+    public function downloadExel(Request $request, string $id, string $type)
+    {
+
+        $project = InstituteProyek::findOrFail($id);
+        $manager = UserEmploye::findOrFail($project->manager_id);
+
+        if ($type == 'null') {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->orderBy('date', 'asc')
+                ->get();
+        } else {
+            $tasks = InstitutePengeluaran::where('id_inst', $project->id)
+                ->where('subject', $type)
+                ->orderBy('date', 'asc')
+                ->get();
+        }
+
+        return Excel::download(new class($project, $manager, $tasks) implements \Maatwebsite\Excel\Concerns\FromView
+        {
+            protected $project;
+            protected $manager;
+            protected $tasks;
+
+            public function __construct($project, $manager, $tasks)
+            {
+                $this->project = $project;
+                $this->manager = $manager;
+                $this->tasks = $tasks;
+            }
+
+            public function view(): View
+            {
+                return view('perusahaan.cetak_keuangan', [
+                    'project' => $this->project,
+                    'manager' => $this->manager,
+                    'tasks' => $this->tasks
+                ]);
+            }
+        }, 'project_data.xlsx');
     }
 
 

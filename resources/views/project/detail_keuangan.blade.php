@@ -22,7 +22,8 @@
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id,   'type' => 'Biaya Lainnya']) }}">Biaya Lainnya</a></li>  
                     </ul>
                     <div class="col-auto text-end float-end download-grp">
-                        <a href="{{ route('download.project.pdf', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
+                        <a href="{{ route('download.project.pdf', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-danger me-2"><i class="fas fa-download"></i> PDF</a>
+                        <a href="{{ route('download.project.exel', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Exel</a>
                     </div>  
                 </div>
                   
@@ -53,7 +54,7 @@
                     <div class="row container">
                         <div class="col-md-6 col-sm-4 col-12">                            
                             <h6 class="invoice-name">Project Name</h6>
-                            <p class="bg-secondary border rounded-pill d-flex text-white px-3">
+                            <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white px-3">
                                {{ $project->name }}
                             </p>
                         </div>

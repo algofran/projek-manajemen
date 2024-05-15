@@ -78,6 +78,7 @@ Route::middleware([
     Route::get('/detail_keuangan_project/{id}', [KeuanganProjectController::class, 'show'])->name('_detail.keuangan_project');
 
     Route::get('/download-project-pdf/{id}/{type}', [KeuanganProjectController::class, 'downloadPDF'])->name('download.project.pdf');
+    Route::get('/download-project-exel/{id}/{type}', [KeuanganProjectController::class, 'downloadExel'])->name('download.project.exel');
 
     Route::get('/Laporan_Keuangan_Pertahun', [LaporanPertahunController::class, 'index'])->name('_laporan.tahun.project');
     Route::post('/tambah_list_laporan_projek', [LaporanPertahunController::class, 'create'])->name('_add.list.laporan.projek');
@@ -115,6 +116,7 @@ Route::middleware([
     Route::post('perusahaan/edit/{id}/', [InstituteDataController::class, 'edit'])->name('_edit.mitra');
 
     Route::get('/download-pdf/{id}/{type}', [KeuanganController::class, 'downloadPDF'])->name('download.pdf');
+    Route::get('/download-exel/{id}/{type}', [KeuanganController::class, 'downloadExel'])->name('download.exel');
 
     Route::get('/Laporan_Keuangan_Pertahun_Perusahaan/{id}', [LaporanPertahunInstitute::class, 'index'])->name('_laporan.tahun.perusahaan');
     Route::post('/tambah_list_laporan', [LaporanPertahunInstitute::class, 'create'])->name('_add.list.laporan');
