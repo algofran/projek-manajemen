@@ -10,8 +10,8 @@
                                 <h3 class="page-title">Penjualan</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                <a href="{{ route('download.exel.penjualan') }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Exel</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
                             </div>
                         </div>
                     </div>

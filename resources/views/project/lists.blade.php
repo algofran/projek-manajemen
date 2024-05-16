@@ -9,17 +9,30 @@
                             <div class="col">
                                 <h3 class="page-title">List Project</h3>
                             </div>
-                            <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                <a href="{{ route('project.add') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-                            </div>
+
                             <div class="row">
                                 <div class="col">
-                                    <div class="btn btn-primary me-2">Active</div>
-                                    <div class="btn btn-warning me-2">On-Hold</div>
-                                    <div class="btn btn-success me-2">Complete</div>
-                                    <div class="btn btn-danger me-2">Finish</div>
+                                    <div class="mb-4">
+                                        <div class="dropdown">
+                                            <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Status Projek
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <li><a class="dropdown-item" href="{{ route('project.lists') }}">All</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '0']) }}">Pending</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '1']) }}">On_Progress</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '2']) }}">On-Hold</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '3']) }}">Complate</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '4']) }}">Finish</a></li>
+                                            </ul>
+                                        </div>
+                                        
+                                        
+                                    </div>
                                 </div>
+                                <div class="col-auto text-end float-end download-grp">
+                                    <a href="{{ route('project.add') }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah</i></a>
+                                </div>  
                             </div>
                         </div>
                     </div>

@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Sales;
 use App\Models\UserEmploye;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\View;
 
 class PenjualanController extends Controller
 {
     public function index(Request $request)
     {
         $i = 1;
-        $pay = ["Belum Bayar", "Sudah Terbayar"];
+        $pay = ["Belum Terbayar", "Sudah Terbayar"];
         $sales = Sales::orderBy('tgl', 'desc')->get();
 
         $tgl = $request->input('tgl');
@@ -80,6 +82,42 @@ class PenjualanController extends Controller
         ]);
 
         return redirect()->route('list_penjualan')->with('success', 'Telkom Akses berhasil diperbarui!');
+    }
+
+    public function downloadExel()
+    {
+        $i = 1;
+        $pay = ["Belum Bayar", "Sudah Terbayar"];
+        $sales = Sales::orderBy('tgl', 'desc')->get();
+        // Menggunakan fungsi dari Maatwebsite Excel untuk mengunduh file
+
+        $employees = UserEmploye::where('type', '>', 0)->orderBy('firstname')->get();
+
+        return Excel::download(new class($i, $pay, $sales, $employees) implements \Maatwebsite\Excel\Concerns\FromView
+        {
+            protected $i;
+            protected $pay;
+            protected $sales;
+            protected $employees;
+
+            public function __construct($i, $pay, $sales, $employees)
+            {
+                $this->i = $i;
+                $this->pay = $pay;
+                $this->sales = $sales;
+                $this->employees = $employees;
+            }
+
+            public function view(): View
+            {
+                return view('penjualan.cetak_keuangan', [
+                    'i' => $this->i,
+                    'pay' => $this->pay,
+                    'sales' => $this->sales,
+                    'employees' => $this->employees
+                ]);
+            }
+        }, 'penjualan_data.xlsx');
     }
 
     public function destroy(string $id)

@@ -94,7 +94,7 @@ Route::middleware([
     Route::get('/add/{id}', [MitraIntituteController::class, 'create'])->name('add.proyek');
     Route::post('/tambah', [MitraIntituteController::class, 'store'])->name('add.store');
     Route::post('/edit/{id}', [MitraIntituteController::class, 'update'])->name('update');
-    Route::get('/hapus/{id}', [MitraIntituteController::class, 'destroy'])->name('_del.proyek');
+    Route::get('/hapus_proyek/{id}', [MitraIntituteController::class, 'destroy'])->name('_del.proyek');
     Route::get('/detail_proyek/{id}', [InstituteProyekController::class, 'index'])->name('_detail.proyek');
     Route::get('/add_task/{id}', [InstituteTagihanController::class, 'index'])->name('_add.task');
     Route::post('/add_task', [InstituteTagihanController::class, 'store'])->name('_store.task');
@@ -173,6 +173,8 @@ Route::middleware([
     Route::get('/penjualan/{pid}/detail', [PenjualanController::class, 'detail'])->name('penjualan.detail');
     Route::post('/penjualan/{id}', [PenjualanController::class, 'update'])->name('penjualan.update');
     Route::get('/penjualan/{id}/delete', [PenjualanController::class, 'destroy'])->name('_penjualan.del');
+    Route::get('/download-penjualan-exel', [PenjualanController::class, 'downloadExel'])->name('download.exel.penjualan');
+
 
     // Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('sales.index');
     // Route::get('/sales/{id}/delete', [PenjualanController::class, 'destroy'])->name('sales.del');

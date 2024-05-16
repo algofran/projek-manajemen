@@ -22,12 +22,17 @@ class ProjectController extends Controller
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
         $managers = UserEmploye::where('type', 1)->orderBy('firstname')->get();
+        $status = $request->query('status');
 
-        if (isset($request->status)) {
-            $projects = ProjectList::where('status', $request->status)->orderByDesc('end_date')->get();
+        if ($status) {
+            $projects = ProjectList::where('status', $status)
+                ->orderByDesc('end_date')
+                ->get();
         } else {
-            $projects = ProjectList::whereYear('end_date', date('Y'))->orderByDesc('end_date')->get();
+            $projects = ProjectList::orderByDesc('end_date')->get();
+            $status = 'null';
         }
+
 
         foreach ($projects as $project) {
             $tprog = TaskLists::where('project_id', $project->id)->count();
@@ -45,7 +50,7 @@ class ProjectController extends Controller
             $project->vendor_tag = $vendor_tag[$project->vendor];
         }
 
-        return view('project.lists', compact('i', 'projects', 'managers'));
+        return view('project.lists', compact('i', 'projects', 'managers', 'status'));
     }
 
     public function menu()
