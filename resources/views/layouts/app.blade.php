@@ -195,35 +195,11 @@
                             <a href="{{ route('dashboard') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
                         </li>
                         <li>
+                            <a href="{{ route('event') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+                        </li>
+                        <li>
                             <a href="{{ route('menu.project') }}"><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>
                         </li>
-                        {{-- <li class="submenu">
-                            <a href="#"><i class="fas fa-clipboard-list"></i> <span> Project</span> <span class="menu-arrow"></span></a>
-                            <ul class="nav nav-children ">
-                                <li>
-                                    <a href="/add_project">
-                                        Add Project
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/project_lists">
-                                        Project List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('keuangan_project')}}">
-                                        Laporan Keuangan
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ __('Dashboard') }}">
-                                        Laporan Keuangan Pertahun
-                                    </a>
-                                </li>
-        
-                            </ul>
-                        </li> --}}
-                        
                         @php
                             $companies = App\Models\InstituteData::all();
                         @endphp
@@ -243,110 +219,17 @@
                                         </a>
                                     </li>
                                 @endforeach
-                                {{-- <li>
-                                    <a href="">
-                                        Laporan Keuangan
-                                    </a>
-                                </li> --}}
                             </ul>
                         </li>
-                        {{-- <li class="submenu">
-                            <a href="#"><i class="fa fa-wifi"></i> <span>ICON PLUS</span> <span class="menu-arrow"></span></a>
-                            <ul class="nav nav-children">
-                                <li>
-                                    <a href="../lists_serpo">
-                                        SERPO
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../lists_iconnet">
-                                        Iconnet
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="../lists_telkom"><i class="feather-codepen"></i><span>Telkom Akses</span></a>
-                        </li> --}}
-                        {{-- <li class="submenu">
-                            <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Keuangan</span> <span class="menu-arrow"></span></a>
-                            <ul class="nav nav-children">
-        
-                                <li>
-                                    <a href="pengeluaran_projek">
-                                        Pengeluaran Project
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ __('pengeluaran_serpo') }}">
-                                        Pengeluaran Serpo
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ __('pengeluaran_iconnet') }}">
-                                        Pengeluaran Iconnet
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ __('pengeluaran_telkom') }}">
-                                        Pengeluaran Telkom Akses
-                                    </a>
-                                </li>
-        
-                            </ul>
-                        </li> --}}
+                        
                         <li>
                             <a href="{{ route('list_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
                         </li>   
 
-                        {{-- <li>
-                            <a href="{{ route('_list.user') }}"><i class="fa fa-credit-card"></i><span>Bank</span></a>
-                        </li> --}}
 
                         <li>
                             <a href="{{ route('_list.user') }}"><i class="fas fa-address-card"></i><span>pengguna</span></a>
                         </li>
-                        {{-- <li class="submenu">
-                            <a href="#"><i class="fa fa-book"></i> <span> Laporan</span> <span class="menu-arrow"></span></a>
-                            <ul class="nav nav-children">
-                                <li>
-                                    <a href="{{ __('laporan') }}">
-                                        Material
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.php?page=report_list&type=tools">
-                                        Peralatan
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.php?page=report_list&type=ops">
-                                        Operasional
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.php?page=report_list&type=others">
-                                        Lain-lain
-                                    </a>
-                                </li>
-        
-                            </ul>
-                        </li> --}}
-                        {{-- <li class="submenu">
-                            <a href="#"><i class="fas fa-address-card"></i> <span>Pengguna</span> <span class="menu-arrow"></span></a>
-                            <ul class="nav nav-children">
-                                <li>
-                                    <a href="./index.php?page=user_baru">
-                                        Tambah User
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('_list.user') }}">
-                                        Daftar Pengguna
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> --}}
                     </ul>
                 </div>
             </div>

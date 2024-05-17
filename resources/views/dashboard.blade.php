@@ -92,17 +92,9 @@
                 <div class="card flex-fill comman-shadow">
                     <div class="card-header d-flex align-items-center">
                         <div class="row">
-                            <div class="row">
-                                <h5 class="card-title col-8">Upcoming Events</h5><br>
-    
-                                <ul class="chart-list-out student-ellips col-3">
-                                    <li class="star-menus"><a href="#" data-bs-toggle="modal" data-bs-target="#my_event" class="btn btn-primary"><i class="feather-plus"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" class="db-widgets"><i class="fa fa-calendar text-black"> To Do List</i></a>
-                            </div>
+                           
+                                <h5 class="card-title">Upcoming Events</h5><br>
+
                         </div>
     
                     </div>
@@ -227,64 +219,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal custom-modal fade bank-details" id="bank_details" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-body">
+       
     
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div id="calendar"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-        </div>
-        <div class="modal fade none-border" id="my_event">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add Event</h4>
-    
-                    </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer justify-content-center">
-                        <form>
-                            <div class="row">
-    
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Time <span class="login-danger">*</span></label>
-                                        <input type="time" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms calendar-icon">
-                                        <label>Date <span class="login-danger">*</span></label>
-                                        <input class="form-control datetimepicker" type="text" placeholder="DD-MM-YYYY">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Desk <span class="login-danger">*</span></label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="student-submit">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 </x-app-layout>

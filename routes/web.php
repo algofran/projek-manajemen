@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IconnetExpController;
 use App\Http\Controllers\InstituteDataController;
 use App\Http\Controllers\InstitutePengeluaranController;
@@ -51,9 +52,10 @@ Route::middleware([
     'verified',
 ])->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/Event', [DashboardController::class, 'show'])->name('event');
+
 
 
     // Project Routes
