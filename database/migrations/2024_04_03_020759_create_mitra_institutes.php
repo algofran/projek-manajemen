@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_inst');
             $table->string('mitra');
-            $table->text('keterangan')->default('-');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
