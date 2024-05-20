@@ -54,7 +54,10 @@ Route::middleware([
     // Dashboard
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/Event', [DashboardController::class, 'show'])->name('event');
+    Route::get('/events/show', [DashboardController::class, 'show'])->name('events');
+    Route::post('/events', [DashboardController::class, 'store'])->name('events.store');
+    Route::put('/events/{id}', [DashboardController::class, 'update'])->name('events.update');
+    Route::delete('/events/{id}', [DashboardController::class, 'destroy'])->name('events.destroy');
 
 
 
@@ -142,32 +145,6 @@ Route::middleware([
     // Route::get('/detail_proyek', function () {
     //     return view('perusahaan/_detail.proyek')->name('show.proyek');
     // });
-
-
-
-
-
-    // SERPO Routes
-    Route::get('/lists_serpo', [SerpoExpController::class, 'index'])->name('lists_serpo');
-    Route::get('/add_serpo', [SerpoExpController::class, 'inputserpo'])->name('serpo.add');
-    Route::post('/add_serpo', [SerpoExpController::class, 'store'])->name('serpo.store');
-    Route::get('/serpos/{pid}/detail', [SerpoExpController::class, 'show'])->name('serpos.detail');
-    Route::get('/serpo/{id}/edit', [SerpoExpController::class, 'edit'])->name('serpo.edit');
-    Route::put('/serpo/{id}', [SerpoExpController::class, 'update'])->name('serpo.update');
-    Route::get('/serpos/{id}/delete', [SerpoExpController::class, 'destroy'])->name('_serpos.del');
-
-    Route::get('/lists_iconnet', [IconnetExpController::class, 'index'])->name('icon_plus.lists_iconnet');
-    Route::post('/lists_iconnet', [IconnetExpController::class, 'store'])->name('iconnet.store');
-    Route::get('/iconnet/{pid}/detail', [IconnetExpController::class, 'show'])->name('iconnet.detail');
-    Route::post('/iconnet/{id}', [IconnetExpController::class, 'update'])->name('iconnet.update');
-    Route::get('/iconnet/{id}/delete', [IconnetExpController::class, 'destroy'])->name('_iconnet.del');
-
-    Route::get('/lists_telkom', [TelkomAksesController::class, 'index'])->name('list_telkomakses');
-    Route::post('/lists_telkom', [TelkomAksesController::class, 'store'])->name('telkom.store');
-    Route::get('/telkomakses/{pid}/detail', [TelkomAksesController::class, 'show'])->name('telkomakses.detail');
-    Route::post('/telkom_akses/{id}', [TelkomAksesController::class, 'update'])->name('telkom.update');
-    Route::get('/telkomakses/{id}/edit', [TelkomAksesController::class, 'edit'])->name('telkomakses.edit');
-    Route::get('/telkomakses/{id}/delete', [TelkomAksesController::class, 'destroy'])->name('_telkom.del');
 
     Route::get('/lists_penjualan', [PenjualanController::class, 'index'])->name('list_penjualan');
     Route::post('/lists_penjualan', [PenjualanController::class, 'store'])->name('penjualan.store');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -35,8 +36,10 @@ class DashboardController extends Controller
      */
     public function show()
     {
-        return view('event');
+        $events = Event::all();
+        return view('event')->with('events', $events->toJson());
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -195,7 +195,7 @@
                             <a href="{{ route('dashboard') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="{{ route('event') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+                            <a href="{{ route('events') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
                         </li>
                         <li>
                             <a href="{{ route('menu.project') }}"><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>

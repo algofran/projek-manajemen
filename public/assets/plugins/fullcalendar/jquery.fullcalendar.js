@@ -1,31 +1,86 @@
 $(document).ready(function() {
     $('#calendar').fullCalendar({
         header: {
-            left: 'month, agendaWeek, agendaDay, list',
+            left: 'prev,next today',
             center: 'title',
-            right: 'prev,today,next'
+            right: 'month,agendaWeek,agendaDay'
         },
-        buttonText: {
-            today: 'Today',
-            month: 'Month',
-            week: 'Week',
-            day: 'Day',
-            list: 'List',
-        },
-        events: [{
-                title: 'Marko',
-                start: '2024-05-17T09:00',
-                end: '2024-05-18T13:00',
-                color: 'blue'
-            },
-            {
-                title: 'Andi Amalia',
-                start: '2024-05-17T15:00',
-                end: '2024-05-17T17:00'
-
+        events: @json($events),
+        editable: true,
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end) {
+            var title = prompt('Event Title:');
+            var eventData;
+            if (title) {
+                eventData = {
+                    title: title,
+                    start: start,
+                    end: end
+                };
+                $.ajax({
+                    url: '{{ route('
+                    events.store ') }}',
+                    method: 'POST',
+                    data: eventData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $('#calendar').fullCalendar('renderEvent', {
+                            id: response.id,
+                            title: title,
+                            start: start,
+                            end: end
+                        }, true);
+                        $('#calendar').fullCalendar('unselect');
+                    }
+                });
             }
-
-        ]
-
+        },
+        eventDrop: function(event, delta, revertFunc) {
+            updateEvent(event, revertFunc);
+        },
+        eventResize: function(event, delta, revertFunc) {
+            updateEvent(event, revertFunc);
+        },
+        eventClick: function(event) {
+            var isDelete = confirm('Do you really want to delete this event?');
+            if (isDelete) {
+                $.ajax({
+                    url: '/events/' + event.id,
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function() {
+                        $('#calendar').fullCalendar('removeEvents', event.id);
+                    }
+                });
+            }
+        }
     });
+
+    function updateEvent(event, revertFunc) {
+        var eventData = {
+            id: event.id,
+            title: event.title,
+            start: event.start.format(),
+            end: event.end ? event.end.format() : null
+        };
+        $.ajax({
+            url: '/events/' + event.id,
+            method: 'PUT',
+            data: eventData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Event updated
+            },
+            error: function() {
+                revertFunc();
+            }
+        });
+    }
 });
