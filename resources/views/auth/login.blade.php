@@ -5,7 +5,7 @@
             <div class="card mx-auto" style="width: 30rem;"> 
                 <div class="card-header"> 
                     <div class="panel-title-sign mt-xl text-left"> 
-                        <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> VISDAT | Project Management System</h2> 
+                        <p class=" text-uppercase text-bold m-auto"><i class="fa fa-user mr-xs"></i> VISDAT | Project Management System</p> 
                     </div> 
                     <x-validation-errors class="mb-4" />
                     @if (session('status'))

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\IconnetExpController;
 use App\Http\Controllers\InstituteDataController;
 use App\Http\Controllers\InstitutePengeluaranController;
@@ -54,10 +55,11 @@ Route::middleware([
     // Dashboard
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/events/show', [DashboardController::class, 'show'])->name('events');
-    Route::post('/events', [DashboardController::class, 'store'])->name('events.store');
-    Route::put('/events/{id}', [DashboardController::class, 'update'])->name('events.update');
-    Route::delete('/events/{id}', [DashboardController::class, 'destroy'])->name('events.destroy');
+
+    Route::get('/events/show', [EventController::class, 'index'])->name('events');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
 
 

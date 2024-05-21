@@ -16,10 +16,10 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css" /> 
         <link rel="stylesheet" href="assets/css/style.css" />
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
-        @livewireStyles
+        @livewireStyles --}}
 
     </head> 
 
@@ -31,6 +31,6 @@
         <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> 
         <script src="assets/js/feather.min.js"></script> 
         <script src="assets/js/script.js"></script> 
-        @livewireScripts
+        {{-- @livewireScripts --}}
     </body> 
 </html>

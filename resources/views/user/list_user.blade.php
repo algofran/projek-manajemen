@@ -16,8 +16,7 @@
                         </div>
                        
                     </div>
-    
-    
+
                     <div class="table-responsive">
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
     
@@ -105,10 +104,7 @@
                                                                 <input type="password" name="cpassword" class="form-control" value="" placeholder="******" required>
                                                             </div>
                                                         </div>
-                                                        
-                                                        
                                                 </div>
-                            
                                                 <div class="modal-footer">
                                                     <div class="bank-details-btn">
                                                         <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>  

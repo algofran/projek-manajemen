@@ -7,7 +7,7 @@
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
                                 <h6>Total Project</h6>
-                                <h3>41</h3>
+                                <h3>{{ $totalprojek }}</h3>
                             </div>
                             <div class="db-icon bg-info">
                                 <i class="fa fa-tags"></i>
@@ -21,8 +21,8 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Pending/On-Hold</h6>
-                                <h3>06</h3>
+                                <h6>Pending/OnHold</h6>
+                                <h3>{{ $pending }}</h3>
                             </div>
                             <div class="db-icon bg-danger">
                                 <i class="fa fa-undo"></i>
@@ -37,7 +37,7 @@
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
                                 <h6>On-Progress</h6>
-                                <h3>11</h3>
+                                <h3>{{ $onprogress }}</h3>
                             </div>
                             <div class="db-icon bg-success">
                                 <i class="feather-refresh-ccw"></i>
@@ -52,7 +52,7 @@
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
                                 <h6>Finished Project</h6>
-                                <h3>30</h3>
+                                <h3>{{ $finish }}</h3>
                             </div>
                             <div class="db-icon bg-purple">
                                 <i class="fa fa-check-square"></i>
