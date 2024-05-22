@@ -59,12 +59,12 @@
                         <p class="text-secondary text-center">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
-                            </script> Pahriansyah | Akram
+                            </script> Andi Amalia Ramadani
                         </p>
                     </div>
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n10" style="background-image:url('{{ asset('assets/img/curved-images/curved6.jpg') }}')"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n10" style="background-image:url('{{ asset('assets-admin/img/curved-images/curved6.jpg') }}')"></div>
                         </div>
                     </div>
                 </div>

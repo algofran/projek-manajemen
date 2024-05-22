@@ -12,7 +12,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $totalprojek = 0;
+        $pending = 0;
+        $onprogress = 0;
+        $finish = 0;
+
+
+
+        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish'));
     }
 
     /**

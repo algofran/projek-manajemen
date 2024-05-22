@@ -28,7 +28,9 @@
                     <table class="table align-items-center m-0" id="dataTable3">
                         <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Firstname</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lastname</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
@@ -43,6 +45,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('script')
@@ -52,35 +55,20 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('admin.dataTable.getUser') }}"
+                url: "{{ route('admin.dataTable.getUser') }}",
+                type: 'GET'
             },
             columns: [
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
-                },
-                {
-                    data: 'role',
-                    name: 'role'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'since',
-                    name: 'since'
-                }
+                { data: 'firstname', name: 'firstname' },
+                { data: 'lastname', name: 'lastname' },
+                { data: 'username', name: 'username' },
+                { data: 'email', name: 'email' },
+                { data: 'phone', name: 'phone' },
+                { data: 'role', name: 'role' },
+                { data: 'status', name: 'status' },
+                { data: 'since', name: 'since' }
             ]
         });
-    } );
+    });
 </script>
 @endsection
