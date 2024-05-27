@@ -80,9 +80,9 @@
                                     <label>Tanggal Project</label>
                                     <div class="col-md">
                                         <div class="input-group mb-3">
-                                            <input type="start_date" class="form-control" placeholder="Username" aria-label="Username" name="start_date">
+                                            <input type="date" class="form-control" aria-label="Username" name="start_date">
                                             <span class="input-group-text">s/d</span>
-                                            <input type="end_date" class="form-control" placeholder="Server" aria-label="Server" name="end_date">
+                                            <input type="date" class="form-control" aria-label="Server" name="end_date">
                                         </div>
                                     </div>
                                 </div>
@@ -91,8 +91,7 @@
                                     <select multiple class="form-control populate" name="user_ids[]">
                                         <option></option>
                                         @foreach($employees as $employee)
-                                            <option value="{{ $employee->id }}" {{ isset($user_ids) && in_array($employee->id, $user_ids) ? 'selected' : '' }}
-                                                >
+                                            <option value="{{ $employee->id }}" >
                                                 {{ ucwords($employee->username) }}
                                             </option>
                                         @endforeach
