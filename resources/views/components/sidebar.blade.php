@@ -12,7 +12,7 @@
                   <a href=""><i class="fas fa-calendar-day"></i> <span>Events</span></a>
               </li>
               <li>
-                  <a href=""><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>
+                  <a href="{{ route('project.menu') }}"><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>
               </li>
               {{-- @php
                   $companies = App\Models\InstituteData::all();
@@ -37,7 +37,7 @@
               </li>
               
               <li>
-                  {{-- <a href="{{ route('list_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a> --}}
+                  <a href=""><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
               </li>   
 
 
