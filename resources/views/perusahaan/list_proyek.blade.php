@@ -298,7 +298,7 @@
                         <form action="{{ route('add.store') }}" method="post">
                             @csrf
                         <div class="modal-body">
-                            <input type="" name="id_inst" value="{{ $mitra->id}}">
+                            <input type="hidden" name="id_inst" value="{{ $mitra->id}}">
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Periode</label>
                                 <div class="col-md-10">

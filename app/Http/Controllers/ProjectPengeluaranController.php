@@ -52,7 +52,7 @@ class ProjectPengeluaranController extends Controller
         $pengeluaran->comment = $request->input('comment');
         $pengeluaran->save();
 
-        return redirect()->route('project.detail', ['id' => $request->input('project_id')])->with('success', 'Task created successfully!');
+        return redirect()->route('project.detail.show', ['id' => $request->input('project_id')])->with('success', 'Task created successfully!');
     }
 
 

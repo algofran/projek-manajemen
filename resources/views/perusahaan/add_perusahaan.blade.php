@@ -266,7 +266,7 @@
                         <form action="{{ route('_add.perusahaan') }}" method="post">
                             @csrf
                         <div class="modal-body">
-                            <input type="" name="id_inst" value="">
+                            <input type="hidden" name="id_inst" value="">
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Nama</label>
                                 <div class="col-md-10">

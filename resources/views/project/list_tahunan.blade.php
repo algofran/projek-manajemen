@@ -155,7 +155,7 @@
                       </div>
                       <form action="{{ route('_add.pdf.laporan.projek') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="" name="id_dokumen" value="{{ $item->id }}">
+                        <input type="hidden" name="id_dokumen" value="{{ $item->id }}">
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Attachment</label>
