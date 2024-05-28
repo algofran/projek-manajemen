@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.layout') @section('content')
+<div class="div">
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table">
@@ -176,4 +177,10 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+
+</div>
+@endsection @section('script')
+<script>
+    feather.replace();
+</script>
+@endsection

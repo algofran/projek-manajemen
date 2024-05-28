@@ -41,7 +41,7 @@ class ProjectListSeeder extends Seeder
             ProjectList::create([
                 'name' => 'Sample Project ' . ($i + 1),
                 'description' => 'Description of project ' . ($i + 1),
-                'status' => rand(0, 1),
+                'status' => rand(0, 3),
                 'start_date' => now(),
                 'end_date' => now()->addMonth(),
                 'user_id' => $managerId,

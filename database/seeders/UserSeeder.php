@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
                 'email' => 'manager' . $i . '@gmail.com',
                 'password' => Hash::make('password'),
                 'phone' => $faker->phoneNumber,
-                'type' => '2'
+                'type' => '1'
             ])->assignRole('manager');
         }
 
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
                 'email' => 'user' . $i . '@gmail.com',
                 'password' => Hash::make('password'),
                 'phone' => $faker->phoneNumber,
-                'type' => '1'
+                'type' => '2'
             ])->assignRole('user');
         }
     }

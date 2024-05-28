@@ -23,8 +23,14 @@ class DatabaseSeeder extends Seeder
             PermissionRoleSeeder::class,
             UserSeeder::class,
             ProjectListSeeder::class,
+
             ProjectTaskSeeder::class,
             ProjectAktivitisSeeder::class,
+            PerusahaanListSeeder::class,
+            InstituteProyekSeeder::class,
+            InstitutePengeluaranSeeder::class,
+            InstituteTaskSeeder::class,
+            SalesSeeder::class,
         ]);
     }
 }

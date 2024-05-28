@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.layout') @section('content')
+<div class="div">
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table">
@@ -22,8 +23,8 @@
                         <li><a class="dropdown-item" href="{{ route('_detail.keuangan_project', ['id' => $project->id,   'type' => 'Biaya Lainnya']) }}">Biaya Lainnya</a></li>  
                     </ul>
                     <div class="col-auto text-end float-end download-grp">
-                        <a href="{{ route('download.project.pdf', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-danger me-2"><i class="fas fa-download"></i> PDF</a>
-                        <a href="{{ route('download.project.exel', ['id' => $project->id, 'type' => isset($type) ? $type : '']) }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Exel</a>
+                        <a href="{{ route('download.project.pdf', ['id' => $project->id, 'type' => isset($type) ? $type : null ]) }}" class="btn btn-danger me-2"><i class="fas fa-download"></i> PDF</a>
+                        <a href="{{ route('download.project.exel', ['id' => $project->id, 'type' => isset($type) ? $type : null ]) }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Exel</a>
                     </div>  
                 </div>
                   
@@ -93,7 +94,7 @@
                             @php
                             $payment=$project->payment_label;
                             @endphp
-
+    
                         
                             @switch($payment)
                                 @case('Belum Ditagih')
@@ -162,17 +163,9 @@
                                         <td>{{ strip_tags($task->comment) }}</td>
                                         <td>{{ 'Rp. ' . number_format($task->cost, 0, ',', '.') }}</td>
                                        
-                                        {{-- <td class="text-end">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditTask'.$task->id }}" class="d-flex btn btn-sm bg-danger-light me-2">
-                                                <i class="feather-edit"></i>
-                                            </a>
-                                            <a href="{{ route('_del.task', ['id' => $task->id]) }}" onclick="return confirm('Are you sure want to delete this task?')" class="btn btn-sm bg-success-light me-2 "> <i class="feather-trash-2"></i></i></a>
-                                            </div>
-                                            
-                                        </td> --}}
                                     </tr>
                                 </tbody>
-
+    
                                
                                 @endforeach
                         </table>
@@ -183,4 +176,10 @@
             
         </div>
     </div>
-</x-app-layout>
+    
+</div>
+@endsection @section('script')
+<script>
+    feather.replace();
+</script>
+@endsection

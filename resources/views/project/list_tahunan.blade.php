@@ -22,9 +22,9 @@
             background-color: #008cff;
         }
   </style>
-  
-  
-  <x-app-layout>
+
+@extends('layouts.layout') @section('content')
+<div class="div">
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table">
@@ -155,7 +155,7 @@
                       </div>
                       <form action="{{ route('_add.pdf.laporan.projek') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="" name="id_dokumen" value="{{ $item->id }}">
+                        <input type="hidden" name="id_dokumen" value="{{ $item->id }}">
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Attachment</label>
@@ -236,24 +236,6 @@
                               </div>
                           </div>
                           
-                         
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-2">Attachment</label>
-                            <div class="col-md-10">
-                                <input type="file" name="file_path" class="form-control" value="{{ old('file_path') }}" placeholder="">
-                                
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-form-label col-md-2">Choose License</label>
-                            <div class="col-md-10">
-                              <select class="form-control mb-md" name="license">
-                                <option value="0">Public Domain</option>
-                                <option value="1">Private Domain</option>
-                                <option value="1">Permissive Domain</option>
-                              </select>
-                          </div>
-                        </div>
                       </div>
   
                       <div class="modal-footer">
@@ -273,4 +255,10 @@
   
         </div>
     </div>
-  </x-app-layout>
+</div>
+@endsection @section('script')
+<script>
+    feather.replace();
+</script>
+@endsection
+  

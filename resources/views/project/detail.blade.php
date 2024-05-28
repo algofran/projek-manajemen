@@ -166,13 +166,13 @@
                                         <td>{{ ucwords($task->user->firstname . ' ' . $task->user->lastname) }}</td>
                                         <td>
                                             @switch($task->status)
-                                                @case(1)
+                                                @case(0)
                                                     <span class="badge badge-warning">Pending</span>
                                                     @break
-                                                @case(2)
-                                                    <span class="badge badge-primary">On-Progress</span>
+                                                @case(1)
+                                                    <span class="badge badge-info">On-Progress</span>
                                                     @break
-                                                @case(3)
+                                                @case(2)
                                                     <span class="badge badge-success">Done</span>
                                                     @break
                                             @endswitch
@@ -238,7 +238,7 @@
                                                                     <select class="form-control form-select" name="status">
                                                                         <option value="0" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
                                                                         <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
-                                                                        <option value="3" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                        <option value="2" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

@@ -28,7 +28,7 @@ class ProjectController extends Controller
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
 
-        $managers = User::where('type', 2)->orderBy('firstname')->get();
+        $managers = User::where('type', 1)->orderBy('firstname')->get();
 
         $status = $request->query('status');
 
@@ -59,22 +59,6 @@ class ProjectController extends Controller
         }
 
         return view('project.lists', compact('i', 'projects', 'managers', 'status'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -126,20 +110,128 @@ class ProjectController extends Controller
         return view('project.detail', compact('end_date', 'project', 'tasks', 'activities', 'progress', 'manager', 'totalExpense', 'employees', 'subjectOptions'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function inputprojek()
     {
-        //
+        $employees = User::where('type', '>', 0)->orderBy('firstname')->get();
+        $managers = User::where('type', 1)->orderBy('firstname')->get();
+        return view('project.add', [
+            'employees' => $employees,
+            'managers' => $managers,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'po_number' => 'nullable|string|max:255',
+            'user_id' => 'nullable|integer',
+            'invoice' => 'nullable|string|max:255',
+            'invoice_date' => 'nullable|date',
+            'pembayaran' => 'nullable|string|max:255',
+            'vendor' => 'nullable|string|max:255',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'user_ids' => 'nullable|array',
+            'user_ids.*' => 'integer',
+            'payment_status' => 'nullable|integer',
+            'status' => 'nullable|integer',
+            'fakturpajak' => 'nullable|string|max:255',
+            'fp_date' => 'nullable|date',
+            'description' => 'nullable|string',
+        ]);
+
+        $userIds = $request->input('user_ids');
+        $userIdsString = implode(',', $userIds); // Mengonversi array menjadi string
+
+        // Buat objek Project baru
+        $project = new ProjectList([
+            'name' => $request->input('name'),
+            'po_number' => $request->input('po_number'),
+            'user_id' => $request->input('user_id'),
+            'user_ids' => $userIdsString,
+            'invoice' => $request->input('invoice'),
+            'inv_date' => $request->input('invoice_date'),
+            'pembayaran' => $request->input('pembayaran'),
+            'vendor' => $request->input('vendor'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'payment_status' => $request->input('payment_status'),
+            'status' => $request->input('status'),
+            'fakturpajak' => $request->input('fakturpajak'),
+            'fp_date' => $request->input('fp_date'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Simpan proyek
+        $project->save();
+
+        // Redirect ke halaman yang sesuai atau beri respons JSON
+        return redirect()->route('project.store')->with('success', 'Project created successfully!');
+    }
+
+
+    public function edit($id)
+    {
+        $project = ProjectList::findOrFail($id);
+        $managers = User::where('type', 1)->orderBy('username')->get();
+        $employees = User::where('type', 2)->orderBy('username')->get();
+
+        return view('project.edit', compact('project', 'managers', 'employees'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $project = ProjectList::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'po_number' => 'nullable|string|max:255',
+            'user_id' => 'nullable|integer',
+            'invoice' => 'nullable|string|max:255',
+            'invoice_date' => 'nullable|date',
+            'pembayaran' => 'nullable|string|max:255',
+            'vendor' => 'nullable|string|max:255',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'user_ids' => 'nullable|array',
+            'user_ids.*' => 'integer',
+            'payment_status' => 'nullable|integer',
+            'status' => 'nullable|integer',
+            'fakturpajak' => 'nullable|stri ng|max:255',
+            'fp_date' => 'nullable|date',
+            'description' => 'nullable|string',
+        ]);
+
+        // Mengonversi array user_ids menjadi string
+        $userIds = $request->input('user_ids');
+        $userIdsString = implode(',', $userIds);
+
+        // Update atribut proyek yang ada
+        $project->update([
+            'name' => $request->input('name'),
+            'po_number' => $request->input('po_number'),
+            'user_id' => $request->input('user_id'),
+            'user_ids' => $userIdsString,
+            'invoice' => $request->input('invoice'),
+            'invoice_date' => $request->input('invoice_date'),
+            'pembayaran' => $request->input('pembayaran'),
+            'vendor' => $request->input('vendor'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'payment_status' => $request->input('payment_status'),
+            'status' => $request->input('status'),
+            'fakturpajak' => $request->input('fakturpajak'),
+            'fp_date' => $request->input('fp_date'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Redirect ke halaman yang sesuai atau beri respons JSON
+        return redirect()->route('project.lists')->with('success', 'Project updated successfully!');
     }
 
     /**
@@ -147,6 +239,12 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = ProjectList::findOrFail($id);
+
+        // Hapus proyek
+        $project->delete();
+
+        // Redirect ke halaman yang sesuai atau beri respons JSON
+        return redirect()->route('project.lists')->with('success', 'Project deleted successfully!');
     }
 }
