@@ -2,14 +2,14 @@
 
 @section('content')
     <section>
-        <div class="page-header min-vh-100">
+        <div class="page-header min-vh-100 bg-info">
             <div class="container">
                 <div class="row">
                     <!-- Login Form -->
                     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                         <div class="card card-plain mt-8">
                             <div class="card-header pb-0 text-left bg-transparent">
-                                <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+                                <h3 class="font-weight-bolder text-white">Welcome back</h3>
                                 <p class="mb-0">Enter your email and password to sign in</p>
                             </div>
                             <div class="card-body">
@@ -34,10 +34,10 @@
                                         @enderror
                                         
                                     </div>
-                                    <div class="form-check form-switch">
+                                    {{-- <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="rememberMe" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
-                                    </div>
+                                    </div> --}}
                                     <div class="text-center">
                                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
                                     </div>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <!-- End of  Login Form -->
-                        <p class="text-secondary text-center">
+                        <p class="text-secondary text-center text-white">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
                             </script> Andi Amalia Ramadani
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n10" style="background-image:url('{{ asset('assets-admin/img/curved-images/curved6.jpg') }}')"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n10" style="background-image:url('{{ asset('assets/img/img-05.jpg') }}')"></div>
                         </div>
                     </div>
                 </div>

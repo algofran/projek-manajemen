@@ -41,7 +41,7 @@ class InstituteProyekSeeder extends Seeder
                 'keterangan' => 'Description of project ' . ($i + 1),
                 'PA' => $faker->numberBetween(0, 30),
                 'start_date' => $faker->date(),
-                'end_date' => $faker->optional()->date(),
+                'end_date' => $faker->date(),
                 'tagihan' => $faker->randomFloat(2, 200000, 1000000),
                 'status' => $faker->randomElement([0, 1, 2]), // 0=hold, 1=onprogress, 2=complete
                 'payment' => $faker->randomElement([0, 1, 2]), // 0=belum, 1=proses, 2=terbayar

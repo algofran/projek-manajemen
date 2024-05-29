@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->tinyInteger('status');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('user_ids');

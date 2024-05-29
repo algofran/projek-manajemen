@@ -162,7 +162,7 @@ class UserController extends Controller
                 return $data->getRoleNames()->implode(', ');
             })
             ->addColumn('since', function ($data) {
-                return $data->updated_at;
+                return $data->updated_at->format('Y');
             })
             ->addColumn('status', function ($data) {
                 return 'Inactive';

@@ -49,7 +49,11 @@
                             <div class="col-md-3 col-sm-4 col-6">                            
                                 <h6 class="invoice-name">Tgl.Berakhir</h6>
                                 <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
-                                   {{ $project->end_date }}
+                                    @if ($project->end_date == null)
+                                        Tidak Ditentukan
+                                    @else
+                                        {{ $project->end_date }}
+                                    @endif
                                 </p>
                             </div>
                         </div>

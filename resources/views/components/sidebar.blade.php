@@ -19,7 +19,7 @@
               @endphp
 
               <li class="submenu">
-                  <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan</span> <span class="menu-arrow"></span></a>
+                  <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan<span class="menu-arrow"></span></span></a>
                   <ul class="nav nav-children">
                       <li>
                           <a href="{{ route('_list.perusahaan') }}"> 
