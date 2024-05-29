@@ -21,6 +21,7 @@ class LaporanPertahunController extends Controller
 
         $employees = User::where('type', '>', 0)->get();
         $mitra = InstituteMitra::findOrFail($id);
+        $tahun = $request->query('tahun');
         $projek = InstituteProyeks::where('id_inst', $id)
             ->orderBy('id', 'desc')
             ->get();
@@ -34,11 +35,20 @@ class LaporanPertahunController extends Controller
             "Papua 2 - Serpo SBU Sulawesi & IBT 2022-2025",
             "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
         ];
-        $laporantahun = InstituteTahun::where('id_inst', $id)->orderBy('created_at')->get();
         // dd($laporantahun);
 
+        if ($tahun) {
+            $laporantahun = InstituteTahun::where('id_inst', $id)->where('tahun', $tahun)
+                ->orderBy('created_at')
+                ->get();
+        } else {
+            $laporantahun = InstituteTahun::where('id_inst', $id)->orderBy('created_at')->get();
+            $tahun = 'null';
+        }
+        $listtahun = InstituteTahun::all();
 
-        return view('perusahaan.list_tahunan_perusahaan', compact('mitra', 'employees', 'paket', 'projek', 'laporantahun', 'dokumen'));
+
+        return view('perusahaan.list_tahunan_perusahaan', compact('mitra', 'employees', 'paket', 'projek', 'laporantahun', 'dokumen', 'tahun', 'listtahun'));
     }
 
     /**

@@ -39,10 +39,12 @@
                             <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                 Tahun
                             </button>
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <li><a class="dropdown-item" href="">2021</a></li>
-                                <li><a class="dropdown-item" href="">2022</a></li>
-                                <li><a class="dropdown-item" href="">2023</a></li>
+                                <li><a class="dropdown-item" href="{{ route('_laporan.tahun.project' )}}">ALL</a></li>
+                                @foreach ($listtahun as $item)
+                                <li><a class="dropdown-item" href="{{ route('_laporan.tahun.project', [ 'tahun' => $item->tahun ]) }}">{{ $item->tahun }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

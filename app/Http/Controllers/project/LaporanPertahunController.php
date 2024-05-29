@@ -14,16 +14,26 @@ class LaporanPertahunController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $i = 1;
 
         $employees = User::orderBy('firstname')->get();
+        $tahun = $request->query('tahun');
         $projects = ProjectList::orderBy('created_at')->get();
         $dokumen = DokumenTahun::orderBy('id')->get();
 
-        $laporantahun = ListDokumen::orderBy('created_at')->get();
-        return view('project.list_tahunan', compact('projects', 'dokumen', 'laporantahun', 'employees'));
+        if ($tahun) {
+            $laporantahun = ListDokumen::where('tahun', $tahun)
+                ->orderBy('created_at')
+                ->get();
+        } else {
+            $laporantahun = ListDokumen::orderBy('created_at')->get();
+            $tahun = 'null';
+        }
+        $listtahun = ListDokumen::all();
+
+        return view('project.list_tahunan', compact('projects', 'dokumen', 'laporantahun', 'employees', 'tahun', 'listtahun'));
     }
 
     /**
