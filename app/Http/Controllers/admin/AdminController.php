@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\InstituteProyeks;
+use App\Models\ProjectList;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,12 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $totalprojek = 0;
-        $pending = 0;
-        $onprogress = 0;
-        $finish = 0;
-
-
+        $totalprojek = ProjectList::count() + InstituteProyeks::count();
+        $pending = ProjectList::where('status', 0)->count() + InstituteProyeks::where('status', 0)->count();
+        $onprogress = ProjectList::where('status', 1)->count() + InstituteProyeks::where('status', 1)->count();
+        $finish = ProjectList::where('status', 2)->count() + InstituteProyeks::where('status', 2)->count();
 
         return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish'));
     }

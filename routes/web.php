@@ -43,14 +43,11 @@ Route::group([
 ], function () {
     Route::get('/getUser', [UserController::class, 'getUser'])->name('admin.dataTable.getUser');
     Route::get('/', [AdminController::class, 'index'])->name('home');
-    Route::resource('user', UserController::class)->only(['index', 'update', 'show', 'edit', 'store', 'destroy'])->names([
-        'index' => 'user',
-        'update'  => 'order.confirm',
-        'show'  => 'order.view',
-        'edit' => 'confirm',
-        'store' => 'order.storepayment',
-        'destroy' => 'user.destroy'
-    ]);
+    Route::get('/User_list', [UserController::class, 'index'])->name('user');
+    Route::get('/hapus_user/{id}', [UserController::class, 'destroy'])->name('_del.user');
+    Route::get('/Edit_user/{id}', [UserController::class, 'edit'])->name('_edituser');
+    Route::post('/list_user/add', [UserController::class, 'store'])->name('add_user');
+    Route::post('/user/update/{id}', [UserController::class, 'update'])->name('update_user');
 });
 
 Route::group([
