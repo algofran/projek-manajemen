@@ -120,7 +120,7 @@
                             <div class="col-3">
                                 <h6 class="invoice-name">Bank</h6>
                                 <p class="invoice-details invoice-details-two ">
-                                    <span class="btn btn-sm btn-info text-white">BCA</span>
+                                    <span class="btn btn-sm btn-info text-white">{{ $project->bank }}</span>
                                 </p>
 
                             </div>

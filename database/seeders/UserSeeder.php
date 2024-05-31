@@ -30,13 +30,13 @@ class UserSeeder extends Seeder
 
         // Buat user manager
         User::create([
-            'firstname' => 'Manager',
-            'lastname' => 'Manager',
-            'username' => 'manager',
+            'firstname' => 'Leonardo',
+            'lastname' => 'Boy',
+            'username' => 'Leonardo',
             'email' => 'manager@gmail.com',
             'password' => Hash::make('password'),
             'phone' => '082192598451',
-            'type' => '2'
+            'type' => '1'
         ])->assignRole('manager');
 
         // Buat user biasa
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
             'phone' => '082192598451',
-            'type' => '1'
+            'type' => '2'
         ])->assignRole('user');
 
         // Buat 3 user admin random

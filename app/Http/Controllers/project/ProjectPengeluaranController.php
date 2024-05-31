@@ -16,7 +16,7 @@ class ProjectPengeluaranController extends Controller
     public function index(Request $request, $id)
     {
         $project_id = ProjectList::findOrFail($id);
-        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $stat = ["", "Pending", "On-Progress", "Finish"];
         $employees = User::where('type', '>', 0)->get();
         return view('project.pengeluaran', compact('stat', 'employees', 'project_id'));
     }

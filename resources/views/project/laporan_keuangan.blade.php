@@ -137,14 +137,6 @@
                                                 <span class="badge badge-primary">{{ $status }}</span>
                                                 @break
                                             
-                                            @case('On-Hold')
-                                                <span class="badge badge-warning">{{ $status }}</span>
-                                                @break
-                                            
-                                            @case('Complete')
-                                                <span class="badge badge-success">{{ $status }}</span>
-                                                @break
-                                            
                                             @case('Finish')
                                                 <span class="badge badge-danger">{{ $status }}</span>
                                                 @break

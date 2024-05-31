@@ -164,7 +164,7 @@
                                                 @csrf
                                     
                                             <div class="modal-body">
-                                                <input type="" name="id_inst" value="{{ old('id_inst',$item->id_inst) }}">
+                                                <input type="hidden" name="id_inst" value="{{ old('id_inst',$item->id_inst) }}">
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-2">Periode</label>
                                                         <div class="col-md-10">
@@ -211,6 +211,7 @@
                                                             <input type="number" class="form-control" placeholder="Jumlah tagihan..." name="tagihan" value="{{ old('tagihan', $item->tagihan) }}">
                                                         </div>
                                                     </div>
+                                                   
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-2">Start Date</label>
                                                         <div class="col-md-10">
@@ -250,6 +251,22 @@
                                                             @if ($errors->has('status'))
                                                                 <span class="text-danger">{{ $errors->first('status') }}</span>
                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-2">BANK</label>
+
+                                                        <div class="col-md-10">
+                                                            <div class="border">
+                                                                @php
+                                                                    $bank = ['BRI','MANDIRI','BTN','BCA']
+                                                                @endphp
+                                                                <select class="form-control form-select" name="bank">
+                                                                    @foreach($bank as $option)
+                                                                    <option value="{{ $option }}" {{ $item->bank == $option ? 'selected' : '' }}>{{ $option }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -402,6 +419,21 @@
                                 @if ($errors->has('payment'))
                                     <span class="text-danger">{{ $errors->first('payment') }}</span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">BANK</label>
+
+                            <div class="col-md-10">
+                                <div class="border">
+                                    <select class="form-control form-select" name="bank">
+                                        <option value="BRI">BRI</option>
+                                        <option value="MANDIRI">MANDIRI</option>
+                                        <option value="BCA">BCA</option>
+                                        <option value="BTN">BTN</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         

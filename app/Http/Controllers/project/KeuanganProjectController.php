@@ -20,7 +20,7 @@ class KeuanganProjectController extends Controller
     public function index(Request $request)
     {
         $i = 1;
-        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $stat = ["", "Pending", "On-Progress", "Finish"];
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];

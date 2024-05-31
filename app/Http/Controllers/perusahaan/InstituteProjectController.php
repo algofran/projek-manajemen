@@ -176,6 +176,7 @@ class InstituteProjectController extends Controller
             'end_date' => $request->input('end_date'),
             'status' => $request->input('status'),
             'payment' => $request->input('payment'),
+            'bank' => $request->input('bank'),
             'manager_id' => $request->input('manager_id'),
         ]);
 
@@ -224,6 +225,7 @@ class InstituteProjectController extends Controller
             'end_date' => $request->input('end_date'),
             'status' => $request->input('status'),
             'payment' => $request->input('payment'),
+            'bank' => $request->input('bank'),
             'manager_id' => $request->input('manager_id'),
         ]);
 

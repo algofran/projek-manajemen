@@ -15,9 +15,9 @@ class AdminController extends Controller
     public function index()
     {
         $totalprojek = ProjectList::count() + InstituteProyeks::count();
-        $pending = ProjectList::where('status', 0)->count() + InstituteProyeks::where('status', 0)->count();
-        $onprogress = ProjectList::where('status', 1)->count() + InstituteProyeks::where('status', 1)->count();
-        $finish = ProjectList::where('status', 2)->count() + InstituteProyeks::where('status', 2)->count();
+        $pending = ProjectList::where('status', 1)->count() + InstituteProyeks::where('status', 0)->count();
+        $onprogress = ProjectList::where('status', 2)->count() + InstituteProyeks::where('status', 1)->count();
+        $finish = ProjectList::where('status', 3)->count() + InstituteProyeks::where('status', 2)->count();
 
         return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish'));
     }

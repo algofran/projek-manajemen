@@ -28,6 +28,13 @@ class InstituteProyekSeeder extends Seeder
 
         $managerRole = Role::where('name', 'manager')->first();
         $managerIds = User::role($managerRole)->pluck('id')->toArray();
+        $bank = [
+            'BRI',
+            'MANDIRI',
+            'BCA',
+            'BTN',
+            'Lainnya'
+        ];
 
         // Loop untuk membuat beberapa data acak
         for ($i = 0; $i < 20; $i++) {
@@ -43,6 +50,7 @@ class InstituteProyekSeeder extends Seeder
                 'start_date' => $faker->date(),
                 'end_date' => $faker->date(),
                 'tagihan' => $faker->randomFloat(2, 200000, 1000000),
+                'bank' => $faker->randomElement($bank),
                 'status' => $faker->randomElement([0, 1, 2]), // 0=hold, 1=onprogress, 2=complete
                 'payment' => $faker->randomElement([0, 1, 2]), // 0=belum, 1=proses, 2=terbayar
                 'manager_id' => $faker->randomElement($managerIds), // Mengambil ID manager secara acak dari daftar

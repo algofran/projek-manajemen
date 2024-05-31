@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('start_date')->default(now());
             $table->date('end_date')->nullable();
             $table->double('tagihan')->default(0);
+            $table->string('bank');
             $table->unsignedTinyInteger('status')->default(0)->comment('0=hold, 1=onprogress, 2=complete');
             $table->unsignedTinyInteger('payment')->default(0)->comment('0=belum, 1=proses, 2=terbayar');
             $table->unsignedBigInteger('manager_id');

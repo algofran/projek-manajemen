@@ -37,10 +37,10 @@
                         </div>
                     </div>
                 </div>
-
+                
 
                 <div class="table-responsive">
-                    <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                    <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped" id="dataTable3">
                         <thead class="student-thread">
                             <tr>
                                 
