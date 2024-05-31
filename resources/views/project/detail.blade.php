@@ -16,7 +16,7 @@
     
                 <div class="card-body justify-content-start mx-4 my-3">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-6 col-sm-4 col-12">
                             <div class=" text-center">
                                 <h6>Project Manager/Staff</h6>
                                 <img src="{{ asset('assets/img/user.png') }}" alt="" width="90">
@@ -33,7 +33,7 @@
                             </p>
     
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-6 col-sm-4 col-12">
                             <h6 class="invoice-name">Project Name</h6>
                             <p class="invoice-details invoice-details-two text-info">
                                 {{ $project->name }}
@@ -46,82 +46,92 @@
                             <p class="invoice-details invoice-details-two">
                                 {{ $project->description }}
                             </p>
-                            <h6 class="invoice-name">Tanggal Mulai</h6>
-                            <p class="invoice-details invoice-details-two">
-                                {{ $project->start_date }}
-                            </p>
-                            <h6 class="invoice-name">Projek Status</h6>
-                            <p class="invoice-details invoice-details-two">
-                                @php
-                                $status = $project->status_label;
-                                @endphp
-                            
-                                @switch($status)
-                                    @case('Pending')
-                                        <button class="btn btn-danger btn-sm">{{ $status }}</button>
-                                        @break
+                            <div class="row">
+                                <div class="col-4">
+                                    <h6 class="invoice-name">Tanggal Mulai</h6>
+                                    <p class="invoice-details invoice-details-two">
+                                        {{ $project->start_date }}
+                                    </p>
+                                </div>
+                                <div class="col-5">
+                                    <h6 class="invoice-name">Tanggal Berakhir</h6>
+                                    <p class="invoice-details invoice-details-two">
+                                        {{ $project->end_date }}
+                                    </p>
+                                </div>
+                                <div class="col-3"> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
                                     
-                                    @case('On-Progress')
-                                        <button class="btn btn-info btn-sm text-light">{{ $status }}</button>
-                                        @break
+                                    <h6 class="invoice-name">Projek Status</h6>
+                                    <p class="invoice-details invoice-details-two">
+                                        @php
+                                        $status = $project->status_label;
+                                        @endphp
                                     
-                                    @case('On-Hold')
-                                        <button class="btn btn-warning btn-sm">{{ $status }}</button>
-                                        @break
+                                        @switch($status)
+                                            @case('Pending')
+                                                <button class="btn btn-danger btn-sm">{{ $status }}</button>
+                                                @break
+                                            
+                                            @case('On-Progress')
+                                                <button class="btn btn-info btn-sm text-light">{{ $status }}</button>
+                                                @break
+                                            @case('Finish')
+                                                <button class="btn btn-danger">{{ $status }}</button>
+                                                @break
+                                            
+                                            @default
+                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
+                                    </p>
+                                </div>
+                                <div class="col-5">
+                                    <h6 class="invoice-name">Status Pembayaran</h6>
+                                    <p class="invoice-details invoice-details-two ">
+                                        @php
+                                        $bayar = $project->payment_label;
+                                        @endphp
                                     
-                                    @case('Complete')
-                                        <button class="btn btn-success btn-sm">{{ $status }}</button>
-                                        @break
-                                    
-                                    @case('Finish')
-                                        <button class="btn btn-danger">{{ $status }}</button>
-                                        @break
-                                    
-                                    @default
-                                        <!-- Tindakan jika tidak ada kasus yang cocok -->
-                                @endswitch
-                            </p>
-                        </div>
-                        <div class="col-md-4 col-sm-12 "><br><br><br><br><br><br><br><br><br><br>
-                            <h6 class="invoice-name">Tanggal Berakhir</h6>
-                            <p class="invoice-details invoice-details-two">
-                                {{ $project->end_date }}
-                            </p>
-                            <h6 class="invoice-name">Status Pembayaran</h6>
-                            <p class="invoice-details invoice-details-two ">
-                                @php
-                                $bayar = $project->payment_label;
-                                @endphp
-                            
-                                @switch($bayar)
-                                    @case('Sudah Terbayar')
-                                        <span class="btn btn-sm btn-success">{{ $bayar }}</span>
-                                        @break
-                                    
-                                    @case('Belum Ditagih')
-                                        <span class="btn btn-sm btn-danger">{{ $bayar }}</span>
-                                        @break
-                                    
-                                    @case('Sudah Ditagih')
-                                        <span class="btn btn-sm btn-info text-light">{{ $bayar }}</span>
-                                        @break
-                                    
-                                    
-                                    @default
-                                        <!-- Tindakan jika tidak ada kasus yang cocok -->
-                                @endswitch
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8">
-                            <h6 class="invoice-name">Project Progress</h6>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100">{{ $progress }}%</div>
+                                        @switch($bayar)
+                                            @case('Sudah Terbayar')
+                                                <span class="btn btn-sm btn-success">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Belum Ditagih')
+                                                <span class="btn btn-sm btn-danger">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            @case('Sudah Ditagih')
+                                                <span class="btn btn-sm btn-info text-light">{{ $bayar }}</span>
+                                                @break
+                                            
+                                            
+                                            @default
+                                                <!-- Tindakan jika tidak ada kasus yang cocok -->
+                                        @endswitch
+                                    </p>
+                                </div>
+                                <div class="col-3">
+                                    <h6 class="invoice-name">BANK</h6>
+                                    <p class="invoice-details invoice-details-two ">
+                                        <span class="btn btn-sm btn-info text-light">{{ $project->bank }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6 class="invoice-name">Project Progress</h6>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100">{{ $progress }}%</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                       
                     </div>
+                    
                     
                 </div>
             </div>
@@ -166,13 +176,13 @@
                                         <td>{{ ucwords($task->user->firstname . ' ' . $task->user->lastname) }}</td>
                                         <td>
                                             @switch($task->status)
-                                                @case(0)
-                                                    <span class="badge badge-warning">Pending</span>
-                                                    @break
                                                 @case(1)
-                                                    <span class="badge badge-info">On-Progress</span>
+                                                    <span class="badge badge-danger">Pending</span>
                                                     @break
                                                 @case(2)
+                                                    <span class="badge badge-warning">On-Progress</span>
+                                                    @break
+                                                @case(3)
                                                     <span class="badge badge-success">Done</span>
                                                     @break
                                             @endswitch
@@ -236,9 +246,9 @@
                                                                 <label>Project Status</label>
                                                                 <div class="border">
                                                                     <select class="form-control form-select" name="status">
-                                                                        <option value="0" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
-                                                                        <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
-                                                                        <option value="2" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                        <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
+                                                                        <option value="2" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                                                                        <option value="4" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

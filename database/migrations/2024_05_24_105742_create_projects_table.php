@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('po_number', 100)->nullable();
             $table->tinyInteger('payment_status')->default(0);
             $table->double('payment')->default(0);
+            $table->string('bank');
             $table->tinyInteger('pembayaran')->default(0);
             $table->integer('vendor')->default(0);
             $table->text('fakturpajak')->nullable();

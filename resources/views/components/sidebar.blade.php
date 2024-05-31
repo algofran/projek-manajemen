@@ -1,3 +1,16 @@
+{{-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/feather/feather.css">
+    <link rel="stylesheet" href="assets/plugins/icons/flags/flags.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head> --}}
 <div class="sidebar" id="sidebar">
   <div class="sidebar-inner slimscroll">
       <div id="sidebar-menu" class="sidebar-menu">
@@ -48,3 +61,12 @@
       </div>
   </div>
 </div>
+
+{{-- <script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/feather.min.js"></script>
+<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+
+</html> --}}

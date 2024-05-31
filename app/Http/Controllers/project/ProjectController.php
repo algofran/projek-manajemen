@@ -23,7 +23,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $i = 1;
-        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $stat = ["", "Pending", "On-Progress", "Finish"];
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
@@ -67,7 +67,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $i = 1;
-        $stat = ["Pending", "On-Progress", "On-Hold", "Complete", "Finish"];
+        $stat = ["", "Pending", "On-Progress", "Finish"];
         $pay = ["Belum Ditagih", "Sudah Ditagih", "Sudah Terbayar"];
         $tag = ["", "PT. PLN (PERSERO)", "PT. INDONESIA COMNET PLUS", "TELKOM AKSES", "RSWS/PEMDA/LAIN2"];
         $vendor_tag = ["", "PT. VISDAT TEKNIK UTAMA", "PT. CORDOVA BERKAH NUSATAMA", "CV. VISDAT TEKNIK UTAMA", "CV. VISUAL DATA KOMPUTER"];
@@ -158,6 +158,8 @@ class ProjectController extends Controller
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
             'payment_status' => $request->input('payment_status'),
+            'payment' => $request->input('payment'),
+            'bank' => $request->input('bank'),
             'status' => $request->input('status'),
             'fakturpajak' => $request->input('fakturpajak'),
             'fp_date' => $request->input('fp_date'),
@@ -224,6 +226,8 @@ class ProjectController extends Controller
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
             'payment_status' => $request->input('payment_status'),
+            'payment' => $request->input('payment'),
+            'bank' => $request->input('bank'),
             'status' => $request->input('status'),
             'fakturpajak' => $request->input('fakturpajak'),
             'fp_date' => $request->input('fp_date'),

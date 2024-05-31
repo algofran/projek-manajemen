@@ -15,10 +15,9 @@
 <script src="{{ asset('assets/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('assets-admin/css/datatables.min.css') }}">
 
-<script
-    src="{{ asset('assets-admin/js/datatables.min.js') }}">
-</script> 
+<script src="{{ asset('assets-admin/js/datatables.min.js') }}"></script> 
 
 <script src="{{ asset('assets/select/select.js') }}"></script>
             
 <script src="{{ asset('assets/js/script.js') }}"></script>
+

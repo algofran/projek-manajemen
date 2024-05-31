@@ -15,16 +15,16 @@
                             <div class="col">
                                 <div class="mb-4">
                                     <div class="dropdown">
-                                        <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Status Projek
+                                        <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Status
+                                            @if ($status == 'Pending'||$status == 'On-Progress'||$status == 'Finish')
+                                            {{ $status }}
+                                            @endif
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <li><a class="dropdown-item" href="{{ route('project.lists') }}">All</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '0']) }}">Pending</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '1']) }}">On_Progress</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '2']) }}">On-Hold</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '3']) }}">Complate</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '4']) }}">Finish</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '1']) }}">Pending</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '2']) }}">On_Progress</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '3']) }}">Finish</a></li>
                                         </ul>
                                     </div>
                                     

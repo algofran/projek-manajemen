@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Faker\Factory as Faker;
+
 
 class ProjectListSeeder extends Seeder
 {
@@ -15,6 +17,7 @@ class ProjectListSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
         // Ambil semua pengguna dengan peran 'manager'
         $managerRole = Role::where('name', 'manager')->first();
         $managers = User::role($managerRole)->pluck('id')->toArray();
@@ -23,6 +26,14 @@ class ProjectListSeeder extends Seeder
             $this->command->info('No managers found. Please create users with the manager role first.');
             return;
         }
+
+        $bank = [
+            'BRI',
+            'MANDIRI',
+            'BCA',
+            'BTN',
+            'Lainnya'
+        ];
 
         // Ambil semua ID pengguna
         $userIds = User::pluck('id')->toArray();
@@ -41,7 +52,7 @@ class ProjectListSeeder extends Seeder
             ProjectList::create([
                 'name' => 'Sample Project ' . ($i + 1),
                 'description' => 'Description of project ' . ($i + 1),
-                'status' => rand(0, 3),
+                'status' => rand(1, 3),
                 'start_date' => now(),
                 'end_date' => now()->addMonth(),
                 'user_id' => $managerId,
@@ -49,6 +60,7 @@ class ProjectListSeeder extends Seeder
                 'po_number' => 'PO' . str_pad($i + 1, 5, '0', STR_PAD_LEFT),
                 'payment_status' => rand(0, 2),
                 'payment' => rand(1000, 10000),
+                'bank' => $faker->randomElement($bank),
                 'pembayaran' => rand(0, 1),
                 'vendor' => rand(1, 4),
                 'fakturpajak' => 'FP' . str_pad($i + 1, 5, '0', STR_PAD_LEFT),

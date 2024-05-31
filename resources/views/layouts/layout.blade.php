@@ -22,14 +22,13 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
 
     {{-- <link id="pagestyle" href="../assets-admin/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" /> --}}
-    <script src="{{ asset('assets-admin/js/jquery-1.11.1.min.js') }}"
-    crossorigin="anonymous"></script>
+    <script src="{{ asset('assets-admin/js/jquery-1.11.1.min.js') }}" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <div class="main-wrapper">
   @include('components.header')
   @include('components.sidebar')
-    <div class="main-wrapper">
       <div class="page-wrapper">
             <div class="content container-fluid">
               @yield('content')

@@ -2,14 +2,14 @@
 
 @section('content')
     <section>
-        <div class="page-header min-vh-100 bg-info">
+        <div class="page-header min-vh-100" style="background-color: rgb(140, 188, 206)">
             <div class="container">
                 <div class="row">
                     <!-- Login Form -->
                     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                         <div class="card card-plain mt-8">
                             <div class="card-header pb-0 text-left bg-transparent">
-                                <h3 class="font-weight-bolder text-white">Welcome back</h3>
+                                <h3 class="font-weight-bolder">Welcome back</h3>
                                 <p class="mb-0">Enter your email and password to sign in</p>
                             </div>
                             <div class="card-body">

@@ -48,6 +48,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nilai Project</label>
+                                                <input type="number" class="form-control rounded-pill border" name="payment">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Bank</label>
+                                        <div class="border">
+                                            <select class="select" name="pembayaran">
+                                                <option value="BRI">BRI</option>
+                                                <option value="MANDIRI">MANDIRI</option>
+                                                <option value="BCA">BCA</option>
+                                                <option value="BTN">BTN</option>
+                                                <option value="Lainnya">Lainnya</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
@@ -118,8 +139,8 @@
                                                 <label>Project Status</label>
                                                 <div class="border">
                                                     <select class="select" name="status">
-                                                        <option value="0">Pending </option>
-                                                        <option value="1">On-Progress</option>
+                                                        <option value="1">Pending </option>
+                                                        <option value="2">On-Progress</option>
                                                         <option value="3">Finish</option>
                                                     </select>
                                                 </div>

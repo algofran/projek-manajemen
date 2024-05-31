@@ -254,8 +254,8 @@
                                                             <div class="border">
                                                                 <select class="form-control form-select" name="status">
                                                                     <option value="0" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
-                                                                    <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
-                                                                    <option value="2" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                    <option value="1" {{ $task->status == 1 ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                                                                    <option value="2" {{ $task->status == 2 ? 'selected' : '' }}>Sudah Selesai</option>
                                                                 </select>
                                                             </div>
                                                         </div>

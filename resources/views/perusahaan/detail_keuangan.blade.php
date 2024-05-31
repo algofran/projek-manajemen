@@ -17,7 +17,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id]) }}">All</a></li>
-                            <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id, 'type' => 'Biaya Opersional']) }}">Operasional</a></li>
+                            <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id, 'type' => 'Biaya Operasional']) }}">Operasional</a></li>
                             <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id, 'type' => 'Biaya Material']) }}">Material</a></li>
                             <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id, 'type' => 'Biaya Tools']) }}">Tools</a></li>
                             <li><a class="dropdown-item" href="{{ route('_detail.keuangan', ['id' => $project->id, 'type' => 'Biaya Gaji']) }}">Gaji/Fees</a></li>  
