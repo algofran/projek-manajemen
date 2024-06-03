@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\penjualan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddPenjualanRequest;
 use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,27 +29,11 @@ class PenjualanController extends Controller
 
         return view('Penjualan.lists_penjualan', compact('i', 'pay', 'sales', 'employees', 'tgl', 'pembeli', 'keterangan', 'beli', 'jual', 'status'));
     }
-    public function store(Request $request)
+    public function store(AddPenjualanRequest $request)
     {
-        $request->validate([
-            'tgl' => 'nullable|date',
-            'pembeli' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:255',
-            'beli' => 'nullable|numeric',
-            'jual' => 'nullable|numeric',
-            'status' => 'nullable|integer',
-            'user' => 'nullable|integer',
-        ]);
 
-        $penjualan = new Sales([
-            'tgl' => $request->input('tgl'),
-            'pembeli' => $request->input('pembeli'),
-            'keterangan' => $request->input('keterangan'),
-            'beli' =>  $request->input('beli'),
-            'jual' => $request->input('jual'),
-            'status' => $request->input('status'),
-            'user' => $request->input('user'),
-        ]);
+        $validatedData = $request->validated();
+        $penjualan = Sales::create($validatedData);
 
         if ($penjualan->save()) {
             return redirect()->route('list_penjualan')->with('success', 'penjualan berhasil dibuat!');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\project;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddProjectTaskRequest;
 use App\Models\ProjectList;
 use App\Models\ProjectTask;
 use App\Models\User;
@@ -33,28 +34,10 @@ class ProjectTugasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddProjectTaskRequest $request)
     {
-        $request->validate([
-            'task' => 'required',
-            'description' => 'required',
-            'user_id' => 'required',
-            'date_created' => 'required|date',
-            'due_date' => 'required|date',
-            'status' => 'required'
-        ]);
-
-        $task = new ProjectTask([
-            'project_id' => $request->input('project_id'),
-            'task' => $request->input('task'),
-            'description' => $request->input('description'),
-            'status' => $request->input('status'),
-            'date_created' => $request->input('date_created'),
-            'due_date' => $request->input('due_date'),
-            'user_id' => $request->input('user_id'),
-        ]);
-
-        $task->save();
+        $validatedData = $request->validated();
+        ProjectTask::create($validatedData);
 
         return redirect()->route('project.detail.show', ['id' => $request->input('project_id')])->with('success', 'Task created successfully!');
     }

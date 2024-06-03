@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddMitraRequest;
+use App\Http\Requests\AddPerusahaanRequest;
 use App\Models\InstituteList;
 use App\Models\InstituteMitra;
 use Illuminate\Http\Request;
@@ -17,31 +19,24 @@ class InstituteDataController extends Controller
         $i = 1;
         $perusahaan = InstituteList::orderBy('id')->get();
         $mitra = InstituteMitra::orderBy('mitra')->get();
-        $name = $request->input('name');
-        $institute = $request->input('institute');
-        $alamat = $request->input('alamat');
-        $keterangan = $request->input('keterangan');
-        $id_inst = $request->input('id_inst');
-        $mitras = $request->input('mitra');
+        // $name = $request->input('name');
+        // $institute = $request->input('institute');
+        // $alamat = $request->input('alamat');
+        // $keterangan = $request->input('keterangan');
+        // $id_inst = $request->input('id_inst');
+        // $mitras = $request->input('mitra');
 
 
-        return view('perusahaan.list_perusahaan', compact('perusahaan', 'i', 'mitra', 'name', 'institute', 'alamat', 'keterangan', 'id_inst', 'mitras'));
+        return view('perusahaan.list_perusahaan', compact('perusahaan', 'i', 'mitra'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(AddMitraRequest $request)
     {
-
-
-        $institute = new InstituteMitra([
-            'id_inst' => $request->input('id_inst'),
-            'mitra' => $request->input('mitra'),
-            'keterangan' => $request->input('keterangan'),
-        ]);
-
-        $institute->save();
+        $validatedData = $request->validated();
+        InstituteMitra::create($validatedData);
 
         return redirect()->back()->with('success', 'Institute created successfully!');
     }
@@ -49,24 +44,10 @@ class InstituteDataController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddPerusahaanRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'institute' => 'required',
-            'alamat' => 'required',
-            'keterangan' => 'required|max:255',
-
-        ]);
-
-        $institute = new InstituteList([
-            'name' => $request->input('name'),
-            'institute' => $request->input('institute'),
-            'alamat' => $request->input('alamat'),
-            'keterangan' => $request->input('keterangan'),
-        ]);
-
-        $institute->save();
+        $validatedData = $request->validated();
+        InstituteList::create($validatedData);
 
         return redirect()->back()->with('success', 'Institute created successfully!');
     }

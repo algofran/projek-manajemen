@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddMitraTaskRequest;
 use App\Models\InstituteProyeks;
 use App\Models\InstituteTask;
 use App\Models\User;
@@ -33,28 +34,11 @@ class TaskProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddMitraTaskRequest $request)
     {
-        $request->validate([
-            'task' => 'required',
-            'description' => 'required',
-            'user_id' => 'required',
-            'date_created' => 'required|date',
-            'due_date' => 'required|date',
-            'status' => 'required'
-        ]);
 
-        $task = new InstituteTask([
-            'project_id' => $request->input('project_id'),
-            'task' => $request->input('task'),
-            'description' => $request->input('description'),
-            'status' => $request->input('status'),
-            'date_created' => $request->input('date_created'),
-            'due_date' => $request->input('due_date'),
-            'user_id' => $request->input('user_id'),
-        ]);
-
-        $task->save();
+        $validatedData = $request->validated();
+        InstituteTask::create($validatedData);
 
         return redirect()->route('_detail.proyek', ['id' => $request->input('project_id')])->with('success', 'Task created successfully!');
     }

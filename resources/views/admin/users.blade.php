@@ -57,51 +57,73 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">First Name</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" placeholder="Andi" value="{{ old('firstname') }}" name="firstname" required>
+                                    <input type="text" class="form-control @error('firstname') is-invalid @enderror" placeholder="Andi" value="{{ old('firstname') }}" name="firstname">
+                                    @error('firstname')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Last Name</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" placeholder="Amalia" value="{{ old('lastname') }}" name="lastname" required>
+                                    <input type="text" class="form-control  @error('lastname') is-invalid @enderror" placeholder="Amalia" value="{{ old('lastname') }}" name="lastname">
+                                    @error('lastname')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">User Name</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" placeholder="Mell" value="{{ old('username') }}" name="username" required>
+                                    <input type="text" class="form-control  @error('username') is-invalid @enderror" placeholder="Mell" value="{{ old('username') }}" name="username" required>
+                                    @error('username')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">email</label>
                                 <div class="col-md-10">
-                                    <input type="email" class="form-control" placeholder="" value="{{ old('email') }}" name="email" required>
+                                    <input type="email" class="form-control  @error('email') is-invalid @enderror" placeholder="" value="{{ old('email') }}" name="email" required>
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
         
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Phone</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" placeholder="+62" value="{{ old('phone') }}" name="phone" required>
+                                    <input type="text" class="form-control  @error('phone') is-invalid @enderror" placeholder="+62" value="{{ old('phone') }}" name="phone" required>
+                                    @error('phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
         
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">User Authority</label>
                                 <div class="col-md-10">
-                                    <select class="form-control form-select" name="type" required>
+                                    <select class="form-control form-select  @error('type') is-invalid @enderror" name="type" required>
 
                                         <option value="0" {{ old('type') == 0 ? 'selected' : '' }}>Administrator</option>
                                         <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Manager</option>
                                         <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Staff</option>
                                     </select>
+                                    @error('type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Password</label>
                                 <div class="col-md-10">
-                                    <input type="password" name="password" class="form-control" value="{{ old('password') }}"placeholder="******" required>
+                                    <input type="password" name="password"  class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"placeholder="******" required>
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Konfirmasi Password</label>

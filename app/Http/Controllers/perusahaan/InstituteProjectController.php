@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddMitraProjekRequest;
+use App\Http\Requests\AddMitraRequest;
 use App\Models\InstituteMitra;
 use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyeks;
@@ -134,57 +136,28 @@ class InstituteProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $id, Request $request)
+    public function create($id)
     {
-        $mitra = InstituteMitra::where('id', $id)->orderBy('id', 'asc')->get();
-        $paket = $request->input('paket');
-        $id_inst = $request->input('id_inst');
-        $periode = $request->input('periode');
-        $sektor = $request->input('sektor');
-        $tagihan = $request->input('tagihan');
-        $status = $request->input('status');
-        $payment = $request->input('payment');
+
+        $mitra = InstituteMitra::findOrFail($id);
         $managers = User::where('type', 1)->orderBy('firstname')->get();
 
-        return view('perusahaan.tambah_proyek', compact('id', 'mitra', 'id_inst', 'paket', 'periode', 'sektor', 'tagihan', 'status', 'payment', 'managers'));
+        return view('perusahaan.tambah_proyek', compact('mitra', 'managers'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddMitraProjekRequest $request)
     {
-        $request->validate([
-            'PA' => 'nullable|integer',
-            'target' => 'nullable|integer',
-            'tagihan' => 'nullable|numeric',
-            'status' => 'nullable|integer',
-            'payment' => 'nullable|integer',
-            'manager_id' => 'nullable|integer',
-        ]);
 
-        $iconnet = new InstituteProyeks([
-            'id_inst' => $request->input('id_inst'),
-            'periode' => $request->input('periode'),
-            'paket' => $request->input('paket'),
-            'sektor' => $request->input('sektor'),
-            'keterangan' => $request->input('keterangan'),
-            'PA' =>  $request->input('PA'),
-            'target' => $request->input('target'),
-            'tagihan' => $request->input('tagihan'),
-            'start_date' => Carbon::now(),
-            'end_date' => $request->input('end_date'),
-            'status' => $request->input('status'),
-            'payment' => $request->input('payment'),
-            'bank' => $request->input('bank'),
-            'manager_id' => $request->input('manager_id'),
-        ]);
+        $validatedData = $request->validated();
+        $data = InstituteProyeks::create($validatedData);
 
-        if ($iconnet->save()) {
+        if ($data->save()) {
             return redirect()->route('list.proyeks', ['id' => $request->input('id_inst')])->with('success', 'proyek berhasil dibuat!');
         } else {
-            $errorMessage = 'Gagal. Silakan coba lagi.';
-            return redirect()->route('perusahaan.list_proyek')->with('error', $errorMessage)->withInput($request->except('password', 'password_confirmation'));
+            return redirect()->back()->with('error', 'Gagal Membuat Proyek');
         }
     }
 
@@ -211,8 +184,8 @@ class InstituteProjectController extends Controller
             'manager_id' => 'nullable|integer',
         ]);
 
-        $iconnet = InstituteProyeks::findOrFail($id);
-        $iconnet->update([
+        $projekmitra = InstituteProyeks::findOrFail($id);
+        $projekmitra->update([
             'id_inst' => $request->input('id_inst'),
             'periode' => $request->input('periode'),
             'paket' => $request->input('paket'),
@@ -221,7 +194,7 @@ class InstituteProjectController extends Controller
             'PA' =>  $request->input('PA'),
             'target' => $request->input('target'),
             'tagihan' => $request->input('tagihan'),
-            'start_date' => $iconnet->start_date,
+            'start_date' => $projekmitra->start_date,
             'end_date' => $request->input('end_date'),
             'status' => $request->input('status'),
             'payment' => $request->input('payment'),
@@ -229,7 +202,7 @@ class InstituteProjectController extends Controller
             'manager_id' => $request->input('manager_id'),
         ]);
 
-        if ($iconnet->save()) {
+        if ($projekmitra->save()) {
             return redirect()->route('list.proyeks', ['id' => $request->input('id_inst')])->with('success', 'proyek berhasil di Edit!');
         } else {
             $errorMessage = 'Gagal. Silakan coba lagi.';

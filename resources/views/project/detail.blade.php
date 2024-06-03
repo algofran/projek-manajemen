@@ -115,8 +115,14 @@
                                 </div>
                                 <div class="col-3">
                                     <h6 class="invoice-name">BANK</h6>
-                                    <p class="invoice-details invoice-details-two ">
-                                        <span class="btn btn-sm btn-info text-light">{{ $project->bank }}</span>
+                                    <p class="invoice-details invoice-details-two">
+                                        <span class="btn btn-sm btn-info text-light">
+                                            @if ($project->bank === null)
+                                                Belum Ada
+                                            @else
+                                                {{ $project->bank }}
+                                            @endif
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -246,9 +252,9 @@
                                                                 <label>Project Status</label>
                                                                 <div class="border">
                                                                     <select class="form-control form-select" name="status">
-                                                                        <option value="1" {{ $task->status == 0 ? 'selected' : '' }}>Belum Dikerjakan</option>
-                                                                        <option value="2" {{ $task->status == 0 ? 'selected' : '' }}>Sedang Dikerjakan</option>
-                                                                        <option value="4" {{ $task->status == 0 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                        <option value="1" {{ $task->status == 1 ? 'selected' : '' }}>Belum Dikerjakan</option>
+                                                                        <option value="2" {{ $task->status == 2 ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                                                                        <option value="3" {{ $task->status == 3 ? 'selected' : '' }}>Sudah Selesai</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

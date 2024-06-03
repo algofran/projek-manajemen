@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200);
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->tinyInteger('status');
             $table->date('start_date');
-            $table->date('end_date')->nullable();
+            $table->date('end_date');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('user_ids');
-            $table->string('po_number', 100)->nullable();
-            $table->tinyInteger('payment_status')->default(0);
-            $table->double('payment')->default(0);
-            $table->string('bank');
-            $table->tinyInteger('pembayaran')->default(0);
-            $table->integer('vendor')->default(0);
+            $table->string('po_number', 100);
+            $table->tinyInteger('payment_status');
+            $table->double('payment')->nullable();
+            $table->string('bank')->nullable();
+            $table->tinyInteger('pembayaran');
+            $table->integer('vendor');
             $table->text('fakturpajak')->nullable();
             $table->date('fp_date')->nullable();
             $table->text('invoice')->nullable();

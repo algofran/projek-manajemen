@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddMitraPengeluaranRequest;
 use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyeks;
 use App\Models\User;
@@ -32,25 +33,10 @@ class PengeluaranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddMitraPengeluaranRequest $request)
     {
-        $request->validate([
-            'project_id' => 'required|numeric',
-            'subject' => 'required|string',
-            'user_id' => 'required|numeric',
-            'date' => 'required|dat e',
-            'cost' => 'required|numeric',
-            'comment' => 'required|string',
-        ]);
-
-        $pengeluaran = new InstitutePengeluaran();
-        $pengeluaran->project_id = $request->input('project_id');
-        $pengeluaran->subject = $request->input('subject');
-        $pengeluaran->user_id = $request->input('user_id');
-        $pengeluaran->date = $request->input('date');
-        $pengeluaran->cost = $request->input('cost');
-        $pengeluaran->comment = $request->input('comment');
-        $pengeluaran->save();
+        $validatedData = $request->validated();
+        InstitutePengeluaran::create($validatedData);
 
         return redirect()->route('_detail.proyek', ['id' => $request->input('project_id')])->with('success', 'Task created successfully!');
     }

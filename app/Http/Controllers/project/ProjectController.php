@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\project;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddProjectListRequest;
 use App\Models\ProjectAktivitis;
 use App\Models\ProjectList;
 use App\Models\ProjectTask;
@@ -120,58 +121,43 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(AddProjectListRequest $request)
     {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'po_number' => 'nullable|string|max:255',
-            'user_id' => 'nullable|integer',
-            'invoice' => 'nullable|string|max:255',
-            'invoice_date' => 'nullable|date',
-            'pembayaran' => 'nullable|string|max:255',
-            'vendor' => 'nullable|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'user_ids' => 'nullable|array',
-            'user_ids.*' => 'integer',
-            'payment_status' => 'nullable|integer',
-            'status' => 'nullable|integer',
-            'fakturpajak' => 'nullable|string|max:255',
-            'fp_date' => 'nullable|date',
-            'description' => 'nullable|string',
-        ]);
+        // Mengambil data yang telah diverifikasi
+        $validatedData = $request->validated();
 
+        // Mengonversi array user_ids menjadi string
         $userIds = $request->input('user_ids');
-        $userIdsString = implode(',', $userIds); // Mengonversi array menjadi string
+        $userIdsString = is_array($userIds) ? implode(',', $userIds) : null; // Mengonversi array menjadi string
 
         // Buat objek Project baru
         $project = new ProjectList([
-            'name' => $request->input('name'),
-            'po_number' => $request->input('po_number'),
-            'user_id' => $request->input('user_id'),
+            'name' => $validatedData['name'],
+            'po_number' => $validatedData['po_number'],
+            'user_id' => $validatedData['user_id'],
             'user_ids' => $userIdsString,
-            'invoice' => $request->input('invoice'),
-            'inv_date' => $request->input('invoice_date'),
-            'pembayaran' => $request->input('pembayaran'),
-            'vendor' => $request->input('vendor'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
-            'payment_status' => $request->input('payment_status'),
-            'payment' => $request->input('payment'),
-            'bank' => $request->input('bank'),
-            'status' => $request->input('status'),
-            'fakturpajak' => $request->input('fakturpajak'),
-            'fp_date' => $request->input('fp_date'),
-            'description' => $request->input('description'),
+            'invoice' => $validatedData['invoice'],
+            'inv_date' => $validatedData['invoice_date'],
+            'pembayaran' => $validatedData['pembayaran'],
+            'vendor' => $validatedData['vendor'],
+            'start_date' => $validatedData['start_date'],
+            'end_date' => $validatedData['end_date'],
+            'payment_status' => $validatedData['payment_status'],
+            'payment' => $validatedData['payment'],
+            'bank' => $validatedData['bank'],
+            'status' => $validatedData['status'],
+            'fakturpajak' => $validatedData['fakturpajak'],
+            'fp_date' => $validatedData['fp_date'],
+            'description' => $validatedData['description'],
         ]);
 
         // Simpan proyek
         $project->save();
 
         // Redirect ke halaman yang sesuai atau beri respons JSON
-        return redirect()->route('project.store')->with('success', 'Project created successfully!');
+        return redirect()->route('project.lists')->with('success', 'Project created successfully!');
     }
+
 
 
     public function edit($id)

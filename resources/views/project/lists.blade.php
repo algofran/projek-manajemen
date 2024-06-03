@@ -40,6 +40,11 @@
                 
 
                 <div class="table-responsive">
+                    @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped" id="dataTable3">
                         <thead class="student-thread">
                             <tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\project;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddProjectPengeluranRequest;
 use App\Models\ProjectAktivitis;
 use App\Models\ProjectList;
 use App\Models\User;
@@ -32,25 +33,11 @@ class ProjectPengeluaranController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddProjectPengeluranRequest $request)
     {
-        $request->validate([
-            'project_id' => 'required|numeric',
-            'subject' => 'required|string',
-            'user_id' => 'required|numeric',
-            'date' => 'required|date',
-            'cost' => 'required|numeric',
-            'comment' => 'required|string',
-        ]);
 
-        $pengeluaran = new ProjectAktivitis();
-        $pengeluaran->project_id = $request->input('project_id');
-        $pengeluaran->subject = $request->input('subject');
-        $pengeluaran->user_id = $request->input('user_id');
-        $pengeluaran->date = $request->input('date');
-        $pengeluaran->cost = $request->input('cost');
-        $pengeluaran->comment = $request->input('comment');
-        $pengeluaran->save();
+        $validatedData = $request->validated();
+        ProjectAktivitis::create($validatedData);
 
         return redirect()->route('project.detail.show', ['id' => $request->input('project_id')])->with('success', 'Pengeluaran created successfully!');
     }

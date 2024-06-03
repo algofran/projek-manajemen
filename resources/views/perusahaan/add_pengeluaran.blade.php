@@ -16,23 +16,29 @@
                                 <div class="form-group">
                                     <label>Project Status</label>
                                     <div class="border">
-                                        <select class="select" name="subject">
+                                        <select class="select @error('subject') is-invalid @enderror" name="subject">
                                             <option value="Biaya Operasional" {{ isset($subject) && $subject == "Biaya Operasional" ? 'selected' : '' }}>Biaya Operasional</option>
                                             <option value="Biaya Material" {{ isset($subject) && $subject == "Biaya Material" ? 'selected' : '' }}>Biaya Material</option>
                                             <option value="Biaya Tools" {{ isset($subject) && $subject == "Biaya Tools" ? 'selected' : '' }}>Biaya Tools</option>
                                             <option value="Biaya Gaji" {{ isset($subject) && $subject == "Biaya Gaji" ? 'selected' : '' }}>Biaya Gaji</option>
                                             <option value="Biaya Lainnya" {{ isset($subject) && $subject == "Biaya Lainnya" ? 'selected' : '' }}>Biaya Lainnya</option>
                                         </select>
+                                        @error('subject')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Pengguna</label>
-                                    <select class="select" name="user_id">
+                                    <select class="select @error('user_id') is-invalid @enderror" name="user_id">
                                         <option>Pilih Pengguna</option>
                                         @foreach ($employees as $employee)
                                         <option value="{{ $employee->id }}">{{ ucwords($employee->firstname.' '.$employee->lastname) }}</option>
                                         @endforeach
                                     </select>
+                                    @error('user_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             
@@ -41,19 +47,28 @@
                                     <label>Tanggal</label>
                                     <div class="col-md">
                                         <div class="input-group mb-3">
-                                            <input type="date" class="form-control" name="date" required>
+                                            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" required>
+                                            @error('date')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Activity Cost</label>
-                                    <input type="number" class="form-control" name="cost" required>
+                                    <input type="number" class="form-control @error('cost') is-invalid @enderror" name="cost" value="{{ old('cost') }}" required>
+                                    @error('cost')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea rows="5" cols="5" class="form-control rounded border border-dark" name="comment" placeholder="Keterangan..." required></textarea>
+                            <textarea rows="5" cols="5" class="form-control rounded border border-dark @error('comment') is-invalid @enderror" name="comment" placeholder="Keterangan...">{{ old('comment') }}</textarea>
+                            @error('comment')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mx-2">Submit</button>
@@ -61,6 +76,7 @@
                         </div>
                     </form>                    
                 </div>
+                
             </div>
         </div>
     </div>
