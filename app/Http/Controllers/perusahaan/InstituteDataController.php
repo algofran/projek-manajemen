@@ -19,13 +19,6 @@ class InstituteDataController extends Controller
         $i = 1;
         $perusahaan = InstituteList::orderBy('id')->get();
         $mitra = InstituteMitra::orderBy('mitra')->get();
-        // $name = $request->input('name');
-        // $institute = $request->input('institute');
-        // $alamat = $request->input('alamat');
-        // $keterangan = $request->input('keterangan');
-        // $id_inst = $request->input('id_inst');
-        // $mitras = $request->input('mitra');
-
 
         return view('perusahaan.list_perusahaan', compact('perusahaan', 'i', 'mitra'));
     }
@@ -60,12 +53,8 @@ class InstituteDataController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request, $id)
     {
-
         $institute = InstituteMitra::findOrFail($id);
         $institute->update([
             'id_inst' => $request->input('id_inst'),

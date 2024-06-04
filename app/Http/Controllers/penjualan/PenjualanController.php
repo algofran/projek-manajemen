@@ -99,6 +99,6 @@ class PenjualanController extends Controller
 
         $penjualan->delete();
 
-        return redirect()->route('list_penjualan')->with('success', 'telkom deleted successfully!');
+        return redirect()->route('list_penjualan')->with('success', 'penjualan deleted successfully!');
     }
 }

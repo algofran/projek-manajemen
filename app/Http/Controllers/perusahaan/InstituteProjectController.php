@@ -93,7 +93,6 @@ class InstituteProjectController extends Controller
         $mitra = InstituteMitra::where('id', $project_id)->pluck('mitra')->first();
         $activities = InstitutePengeluaran::where('project_id', $id)->orderBy('date', 'desc')->get();
 
-
         $project = InstituteProyeks::findOrFail($id);
         $tasks = InstituteTask::where('project_id', $id)->orderBy('id', 'asc')->get();
         $totalTasks = $tasks->count();
@@ -104,12 +103,10 @@ class InstituteProjectController extends Controller
         $employees = User::where('type', '>', 0)->get();
         $totalExpense = InstitutePengeluaran::where('project_id', $id)->sum('cost');
 
-
         $tprog = InstituteTask::where('project_id', $project->id)->count();
         $cprog = InstituteTask::where('project_id', $project->id)->where('status', 3)->count();
         $prog = $tprog > 0 ? ($cprog / $tprog) * 100 : 0;
         $prog = $prog > 0 ? number_format($prog, 2) : $prog;
-
 
         $status = $stat[$project->status];
         $project->status_label = $status;
@@ -118,7 +115,6 @@ class InstituteProjectController extends Controller
         $project->payment_label = $paymentStatus;
 
         $end_date = $project->end_date;
-
 
         // Ambil pengguna terkait setiap tugas secara terpisah
         foreach ($tasks as $task) {
@@ -138,7 +134,6 @@ class InstituteProjectController extends Controller
      */
     public function create($id)
     {
-
         $mitra = InstituteMitra::findOrFail($id);
         $managers = User::where('type', 1)->orderBy('firstname')->get();
 
@@ -150,7 +145,6 @@ class InstituteProjectController extends Controller
      */
     public function store(AddMitraProjekRequest $request)
     {
-
         $validatedData = $request->validated();
         $data = InstituteProyeks::create($validatedData);
 
