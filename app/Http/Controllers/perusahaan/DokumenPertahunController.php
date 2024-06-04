@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddDokumenIntituteRequest;
+use App\Http\Requests\AddLaporanInstituteRequest;
 use App\Models\InstituteDokumen;
 use App\Models\InstituteMitra;
 use App\Models\InstituteProyeks;
@@ -54,18 +56,11 @@ class DokumenPertahunController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(AddLaporanInstituteRequest $request)
     {
 
-        // dd($request);
-        $institute = new InstituteTahun([
-            'id_inst' => $request->input('id_inst'),
-            'user_id' => $request->input('user_id'),
-            'deskripsi' => $request->input('deskripsi'),
-            'tahun' => $request->input('tahun'),
-        ]);
-        $institute->save();
-
+        $validatedData = $request->validated();
+        InstituteTahun::create($validatedData);
 
         return redirect()->back()->with('success', 'Institute created successfully!');
     }
@@ -73,7 +68,7 @@ class DokumenPertahunController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddDokumenIntituteRequest $request)
     {
 
         $file           = $request->file('file_path');

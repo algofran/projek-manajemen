@@ -11,7 +11,7 @@ class AddDokumenIntituteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,27 @@ class AddDokumenIntituteRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'id_dokumen' => 'required|exists:institute_list_dokumens,id',
+            'file_path' => 'required|file|mimes:pdf|max:2048',
+            'license' => 'required|string|in:Public Domain,Private Domain,Permissive Domain',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id_dokumen.required' => 'ID dokumen diperlukan',
+            'id_dokumen.exists' => 'ID dokumen tidak valid',
+            'file_path.required' => 'Lampiran diperlukan',
+            'file_path.file' => 'Lampiran harus berupa file',
+            'file_path.mimes' => 'Lampiran harus berupa file PDF',
+            'file_path.max' => 'Ukuran file tidak boleh lebih dari 2MB',
+            'license.required' => 'Lisensi diperlukan',
+            'license.string' => 'Lisensi harus berupa teks',
+            'license.in' => 'Lisensi tidak valid',
         ];
     }
 }

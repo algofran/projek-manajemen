@@ -24,6 +24,7 @@
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 @endif
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
 

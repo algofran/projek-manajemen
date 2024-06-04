@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\project;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddDokumenRequest;
+use App\Http\Requests\AddLaporanRequest;
 use App\Models\DokumenTahun;
 use App\Models\ListDokumen;
 use App\Models\ProjectList;
@@ -39,15 +41,10 @@ class LaporanPertahunController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(AddLaporanRequest $request)
     {
-        $projek = new ListDokumen([
-            'user_id' => $request->input('user_id'),
-            'deskripsi' => $request->input('deskripsi'),
-            'tahun' => $request->input('tahun'),
-        ]);
-        $projek->save();
-
+        $validatedData = $request->validated();
+        ListDokumen::create($validatedData);
 
         return redirect()->back()->with('success', 'projek dokumen list tahun created successfully!');
     }
@@ -55,7 +52,7 @@ class LaporanPertahunController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddDokumenRequest $request)
     {
         $file           = $request->file('file_path');
 

@@ -1,11 +1,12 @@
 <div class="header">
-  <div class="header-left">
-      <a href="{{ route('home') }}" class="logo">
-          <h2 class="">LOGO</h2>
+  <div class="header-left bg-info">
+      <a href="{{ route('home') }}" class="logo bg-info">
+          {{-- <h2 class="">LOGO</h2> --}}
+          <img src="{{ asset('assets/img/image.png' ) }}" class="bg-info" alt="Logo" width="80" height="40">
       </a>
       <a href="{{ route('home') }}" class="logo logo-small">
-          <!-- <img src="{{ asset('assets/img/logo-small.png ' ) }}" alt="Logo" width="30" height="30"> -->
-          <h2 class="">LOGO</h2>
+          <img src="{{ asset('assets/img/visdat.png' ) }}" alt="Logo" width="30" height="30">
+          {{-- <h2 class="">LOGO</h2> --}}
       </a>
   </div>
   <div class="menu-toggle">
@@ -19,7 +20,7 @@
           <button class="btn" type="submit"><i class="fas fa-search"></i></button>
       </form>
   </div>
-  <a class="mobile_btn" id="mobile_btn">
+  <a class="mobile_btn bg-white" id="mobile_btn">
       <i class="fas fa-bars"></i>
   </a>
 

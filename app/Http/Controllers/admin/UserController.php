@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
@@ -45,17 +46,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddUserRequest $request)
     {
-        $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            //     'email' => 'required|string|email|max:255|unique:users',
-            // 'password' => 'required|string|min:8|confirmed',
-            //     'phone' => 'required|string|max:15',
-            'type' => 'required|integer',
-        ]);
+
 
         $role = $this->getRoleByType($request->type);
 
@@ -80,9 +73,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('admin.event');
     }
 
     /**
@@ -98,17 +91,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AddUserRequest $request, string $id)
     {
-        $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $id,
-            //     'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            // 'password' => 'nullable|string|min:8|confirmed',
-            //     'phone' => 'required|string|max:15',
-            'type' => 'required|integer',
-        ]);
+
 
         $user = User::findOrFail($id);
         $user->firstname = $request->firstname;

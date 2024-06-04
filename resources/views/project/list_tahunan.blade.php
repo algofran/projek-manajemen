@@ -162,17 +162,23 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Attachment</label>
                                 <div class="col-md-10">
-                                    <input type="file" name="file_path" class="form-control" value="{{ old('file_path') }}" placeholder="">
+                                    <input type="file" name="file_path" class="form-control @error('file_path') is-invalid @enderror" value="{{ old('file_path') }}" placeholder="" >
+                                    @error('file_path')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Choose License</label>
                                 <div class="col-md-10">
-                                    <select class="form-control mb-md" name="license">
-                                        <option value="Public Domain">Public Domain</option>
-                                        <option value="Private Domain">Private Domain</option>
-                                        <option value="Permissive Domain">Permissive Domain</option>
+                                    <select class="form-control mb-md @error('license') is-invalid @enderror" name="license" >
+                                        <option value="Public Domain" {{ old('license') == 'Public Domain' ? 'selected' : '' }}>Public Domain</option>
+                                        <option value="Private Domain" {{ old('license') == 'Private Domain' ? 'selected' : '' }}>Private Domain</option>
+                                        <option value="Permissive Domain" {{ old('license') == 'Permissive Domain' ? 'selected' : '' }}>Permissive Domain</option>
                                     </select>
+                                    @error('license')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -182,8 +188,7 @@
                                 <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
                             </div>
                         </div>
-                        <form action=""></form>
-                    </form>
+                    </form>                    
                   </div>
               </div>
             </div>
@@ -202,54 +207,56 @@
                           </button>
                       </div>
                       <form action="{{ route('_add.list.laporan.projek') }}" method="post">
-                          @csrf
-                          {{-- <input type="hidden" name="id_inst" value="{{ $mitra->id}}"> --}}
-                      <div class="modal-body">
-                        <div class="form-group row">
-                          <label class="col-form-label col-md-2">Author</label>
-                          <div class="col-md-10">
-                              <select class="form-control form-select" name="user_id">
-                                  <option>Pilih Author</option>
-                                 
-                                      @foreach ($employees as $manager)
-                                          <option value="{{ $manager->id }}">{{ ucwords($manager->username) }}</option>
-                                      @endforeach
-                              </select>
-                          </div>
-                         
-                      </div>
-                      <div class="form-group row">
-                          <label class="col-form-label col-md-2">Project</label>
-                          <div class="col-md-10">
-                            <select class="form-control mb-md" name="deskripsi">
-                              @foreach ($projects as $item)
-                                <option value="{{ $item->name }}">{{ ucwords($item->name) }}</option>
-                              @endforeach
-                            </select>
-                          </div>
-                      </div>
-                      
-                          
-                          <div class="form-group row">
-                              <label class="col-form-label col-md-2">Tahun</label>
-                              <div class="col-md-10">
-                                  <input type="number" name="tahun" class="form-control" value="{{ old('tahun') }}" placeholder="" required>
-                                
-                              </div>
-                          </div>
-                          
-                      </div>
-  
-                      <div class="modal-footer">
-                          <div class="bank-details-btn">
-  
-                              <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
-                                  
-                              </a>
-                              <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
-                          </div>
-                      </div>
-                  </form>
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Author</label>
+                                <div class="col-md-10">
+                                    <select class="form-control form-select @error('user_id') is-invalid @enderror" name="user_id" >
+                                        <option value="">Pilih Author</option>
+                                        @foreach ($employees as $manager)
+                                            <option value="{{ $manager->id }}" {{ old('user_id') == $manager->id ? 'selected' : '' }}>
+                                                {{ ucwords($manager->username) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Project</label>
+                                <div class="col-md-10">
+                                    <select class="form-control form-select @error('deskripsi') is-invalid @enderror" name="deskripsi" >
+                                        @foreach ($projects as $item)
+                                            <option value="{{ $item->name }}" {{ old('deskripsi') == $item->name ? 'selected' : '' }}>
+                                                {{ ucwords($item->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('deskripsi')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Tahun</label>
+                                <div class="col-md-10">
+                                    <input type="number" name="tahun" class="form-control @error('tahun') is-invalid @enderror" value="{{ old('tahun') }}" placeholder="" >
+                                    @error('tahun')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="bank-details-btn">
+                                <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
+                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                            </div>
+                        </div>
+                    </form>                    
                   </div>
               </div>
           </div>

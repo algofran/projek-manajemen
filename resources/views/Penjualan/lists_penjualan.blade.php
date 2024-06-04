@@ -17,6 +17,12 @@
                                 </div>
                             </div>
                         </div>
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close me-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
                         <div class="table-responsive">
                             <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                                 <thead class="student-thread">

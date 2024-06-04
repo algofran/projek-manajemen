@@ -39,14 +39,14 @@ class AddMitraPengeluaranRequest extends FormRequest
     public function messages()
     {
         return [
-            'project_id.required' => 'Project ID is required.',
-            'subject.required' => 'Subject is required.',
-            'user_id.required' => 'User ID is required.',
-            'date.required' => 'Date is required.',
-            'date.date' => 'Date must be a valid date format.',
-            'cost.required' => 'Cost is required.',
-            'cost.numeric' => 'Cost must be a number.',
-            'comment.required' => 'Comment is required.',
+            'project_id.required' => 'ID Proyek wajib diisi.',
+            'subject.required' => 'Subjek wajib diisi.',
+            'user_id.required' => 'ID Pengguna wajib diisi.',
+            'date.required' => 'Tanggal wajib diisi.',
+            'date.date' => 'Tanggal harus berupa format tanggal yang valid.',
+            'cost.required' => 'Biaya wajib diisi.',
+            'cost.numeric' => 'Biaya harus berupa angka.',
+            'comment.required' => 'Komentar wajib diisi.',
         ];
     }
 }
