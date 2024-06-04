@@ -131,76 +131,76 @@
     </div>
 
     <div class="row ">
-        <div class="col-xl-2 col-sm-6 col-12 text-center mx-auto">
-            <div class="card w-100">
+         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+            <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
-                    <div class="db-widgets justify-content-between align-items-center">
+                    <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
-                            <h6 class="text-dark">Pending/On-Hold</h6>
-                            <div class="db-icon bg-white text-dark border border-dark mx-auto my-2">
-                                <i class="fa fa-exclamation-circle"></i>
-                            </div>
-                            <p>Rp.770.186.331</p>
+                            <h6>Pending/On-Hold</h6>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($pendingonhold, 0, ',', '.') }}</h3>
+                        </div>
+                        <div class="db-icon bg-warning">
+                            <i class="fa fa-wrench"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6 col-12 text-center mx-auto">
-            <div class="card bg-comman w-100">
+        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+            <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
-                    <div class="db-widgets justify-content-center align-items-center">
-                        <div class="db-info mx-auto">
-                            <h6 class="text-dark">Jumlah yang sudah terbayar</h6>
-                            <div class="db-icon bg-white text-dark border border-dark mx-auto my-2">
-                                <i class="fa fa-check-circle"></i>
-                            </div>
-                            <p>Rp.26.070.000</p>
+                    <div class="db-widgets d-flex justify-content-between align-items-center">
+                        <div class="db-info">
+                            <h6>Jumlah yang Sudah Terbayar</h6>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($jumlahyangSudahTerbayar, 0, ',', '.') }}</h3>
+                        </div>
+                        <div class="db-icon bg-success">
+                            <i class="fa fa-check-square"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-2 col-sm-6 col-12 text-center mx-auto">
-            <div class="card bg-comman w-100">
+        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+            <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
-                    <div class="db-widgets justify-content-center align-items-center">
-                        <div class="db-info mx-auto">
-                            <h6 class="text-dark">Jumlah yang belum terbayar</h6>
-                            <div class="db-icon bg-white text-dark border border-dark mx-auto my-2">
-                                <i class="fa fa-times"></i>
-                            </div>
-                            <p>Rp.694.116.331</p>
+                    <div class="db-widgets d-flex justify-content-between align-items-center">
+                        <div class="db-info">
+                            <h6>Jumlah Yang Belum Terbayar</h6>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($jumlahYangBelumTerbayar, 0, ',', '.') }}</h3>
+                        </div>
+                        <div class="db-icon bg-danger">
+                            <i class="fa fa-times"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6 col-12 text-center mx-auto">
-            <div class="card bg-comman w-100">
+        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+            <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
-                    <div class="db-widgets justify-content-center align-items-center">
-                        <div class="db-info mx-auto">
-                            <h6 class="text-dark">Total Project Expense</h6>
-                            <div class="db-icon bg-white text-dark border border-dark mx-auto my-2">
-                                <i class="fa fa-clone"></i>
-                            </div>
-                            <p>Rp.582.164.331</p>
+                    <div class="db-widgets d-flex justify-content-between align-items-center">
+                        <div class="db-info">
+                            <h6>Total Project Expense</h6>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($totalProjectExpense, 0, ',', '.') }}</h3>
+                        </div>
+                        <div class="db-icon bg-secondary">
+                            <i class="fa fa-undo"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-2 col-sm-6 col-12 text-center mx-auto">
-            <div class="card bg-comman w-100">
+        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+            <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
-                    <div class="db-widgets justify-content-center align-items-center">
-                        <div class="db-info mx-auto">
-                            <h6 class="text-dark">Gross Project Profit</h6>
-                            <div class="db-icon bg-white text-dark border border-dark mx-auto my-2">
-                                <i class="feather-dollar-sign"></i>
-                            </div>
-                            <p>Rp.582.164.331</p>
+                    <div class="db-widgets d-flex justify-content-between align-items-center">
+                        <div class="db-info">
+                            <h6>Gross Project Profit</h6>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($grossProjectProfit, 0, ',', '.') }}</h3>
+                        </div>
+                        <div class="db-icon bg-info">
+                            <i class="fa fa-tags"></i>
                         </div>
                     </div>
                 </div>
