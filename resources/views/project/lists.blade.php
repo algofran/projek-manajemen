@@ -41,10 +41,11 @@
 
                 <div class="table-responsive">
                     @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped" id="dataTable3">
                         <thead class="student-thread">
                             <tr>

@@ -155,6 +155,17 @@
                         </div>
                     </div>
                     <div class="table-responsive">
+                        @if (session('success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session('success') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+                        @if (session('error'))
+                        <div class="alert alert-success">
+                            {{ session('error') }}
+                        </div>
+                        @endif
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                             <thead class="student-thread">
                                 <tr>
@@ -217,67 +228,81 @@
                                             </div>
                                             <form action="{{ route('task.update', $task->id) }}" method="post">
                                                 @csrf
-                                            <div class="modal-body">
+                                                <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <input type="hidden" name="project_id" value="{{ $task->project_id }}">
                                                             <div class="form-group">
                                                                 <label>Nama Pekerjaan</label>
-                                                                <input type="text" class="form-control" name="task" required value="{{ $task->task }}">
+                                                                <input type="text" class="form-control @error('task') is-invalid @enderror" name="task"  value="{{ old('task', $task->task) }}">
+                                                                @error('task')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Penanggung jawab</label><br>
-                                                                <select class="form-control form-select" name="user_id">
-                                                                    <option>Pilih Penanggunjawab</option>
+                                                                <label>Penanggung Jawab</label><br>
+                                                                <select class="form-control form-select @error('user_id') is-invalid @enderror" name="user_id">
+                                                                    <option>Pilih Penanggung Jawab</option>
                                                                     @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}"  {{ in_array($employee->id, explode(',', $task->user_id)) ? 'selected' : '' }}>{{ ucwords($employee->firstname.' '.$employee->lastname) }}</option>
+                                                                        <option value="{{ $employee->id }}" {{ in_array($employee->id, explode(',', $task->user_id)) ? 'selected' : '' }}>
+                                                                            {{ ucwords($employee->firstname.' '.$employee->lastname) }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('user_id')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
-                                                            
                                                         </div>
-                                                        
+                                            
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Jadwal Pelaksana</label>
                                                                 <div class="col-md">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="date" class="form-control" placeholder="Mulai" name="date_created" required value="{{ $task->date_created }}">
+                                                                        <input type="date" class="form-control @error('date_created') is-invalid @enderror" name="date_created" required value="{{ old('date_created', $task->date_created) }}">
                                                                         <span class="input-group-text">s/d</span>
-                                                                        <input type="date" class="form-control" placeholder="Selesai" name="due_date" required value="{{ $task->due_date }}">
+                                                                        <input type="date" class="form-control @error('due_date') is-invalid @enderror" name="due_date" required value="{{ old('due_date', $task->due_date) }}">
                                                                     </div>
+                                                                    @error('date_created')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
+                                                                    @error('due_date')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Project Status</label>
                                                                 <div class="border">
-                                                                    <select class="form-control form-select" name="status">
-                                                                        <option value="1" {{ $task->status == 1 ? 'selected' : '' }}>Belum Dikerjakan</option>
-                                                                        <option value="2" {{ $task->status == 2 ? 'selected' : '' }}>Sedang Dikerjakan</option>
-                                                                        <option value="3" {{ $task->status == 3 ? 'selected' : '' }}>Sudah Selesai</option>
+                                                                    <select class="form-control form-select @error('status') is-invalid @enderror" name="status">
+                                                                        <option value="1" {{ old('status', $task->status) == 1 ? 'selected' : '' }}>Belum Dikerjakan</option>
+                                                                        <option value="2" {{ old('status', $task->status) == 2 ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                                                                        <option value="3" {{ old('status', $task->status) == 3 ? 'selected' : '' }}>Sudah Selesai</option>
                                                                     </select>
+                                                                    @error('status')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Keterangan</label>
-                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark" name="description" required>{{ $task->description }}</textarea>
+                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark @error('description') is-invalid @enderror" name="description" required>{{ old('description', $task->description) }}</textarea>
+                                                        @error('description')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
-                                        </div>
-                                        
-                    
-                                        <div class="modal-footer">
-                                            <div class="bank-details-btn">
-                
-                                                <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
-                                                    
-                                                </a>
-                                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
+                                                </div>
+                                            
+                                                <div class="modal-footer">
+                                                    <div class="bank-details-btn">
+                                                        <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
+                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </form>
                                 </div>  
                                 @endforeach
                         </table>
@@ -299,6 +324,18 @@
                         </div>
                     </div>
                     <div class="table-responsive">
+                        @if (session('success_pengeluaran'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+                        @if (session('error'))
+                        <div class="alert alert-success">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                             <thead class="student-thread">
                                 
@@ -347,75 +384,77 @@
                                         <form action="{{ route('pengeluaran.update', $activity->id) }}" method="post">
                                             @csrf
                                             {{-- @method('PATCH') --}}
-                                        <div class="modal-body">
+                                            <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <input type="hidden" name="project_id" value="{{ $activity->project_id }}">
                                                         <div class="form-group">
                                                             <label>Project Status</label>
                                                             <div class="border">
-                                                                <select class="form-control form-select" name="subject">
+                                                                <select class="form-control form-select @error('subject') is-invalid @enderror" name="subject">
                                                                     @foreach($subjectOptions as $option)
-                                                                    <option value="{{ $option }}" {{ $activity->subject == $option ? 'selected' : '' }}>{{ $option }}</option>
+                                                                        <option value="{{ $option }}" {{ $activity->subject == $option ? 'selected' : '' }}>{{ $option }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('subject')
+                                                                    <span class="invalid-feedback">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
-                                                            @error('subject')
-                                                            <span class="alert alert-danger">{{ $message }}</span>
-                                                            @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nama Pengguna</label>
-                                                            <select class="form-control form-select" name="user_id">
+                                                            <select class="form-control form-select @error('user_id') is-invalid @enderror" name="user_id">
                                                                 <option>Pilih Pengguna</option>
                                                                 @foreach ($employees as $employee)
-                                                                <option value="{{ $employee->id }}"  {{ in_array($employee->id, explode(',', $activity->user_id)) ? 'selected' : '' }}>{{ ucwords($employee->firstname.' '.$employee->lastname) }}</option>
+                                                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, explode(',', $activity->user_id)) ? 'selected' : '' }}>
+                                                                        {{ ucwords($employee->firstname.' '.$employee->lastname) }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                             @error('user_id')
-    <span class="alert alert-danger">>{{ $message }}</span>
-    @enderror
+                                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
-                                                    
+                                        
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Tanggal</label>
                                                             <div class="col-md">
                                                                 <div class="input-group mb-3">
-                                                                    <input type="date" class="form-control" name="date" value="{{ $activity->date }}" required>
+                                                                    <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date', $activity->date) }}" required>
                                                                 </div>
+                                                                @error('date')
+                                                                    <span class="invalid-feedback">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
-                                                            @error('date')
-    <span class="alert alert-danger">{{ $message }}</span>
-    @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Activity Cost</label>
-                                                            <input type="number" class="form-control" name="cost" value="{{ $activity->cost }}" required>
+                                                            <input type="number" class="form-control @error('cost') is-invalid @enderror" name="cost" value="{{ old('cost', $activity->cost) }}" required>
+                                                            @error('cost')
+                                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
+                                        
                                                     <div class="form-group">
                                                         <label>Keterangan</label>
-                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark" name="comment" required value="comment">{{ $activity->comment }}</textarea>
+                                                        <textarea rows="5" cols="5" class="form-control rounded border border-dark @error('comment') is-invalid @enderror" name="comment" required>{{ old('comment', $activity->comment) }}</textarea>
                                                         @error('comment')
-                                                        <span class="alert alert-danger">{{ $message }}</span>
+                                                            <span class="invalid-feedback">{{ $message }}</span>
                                                         @enderror
                                                     </div>
-                                    </div>
-                                    
-                
-                                    <div class="modal-footer">
-                                        <div class="bank-details-btn">
-            
-                                            <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
-                                                
-                                            </a>
-                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="modal-footer">
+                                                <div class="bank-details-btn">
+                                                    <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
+                                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </form>
                             </div>  
                             @endforeach
                         </table>

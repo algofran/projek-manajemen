@@ -43,30 +43,18 @@ class PenjualanController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(AddPenjualanRequest $request, $id)
     {
-        $request->validate([
-            'tgl' => 'nullable|date',
-            'pembeli' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:255',
-            'beli' => 'nullable|numeric',
-            'jual' => 'nullable|numeric',
-            'status' => 'nullable|integer',
-            'user' => 'nullable|integer',
-        ]);
 
-        $penjualan = Sales::findOrFail($id);
-        $penjualan->update([
-            'tgl' => $request->input('tgl'),
-            'pembeli' => $request->input('pembeli'),
-            'keterangan' => $request->input('keterangan'),
-            'beli' =>  $request->input('beli'),
-            'jual' => $request->input('jual'),
-            'status' => $request->input('status'),
-            'user' => $request->input('user'),
-        ]);
+        $data = Sales::findOrFail($id);
 
-        return redirect()->route('list_penjualan')->with('success', 'Telkom Akses berhasil diperbarui!');
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
+
+        return redirect()->back()->with('success', 'Penjualan berhasil diperbarui!');
     }
 
     public function downloadExel()

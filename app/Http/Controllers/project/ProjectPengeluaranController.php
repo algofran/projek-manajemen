@@ -61,22 +61,17 @@ class ProjectPengeluaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddProjectPengeluranRequest $request, $id)
     {
-        //dd($request);
+        $data = ProjectAktivitis::findOrFail($id);
 
-        // Jika validasi gagal, kembali ke form dengan pesan kesalahan
-        $pengeluaran = ProjectAktivitis::findOrFail($id);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
-        $pengeluaran->update([
-            'project_id' => $request->input('project_id'),
-            'comment' => $request->input('comment'),
-            'subject' => $request->input('subject'),
-            'user_id' => $request->input('user_id'),
-            'date' => $request->input('date'),
-            'cost' => $request->input('cost'),
-        ]);
-        return redirect()->back()->with('success', 'Pengeluaran berhasil diperbarui!');
+        return redirect()->back()->with('success_pengeluaran', 'Pengeluaran berhasil diperbarui!');
     }
 
 

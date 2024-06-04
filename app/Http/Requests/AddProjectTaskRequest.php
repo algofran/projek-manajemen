@@ -25,7 +25,7 @@ class AddProjectTaskRequest extends FormRequest
             'project_id' => 'required|integer|exists:projects,id',
             'task' => 'required|string|max:200',
             'description' => 'required|string',
-            'status' => 'required|integer|in:0,1,2', // Assuming status can be 0, 1, or 2
+            'status' => 'required|integer|in:1,2,3', // Assuming status can be 0, 1, or 2
             'date_created' => 'nullable|date',
             'due_date' => 'nullable|date|after_or_equal:date_created',
             'user_id' => 'required|exists:users,id',
