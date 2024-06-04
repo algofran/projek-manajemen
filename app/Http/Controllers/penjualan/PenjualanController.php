@@ -83,7 +83,7 @@ class PenjualanController extends Controller
 
             public function view(): View
             {
-                return view('penjualan.cetak_keuangan', [
+                return view('Penjualan.cetak_keuangan', [
                     'i' => $this->i,
                     'pay' => $this->pay,
                     'sales' => $this->sales,
