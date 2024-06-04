@@ -40,22 +40,22 @@ class AddProjectTaskRequest extends FormRequest
     public function messages()
     {
         return [
-            'project_id.required' => 'Project ID is required',
-            'project_id.integer' => 'Project ID must be an integer',
-            'project_id.exists' => 'The selected project ID is invalid',
-            'task.required' => 'Task is required',
-            'task.string' => 'Task must be a string',
-            'task.max' => 'Task may not be greater than 200 characters',
-            'description.required' => 'Description is required',
-            'description.string' => 'Description must be a string',
-            'status.required' => 'Status is required',
-            'status.integer' => 'Status must be an integer',
-            'status.in' => 'Status must be 0, 1, or 2',
-            'date_created.date' => 'Date Created must be a valid date',
-            'due_date.date' => 'Due Date must be a valid date',
-            'due_date.after_or_equal' => 'Due Date must be a date after or equal to Date Created',
-            'user_id.required' => 'User ID is required',
-            'user_id.exists' => 'The selected user ID is invalid',
+            'project_id.required' => 'ID proyek wajib diisi',
+            'project_id.integer' => 'ID proyek harus berupa angka',
+            'project_id.exists' => 'ID proyek yang dipilih tidak valid',
+            'task.required' => 'Tugas wajib diisi',
+            'task.string' => 'Tugas harus berupa teks',
+            'task.max' => 'Tugas tidak boleh lebih dari 200 karakter',
+            'description.required' => 'Deskripsi wajib diisi',
+            'description.string' => 'Deskripsi harus berupa teks',
+            'status.required' => 'Status wajib diisi',
+            'status.integer' => 'Status harus berupa angka',
+            'status.in' => 'Status harus bernilai 0, 1, atau 2',
+            'date_created.date' => 'Tanggal dibuat harus berupa tanggal yang valid',
+            'due_date.date' => 'Tanggal jatuh tempo harus berupa tanggal yang valid',
+            'due_date.after_or_equal' => 'Tanggal jatuh tempo harus setelah atau sama dengan tanggal dibuat',
+            'user_id.required' => 'ID pengguna wajib diisi',
+            'user_id.exists' => 'ID pengguna yang dipilih tidak valid',
         ];
     }
 }

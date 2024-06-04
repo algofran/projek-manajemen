@@ -35,18 +35,18 @@ class AddMitraTaskRequest extends FormRequest
     public function messages()
     {
         return [
-            'project_id.required' => 'Project ID is required.',
-            'task.required' => 'Task name is required.',
-            'task.max' => 'Task name may not be greater than 200 characters.',
-            'user_id.required' => 'Penanggung jawab is required.',
-            'date_created.required' => 'Jadwal Pelaksana start date is required.',
-            'date_created.date' => 'Jadwal Pelaksana start date must be a valid date format.',
-            'due_date.required' => 'Jadwal Pelaksana due date is required.',
-            'due_date.date' => 'Jadwal Pelaksana due date must be a valid date format.',
-            'due_date.after_or_equal' => 'Jadwal Pelaksana due date must be after or equal to start date.',
-            'status.required' => 'Project status is required.',
-            'status.in' => 'Invalid project status.',
-            'description.required' => 'Keterangan is required.',
+            'project_id.required' => 'ID Proyek wajib diisi.',
+            'task.required' => 'Nama tugas wajib diisi.',
+            'task.max' => 'Nama tugas tidak boleh lebih dari 200 karakter.',
+            'user_id.required' => 'Penanggung jawab wajib diisi.',
+            'date_created.required' => 'Tanggal mulai pelaksanaan wajib diisi.',
+            'date_created.date' => 'Tanggal mulai pelaksanaan harus berupa format tanggal yang valid.',
+            'due_date.required' => 'Tanggal jatuh tempo pelaksanaan wajib diisi.',
+            'due_date.date' => 'Tanggal jatuh tempo pelaksanaan harus berupa format tanggal yang valid.',
+            'due_date.after_or_equal' => 'Tanggal jatuh tempo pelaksanaan harus setelah atau sama dengan tanggal mulai pelaksanaan.',
+            'status.required' => 'Status proyek wajib diisi.',
+            'status.in' => 'Status proyek tidak valid.',
+            'description.required' => 'Keterangan wajib diisi.',
         ];
     }
 }

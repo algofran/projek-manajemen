@@ -40,21 +40,21 @@ class AddPenjualanRequest extends FormRequest
     public function messages()
     {
         return [
-            'tgl.required' => 'Tanggal is required.',
-            'tgl.date' => 'Tanggal must be a valid date format.',
-            'pembeli.required' => 'Nama Pembeli is required.',
-            'pembeli.string' => 'Nama Pembeli must be a string.',
-            'pembeli.max' => 'Nama Pembeli may not be greater than :max characters.',
-            'keterangan.required' => 'Keterangan is required.',
-            'keterangan.string' => 'Keterangan must be a string.',
-            'beli.required' => 'Harga Pembelian is required.',
-            'beli.numeric' => 'Harga Pembelian must be a number.',
-            'jual.required' => 'Harga Penjualan is required.',
-            'jual.numeric' => 'Harga Penjualan must be a number.',
-            'user.required' => 'Nama Pengguna is required.',
-            'user.exists' => 'Nama Pengguna must be a valid user.',
-            'status.required' => 'Status Pembayaran is required.',
-            'status.in' => 'Status Pembayaran must be either 0 or 1.',
+            'tgl.required' => 'Tanggal wajib diisi.',
+            'tgl.date' => 'Tanggal harus berupa format tanggal yang valid.',
+            'pembeli.required' => 'Nama Pembeli wajib diisi.',
+            'pembeli.string' => 'Nama Pembeli harus berupa teks.',
+            'pembeli.max' => 'Nama Pembeli tidak boleh lebih dari :max karakter.',
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.string' => 'Keterangan harus berupa teks.',
+            'beli.required' => 'Harga Pembelian wajib diisi.',
+            'beli.numeric' => 'Harga Pembelian harus berupa angka.',
+            'jual.required' => 'Harga Penjualan wajib diisi.',
+            'jual.numeric' => 'Harga Penjualan harus berupa angka.',
+            'user.required' => 'Nama Pengguna wajib diisi.',
+            'user.exists' => 'Nama Pengguna harus berupa pengguna yang valid.',
+            'status.required' => 'Status Pembayaran wajib diisi.',
+            'status.in' => 'Status Pembayaran harus bernilai 0 atau 1.',
         ];
     }
 }
