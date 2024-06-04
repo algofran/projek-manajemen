@@ -137,7 +137,7 @@
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
                             <h6>Pending/On-Hold</h6>
-                            <h3 class="text-bolder">{{ $pendingonhold }}</h3>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($pendingonhold, 0, ',', '.') }}</h3>
                         </div>
                         <div class="db-icon bg-warning">
                             <i class="fa fa-wrench"></i>
@@ -152,7 +152,7 @@
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
                             <h6>Jumlah yang Sudah Terbayar</h6>
-                            <h3>{{ $jumlahyangSudahTerbayar }}</h3>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($jumlahyangSudahTerbayar, 0, ',', '.') }}</h3>
                         </div>
                         <div class="db-icon bg-success">
                             <i class="fa fa-check-square"></i>
@@ -167,7 +167,7 @@
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
                             <h6>Jumlah Yang Belum Terbayar</h6>
-                            <h3>{{ $jumlahYangBelumTerbayar}}</h3>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($jumlahYangBelumTerbayar, 0, ',', '.') }}</h3>
                         </div>
                         <div class="db-icon bg-danger">
                             <i class="fa fa-times"></i>
@@ -182,7 +182,7 @@
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
                             <h6>Total Project Expense</h6>
-                            <h3>{{ $totalProjectExpense }}</h3>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($totalProjectExpense, 0, ',', '.') }}</h3>
                         </div>
                         <div class="db-icon bg-secondary">
                             <i class="fa fa-undo"></i>
@@ -197,7 +197,7 @@
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
                             <h6>Gross Project Profit</h6>
-                            <h3>{{ $grossProjectProfit }}</h3>
+                            <h3 class="text-bolder">{{ 'Rp.'. number_format($grossProjectProfit, 0, ',', '.') }}</h3>
                         </div>
                         <div class="db-icon bg-info">
                             <i class="fa fa-tags"></i>
