@@ -61,18 +61,16 @@ class PengeluaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddMitraPengeluaranRequest $request, $id)
     {
 
-        $iconnet = InstitutePengeluaran::findOrFail($id);
-        $iconnet->update([
-            'project_id' => $request->input('project_id'),
-            'subject' => $request->input('subject'),
-            'user_id' => $request->input('user_id'),
-            'date' => $request->input('date'),
-            'cost' => $request->input('cost'),
-            'comment' => $request->input('comment'),
-        ]);
+        $data = InstitutePengeluaran::findOrFail($id);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
         return redirect()->back()->with('success', 'Pengeluaran berhasil diperbarui!');
     }

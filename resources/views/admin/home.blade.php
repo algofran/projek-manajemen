@@ -72,17 +72,17 @@
                         <div class="col-6">
                             <h5 class="card-title">Revenue</h5>
                         </div>
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <ul class="chart-list-out">
-                                <li><span class="circle circle-green"></span>Income</li>
-                                <li><span class="circle-blue"></span>Expenses</li>
+                                <li><span class="circle-"></span>Pengeluaran</li>
+                                <li><span class="circle-blue"></span>Pendapatan</li>
                                 <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="apexcharts-area"></div>
+                    <div id="chart"></div>
                 </div>
             </div>
         </div>

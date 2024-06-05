@@ -66,23 +66,7 @@
                 { data: 'phone', name: 'phone' },
                 { data: 'role', name: 'role' },
                 { data: 'status', name: 'status' },
-                { data: 'since', name: 'since' },
-                {
-                  data: 'id', 
-                  name: 'action',
-                  orderable: false,
-                  searchable: false,
-                  render: function(data, type, row, meta){
-                      return `
-                      <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.${data} }}" class="btn btn-sm bg-danger-light me-2">
-                     <i class="feather-edit"></i>
-                     </a>
-                    <a href="{{ route('_del.user', ['id' => ${data}]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this User?')">
-                    <i class="feather-trash-2"></i>
-                    </a>
-                      `;
-                  }
-              }
+                { data: 'since', name: 'since' }
             ]
         });
     });

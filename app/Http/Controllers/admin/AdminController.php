@@ -23,14 +23,26 @@ class AdminController extends Controller
         $finish = ProjectList::where('status', 3)->count() + InstituteProyeks::where('status', 2)->count();
 
         $pendingonhold = ProjectList::where('payment_status', 1)->sum('payment') + InstituteProyeks::where('status', 1)->sum('tagihan'); // Ganti 'nilai' dengan nama kolom yang ingin dijumlahkan
-        $jumlahyangSudahTerbayar = ProjectList::where('payment_status', 3)->sum('payment') + InstituteProyeks::where('status', 3)->sum('tagihan') + Sales::where('status', 1)->sum('jual'); 
-        $jumlahYangBelumTerbayar = ProjectList::where('payment_status', 1)->sum('payment') + InstituteProyeks::where('status', 1)->sum('tagihan') + Sales::where('status', 0)->sum('jual'); 
-        $totalProjectExpense = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('jual');
-        $grossProjectProfit = ProjectList::where('payment_status', 3)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') - InstituteProyeks::where('status', 1)->sum('tagihan') + InstituteProyeks::where('status', 3)->sum('tagihan') + InstitutePengeluaran::sum('cost') - Sales::where('status', 1)->sum('jual') + Sales::where('status', 0)->sum('jual') +Sales::sum('jual');
+        $jumlahyangSudahTerbayar = ProjectList::where('payment_status', 3)->sum('payment') + InstituteProyeks::where('status', 3)->sum('tagihan') + Sales::where('status', 1)->sum('jual');
+        $jumlahYangBelumTerbayar = ProjectList::where('payment_status', 1)->sum('payment') + InstituteProyeks::where('status', 1)->sum('tagihan') + Sales::where('status', 0)->sum('jual');
+        $totalProjectExpense = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('beli');
+        $grossProjectProfit = ProjectList::where('payment_status', 3)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') - InstituteProyeks::where('status', 1)->sum('tagihan') + InstituteProyeks::where('status', 3)->sum('tagihan') + InstitutePengeluaran::sum('cost') - Sales::where('status', 1)->sum('jual') + Sales::where('status', 0)->sum('jual') + Sales::sum('jual');
         // $grossProjectProfit = ProjectList::where('payment_status', 3)->sum('payment') + InstituteProyeks::where('status', 3)->sum('tagihan') + Sales::where('status', 1)->sum('jual') - ProjectList::where('payment_status', 1)->sum('payment') + InstituteProyeks::where('status', 1)->sum('tagihan') + Sales::where('status', 0)->sum('jual') ; 
         // dd($pendingonhold);
 
-        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish','pendingonhold','jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar','totalProjectExpense', 'grossProjectProfit'));
+        $Pengeluaran =  ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('beli');
+        $Pendapatan = ProjectList::sum('payment') + InstituteProyeks::sum('tagihan') + Sales::sum('jual');
+        $pendapatanbersih = $Pendapatan - $Pengeluaran;
+
+        $currentYear = date('Y');
+        // Inisialisasi array tahun
+        $years = [];
+        // Mengisi array dari tahun 1990 hingga tahun saat ini
+        for ($year = 1990; $year <= $currentYear; $year++) {
+            $years[] = $year;
+        }
+
+        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish', 'pendingonhold', 'jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar', 'totalProjectExpense', 'grossProjectProfit', 'Pendapatan', 'Pengeluaran', 'years'));
     }
 
     // public function list()

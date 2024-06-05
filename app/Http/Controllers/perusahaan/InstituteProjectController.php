@@ -167,36 +167,18 @@ class InstituteProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddMitraProjekRequest $request, $id)
     {
-        $request->validate([
-            'PA' => 'nullable|integer',
-            'target' => 'nullable|integer',
-            'tagihan' => 'nullable|numeric',
-            'status' => 'nullable|integer',
-            'payment' => 'nullable|integer',
-            'manager_id' => 'nullable|integer',
-        ]);
+        $data = InstituteProyeks::findOrFail($id);
 
-        $projekmitra = InstituteProyeks::findOrFail($id);
-        $projekmitra->update([
-            'id_inst' => $request->input('id_inst'),
-            'periode' => $request->input('periode'),
-            'paket' => $request->input('paket'),
-            'sektor' => $request->input('sektor'),
-            'keterangan' => $request->input('keterangan'),
-            'PA' =>  $request->input('PA'),
-            'target' => $request->input('target'),
-            'tagihan' => $request->input('tagihan'),
-            'start_date' => $projekmitra->start_date,
-            'end_date' => $request->input('end_date'),
-            'status' => $request->input('status'),
-            'payment' => $request->input('payment'),
-            'bank' => $request->input('bank'),
-            'manager_id' => $request->input('manager_id'),
-        ]);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
-        if ($projekmitra->save()) {
+
+        if ($data->update()) {
             return redirect()->route('list.proyeks', ['id' => $request->input('id_inst')])->with('success', 'proyek berhasil di Edit!');
         } else {
             $errorMessage = 'Gagal. Silakan coba lagi.';

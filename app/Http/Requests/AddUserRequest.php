@@ -24,8 +24,8 @@ class AddUserRequest extends FormRequest
         return [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users,username,' . $this->route('id'),
+            'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('id'),
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|string|max:255',
             // 'type' => 'required|in:0,1,2',

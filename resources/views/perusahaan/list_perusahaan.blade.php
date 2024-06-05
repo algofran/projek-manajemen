@@ -64,7 +64,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div class="form-header text-start mb-0">
-                                                        <h4 class="mb-0">Add item</h4>
+                                                        <h4 class="mb-0">Edit item</h4>
                                                     </div>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -72,27 +72,44 @@
                                                 </div>
                                                 <form action="{{ route('_edit.mitra', $item->id) }}" method="post">
                                                     @csrf
-                                        
-                                                <div class="modal-body">  
-                                                            <div class="col-md-10">
-                                                                <input type="" class="form-control" placeholder="" value="{{ old('name',$data->id_inst) }}" name="id_inst" required="">
-                                                            </div>
+                    
+                                                    <div class="modal-body">  
+                                                        <div class="col-md-10">
+                                                            <input type="" class="form-control @error('id_inst') is-invalid @enderror" placeholder="" value="{{ old('id_inst',$data->id_inst) }}" name="id_inst" 
+                                                            ="">
+                                                            @error('id_inst')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
                                                     
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-md-2">Mitra</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" name="mitra" class="form-control" value="{{ old('mitras', $data->mitra) }}" placeholder="" required="">
+                                                                <input type="text" name="mitra" class="form-control @error('mitra') is-invalid @enderror" value="{{ old('mitra', $data->mitra) }}" placeholder="" 
+                                                                ="">
+                                                                @error('mitra')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    {{ $message }}
+                                                                    </span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-md-2">Keterangan</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" name="keterangan" class="form-control" value="{{ old('keteragan', $data->keterangan) }}" placeholder="Ketarangan..." required="">
+                                                                <input type="text" name="keterangan" class="form-control @error('keteragan') is-invalid @enderror" value="{{ old('keteragan', $data->keterangan) }}" placeholder="Ketarangan..." 
+                                                                ="">
+                                                                @error('keteragan')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                             </div>
                                                         </div>
-                                                        
+                                                    </div>
                                                     
-                                                </div>
                             
                                                 <div class="modal-footer">
                                                     <div class="bank-details-btn">
@@ -131,108 +148,125 @@
                                     </div>
                                 </td>
                             </tr>
-                                <div class="modal custom-modal fade bank-details" id="{{ 'Edititem'.$item->id }}" role="dialog">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="form-header text-start mb-0">
-                                                    <h4 class="mb-0">Edit Perusahaan</h4>
-                                                </div>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                            <div class="modal custom-modal fade bank-details" id="{{ 'Edititem'.$item->id }}" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="form-header text-start mb-0">
+                                                <h4 class="mb-0">Edit Perusahaan</h4>
                                             </div>
-                                            <form action="{{ route('_update.institute', $item->id) }}" method="post">
-                                                @csrf
-                                    
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('_update.institute', $item->id) }}" method="post">
+                                            @csrf
                                             <div class="modal-body">
-                                                
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Name</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" class="form-control" placeholder="" value="{{ old('name',$item->name) }}" name="name" required="">
-                                                        </div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Name</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="" value="{{ old('name',$item->name) }}" name="name" >
+                                                        @error('name')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Id Institute</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" name="institute" class="form-control" value="{{ old('institute', $item->institute) }}"placeholder="" required="">
-                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Id Institute</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="institute" class="form-control @error('institute') is-invalid @enderror" value="{{ old('institute', $item->institute) }}" >
+                                                        @error('institute')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Alamat</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $item->alamat) }}" placeholder="Jumlah Aktivasi (alamat)..." required="">
-                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Alamat</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat', $item->alamat) }}" placeholder="Jumlah Aktivasi (alamat)..." >
+                                                        @error('alamat')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Keterangan</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" name="keterangan" class="form-control" value="{{ old('keteragan', $item->keterangan) }}" placeholder="Ketarangan..." required="">
-                                                        </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Keterangan</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan', $item->keterangan) }}" placeholder="Keterangan..." >
+                                                        @error('keterangan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
-                                                    
-                                                   
+                                                </div>
                                             </div>
-                        
                                             <div class="modal-footer">
                                                 <div class="bank-details-btn">
-                    
-                                                    <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>
-                                                        
-                                                    </a>
+                                                    <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
                                                     <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
                                                 </div>
                                             </div>
                                         </form>
-                                        </div>
-                                    </div>
-                                </div>  
-                                <div class="modal custom-modal fade bank-details" id="{{ 'addmitra'.$item->id }}" role="dialog">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="form-header text-start mb-0">
-                                                    <h4 class="mb-0">Add Mitra</h4>
-                                                </div>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form action="{{ route('_add.mitra') }}" method="post">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="id_inst" value="{{ old('id_inst', $item->id) }}">
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Mitra</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" name="mitra" class="form-control @error('mitra') is-invalid @enderror" value="{{ old('mitra') }}" required>
-                                                            @error('mitra')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-form-label col-md-2">Keterangan</label>
-                                                        <div class="col-md-10">
-                                                            <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}">
-                                                            @error('keterangan')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                
-                                                <div class="modal-footer">
-                                                    <div class="bank-details-btn">
-                                                        <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
-                                                        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
+                            </div>  
+                            
+                            <div class="modal custom-modal fade bank-details" id="{{ 'addmitra'.$item->id }}" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="form-header text-start mb-0">
+                                                <h4 class="mb-0">Add Mitra</h4>
+                                            </div>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('_add.mitra') }}" method="post">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id_inst" value="{{ old('id_inst', $item->id) }}">
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Mitra</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="mitra" class="form-control @error('mitra') is-invalid @enderror" value="{{ old('mitra') }}" >
+                                                        @error('mitra')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-2">Keterangan</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}">
+                                                        @error('keterangan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="bank-details-btn">
+                                                    <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
+                                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             @endforeach
 
                         </tbody>
@@ -259,7 +293,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Nama</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" 
+                                    >
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -268,7 +303,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Id Institute</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="institute" class="form-control @error('institute') is-invalid @enderror" value="{{ old('institute') }}" required>
+                                    <input type="text" name="institute" class="form-control @error('institute') is-invalid @enderror" value="{{ old('institute') }}" 
+                                    >
                                     @error('institute')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -277,7 +313,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Alamat</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" required>
+                                    <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" 
+                                    >
                                     @error('alamat')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -286,7 +323,8 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2">Keterangan</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" required>
+                                    <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" 
+                                    >
                                     @error('keterangan')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

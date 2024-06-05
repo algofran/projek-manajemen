@@ -2,7 +2,7 @@
 
 @section('content')
     <section>
-        <div class="page-header min-vh-100" style="background-color: rgb(140, 188, 206)">
+        <div class="page-header min-vh-100" style="background-color: rgb(191, 238, 255)">
             <div class="container">
                 <div class="row">
                     <!-- Login Form -->
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <!-- End of  Login Form -->
-                        <p class="text-secondary text-center text-white">
+                        <p class="text-secondary text-center">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
                             </script> Andi Amalia Ramadani

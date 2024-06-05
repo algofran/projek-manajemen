@@ -53,14 +53,15 @@ class InstituteDataController extends Controller
         //
     }
 
-    public function edit(Request $request, $id)
+    public function edit(AddMitraRequest $request, $id)
     {
-        $institute = InstituteMitra::findOrFail($id);
-        $institute->update([
-            'id_inst' => $request->input('id_inst'),
-            'mitra' => $request->input('mitra'),
-            'keterangan' => $request->input('keterangan'),
-        ]);
+        $data = InstituteMitra::findOrFail($id);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
         return redirect()->back()->with('success', 'Institute berhasil diperbarui!');
     }
@@ -68,22 +69,15 @@ class InstituteDataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddPerusahaanRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'institute' => 'required',
-            'alamat' => 'required',
-            'keterangan' => 'required|max:255',
-        ]);
+        $data = InstituteList::findOrFail($id);
 
-        $institute = InstituteList::findOrFail($id);
-        $institute->update([
-            'name' => $request->input('name'),
-            'institute' => $request->input('institute'),
-            'alamat' => $request->input('alamat'),
-            'keterangan' => $request->input('keterangan'),
-        ]);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
         return redirect()->back()->with('success', 'Institute berhasil diperbarui!');
     }
