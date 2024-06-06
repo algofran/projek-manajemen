@@ -9,13 +9,14 @@ use App\Models\ProjectAktivitis;
 use App\Models\ProjectList;
 use App\Models\Sales;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($year = null)
     {
         $totalprojek = ProjectList::count() + InstituteProyeks::count();
         $pending = ProjectList::where('status', 1)->count() + InstituteProyeks::where('status', 0)->count();
@@ -27,6 +28,8 @@ class AdminController extends Controller
         $jumlahYangBelumTerbayar = ProjectList::where('payment_status', 0)->sum('payment') + InstituteProyeks::where('status', 0)->sum('tagihan') + Sales::where('status', 0)->sum('jual'); 
         $totalProjectExpense = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('jual');
         $grossProjectProfit = ProjectList::where('payment_status', 3)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') - InstituteProyeks::where('status', 1)->sum('tagihan') + InstituteProyeks::where('status', 3)->sum('tagihan') + InstitutePengeluaran::sum('cost') - Sales::where('status', 1)->sum('jual') + Sales::where('status', 0)->sum('jual') +Sales::sum('jual');
+        
+        // $tahun =listproyeks::whereYear('created_at', now()->2024)->get();
 
         return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish','pendingonhold','jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar','totalProjectExpense', 'grossProjectProfit'));
     }

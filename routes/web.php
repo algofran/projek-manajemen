@@ -41,6 +41,7 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\admin',
     'prefix'     => '/',
 ], function () {
+    Route::get('/dashboard/{year?}', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/getUser', [UserController::class, 'getUser'])->name('admin.dataTable.getUser');
     Route::get('/', [AdminController::class, 'index'])->name('home');
     Route::get('/User_list', [UserController::class, 'index'])->name('user');

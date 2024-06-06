@@ -1,7 +1,74 @@
 @extends('layouts.layout')
 @section('content')
 <div class="div">
+    <div class="container">
+        <h3>Admin Dashboard</h3>
+        <!-- Tambahkan konten dashboard di sini -->
+    </div>
+    <div class="col">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Tahun
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a class="dropdown-item" href="">2024</a></li>
+              <li><a class="dropdown-item" href="">2023</a></li>
+              <li><a class="dropdown-item" href="">2022</a></li>
+              <li><a class="dropdown-item" href="">2021</a></li>
+              <li><a class="dropdown-item" href="">2020</a></li>
+              <li><a class="dropdown-item" href="">2019</a></li>
+              <li><a class="dropdown-item" href="">2018</a></li>
+              <li><a class="dropdown-item" href="">2017</a></li>
+              <li><a class="dropdown-item" href="">2016</a></li>
+              <li><a class="dropdown-item" href="">2015</a></li>
+              <li><a class="dropdown-item" href="">2014</a></li>
+              <li><a class="dropdown-item" href="">2013</a></li>
+              <li><a class="dropdown-item" href="">2012 </a></li>
+              {{-- <li><a class="dropdown-item" href="">{{ $item->tahun }}</a></li> --}}
+          </ul>
+        </div>
+    </div>
+    {{-- <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2024]) }}">2024</a></li>
+              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2023]) }}">2023</a></li>
+              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2022]) }}">2022</a></li>
+              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2021]) }}">2021</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2020]) }}">2020</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2019]) }}">2019</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2018]) }}">2018</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2017]) }}">2017</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2016]) }}">2016</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2015]) }}">2015</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2014]) }}">2014</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2013]) }}">2013</a></li>
+              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2012]) }}">2012 </a></li> --}}
+    {{-- <div class="btn-group mt-3">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tahun
+        </button>
+        <div class="dropdown-menu mt-3">
+            <a class="dropdown-item" href="#">2022</a>
+            <a class="dropdown-item" href="#">2021</a>
+            <a class="dropdown-item" href="#">2020</a>
+            <!-- Tambahkan opsi tahun lainnya di sini -->
+        </div>
+    </div> --}}
     <div class="row">
+        {{-- <div class="mb-4">
+            <div class="dropdown">
+                <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Status
+                    @if ($status == 'Pending' || $status == 'On-Progress' || $status == 'Finish')
+                        {{ $status }}
+                    @endif
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a class="dropdown-item" href="{{ route('project.lists') }}">All</a></li>
+                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'Pending']) }}">Pending</a></li>
+                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'On-Progress']) }}">On Progress</a></li>
+                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'Finish']) }}">Finish</a></li>
+                </ul>
+            </div> 
+        </div> --}}
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
             <div class="card bg-comman w-100">
                 <div class="card-body">
@@ -130,6 +197,29 @@
         </div>
     </div>
 
+    <div class="col">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Tahun
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a class="dropdown-item" href="">2024</a></li>
+              <li><a class="dropdown-item" href="">2023</a></li>
+              <li><a class="dropdown-item" href="">2022</a></li>
+              <li><a class="dropdown-item" href="">2021</a></li>
+              <li><a class="dropdown-item" href="">2020</a></li>
+              <li><a class="dropdown-item" href="">2019</a></li>
+              <li><a class="dropdown-item" href="">2018</a></li>
+              <li><a class="dropdown-item" href="">2017</a></li>
+              <li><a class="dropdown-item" href="">2016</a></li>
+              <li><a class="dropdown-item" href="">2015</a></li>
+              <li><a class="dropdown-item" href="">2014</a></li>
+              <li><a class="dropdown-item" href="">2013</a></li>
+              <li><a class="dropdown-item" href="">2012 </a></li>
+              {{-- <li><a class="dropdown-item" href="">{{ $item->tahun }}</a></li> --}}
+          </ul>
+        </div>
+    </div>
     <div class="row ">
          <div class="col-xl-4 col-sm-8 col-14 mx-auto">
             <div class="card bg-comman w-100 equal-height">
