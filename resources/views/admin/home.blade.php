@@ -249,7 +249,7 @@
             enabled: false
         },
         stroke: {
-            curve: 'straight'
+            curve: 'smooth'
         },
         title: {
             text: 'Pendapatan Perusahaan Perbulan',
