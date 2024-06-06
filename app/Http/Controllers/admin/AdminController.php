@@ -8,6 +8,7 @@ use App\Models\InstituteProyeks;
 use App\Models\ProjectAktivitis;
 use App\Models\ProjectList;
 use App\Models\Sales;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -18,20 +19,86 @@ class AdminController extends Controller
      */
     public function index($year = null)
     {
-        $totalprojek = ProjectList::count() + InstituteProyeks::count();
-        $pending = ProjectList::where('status', 1)->count() + InstituteProyeks::where('status', 0)->count();
-        $onprogress = ProjectList::where('status', 2)->count() + InstituteProyeks::where('status', 1)->count();
-        $finish = ProjectList::where('status', 3)->count() + InstituteProyeks::where('status', 2)->count();
-
-        $pendingonhold = ProjectList::where('payment_status', 1)->sum('payment') + InstituteProyeks::where('status', 1)->sum('tagihan'); // Ganti 'nilai' dengan nama kolom yang ingin dijumlahkan
-        $jumlahyangSudahTerbayar = ProjectList::where('payment_status', 3)->sum('payment') + InstituteProyeks::where('status', 3)->sum('tagihan') + Sales::where('status', 1)->sum('jual'); 
-        $jumlahYangBelumTerbayar = ProjectList::where('payment_status', 0)->sum('payment') + InstituteProyeks::where('status', 0)->sum('tagihan') + Sales::where('status', 0)->sum('jual'); 
-        $totalProjectExpense = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('jual');
-        $grossProjectProfit = ProjectList::where('payment_status', 3)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') + ProjectList::where('payment_status', 1)->sum('payment') - InstituteProyeks::where('status', 1)->sum('tagihan') + InstituteProyeks::where('status', 3)->sum('tagihan') + InstitutePengeluaran::sum('cost') - Sales::where('status', 1)->sum('jual') + Sales::where('status', 0)->sum('jual') +Sales::sum('jual');
+        // Tahun button filter All
+        $tahun = $year;
+        // Tahun button filter All
         
-        // $tahun =listproyeks::whereYear('created_at', now()->2024)->get();
+        // Dashboard Total Keseluruhan Project
+        $totalprojek = ProjectList::whereYear('start_date', $tahun)->count() + InstituteProyeks::whereYear('start_date', $tahun)->count();
+        $pending = ProjectList::whereYear('start_date', $tahun)->where('status', 1)->count() + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 0)->count();
+        $onprogress = ProjectList::whereYear('start_date', $tahun)->where('status', 2)->count() + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 1)->count();
+        $finish = ProjectList::whereYear('start_date', $tahun)->where('status', 3)->count() + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 2)->count();
+        // Dashboard Total Keseluruhan Project
 
-        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish','pendingonhold','jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar','totalProjectExpense', 'grossProjectProfit'));
+        // Dashboard Total Keuangan Tiap Project
+        $pendingonhold = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 1)->sum('payment') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 1)->sum('tagihan'); // Ganti 'nilai' dengan nama kolom yang ingin dijumlahkan
+        $jumlahyangSudahTerbayar = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 3)->sum('payment') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 2)->sum('tagihan') + Sales::whereYear('tgl', $tahun)->where('status', 1)->sum('jual');
+        $jumlahYangBelumTerbayar = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 1)->sum('payment') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 0)->sum('tagihan') + Sales::whereYear('tgl', $tahun)->where('status', 0)->sum('jual');
+        $totalProjectExpense = ProjectAktivitis::whereYear('date', $tahun)->sum('cost') + InstitutePengeluaran::whereYear('date', $tahun)->sum('cost')  + Sales::whereYear('tgl', $tahun)->sum('beli');
+        $grossProjectProfit = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 1)->sum('payment') + ProjectList::whereYear('start_date', $tahun)->where('payment_status', 3)->sum('payment') + ProjectList::whereYear('start_date', $tahun)->where('payment_status', 1)->sum('payment') - InstituteProyeks::whereYear('start_date', $tahun)->where('status', 0)->sum('tagihan') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 2)->sum('tagihan') + InstitutePengeluaran::whereYear('date', $tahun)->sum('cost') - Sales::whereYear('tgl', $tahun)->where('status', 1)->sum('jual') + Sales::whereYear('tgl', $tahun)->where('status', 0)->sum('jual') + Sales::whereYear('tgl', $tahun)->sum('jual');
+
+        $Pengeluaran =  ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost')  + Sales::sum('beli');
+        $Pendapatan = ProjectList::sum('payment') + InstituteProyeks::sum('tagihan') + Sales::sum('jual');
+        $pendapatanbersih = $Pendapatan - $Pengeluaran;
+        // Dashboard Total Keuangan Tiap Project
+        
+        $bulan = 12;
+
+        $databulan = [];
+        $dataTotalPendapatan = [];
+
+        for ($i = 1; $i <= $bulan; $i++) {
+            $dataTotalPendapatanTelkom[] = InstituteProyeks::where('id_inst', 3)
+                ->whereYear('start_date', $tahun)
+                ->whereMonth('start_date', $i)
+                ->sum('tagihan');
+
+            $dataTotalPendapatanSerpo[] = InstituteProyeks::where('id_inst', 2)
+                ->whereYear('start_date', $tahun)
+                ->whereMonth('start_date', $i)
+                ->sum('tagihan');
+
+            $dataTotalPendapatanIconnet[] = InstituteProyeks::where('id_inst', 1)
+                ->whereYear('start_date', $tahun)
+                ->whereMonth('start_date', $i)
+                ->sum('tagihan');
+
+            $databulan[] = $this->ubahAngkaToBulan($i);
+        }
+
+        // Penyimpanan data total pendapatan dalam array $data
+        $data['dataTotalPendapatanTelkom'] = $dataTotalPendapatanTelkom;
+        $data['dataTotalPendapatanSerpo'] = $dataTotalPendapatanSerpo;
+        $data['dataTotalPendapatanIconnet'] = $dataTotalPendapatanIconnet;
+        $data['databulan'] = $databulan;
+
+        // Konversi data ke format JSON
+        $dataTotalPendapatanTelkomJson = json_encode($data['dataTotalPendapatanTelkom']);
+        $dataTotalPendapatanSerpoJson = json_encode($data['dataTotalPendapatanSerpo']);
+        $dataTotalPendapatanIconnetJson = json_encode($data['dataTotalPendapatanIconnet']);
+        $databulanJson = json_encode($data['databulan']);
+
+        // Rendering view
+        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish', 'pendingonhold', 'jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar', 'totalProjectExpense', 'grossProjectProfit', 'Pendapatan', 'Pengeluaran', 'data', 'dataTotalPendapatanTelkomJson', 'dataTotalPendapatanSerpoJson', 'dataTotalPendapatanIconnetJson', 'databulanJson', 'tahun'));
+    }
+
+    public function ubahAngkaToBulan($bulanAngka)
+    {
+        $bulanArray = [
+            '0' => '', '1' => 'Januari',
+            '2' => 'Februari',
+            '3' => 'Maret',
+            '4' => 'April',
+            '5' => 'Mei',
+            '6' => 'Juni',
+            '7' => 'Juli',
+            '8' => 'Agustus',
+            '9' => 'September',
+            '10' => 'Oktober',
+            '11' => 'Novemebr',
+            '12' => 'Desember',
+        ];
+        return $bulanArray[$bulanAngka + 0];
     }
 
     /**

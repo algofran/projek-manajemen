@@ -70,23 +70,15 @@ class DokumenPertahunController extends Controller
      */
     public function store(AddDokumenIntituteRequest $request)
     {
-
         $file           = $request->file('file_path');
-
-        //mengambil nama file
         $nama_file      = $file->getClientOriginalName();
-
-        //memindahkan file ke folder tujuan
         $file->move(public_path('PDF'), $nama_file);
-
 
         $upload = new InstituteDokumen();
 
         $upload->id_dokumen      = $request->input('id_dokumen');
         $upload->file_path       = $nama_file;
         $upload->license = $request->input('license');
-
-        //menyimpan data ke database
         $upload->save();
 
         return back();
@@ -94,18 +86,12 @@ class DokumenPertahunController extends Controller
 
     public function download($id)
     {
-        // Cari dokumen berdasarkan id dokumen
         $dokumen = InstituteDokumen::findOrFail($id);
-
-        // Path lengkap ke file
         $file_path = public_path('PDF/') . $dokumen->file_path;
 
-        // Pastikan file ada
         if (file_exists($file_path)) {
-            // Download file
             return response()->download($file_path);
         } else {
-            // File tidak ditemukan
             return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
     }
@@ -140,14 +126,10 @@ class DokumenPertahunController extends Controller
      */
     public function destroy(string $id)
     {
-        // Cari dokumen berdasarkan id dokumen
         $hapus = InstituteDokumen::findOrfail($id);
-
         $file = public_path('/PDF/') . $hapus->file_path;
 
-        // Pastikan dokumen ada
         if (file_exists($file)) {
-
             @unlink($file);
         }
         $hapus->delete();

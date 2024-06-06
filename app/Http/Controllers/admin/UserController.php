@@ -93,26 +93,23 @@ class UserController extends Controller
      */
     public function update(AddUserRequest $request, string $id)
     {
-
-
         $user = User::findOrFail($id);
-        $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->type = $request->type;
 
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
-
-        $user->save();
+        $user->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'type' => $request->type,
+            // Jika ada password baru, maka di-hash terlebih dahulu
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
 
         $role = $this->getRoleByType($request->type);
         $user->syncRoles($role);
 
-        return view('admin.users')->with('success', 'User update successfully.');
+        return redirect()->route('user')->with('success', 'User update successfully.');
     }
 
     /**

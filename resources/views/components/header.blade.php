@@ -1,8 +1,8 @@
 <div class="header">
-  <div class="header-left bg-info">
-      <a href="{{ route('home') }}" class="logo bg-info">
+  <div class="header-left" style="background-color: rgb(0, 182, 214)">
+      <a href="{{ route('home') }}" class="logo">
           {{-- <h2 class="">LOGO</h2> --}}
-          <img src="{{ asset('assets/img/image.png' ) }}" class="bg-info" alt="Logo" width="80" height="40">
+          <img src="{{ asset('assets/img/image.png' ) }}" class="" alt="Logo" width="80" height="40">
       </a>
       <a href="{{ route('home') }}" class="logo logo-small">
           <img src="{{ asset('assets/img/visdat.png' ) }}" alt="Logo" width="30" height="30">
@@ -113,7 +113,11 @@
                   <img class="rounded-circle" src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" width="31" alt="Soeng Souy">
                   <div class="user-text">
                       <h6>{{ Auth::user()->username }}</h6>
-                      <p class="text-muted mb-0">Administrator</p>
+                      <p class="text-muted mb-0">
+                        @foreach(Auth::user()->roles as $role)
+                            {{ $role->name }}
+                        @endforeach
+                    </p>
                   </div>
               </span>
           </a>
@@ -124,7 +128,11 @@
                   </div>
                   <div class="user-text">
                       <h6>{{ Auth::user()->username }}</h6>
-                      <p class="text-muted mb-0">{{ Auth::user()->lastname }}</p>
+                      <p class="text-muted mb-0">
+                        @foreach(Auth::user()->roles as $role)
+                            {{ $role->name }}
+                        @endforeach
+                    </p>
                   </div>
               </div>
               <a class="dropdown-item" href="profile.html">My Profile</a>

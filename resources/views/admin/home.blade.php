@@ -11,47 +11,13 @@
                 Tahun
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <li><a class="dropdown-item" href="">2024</a></li>
-              <li><a class="dropdown-item" href="">2023</a></li>
-              <li><a class="dropdown-item" href="">2022</a></li>
-              <li><a class="dropdown-item" href="">2021</a></li>
-              <li><a class="dropdown-item" href="">2020</a></li>
-              <li><a class="dropdown-item" href="">2019</a></li>
-              <li><a class="dropdown-item" href="">2018</a></li>
-              <li><a class="dropdown-item" href="">2017</a></li>
-              <li><a class="dropdown-item" href="">2016</a></li>
-              <li><a class="dropdown-item" href="">2015</a></li>
-              <li><a class="dropdown-item" href="">2014</a></li>
-              <li><a class="dropdown-item" href="">2013</a></li>
-              <li><a class="dropdown-item" href="">2012 </a></li>
-              {{-- <li><a class="dropdown-item" href="">{{ $item->tahun }}</a></li> --}}
-          </ul>
+                @for ($year = date('Y'); $year >= 2012; $year--)
+                    <li><a class="dropdown-item" href="{{ route('home', ['year' => $year]) }}">{{ $year }}</a></li>
+                @endfor
+            </ul>
         </div>
     </div>
-    {{-- <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2024]) }}">2024</a></li>
-              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2023]) }}">2023</a></li>
-              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2022]) }}">2022</a></li>
-              <li><a class="dropdown-item" href="{{ route('list.proyeks', ['year' => 2021]) }}">2021</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2020]) }}">2020</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2019]) }}">2019</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2018]) }}">2018</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2017]) }}">2017</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2016]) }}">2016</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2015]) }}">2015</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2014]) }}">2014</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2013]) }}">2013</a></li>
-              <li><a class="dropdown-item" href="{{ route('dashboard', ['year' => 2012]) }}">2012 </a></li> --}}
-    {{-- <div class="btn-group mt-3">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Tahun
-        </button>
-        <div class="dropdown-menu mt-3">
-            <a class="dropdown-item" href="#">2022</a>
-            <a class="dropdown-item" href="#">2021</a>
-            <a class="dropdown-item" href="#">2020</a>
-            <!-- Tambahkan opsi tahun lainnya di sini -->
-        </div>
-    </div> --}}
+    
     <div class="row">
         {{-- <div class="mb-4">
             <div class="dropdown">
@@ -130,26 +96,29 @@
             </div>
         </div>
     </div>
-
+    {{-- @php
+        dd($data);
+    @endphp --}}
+    
     <div class="row">
         <div class="col-md-12 col-lg-8">
             <div class="card card-chart">
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <h5 class="card-title">Revenue</h5>
+                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <ul class="chart-list-out">
-                                <li><span class="circle circle-green"></span>Income</li>
-                                <li><span class="circle-blue"></span>Expenses</li>
+                                <li><span class="circle-"></span>Pengeluaran</li>
+                                <li><span class="circle-blue"></span>Pendapatan</li>
                                 <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="apexcharts-area"></div>
+                    <div id="chart"></div>
                 </div>
             </div>
         </div>
@@ -197,29 +166,6 @@
         </div>
     </div>
 
-    <div class="col">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Tahun
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <li><a class="dropdown-item" href="">2024</a></li>
-              <li><a class="dropdown-item" href="">2023</a></li>
-              <li><a class="dropdown-item" href="">2022</a></li>
-              <li><a class="dropdown-item" href="">2021</a></li>
-              <li><a class="dropdown-item" href="">2020</a></li>
-              <li><a class="dropdown-item" href="">2019</a></li>
-              <li><a class="dropdown-item" href="">2018</a></li>
-              <li><a class="dropdown-item" href="">2017</a></li>
-              <li><a class="dropdown-item" href="">2016</a></li>
-              <li><a class="dropdown-item" href="">2015</a></li>
-              <li><a class="dropdown-item" href="">2014</a></li>
-              <li><a class="dropdown-item" href="">2013</a></li>
-              <li><a class="dropdown-item" href="">2012 </a></li>
-              {{-- <li><a class="dropdown-item" href="">{{ $item->tahun }}</a></li> --}}
-          </ul>
-        </div>
-    </div>
     <div class="row ">
          <div class="col-xl-4 col-sm-8 col-14 mx-auto">
             <div class="card bg-comman w-100 equal-height">
@@ -304,4 +250,67 @@
 <script>
     feather.replace();
 </script>
+<script>
+    var dataTotalPendapatanTelkom = <?php echo $dataTotalPendapatanTelkomJson; ?>;
+    var dataTotalPendapatanSerpo = <?php echo $dataTotalPendapatanSerpoJson; ?>;
+    var dataTotalPendapatanIconnet = <?php echo $dataTotalPendapatanIconnetJson; ?>;
+    var databulan = <?php echo $databulanJson; ?>;
+
+    var options = {
+        series: [
+            {
+                name: "Telkom Akses",
+                data: dataTotalPendapatanTelkom,
+            },
+            {
+                name: "Serpo",
+                data: dataTotalPendapatanSerpo,
+            },
+            {
+                name: "Iconnet",
+                data: dataTotalPendapatanIconnet,
+            }
+        ],
+        chart: {
+            height: 320,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        title: {
+            text: 'Pendapatan Perusahaan Perbulan',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: databulan,
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    return value.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR"
+                    });
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+
 @endsection

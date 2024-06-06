@@ -63,27 +63,15 @@ class TaskProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddMitraTaskRequest $request, $id)
     {
-        $request->validate([
-            'task' => 'required',
-            'description' => 'required',
-            'user_id' => 'required',
-            'date_created' => 'required|date',
-            'due_date' => 'required|date',
-            'status' => 'required'
-        ]);
+        $data = InstituteTask::findOrFail($id);
 
-        $iconnet = InstituteTask::findOrFail($id);
-        $iconnet->update([
-            'project_id' => $request->input('project_id'),
-            'task' => $request->input('task'),
-            'description' => $request->input('description'),
-            'status' => $request->input('status'),
-            'date_created' => $request->input('date_created'),
-            'due_date' => $request->input('due_date'),
-            'user_id' => $request->input('user_id'),
-        ]);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
+        $validatedData = $request->validated();
+        $data->update($validatedData);
 
         return redirect()->back()->with('success', 'Tugas berhasil diperbarui!');
     }

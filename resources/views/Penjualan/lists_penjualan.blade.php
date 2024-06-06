@@ -84,70 +84,88 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <form action="{{ route('penjualan.update', $data->id) }}" method="post">
-                                                    @csrf
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Tanggal</label>
-                                                                <div class="col-md-10">
-                                                                    <input type="date" class="form-control" value="{{ old('tgl',$data->tgl) }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" required>
-                                                                </div>
+                                                    <form action="{{ route('penjualan.update', $data->id) }}" method="post">
+                                                        @csrf
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Tanggal</label>
+                                                            <div class="col-md-10">
+                                                                <input type="date" class="form-control" value="{{ old('tgl',$data->tgl) }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" >
+                                                                @error('tgl')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Nama Pembeli</label>
-                                                                <div class="col-md-10">
-                                                                    <input type="text" class="form-control" placeholder="Andi Amalia" value="{{ old('pembeli',$data->pembeli) }}" name="pembeli" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Keterangan</label>
-                                                                <div class="col-md-10">
-                                                                    <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan',$data->keterangan) }}"placeholder="Keterangan.." required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Harga Pembelian</label>
-                                                                <div class="col-md-10">
-                                                                    <input type="number" class="form-control" placeholder="Biaya Pembelian..." name="beli" value="{{ old('beli',$data->beli) }}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Harga Penjualam</label>
-                                                                <div class="col-md-10">
-                                                                    <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual',$data->jual) }}" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Nama Pengguna</label>
-                                                                <div class="col-md-10">
-                                                                    <select class="form-control form-select" name="user" required>
-                                                                        <option>Pilih Pengguna</option>                                          
-                                                                        @foreach ($employees as $user)
-                                                                        <option value="{{ $user->id }}" {{ old('user', $data->user) == $user->id ? 'selected' : '' }}>{{ ucwords($user->username) }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-form-label col-md-2">Status Pembayaran</label>
-                                                                <div class="col-md-10">
-                                                                    <select class="form-control form-select" name="status" required>
-                                
-                                                                        <option value="0" {{ old('status',$data->status) == 0 ? 'selected' : '' }}>Belum Terbayar</option>
-                                                                        <option value="1" {{ old('status',$data->status) == 1 ? 'selected' : '' }}>Sudah Terbayar</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                
-                                                    <div class="modal-footer">
-                                                        <div class="bank-details-btn">
-                                                            <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>  
-                                                            </a>
-                                                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Nama Pembeli</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" class="form-control" placeholder="Andi Amalia" value="{{ old('pembeli',$data->pembeli) }}" name="pembeli" >
+                                                                @error('pembeli')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Keterangan</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan',$data->keterangan) }}" placeholder="Keterangan.." >
+                                                                @error('keterangan')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Harga Pembelian</label>
+                                                            <div class="col-md-10">
+                                                                <input type="number" class="form-control" placeholder="Biaya Pembelian..." name="beli" value="{{ old('beli',$data->beli) }}">
+                                                                @error('beli')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Harga Penjualam</label>
+                                                            <div class="col-md-10">
+                                                                <input type="number" class="form-control" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual',$data->jual) }}" >
+                                                                @error('jual')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Nama Pengguna</label>
+                                                            <div class="col-md-10">
+                                                                <select class="form-control form-select" name="user" >
+                                                                    <option>Pilih Pengguna</option>                                          
+                                                                    @foreach ($employees as $user)
+                                                                    <option value="{{ $user->id }}" {{ old('user', $data->user) == $user->id ? 'selected' : '' }}>{{ ucwords($user->username) }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('user')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-form-label col-md-2">Status Pembayaran</label>
+                                                            <div class="col-md-10">
+                                                                <select class="form-control form-select" name="status" >
+                                                                    <option value="0" {{ old('status',$data->status) == 0 ? 'selected' : '' }}>Belum Terbayar</option>
+                                                                    <option value="1" {{ old('status',$data->status) == 1 ? 'selected' : '' }}>Sudah Terbayar</option>
+                                                                </select>
+                                                                @error('status')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="bank-details-btn">
+                                                                <button type="submit" class="btn save-invoice-btn btn-primary"> Save</button>  
+                                                                </a>
+                                                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                                            </div>
+                                                        </div>
                                                     </form>
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>  
                                     @endforeach
@@ -173,7 +191,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Tanggal</label>
                                         <div class="col-md-10">
-                                            <input type="date" class="form-control @error('tgl') is-invalid @enderror" value="{{ old('tgl') }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" required>
+                                            <input type="date" class="form-control @error('tgl') is-invalid @enderror" value="{{ old('tgl') }}" name="tgl" data-date-format="yyyy-mm-dd" data-plugin-datepicker="" >
                                             @error('tgl')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -191,7 +209,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Keterangan</label>
                                         <div class="col-md-10">
-                                            <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" placeholder="Keterangan.." required>
+                                            <input type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" placeholder="Keterangan.." >
                                             @error('keterangan')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -209,7 +227,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Harga Penjualan</label>
                                         <div class="col-md-10">
-                                            <input type="number" class="form-control @error('jual') is-invalid @enderror" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual') }}" required>
+                                            <input type="number" class="form-control @error('jual') is-invalid @enderror" placeholder="Harga Penjualan..." name="jual" value="{{ old('jual') }}" >
                                             @error('jual')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -218,7 +236,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Nama Pengguna</label>
                                         <div class="col-md-10">
-                                            <select class="form-control @error('user') is-invalid @enderror" name="user" required>
+                                            <select class="form-control @error('user') is-invalid @enderror" name="user" >
                                                 <option>Pilih Pengguna</option>
                                                 @foreach ($employees as $employee)
                                                 <option value="{{ $employee->id }}">{{ ucwords($employee->username) }}</option>
@@ -232,7 +250,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Status Pembayaran</label>
                                         <div class="col-md-10">
-                                            <select class="form-control @error('status') is-invalid @enderror" name="status" required>
+                                            <select class="form-control @error('status') is-invalid @enderror" name="status" >
                                                 <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Belum Terbayar</option>
                                                 <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Sudah Terbayar</option>
                                             </select>

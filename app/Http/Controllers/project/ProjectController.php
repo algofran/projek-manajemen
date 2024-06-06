@@ -172,35 +172,21 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AddProjectListRequest $request, $id)
     {
-        $project = ProjectList::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'po_number' => 'nullable|string|max:255',
-            'user_id' => 'nullable|integer',
-            'invoice' => 'nullable|string|max:255',
-            'invoice_date' => 'nullable|date',
-            'pembayaran' => 'nullable|string|max:255',
-            'vendor' => 'nullable|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'user_ids' => 'nullable|array',
-            'user_ids.*' => 'integer',
-            'payment_status' => 'nullable|integer',
-            'status' => 'nullable|integer',
-            'fakturpajak' => 'nullable|stri ng|max:255',
-            'fp_date' => 'nullable|date',
-            'description' => 'nullable|string',
-        ]);
+        $data = ProjectList::findOrFail($id);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Proyek tidak ditemukan');
+        }
 
         // Mengonversi array user_ids menjadi string
         $userIds = $request->input('user_ids');
         $userIdsString = implode(',', $userIds);
 
         // Update atribut proyek yang ada
-        $project->update([
+        $data->update([
             'name' => $request->input('name'),
             'po_number' => $request->input('po_number'),
             'user_id' => $request->input('user_id'),
