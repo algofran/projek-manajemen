@@ -40,7 +40,7 @@ class InstituteProyekSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $idInst = $faker->randomElement($mitraIds);
 
-            $startDate = $faker->dateTimeBetween('2018-01-01', 'now');
+            $startDate = $faker->dateTimeBetween('2012-01-01', 'now');
             $endDate = $faker->dateTimeBetween($startDate, 'now');
 
             InstituteProyeks::create([

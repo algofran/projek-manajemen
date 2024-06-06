@@ -19,22 +19,6 @@
     </div>
     
     <div class="row">
-        {{-- <div class="mb-4">
-            <div class="dropdown">
-                <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                    Status
-                    @if ($status == 'Pending' || $status == 'On-Progress' || $status == 'Finish')
-                        {{ $status }}
-                    @endif
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item" href="{{ route('project.lists') }}">All</a></li>
-                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'Pending']) }}">Pending</a></li>
-                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'On-Progress']) }}">On Progress</a></li>
-                    <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => 'Finish']) }}">Finish</a></li>
-                </ul>
-            </div> 
-        </div> --}}
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
             <div class="card bg-comman w-100">
                 <div class="card-body">
@@ -108,13 +92,6 @@
                         <div class="col-6">
                             <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
-                        {{-- <div class="col-6">
-                            <ul class="chart-list-out">
-                                <li><span class="circle-"></span>Pengeluaran</li>
-                                <li><span class="circle-blue"></span>Pendapatan</li>
-                                <li class="star-menus"><a href="javascript:;"><i class="fas fa-ellipsis-v"></i></a></li>
-                            </ul>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -122,42 +99,49 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 d-flex">
+        <div class="col-xl-4">
             <div class="card flex-fill comman-shadow">
                 <div class="card-header d-flex align-items-center">
                     <div class="row">
-                        <h5 class="card-title">Upcoming Events</h5>
+                        <h3 class="card-title">Progress Activity</h3>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div id="calendar-doctor" class="calendar-container"></div>
-                    <div class="calendar-info calendar-info1">
-                        <div class="upcome-event-date">
-                            <h3>11 Jan</h3>
-                            <span><i class="fas fa-ellipsis-h"></i></span>
-                        </div>
-                        <div class="calendar-details">
-                            <p>08:00 am</p>
-                            <div class="calendar-box normal-bg">
-                                <div class="calandar-event-name">
-                                    <h4>Botony</h4>
-                                    <h5>Lorem ipsum sit amet</h5>
-                                </div>
-                                <span>08:00 - 09:00 am</span>
+                <div class="card flex-fill bg-white">
+                    <div class="card-header">
+                        <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
+                            <li class="nav-item">
+                                <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">Serpo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab-5" data-bs-toggle="tab" class="nav-link">Inconnet</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab-6" data-bs-toggle="tab" class="nav-link ">Telkom Akses</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content pt-0">
+                            <div role="tabpanel" id="tab-4" class="tab-pane fade show active">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingserpo}}</li>
+                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progressserpo}}</li>
+                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishserpo}}</li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="upcome-event-date">
-                            <h3>10 Jan</h3>
-                            <span><i class="fas fa-ellipsis-h"></i></span>
-                        </div>
-                        <div class="calendar-details">
-                            <p>08:00 am</p>
-                            <div class="calendar-box normal-bg">
-                                <div class="calandar-event-name">
-                                    <h4>Botony</h4>
-                                    <h5>Lorem ipsum sit amet</h5>
-                                </div>
-                                <span>08:00 - 09:00 am</span>
+                            <div role="tabpanel" id="tab-5" class="tab-pane fade">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingiconnet}}</li>
+                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progressiconnet}}</li>
+                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishiconnet}}</li>
+                                </ul>
+                            </div>
+                            <div role="tabpanel" id="tab-6" class="tab-pane fade">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingtelkom}}</li>
+                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progresstelkom}}</li>
+                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishtelkom}}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -167,7 +151,7 @@
     </div>
 
     <div class="row ">
-         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
             <div class="card bg-comman w-100 equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">

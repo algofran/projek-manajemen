@@ -30,6 +30,20 @@ class AdminController extends Controller
         $finish = ProjectList::whereYear('start_date', $tahun)->where('status', 3)->count() + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 2)->count();
         // Dashboard Total Keseluruhan Project
 
+        // Progress Activity
+        $pendingserpo = InstituteProyeks::where('id_inst', 2)->where('status', 0)->whereYear('start_date', $tahun)->count();
+        $progressserpo = InstituteProyeks::where('id_inst', 2)->where('status', 1)->whereYear('start_date', $tahun)->count();
+        $finishserpo =InstituteProyeks::where('id_inst', 2)->where('status', 2)->whereYear('start_date', $tahun)->count();
+
+        $pendingiconnet = InstituteProyeks::where('id_inst', 1)->where('status', 0)->whereYear('start_date', $tahun)->count();
+        $progressiconnet = InstituteProyeks::where('id_inst', 1)->where('status', 1)->whereYear('start_date', $tahun)->count();
+        $finishiconnet =InstituteProyeks::where('id_inst', 1)->where('status', 2)->whereYear('start_date', $tahun)->count();
+
+        $pendingtelkom = InstituteProyeks::where('id_inst', 3)->where('status', 0)->whereYear('start_date', $tahun)->count();
+        $progresstelkom = InstituteProyeks::where('id_inst', 3)->where('status', 1)->whereYear('start_date', $tahun)->count();
+        $finishtelkom =InstituteProyeks::where('id_inst', 3)->where('status', 2)->whereYear('start_date', $tahun)->count();
+        // Progress Activity
+
         // Dashboard Total Keuangan Tiap Project
         $pendingonhold = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 1)->sum('payment') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 1)->sum('tagihan'); // Ganti 'nilai' dengan nama kolom yang ingin dijumlahkan
         $jumlahyangSudahTerbayar = ProjectList::whereYear('start_date', $tahun)->where('payment_status', 3)->sum('payment') + InstituteProyeks::whereYear('start_date', $tahun)->where('status', 2)->sum('tagihan') + Sales::whereYear('tgl', $tahun)->where('status', 1)->sum('jual');
@@ -79,7 +93,7 @@ class AdminController extends Controller
         $databulanJson = json_encode($data['databulan']);
 
         // Rendering view
-        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish', 'pendingonhold', 'jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar', 'totalProjectExpense', 'grossProjectProfit', 'Pendapatan', 'Pengeluaran', 'data', 'dataTotalPendapatanTelkomJson', 'dataTotalPendapatanSerpoJson', 'dataTotalPendapatanIconnetJson', 'databulanJson', 'tahun'));
+        return view('admin.home', compact('totalprojek', 'pending', 'onprogress', 'finish', 'pendingonhold', 'jumlahyangSudahTerbayar', 'jumlahYangBelumTerbayar', 'totalProjectExpense', 'grossProjectProfit', 'Pendapatan', 'Pengeluaran', 'data', 'dataTotalPendapatanTelkomJson', 'dataTotalPendapatanSerpoJson', 'dataTotalPendapatanIconnetJson', 'databulanJson', 'tahun', 'pendingserpo', 'progressserpo', 'finishserpo', 'pendingiconnet', 'progressiconnet', 'finishiconnet', 'pendingtelkom', 'progresstelkom', 'finishtelkom'));
     }
 
     public function ubahAngkaToBulan($bulanAngka)
