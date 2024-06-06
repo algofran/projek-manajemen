@@ -63,14 +63,17 @@
             </div>
         </div>
     </div>
-
+    {{-- @php
+        dd($data);
+    @endphp --}}
+    
     <div class="row">
         <div class="col-md-12 col-lg-8">
             <div class="card card-chart">
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <h5 class="card-title">Revenue</h5>
+                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
                         {{-- <div class="col-6">
                             <ul class="chart-list-out">
@@ -214,4 +217,67 @@
 <script>
     feather.replace();
 </script>
+<script>
+    var dataTotalPendapatanTelkom = <?php echo $dataTotalPendapatanTelkomJson; ?>;
+    var dataTotalPendapatanSerpo = <?php echo $dataTotalPendapatanSerpoJson; ?>;
+    var dataTotalPendapatanIconnet = <?php echo $dataTotalPendapatanIconnetJson; ?>;
+    var databulan = <?php echo $databulanJson; ?>;
+
+    var options = {
+        series: [
+            {
+                name: "Telkom Akses",
+                data: dataTotalPendapatanTelkom,
+            },
+            {
+                name: "Serpo",
+                data: dataTotalPendapatanSerpo,
+            },
+            {
+                name: "Iconnet",
+                data: dataTotalPendapatanIconnet,
+            }
+        ],
+        chart: {
+            height: 320,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Pendapatan Perusahaan Perbulan',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: databulan,
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    return value.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR"
+                    });
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+
 @endsection

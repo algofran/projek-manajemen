@@ -40,6 +40,9 @@ class InstituteProyekSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $idInst = $faker->randomElement($mitraIds);
 
+            $startDate = $faker->dateTimeBetween('2018-01-01', 'now');
+            $endDate = $faker->dateTimeBetween($startDate, 'now');
+
             InstituteProyeks::create([
                 'id_inst' => $idInst,
                 'periode' => $faker->date('Ymd', '2024-01-01'),
@@ -47,8 +50,8 @@ class InstituteProyekSeeder extends Seeder
                 'sektor' => $faker->city,
                 'keterangan' => 'Description of project ' . ($i + 1),
                 'PA' => $faker->numberBetween(0, 30),
-                'start_date' => $faker->date(),
-                'end_date' => $faker->date(),
+                'start_date' => $startDate->format('Y-m-d'),
+                'end_date' => $endDate->format('Y-m-d'),
                 'tagihan' => $faker->randomFloat(2, 200000, 1000000),
                 'bank' => $faker->randomElement($bank),
                 'status' => $faker->randomElement([0, 1, 2]), // 0=hold, 1=onprogress, 2=complete
