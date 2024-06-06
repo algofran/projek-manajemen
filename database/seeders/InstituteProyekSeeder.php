@@ -37,7 +37,7 @@ class InstituteProyekSeeder extends Seeder
         ];
 
         // Loop untuk membuat beberapa data acak
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $idInst = $faker->randomElement($mitraIds);
 
             $startDate = $faker->dateTimeBetween('2018-01-01', 'now');

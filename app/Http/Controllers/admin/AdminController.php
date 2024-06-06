@@ -34,7 +34,7 @@ class AdminController extends Controller
         $pendapatanbersih = $Pendapatan - $Pengeluaran;
 
 
-        $tahun = 2020;
+        $tahun = 2021;
         $bulan = 12;
         $databulan = [];
         $dataTotalPendapatan = [];

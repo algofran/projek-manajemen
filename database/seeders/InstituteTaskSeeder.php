@@ -27,7 +27,7 @@ class InstituteTaskSeeder extends Seeder
         // Mendapatkan semua username dari tabel users
         $userIds = User::pluck('id')->toArray();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             InstituteTask::create([
                 'project_id' => $faker->randomElement($proyekIds),
                 'task' => $faker->sentence(6),
