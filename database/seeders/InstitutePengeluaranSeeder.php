@@ -36,7 +36,7 @@ class InstitutePengeluaranSeeder extends Seeder
 
 
         // Loop untuk membuat beberapa data acak
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             InstitutePengeluaran::create([
                 'project_id' => $faker->randomElement($proyekIds),
                 'comment' => $faker->paragraph,

@@ -14,12 +14,12 @@
           <i class="fas fa-bars text-danger"></i>
       </a>
   </div>
-  <div class="top-nav-search">
+  {{-- <div class="top-nav-search">
       <form>
           <input type="text" class="form-control" placeholder="Search here">
           <button class="btn" type="submit"><i class="fas fa-search"></i></button>
       </form>
-  </div>
+  </div> --}}
   <a class="mobile_btn bg-white" id="mobile_btn">
       <i class="fas fa-bars text-danger"></i>
   </a>
@@ -28,10 +28,10 @@
 
 
       <li class="nav-item dropdown noti-dropdown me-2">
-          <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+          {{-- <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
               <img src="{{ asset('assets/img/icons/header-icon-05.svg ' ) }}" alt="">
-          </a>
-          <div class="dropdown-menu notifications">
+          </a> --}}
+          {{-- <div class="dropdown-menu notifications">
               <div class="topnav-dropdown-header">
                   <span class="notification-title">Notifications</span>
                   <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
@@ -105,7 +105,7 @@
               <div class="topnav-dropdown-footer">
                   <a href="#">View all Notifications</a>
               </div>
-          </div>
+          </div> --}}
       </li>
       <li class="nav-item dropdown has-arrow new-user-menus">
           <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">

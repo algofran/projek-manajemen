@@ -44,6 +44,7 @@ Route::group([
     // Route::get('/dashboard/{year?}', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/getUser', [UserController::class, 'getUser'])->name('admin.dataTable.getUser');
     Route::get('/dashboard/{year?}', [AdminController::class, 'index'])->name('home');
+    Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/User_list', [UserController::class, 'index'])->name('user');
     Route::get('/hapus_user/{id}', [UserController::class, 'destroy'])->name('_del.user');
     Route::get('/Edit_user/{id}', [UserController::class, 'edit'])->name('_edituser');

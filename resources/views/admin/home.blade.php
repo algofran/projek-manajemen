@@ -2,20 +2,24 @@
 @section('content')
 <div class="div">
     <div class="container">
-        <h3>Admin Dashboard</h3>
-        <!-- Tambahkan konten dashboard di sini -->
-    </div>
-    <div class="col">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Tahun
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                @for ($year = date('Y'); $year >= 2012; $year--)
-                    <li><a class="dropdown-item" href="{{ route('home', ['year' => $year]) }}">{{ $year }}</a></li>
-                @endfor
-            </ul>
+        <div class="row">
+            <div class="col">
+                <h3>Admin Dashboard</h3>
+            </div>
+            <div class="col text-end mb-3">
+                <div class="dropdown">
+                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tahun
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        @for ($year = date('Y'); $year >= 2012; $year--)
+                            <li><a class="dropdown-item" href="{{ route('home', ['year' => $year]) }}">{{ $year }}</a></li>
+                        @endfor
+                    </ul>
+                </div>
+            </div>
         </div>
+        <!-- Tambahkan konten dashboard di sini -->
     </div>
     
     <div class="row">
@@ -96,6 +100,18 @@
                 </div>
                 <div class="card-body">
                     <div id="chart"></div>
+                </div>
+            </div>
+            <div class="card card-chart">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart2"></div>
                 </div>
             </div>
         </div>
@@ -234,6 +250,7 @@
 <script>
     feather.replace();
 </script>
+
 <script>
     var dataTotalPendapatanTelkom = <?php echo $dataTotalPendapatanTelkomJson; ?>;
     var dataTotalPendapatanSerpo = <?php echo $dataTotalPendapatanSerpoJson; ?>;
@@ -295,6 +312,71 @@
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
+</script>
+
+
+<script>
+    var dataTotalPengeluaranTelkom = <?php echo $dataTotalPengeluaranTelkomJson; ?>;
+    var dataTotalPengeluaranSerpo = <?php echo $dataTotalPengeluaranSerpoJson; ?>;
+    var dataTotalPengeluaranIconnet = <?php echo $dataTotalPengeluaranIconnetJson; ?>;
+    var databulan = <?php echo $databulanJson; ?>;
+
+    var options = {
+        series: [
+            {
+                name: "Telkom Akses",
+                data: dataTotalPengeluaranTelkom,
+            },
+            {
+                name: "Serpo",
+                data: dataTotalPengeluaranSerpo,
+            },
+            {
+                name: "Iconnet",
+                data: dataTotalPengeluaranIconnet,
+            }
+        ],
+        chart: {
+            height: 320,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        title: {
+            text: 'Pengeluaran Perusahaan Perbulan',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: databulan,
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    return value.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR"
+                    });
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+    chart.render();
+    
 </script>
 
 @endsection
