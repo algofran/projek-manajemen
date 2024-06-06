@@ -39,9 +39,11 @@ class ProjectListSeeder extends Seeder
         $userIds = User::pluck('id')->toArray();
 
         // Buat project baru dengan data acak
-        for ($i = 0; $i < 20; $i++) { // Buat 10 project sebagai contoh
+        for ($i = 0; $i < 100; $i++) { // Buat 10 project sebagai contoh
             // Pilih manager_id secara acak dari daftar ID pengguna dengan role manager
             $managerId = $managers[array_rand($managers)];
+            $startDate = $faker->dateTimeBetween('2012-01-01', 'now');
+            $endDate = $faker->dateTimeBetween($startDate, 'now');
 
             // Pilih 3 user_ids secara acak dari daftar ID pengguna dan gabungkan menjadi string
             $randomUserIds = array_rand($userIds, 3);
@@ -53,8 +55,8 @@ class ProjectListSeeder extends Seeder
                 'name' => 'Sample Project ' . ($i + 1),
                 'description' => 'Description of project ' . ($i + 1),
                 'status' => rand(1, 3),
-                'start_date' => now(),
-                'end_date' => now()->addMonth(),
+                'start_date' => $startDate->format('Y-m-d'),
+                'end_date' => $endDate->format('Y-m-d'),
                 'user_id' => $managerId,
                 'user_ids' => $userIdsString,
                 'po_number' => 'PO' . str_pad($i + 1, 5, '0', STR_PAD_LEFT),

@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="header-left" style="background-color: rgb(0, 182, 214)">
+  <div class="header-left" style="background-color: rgb(214, 0, 0)">
       <a href="{{ route('home') }}" class="logo">
           {{-- <h2 class="">LOGO</h2> --}}
           <img src="{{ asset('assets/img/image.png' ) }}" class="" alt="Logo" width="80" height="40">
@@ -10,8 +10,8 @@
       </a>
   </div>
   <div class="menu-toggle">
-      <a href="javascript:void(0);" id="toggle_btn">
-          <i class="fas fa-bars"></i>
+      <a class="bg-white" href="javascript:void(0);" id="toggle_btn">
+          <i class="fas fa-bars text-danger"></i>
       </a>
   </div>
   <div class="top-nav-search">
@@ -21,7 +21,7 @@
       </form>
   </div>
   <a class="mobile_btn bg-white" id="mobile_btn">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-bars text-danger"></i>
   </a>
 
   <ul class="nav user-menu">

@@ -20,7 +20,7 @@ class ProjectTaskSeeder extends Seeder
         // Loop untuk membuat beberapa data acak
 
         $userIds = User::pluck('id')->toArray();
-        for ($i = 0; $i < 40; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             ProjectTask::create([
                 'project_id' => $faker->numberBetween(1, 20), // Ganti dengan rentang yang sesuai
                 'task' => $faker->sentence(6),
