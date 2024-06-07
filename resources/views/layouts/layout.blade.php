@@ -17,7 +17,9 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/datatables.min.css')}}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/plugins/alertify/alertify.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/select/select.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
 

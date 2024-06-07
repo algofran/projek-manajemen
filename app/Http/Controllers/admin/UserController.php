@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
+use App\Models\Events;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
@@ -73,12 +74,59 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Request $request)
     {
+        if ($request->ajax()) {
+            $events = Events::where(function ($query) use ($request) {
+                $query->where('event_start', '>=', $request->start)
+                    ->where('event_end', '<=', $request->end);
+            })
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('event_start', '<=', $request->start)
+                        ->where('event_end', '>=', $request->end);
+                })
+                ->get(['id', 'event_name as title', 'event_start as start', 'event_end as end']);
+
+            // Format tanggal sesuai kebutuhan fullcalendar
+            foreach ($events as $event) {
+                $event->start = date('c', strtotime($event->start));
+                $event->end = date('c', strtotime($event->end));
+            }
+
+            return response()->json($events);
+        }
+
         return view('admin.event');
     }
 
-    /**
+    public function calendarEvents(Request $request)
+    {
+        switch ($request->type) {
+            case 'create':
+                $event = Events::create([
+                    'event_name' => $request->event_name,
+                    'event_start' => $request->event_start,
+                    'event_end' => $request->event_end,
+                ]);
+                return response()->json($event);
+            case 'edit':
+                $event = Events::find($request->id);
+                $event->update([
+                    'event_name' => $request->event_name,
+                    'event_start' => $request->event_start,
+                    'event_end' => $request->event_end,
+                ]);
+                return response()->json($event);
+            case 'delete':
+                $event = Events::find($request->id);
+                $event->delete();
+                return response()->json(['success' => true]);
+            default:
+                return response()->json(['error' => 'Invalid type']);
+        }
+    }
+
+    /** 
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
