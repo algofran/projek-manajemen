@@ -96,24 +96,31 @@
                         <div class="col-6">
                             <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
+                        <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
+                            <li class="nav-item">
+                                <a href="#tab-7" data-bs-toggle="tab" class="nav-link active">Pendapatan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab-8" data-bs-toggle="tab" class="nav-link">Pengeluaran</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
                 <div class="card-body">
-                    <div id="chart"></div>
-                </div>
-            </div>
-            <div class="card card-chart">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
+                   
+                    <div class="tab-content pt-0">
+                        <div role="tabpanel" id="tab-7" class="tab-pane fade show active">
+                            <div id="chart"></div>
+                        </div>
+                        <div role="tabpanel" id="tab-8" class="tab-pane fade">
+                            <div id="chart2"></div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div id="chart2"></div>
-                </div>
             </div>
+            
+            
         </div>
         <div class="col-xl-4">
             <div class="card flex-fill comman-shadow">
