@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="header-left" style="background-color: rgb(214, 0, 0)">
+  <div class="header-left bg-danger bg-gradient text-white">
       <a href="{{ route('home') }}" class="logo">
           {{-- <h2 class="">LOGO</h2> --}}
           <img src="{{ asset('assets/img/image.png' ) }}" class="" alt="Logo" width="80" height="40">

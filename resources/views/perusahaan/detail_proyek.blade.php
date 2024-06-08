@@ -3,11 +3,9 @@
   <div class="row">
     <div class="col-sm-12">
         <div class="card card-table">
-
-            <div class="card-header fw-bolder fs-6 bg-info text-white">
-                Detail Projek
-            </div>
-
+                <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
+                    Detail Projek
+                </div>
         </div>
         <div class="card card-table">
 
@@ -150,7 +148,7 @@
                             <h3 class="page-title">Daftar Tugas</h3>
                         </div>
                         <div class="col-auto text-end float-end ms-auto download-grp">
-                            <a href="{{ route('_add.task', ['id' => $project->id]) }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah Tugas</i></a>
+                            <a href="{{ route('_add.task', ['id' => $project->id]) }}" class="btn btn-outline-danger"><i class="fas fa-plus"> </i>Tambah Tugas</a>
                         </div>
 
                     </div>
@@ -320,7 +318,7 @@
                             <h3 class="page-title">Daftar Pengeluaran</h3>
                         </div>
                         <div class="col-auto text-end float-end ms-auto download-grp">
-                            <a href="{{ route('_add.pengeluaran', ['id' => $project->id]) }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah Pengeluaran</i></a>
+                            <a href="{{ route('_add.pengeluaran', ['id' => $project->id]) }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah Pengeluaran</a>
                         </div>
 
                     </div>

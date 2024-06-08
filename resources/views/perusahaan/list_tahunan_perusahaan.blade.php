@@ -30,8 +30,8 @@
       <div class="row">
           <div class="col-sm-12">
               <div class="card card-table">
-                  <div class="card-header fw-bolder fs-6 bg-info text-white">
-                      Laporan Keuangan Pertahun {{ $mitra->mitra }}
+                  <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
+                    Laporan Keuangan Pertahun {{ $mitra->mitra }}
                   </div>
               </div>
               <div class="page-header">
@@ -50,7 +50,7 @@
                           </div>
                       </div>
                       <div class="col-auto text-end float-end ms-auto download-grp">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-primary"><i class="fas fa-plus"> Tambah Laporan</i></a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-outline-danger"><i class="fas fa-plus"> </i> Tambah Laporan</a>
                       </div>
                   </div>
                   @if ($laporantahun == "[]")

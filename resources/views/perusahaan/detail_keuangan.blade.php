@@ -3,16 +3,12 @@
 <div class="div">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card card-table">
-        
-                    <div class="card-header fw-bolder fs-6 bg-info text-white">
-                        Detail Projek
-                    </div>
-        
+                <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white mb-4">
+                    Detail Keuangan Projek
                 </div>
                 <div class="mb-4">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                             Report Detail Laporan Keuangan
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -146,8 +142,8 @@
                             </div> --}}
                             <div class="col-md-3 col-sm-4 col-6">                            
                                 <h6 class="invoice-name">Nama Bank</h6>
-                                <p class="justify-content-center bg-secondary border rounded-pill d-flex text-white">
-                                   BCA
+                                <p class="justify-content-center bg-info border rounded-pill d-flex text-white">
+                                   {{ $project->bank }}
                                 </p>
                             </div>
                         </div>

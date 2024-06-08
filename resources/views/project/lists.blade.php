@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-12">
         <div class="card card-table">
-            <div class="card-header fw-bolder fs-6 bg-danger text-white">
+            <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
                 Data Project 
             </div>
         </div>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-auto text-end float-end download-grp">
-                                <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"> Tambah</i></a>
+                                <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
                             </div>  
                         </div>
                     </div>

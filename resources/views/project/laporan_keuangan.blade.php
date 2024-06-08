@@ -2,94 +2,11 @@
 <div class="div">
     <div class="row">
         <div class="col-sm-12">
+            <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white mb-4">
+                List Keuangan Projek
+            </div>
             <div class="card card-table">
                 <div class="card-body">
-    
-                    <div class="page-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title">List Keuangan</h3>
-                            </div>
-                            
-                            <!-- <div class="row">
-                                <div class="col">
-                                    <div class="btn btn-primary me-2">Active</div>
-                                    <div class="btn btn-warning me-2">On-Hold</div>
-                                    <div class="btn btn-success me-2">Complete</div>
-                                    <div class="btn btn-danger me-2">Finish</div>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                    
-                    {{-- <div class="card report-card">
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <ul class="app-listing">
-                                        
-                                        <li>
-                                            <div class="multipleSelection">
-                                                <div class="selectBox">
-                                                    <p class="mb-0"><i class="fas fa-bookmark me-1 select-icon"></i> By Category</p>
-                                                    <span class="down-icon"><i class="fas fa-chevron-down"></i></span>
-                                                </div>
-                                                <div id="checkBoxes">
-                                                    <form action="#">
-                                                        <p class="checkbox-title">Category</p>
-                                                        <div class="form-custom">
-                                                            <input type="text" class="form-control bg-grey" placeholder="Enter Category Name">
-                                                        </div>
-                                                        <div class="selectBox-cont">
-                                                            <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Advertising
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Food
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Marketing
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Repairs
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Software
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Stationary
-                                                            </label>
-                                                                                                                    <label class="custom_check w-100">
-                                                            <input type="checkbox" name="category">
-                                                            <span class="checkmark"></span> Travel
-                                                            </label>
-                                                        </div>
-                                                        <button type="submit" class="btn w-100 btn-primary">Apply</button>
-                                                        <button type="reset" class="btn w-100 btn-grey">Reset</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="report-btn">
-                                                <a href="#" class="btn">
-                                                    <img src="assets/img/icons/invoices-icon5.png" alt="" class="me-2"> Download
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                   
-    
     
                     <div class="table-responsive">
                         <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">

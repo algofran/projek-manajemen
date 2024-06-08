@@ -3,9 +3,11 @@
 <div class="div">
   <div class="row">
     <div class="col-sm-12">
+        <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white mb-4">
+            List Pengguna
+        </div>
         <div class="card card-table">
             <div class="card-body">
-
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
@@ -13,7 +15,7 @@
                         </div>
 
                         <div class="col-6 text-end">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#add_user" class="btn btn-primary">Tambah User <i class="fas fa-plus"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#add_user" class="btn btn-outline-danger"> <i class="fas fa-plus"></i> Tambah Pengguna</a>
                         </div>
                     </div>
                 
