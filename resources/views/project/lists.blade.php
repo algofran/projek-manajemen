@@ -3,8 +3,12 @@
   <div class="row">
     <div class="col-sm-12">
         <div class="card card-table">
+            <div class="card-header fw-bolder fs-6 bg-danger text-white">
+                Data Project 
+            </div>
+        </div>
+        <div class="card card-table">
             <div class="card-body">
-
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
@@ -15,7 +19,7 @@
                             <div class="col">
                                 <div class="mb-4">
                                     <div class="dropdown">
-                                        <button class="btn btn-white dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Status
+                                        <button class="btn btn-outline-danger dropdown-toggle mt-4" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Status
                                             @if ($status == 'Pending'||$status == 'On-Progress'||$status == 'Finish')
                                             {{ $status }}
                                             @endif
@@ -23,7 +27,7 @@
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <li><a class="dropdown-item" href="{{ route('project.lists') }}">All</a></li>
                                             <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '1']) }}">Pending</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '2']) }}">On_Progress</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '2']) }}">On-Progress</a></li>
                                             <li><a class="dropdown-item" href="{{ route('project.lists', ['status' => '3']) }}">Finish</a></li>
                                         </ul>
                                     </div>
@@ -32,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-auto text-end float-end download-grp">
-                                <a href="{{ route('project.add') }}" class="btn btn-primary"><i class="fas fa-plus"> Tambah</i></a>
+                                <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"> Tambah</i></a>
                             </div>  
                         </div>
                     </div>

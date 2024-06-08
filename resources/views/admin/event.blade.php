@@ -47,15 +47,8 @@
 
 <div class="container">
     <div class="row align-items-center">
-        <div class="col">
-            <h2 class="page-title">Events</h2>
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Events</li>
-            </ul>
-        </div>
-        <div class="col-auto text-end ms-auto download-grp">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#my_event" class="btn btn-primary"><i class="fas fa-plus"></i> Add Event</a>
+        <div class="col-auto mb-3 download-grp">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#my_event" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Add Event</a>
         </div>
     </div>
     
