@@ -8,10 +8,11 @@
                 <div class="row">
                     <!-- Login Form -->
                     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                        <div class="card card-plain mt-8">
+                        <div class="card card-plain mt-5">
                             <div class="card-header pb-0 text-left bg-transparent">
-                                <h3 class="font-weight-bolder text-white">Welcome back</h3>
-                                <p class="mb-0 text-white">Enter your email and password to sign in</p>
+                                <h3 class="font-weight-bolder text-white">Aplikasi Manajemen Projek</h3>
+                                <p class="mb-0 text-white fw-bold">PT. Visdat</p>
+                                <p class="mb-0 text-white fw-bold">Visual Data Komputer</p>
                             </div>
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}" role="form">
@@ -21,7 +22,7 @@
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" aria-label="Email" aria-describedby="email-addon">
                                         @error('email')
                                             <span class="invalid-feedback text-xs" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong class="text-white">{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
@@ -30,7 +31,7 @@
                                         <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" aria-label="Password" aria-describedby="password-addon">
                                         @error('password')
                                             <span class="invalid-feedback text-xs" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong class="text-white">{{ $message }}</strong>
                                             </span>
                                         @enderror
                                         
