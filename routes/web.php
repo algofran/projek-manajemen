@@ -50,6 +50,7 @@ Route::group([
     Route::get('/Edit_user/{id}', [UserController::class, 'edit'])->name('_edituser');
     Route::post('/list_user/add', [UserController::class, 'store'])->name('add_user');
     Route::post('/user/update/{id}', [UserController::class, 'update'])->name('update_user');
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('profile_user');
 
     Route::get('/events/show', [UserController::class, 'show'])->name('events.show');
     Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents'])->name('calendar.crud');

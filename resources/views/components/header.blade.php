@@ -108,55 +108,73 @@
           </div> --}}
       </li>
       <li class="nav-item dropdown has-arrow new-user-menus">
-          <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-              <span class="user-img">
-                  <img class="rounded-circle" src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" width="31" alt="Soeng Souy">
-                  <div class="user-text">
-                      <h6>{{ Auth::user()->username }}</h6>
-                      <p class="text-muted mb-0">
-                        @foreach(Auth::user()->roles as $role)
+        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+            <span class="user-img">
+                @php
+                    $user = Auth::user();
+                    $role = $user->roles->first();
+                @endphp
+                @switch($role->id)
+                    @case(1)
+                        <img class="rounded-circle" src="{{ asset('assets/admin.png') }}" width="31" alt="Admin">
+                        @break
+                    @case(2)
+                        <img class="rounded-circle" src="{{ asset('assets/user.png') }}" width="31" alt="User">
+                        @break
+                    @case(3)
+                        <img class="rounded-circle" src="{{ asset('assets/manager.png') }}" width="31" alt="Manager">
+                        @break
+                    @default
+                        <img class="rounded-circle" src="{{ asset('assets/default.png') }}" width="31" alt="User">
+                @endswitch
+                <div class="user-text">
+                    <h6>{{ $user->username }}</h6>
+                    <p class="text-muted mb-0">{{ $role->name }}</p>
+                </div>
+            </span>
+        </a>
+        <div class="dropdown-menu">
+            <div class="user-header">
+               
+                <div class="avatar avatar-sm">
+                    @switch($role->id)
+                    @case(1)
+                        <img class="rounded-circle" src="{{ asset('assets/admin.png') }}" width="31" alt="Admin">
+                        @break
+                    @case(2)
+                        <img class="rounded-circle" src="{{ asset('assets/user.png') }}" width="31" alt="User">
+                        @break
+                    @case(3)
+                        <img class="rounded-circle" src="{{ asset('assets/manager.png') }}" width="31" alt="Manager">
+                        @break
+                    @default
+                        <img class="rounded-circle" src="{{ asset('assets/default.png') }}" width="31" alt="User">
+                @endswitch
+                </div>
+                <div class="user-text">
+                    <h6>{{ $user->username }}</h6>
+                    <p class="text-muted mb-0">
                             {{ $role->name }}
-                        @endforeach
-                    </p>
-                  </div>
-              </span>
-          </a>
-          <div class="dropdown-menu">
-              <div class="user-header">
-                  <div class="avatar avatar-sm">
-                      <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image" class="avatar-img rounded-circle">
-                  </div>
-                  <div class="user-text">
-                      <h6>{{ Auth::user()->username }}</h6>
-                      <p class="text-muted mb-0">
-                        @foreach(Auth::user()->roles as $role)
-                            {{ $role->name }}
-                        @endforeach
-                    </p>
-                  </div>
-              </div>
-              <a class="dropdown-item" href="profile.html">My Profile</a>
-              <a class="dropdown-item" href="inbox.html">Inbox</a>
-              
-                <a class="dropdown-item border-radius-md" href=""
-                   onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                    <div class="d-flex py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                            <h6 class="text-sm font-weight-normal mb-1">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                <span class="font-weight-bold">&nbsp;&nbsp;Logout</span>
-                            </h6>
-                        </div>
+                            </p>
+                            </div>
+            </div>
+            <a class="dropdown-item" href="{{ route('profile_user') }}">My Profile</a>
+            <a class="dropdown-item border-radius-md" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <div class="d-flex py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="font-weight-bold text-danger">&nbsp;&nbsp;Logout</span>
+                        </h6>
                     </div>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-          
-              
-          </div>
-      </li>
+                </div>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
+    </li>
+    
 
   </ul>
 </div>

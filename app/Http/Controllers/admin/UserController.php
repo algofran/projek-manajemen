@@ -39,6 +39,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         //
@@ -216,5 +217,10 @@ class UserController extends Controller
             default:
                 return 'user';
         }
+    }
+
+    public function profile()
+    {
+        return view('admin.profile');
     }
 }

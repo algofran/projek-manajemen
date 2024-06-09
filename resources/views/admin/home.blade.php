@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3>Admin Dashboard</h3>
+                <h3 class="text-gradient text-danger">Admin Dashboard</h3>
             </div>
             <div class="col text-end mb-3">
                 <div class="dropdown">
@@ -24,7 +24,7 @@
     
     <div class="row">
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
-            <div class="card bg-comman w-100">
+            <div class="card bg-comman w-100 shadow">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
-            <div class="card bg-comman w-100">
+            <div class="card bg-comman w-100 shadow">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
-            <div class="card bg-comman w-100">
+            <div class="card bg-comman w-100 shadow">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
-            <div class="card bg-comman w-100">
+            <div class="card bg-comman w-100 shadow">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -90,7 +90,7 @@
     
     <div class="row">
         <div class="col-md-12 col-lg-8">
-            <div class="card card-chart">
+            <div class="card card-chart shadow">
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
@@ -123,7 +123,7 @@
             
         </div>
         <div class="col-xl-4">
-            <div class="card flex-fill comman-shadow">
+            <div class="card flex-fill shadow">
                 <div class="card-header d-flex align-items-center">
                     <div class="row">
                         <h3 class="card-title">Progress Activity</h3>
@@ -175,7 +175,7 @@
 
     <div class="row ">
         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
-            <div class="card bg-comman w-100 equal-height">
+            <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -190,7 +190,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
-            <div class="card bg-comman w-100 equal-height">
+            <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -205,7 +205,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
-            <div class="card bg-comman w-100 equal-height">
+            <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -220,7 +220,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
-            <div class="card bg-comman w-100 equal-height">
+            <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
@@ -235,7 +235,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-sm-8 col-14 mx-auto">
-            <div class="card bg-comman w-100 equal-height">
+            <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
                         <div class="db-info">
