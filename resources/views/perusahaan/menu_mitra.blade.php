@@ -18,12 +18,12 @@
                                 <div class="row align-items-center">
                                     <a href="{{ route('list.proyeks', ['id' => $item->id]) }}">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-3 col-xl-2 col-md-2 col-lg-2">
                                                 <div class="db-icon bg-info">
                                                     <i class="fa fa-table"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-10 my-auto">
+                                            <div class="col-9 col-xl-10 col-md-10 col-lg-10 my-auto">
                                                 <h5 class="card-title">List {{ $item->mitra }}</h5>
                                             </div>
                                         </div>
@@ -40,12 +40,12 @@
                                 <div class="row align-items-center">
                                     <a href="{{ route('add.proyek', ['id' => $item->id]) }}">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-3 col-xl-2 col-md-2 col-lg-2">
                                                 <div class="db-icon bg-success">
                                                     <i class="fa fa-plus-square"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-10 my-auto">
+                                            <div class="col-9 col-xl-10 col-md-10 col-lg-10 my-auto">
                                                 <h5 class="card-title">Tambah Aktivitas</h5>
                                             </div>
                                         </div>
@@ -62,12 +62,12 @@
                                 <div class="row align-items-center">
                                     <a href="{{ route('keuangan', ['id' => $item->id]) }}">
                                         <div class="row">  
-                                            <div class="col-2">
+                                            <div class="col-3 col-xl-2 col-md-2 col-lg-2">
                                                 <div class="db-icon bg-purple">
                                                     <i class="fa fa-plus-square"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-10 my-auto">
+                                            <div class="col-9 col-xl-10 col-md-10 col-lg-10 my-auto">
                                                 <h5 class="card-title">Laporan Keuangan</h5>
                                             </div>
                                         </div>
@@ -84,12 +84,12 @@
                                 <div class="row align-items-center">
                                     <a href="{{ route('_laporan.tahun.perusahaan', ['id' => $item->id]) }}">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-3 col-xl-2 col-md-2 col-lg-2">
                                                 <div class="db-icon bg-warning">
                                                     <i class="fa fa-calendar-alt"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-10 my-auto">
+                                            <div class="col-9 col-xl-10 col-md-10 col-lg-10 my-auto">
                                                 <h5 class="card-title">Laporan Tahunan</h5>
                                             </div>
                                         </div>
