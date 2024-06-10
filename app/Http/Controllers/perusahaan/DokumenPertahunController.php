@@ -28,6 +28,7 @@ class DokumenPertahunController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         $dokumen = InstituteDokumen::orderBy('id')->get();
+        // dd($dokumen);
         $paket = [
             "",
             "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",
@@ -70,6 +71,7 @@ class DokumenPertahunController extends Controller
      */
     public function store(AddDokumenIntituteRequest $request)
     {
+        // dd($request);
         $file           = $request->file('file_path');
         $nama_file      = $file->getClientOriginalName();
         $file->move(public_path('PDF'), $nama_file);

@@ -22,7 +22,7 @@ class AddDokumenIntituteRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_dokumen' => 'required|exists:institute_list_dokumens,id',
+            // 'id_dokumen' => 'required|exists:institute_list_dokumens,id',
             'file_path' => 'required|file|mimes:pdf|max:2048',
             'license' => 'required|string|in:Public Domain,Private Domain,Permissive Domain',
         ];
@@ -31,8 +31,8 @@ class AddDokumenIntituteRequest extends FormRequest
     public function messages()
     {
         return [
-            'id_dokumen.required' => 'ID dokumen diperlukan',
-            'id_dokumen.exists' => 'ID dokumen tidak valid',
+            // 'id_dokumen.required' => 'ID dokumen diperlukan',
+            // 'id_dokumen.exists' => 'ID dokumen tidak valid',
             'file_path.required' => 'Lampiran diperlukan',
             'file_path.file' => 'Lampiran harus berupa file',
             'file_path.mimes' => 'Lampiran harus berupa file PDF',
