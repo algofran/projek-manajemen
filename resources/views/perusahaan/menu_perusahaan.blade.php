@@ -15,15 +15,14 @@
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <div class="row align-items-center">
-                                    <div class="ms-4 mt-3">
-                                        <h5 class="card-title">{{ $item->mitra }}</h5>
-                                        <div class="db-icon bg-gradient bg-danger mt-3">
-                                            <i class="fa fa-tags"></i>
+                                    <a href="{{ route('mitra.menu', ['id' => $item->id, 'name' => $item->mitra]) }}">
+                                        <div class="ms-4 mt-3">
+                                            <h5 class="card-title">{{ $item->mitra }}</h5>
+                                            <div class="db-icon bg-gradient bg-danger mt-3">
+                                                <i class="fa fa-tags"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="mt-3 d-grid gap-2 mx-auto">
-                                    <a href="{{ route('mitra.menu', ['id' => $item->id, 'name' => $item->mitra]) }}" class="btn btn-outline-danger mx-4">+ KLIK</a>
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-body text-center">
