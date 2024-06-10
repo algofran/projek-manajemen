@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="text-gradient text-danger">Admin Dashboard</h3>
+                <h3 class="text-gradient text-danger">Dashboard</h3>
             </div>
             <div class="col text-end mb-3">
                 <div class="dropdown">
