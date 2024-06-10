@@ -51,42 +51,42 @@ class UserSeeder extends Seeder
         ])->assignRole('user');
 
         // Buat 3 user admin random
-        for ($i = 0; $i < 3; $i++) {
-            User::create([
-                'firstname' => $faker->firstName,
-                'lastname' => $faker->lastName,
-                'username' => 'admin' . $i,
-                'email' => 'admin' . $i . '@gmail.com',
-                'password' => Hash::make('password'),
-                'phone' => $faker->phoneNumber,
-                'type' => '0'
-            ])->assignRole('admin');
-        }
+        // for ($i = 0; $i < 3; $i++) {
+        //     User::create([
+        //         'firstname' => $faker->firstName,
+        //         'lastname' => $faker->lastName,
+        //         'username' => 'admin' . $i,
+        //         'email' => 'admin' . $i . '@gmail.com',
+        //         'password' => Hash::make('password'),
+        //         'phone' => $faker->phoneNumber,
+        //         'type' => '0'
+        //     ])->assignRole('admin');
+        // }
 
-        // Buat 3 user manager random
-        for ($i = 0; $i < 3; $i++) {
-            User::create([
-                'firstname' => $faker->firstName,
-                'lastname' => $faker->lastName,
-                'username' => 'manager' . $i,
-                'email' => 'manager' . $i . '@gmail.com',
-                'password' => Hash::make('password'),
-                'phone' => $faker->phoneNumber,
-                'type' => '1'
-            ])->assignRole('manager');
-        }
+        // // Buat 3 user manager random
+        // for ($i = 0; $i < 3; $i++) {
+        //     User::create([
+        //         'firstname' => $faker->firstName,
+        //         'lastname' => $faker->lastName,
+        //         'username' => 'manager' . $i,
+        //         'email' => 'manager' . $i . '@gmail.com',
+        //         'password' => Hash::make('password'),
+        //         'phone' => $faker->phoneNumber,
+        //         'type' => '1'
+        //     ])->assignRole('manager');
+        // }
 
-        // Buat 3 user biasa random
-        for ($i = 0; $i < 3; $i++) {
-            User::create([
-                'firstname' => $faker->firstName,
-                'lastname' => $faker->lastName,
-                'username' => 'user' . $i,
-                'email' => 'user' . $i . '@gmail.com',
-                'password' => Hash::make('password'),
-                'phone' => $faker->phoneNumber,
-                'type' => '2'
-            ])->assignRole('user');
-        }
+        // // Buat 3 user biasa random
+        // for ($i = 0; $i < 3; $i++) {
+        //     User::create([
+        //         'firstname' => $faker->firstName,
+        //         'lastname' => $faker->lastName,
+        //         'username' => 'user' . $i,
+        //         'email' => 'user' . $i . '@gmail.com',
+        //         'password' => Hash::make('password'),
+        //         'phone' => $faker->phoneNumber,
+        //         'type' => '2'
+        //     ])->assignRole('user');
+        // }
     }
 }
