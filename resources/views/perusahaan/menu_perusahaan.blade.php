@@ -16,18 +16,23 @@
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <a href="{{ route('mitra.menu', ['id' => $item->id, 'name' => $item->mitra]) }}">
-                                        <div class="ms-4 mt-3">
-                                            <h5 class="card-title">{{ $item->mitra }}</h5>
-                                            <div class="db-icon bg-gradient bg-danger mt-3">
-                                                <i class="fa fa-tags"></i>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div class="db-icon bg-gradient bg-danger">
+                                                    <i class="fa fa-tags"></i>
+                                                </div>
                                             </div>
+                                            <div class="col-9 my-auto">
+                                                <h5 class="card-title">{{ $item->mitra }}</h5>
+                                            </div>
+                                            
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="card-body text-center">
+                            {{-- <div class="card-body text-center">
                                 <!-- Content if any -->
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @endforeach
