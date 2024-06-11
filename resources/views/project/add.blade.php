@@ -138,20 +138,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label text-bold @error('user_ids') is-invalid @enderror">Team Members</label>
-                                    <select multiple class="form-control populate" name="user_ids[]">
-                                        <option></option>
-                                        @foreach($employees as $employee)
-                                            <option value="{{ $employee->id }}" {{ in_array($employee->id, old('user_ids', [])) ? 'selected' : '' }}>
-                                                {{ ucwords($employee->username) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_ids')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label text-bold @error('user_ids') is-invalid @enderror">Team Members</label>
+                                            <select multiple class="form-control populate" name="user_ids[]">
+                                                <option></option>
+                                                @foreach($employees as $employee)
+                                                    <option value="{{ $employee->id }}" {{ in_array($employee->id, old('user_ids', [])) ? 'selected' : '' }}>
+                                                        {{ ucwords($employee->username) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('user_ids')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div> 
+                                    </div>
+                                </div>                               
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

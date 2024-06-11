@@ -88,8 +88,8 @@ class UserController extends Controller
                 })
                 ->get(['id', 'event_name as title', 'event_start as start', 'event_end as end']);
 
-            // Format tanggal sesuai kebutuhan fullcalendar
             foreach ($events as $event) {
+                // Ubah format tanggal untuk FullCalendar
                 $event->start = date('c', strtotime($event->start));
                 $event->end = date('c', strtotime($event->end));
             }
@@ -99,6 +99,7 @@ class UserController extends Controller
 
         return view('admin.event');
     }
+
 
     public function calendarEvents(Request $request)
     {
@@ -110,22 +111,34 @@ class UserController extends Controller
                     'event_end' => $request->event_end,
                 ]);
                 return response()->json($event);
+
             case 'edit':
                 $event = Events::find($request->id);
-                $event->update([
-                    'event_name' => $request->event_name,
-                    'event_start' => $request->event_start,
-                    'event_end' => $request->event_end,
-                ]);
-                return response()->json($event);
+                if ($event) {
+                    $event->update([
+                        'event_name' => $request->event_name,
+                        'event_start' => $request->event_start,
+                        'event_end' => $request->event_end,
+                    ]);
+                    return response()->json($event);
+                } else {
+                    return response()->json(['error' => 'Event not found'], 404);
+                }
+
             case 'delete':
                 $event = Events::find($request->id);
-                $event->delete();
-                return response()->json(['success' => true]);
+                if ($event) {
+                    $event->delete();
+                    return response()->json(['success' => true]);
+                } else {
+                    return response()->json(['error' => 'Event not found'], 404);
+                }
+
             default:
-                return response()->json(['error' => 'Invalid type']);
+                return response()->json(['error' => 'Invalid type'], 400);
         }
     }
+
 
     /** 
      * Show the form for editing the specified resource.

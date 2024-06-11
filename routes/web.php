@@ -53,7 +53,7 @@ Route::group([
     Route::get('/user/profile', [UserController::class, 'profile'])->name('profile_user');
 
     Route::get('/events/show', [UserController::class, 'show'])->name('events.show');
-    Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents'])->name('calendar.crud');
+    Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents']);
 });
 
 Route::group([
