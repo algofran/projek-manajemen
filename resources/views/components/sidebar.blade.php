@@ -35,9 +35,11 @@
                   <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan<span class="menu-arrow"></span></span></a>
                   <ul class="nav nav-children">
                       <li>
-                          <a href="{{ route('_list.perusahaan') }}"> 
-                              Tambah Perusahaan
-                          </a>
+                        @role(['admin', 'manager'])
+                        <a href="{{ route('_list.perusahaan') }}"> 
+                            Tambah Perusahaan
+                        </a>
+                        @endrole
                       </li>
                        @foreach ($companies as $company)
                           <li>
@@ -53,10 +55,12 @@
                   <a href="{{ route('list_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
               </li>   
 
-
+              @role(['admin','manager'])
               <li>
-                  <a href="{{ route('user') }}"><i class="fas fa-address-card"></i><span>pengguna</span></a>
-              </li>
+                <a href="{{ route('user') }}"><i class="fas fa-address-card"></i><span>pengguna</span></a>
+            </li>
+              @endrole
+              
           </ul>
       </div>
   </div>

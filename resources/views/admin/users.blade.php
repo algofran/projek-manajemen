@@ -33,7 +33,9 @@
                             <th class="text-secondary">Role</th>
                             <th class="text-secondary">Status</th>
                             <th class="text-secondary">Since</th>
+                            @role('admin')
                             <th class="text-secondary text-end">Action</th>
+                            @endrole
                         </tr>
                         </thead>
                         <tbody></tbody>
@@ -177,12 +179,15 @@
                     var deleteUrl = '{{ route("_del.user", ":id") }}';
                       deleteUrl = deleteUrl.replace(':id', data);
                       return `
-                      <a href="${editUrl}" class="btn btn-sm bg-danger-light me-2">
+                      @role('admin')
+                       <a href="${editUrl}" class="btn btn-sm bg-danger-light me-2">
                         <i class="feather-edit"></i>
                     </a>
                       <a href="${deleteUrl}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this User?')">
                       <i class="feather-trash-2"></i>
                       </a>
+                      @endrole
+                     
                           `;
                   }
                 }

@@ -108,9 +108,11 @@
                                   </p>
                                 </div>
                                 <div class="col">
-                                  <div class="col-auto text-end float-end ms-auto download-grp">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addpdf'.$item->id }}" class="btn btn-info text-white"><i class="fas fa-plus"> PDF</i></a>
-                                </div>
+                                    @role(['admin', 'manager'])
+                                        <div class="col-auto text-end float-end ms-auto download-grp">
+                                          <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addpdf'.$item->id }}" class="btn btn-info text-white"><i class="fas fa-plus"> PDF</i></a>
+                                      </div>
+                                @endrole
                                 </div>
                               </div>
       
@@ -130,9 +132,11 @@
                                         <a href="{{ route('_download.pdf.laporan', $data->id) }}" class="btn btn-sm btn-outline-info">
                                           <i class="fa fa-download text-dark"></i>
                                         </a>
+                                        @role(['admin', 'manager'])
                                         <a href="{{ route('_del.pdf.laporan', ['id' => $data->id, 'periode' => $item->periode]) }}" class="btn btn-sm btn-outline-danger">
                                           <i class="feather-trash-2 text-dark"></i>
                                         </a>
+                                @endrole
                                       </td>
                                   
                                     </tr>
@@ -147,58 +151,60 @@
                 </div>
                 
                 
-              <div class="modal custom-modal fade bank-details" id="{{ 'addpdf'.$item->id }}" role="dialog">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="form-header text-start mb-0">
-                                <h4 class="mb-0">Add PDF {{ $item->deskripsi }}</h4>
-                            </div>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('_add.pdf.laporan') }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="id_dokumen" value="{{ $item->id }}">
-                            <div class="modal-body">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Attachment</label>
-                                    <div class="col-md-10">
-                                        <input type="file" name="file_path" class="form-control @error('file_path') is-invalid @enderror" value="{{ old('file_path') }}" placeholder="" required>
-                                        @error('file_path')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">Choose License</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control mb-md @error('license') is-invalid @enderror" name="license" required>
-                                            <option value="Public Domain" {{ old('license') == 'Public Domain' ? 'selected' : '' }}>Public Domain</option>
-                                            <option value="Private Domain" {{ old('license') == 'Private Domain' ? 'selected' : '' }}>Private Domain</option>
-                                            <option value="Permissive Domain" {{ old('license') == 'Permissive Domain' ? 'selected' : '' }}>Permissive Domain</option>
-                                        </select>
-                                        @error('license')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="bank-details-btn">
-                                    <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
-                                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
-                                </div>
-                            </div>
-                        </form>
-                        
-                    </div>
-                </div>
-              </div>
+                @role(['admin', 'manager'])
+                    <div class="modal custom-modal fade bank-details" id="{{ 'addpdf'.$item->id }}" role="dialog">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <div class="form-header text-start mb-0">
+                                      <h4 class="mb-0">Add PDF {{ $item->deskripsi }}</h4>
+                                  </div>
+                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                              <form action="{{ route('_add.pdf.laporan') }}" method="post" enctype="multipart/form-data">
+                                  @csrf
+                                  <input type="hidden" name="id_dokumen" value="{{ $item->id }}">
+                                  <div class="modal-body">
+                                      <div class="form-group row">
+                                          <label class="col-form-label col-md-2">Attachment</label>
+                                          <div class="col-md-10">
+                                              <input type="file" name="file_path" class="form-control @error('file_path') is-invalid @enderror" value="{{ old('file_path') }}" placeholder="" required>
+                                              @error('file_path')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <label class="col-form-label col-md-2">Choose License</label>
+                                          <div class="col-md-10">
+                                              <select class="form-control mb-md @error('license') is-invalid @enderror" name="license" required>
+                                                  <option value="Public Domain" {{ old('license') == 'Public Domain' ? 'selected' : '' }}>Public Domain</option>
+                                                  <option value="Private Domain" {{ old('license') == 'Private Domain' ? 'selected' : '' }}>Private Domain</option>
+                                                  <option value="Permissive Domain" {{ old('license') == 'Permissive Domain' ? 'selected' : '' }}>Permissive Domain</option>
+                                              </select>
+                                              @error('license')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <div class="bank-details-btn">
+                                          <button type="submit" class="btn save-invoice-btn btn-primary">Save</button>
+                                          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-danger me-2">Cancel</a>
+                                      </div>
+                                  </div>
+                              </form>
+                              
+                          </div>
+                      </div>
+                    </div>   
+                @endrole
                 @endforeach
               </div>
-                
+              @role(['admin', 'manager'])
               <div class="modal custom-modal fade bank-details" id="bank_details" role="dialog">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -275,6 +281,7 @@
                     </div>
                 </div>
             </div>
+              @endrole
       
       
           </div>

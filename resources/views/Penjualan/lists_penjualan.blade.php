@@ -16,7 +16,9 @@
                                 </div>
                                 <div class="col-auto text-end float-end ms-auto download-grp">
                                     <a href="{{ route('download.exel.penjualan') }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Exel</a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
+                                    @role(['admin', 'manager'])
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" href="#" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
+                                @endrole
                                 </div>
                             </div>
                         </div>
@@ -35,7 +37,9 @@
                                         <th>Keterangan</th>
                                         <th>Jumlah</th>
                                         <th>Status</th>
+                                        @role(['admin', 'manager'])
                                         <th class="text-end">Action</th>
+                                        @endrole
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,10 +65,8 @@
                                             @endswitch
                                         </td>
                                         <td class="text-end">
+                                            @role(['admin', 'manager'])
                                             <div class="actions ">
-                                                {{-- <a href="{{ route('penjualan.detail', ['pid' => $data->id]) }}" class="btn btn-sm bg-success-light me-2 ">
-                                                    <i class="feather-eye"></i>
-                                                </a> --}}
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#EditPenjualan'.$data->id }}" class="btn btn-sm bg-danger-light me-2">
                                                     <i class="feather-edit"></i>
                                                 </a>
@@ -72,8 +74,10 @@
                                                     <i class="feather-trash-2"></i>
                                                 </a>
                                             </div>
+                                            @endrole
                                         </td>
                                     </tr>
+                                    @role(['admin', 'manager'])
                                     <div class="modal custom-modal fade bank-details" id="{{ 'EditPenjualan'.$data->id }}" role="dialog">
                                     
                                         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -171,12 +175,14 @@
                                                 </div>
                                         </div>
                                     </div>  
+                                @endrole
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                @role(['admin', 'manager'])
                 <div class="modal custom-modal fade bank-details" id="bank_details" role="dialog">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
@@ -274,6 +280,8 @@
                         </div>
                     </div>
                 </div>
+                @endrole
+                                
                 
             </div>
         </div>

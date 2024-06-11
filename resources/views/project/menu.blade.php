@@ -36,6 +36,7 @@
                         </div>
                     </div>
                     <!-- Tambah Project -->
+                    @role(['admin', 'manager'])      
                     <div class="col-12 col-lg-6 col-xl-6 mb-3">
                         <div class="card flex-fill">
                             <div class="card-header">
@@ -61,6 +62,7 @@
                           
                         </div>
                     </div>
+                    @endrole
                     <!-- Laporan Keuangan -->
                     <div class="col-12 col-lg-6 col-xl-6 mb-3">
                         <div class="card flex-fill">

@@ -48,9 +48,11 @@
                             </ul>
                         </div>
                     </div>
+                    @role(['admin', 'manager'])      
                     <div class="col-auto text-end float-end ms-auto download-grp">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#bank_details" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah Laporan</a>
                     </div>
+                    @endrole
                 </div>
                 @if ($laporantahun == "[]")
                 <div class="my-5">
@@ -90,10 +92,11 @@
                                     @endforeach 
                                   </h4>
                               </div>
+                              @role(['admin', 'manager'])
                               <div class="col">
                                   <p class="text-end">{{ $item->created_at }}</p>
-  
                               </div>
+                            @endrole
                           </div>
                           
                       </div>
@@ -127,9 +130,11 @@
                                       <a href="{{ route('_download.pdf.laporan.projek', $data->id) }}" class="btn btn-sm btn-outline-info">
                                         <i class="fa fa-download text-dark"></i>
                                       </a>
+                                      @role(['admin', 'manager'])
                                       <a href="{{ route('_del.pdf.laporan.projek', ['id' => $data->id]) }}" class="btn btn-sm btn-outline-danger">
                                         <i class="feather-trash-2 text-dark"></i>
                                       </a>
+                                @endrole
                                     </td>
                                 
                                   </tr>

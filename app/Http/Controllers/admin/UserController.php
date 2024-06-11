@@ -158,7 +158,7 @@ class UserController extends Controller
         $role = $this->getRoleByType($request->type);
         $user->syncRoles($role);
 
-        return redirect()->route('user')->with('success', 'User update successfully.');
+        return redirect()->back()->with('success', 'User update successfully.');
     }
 
     /**

@@ -73,16 +73,27 @@
                                                     <input type="text" class="form-control" placeholder="+62" value="{{ $user->phone }}" name="phone" required>
                                                 </div>
                                             </div>
-                                          <div class="form-group row">
-                                              <label class="col-form-label col-md-2">User Authority</label>
-                                              <div class="col-md-10">
-                                                <select class="form-control form-select" name="type" required>
-                                                  <option value="0" {{ $user->type == 0 ? 'selected' : '' }}>Administrator</option>
-                                                  <option value="1" {{ $user->type == 1 ? 'selected' : '' }}>Manager</option>
-                                                  <option value="2" {{ $user->type == 2 ? 'selected' : '' }}>Staff</option>
-                                              </select>
-                                              </div>
-                                          </div>
+                                            @role(['admin', 'manager'])
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-md-2">User Authority</label>
+                                                <div class="col-md-10">
+                                                  <select class="form-control form-select" name="type" required>
+                                                    <option value="0" {{ $user->type == 0 ? 'selected' : '' }}>Administrator</option>
+                                                    <option value="1" {{ $user->type == 1 ? 'selected' : '' }}>Manager</option>
+                                                    <option value="2" {{ $user->type == 2 ? 'selected' : '' }}>Staff</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            @endrole
+                                            @role ('user')
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-md-2">User Authority</label>
+                                                <div class="col-md-10">
+                                                    <input type="hidden" name="type" class="form-control" readonly value="{{ $user->type }}">
+                                                    <input type="" class="form-control" readonly value="User">
+                                                </div>
+                                            </div>
+                                            @endrole
                                           <div class="form-group row">
                                               <label class="col-form-label col-md-2">Password</label>
                                               <div class="col-md-10">

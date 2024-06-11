@@ -35,9 +35,11 @@
                                     
                                 </div>
                             </div>
+                            @role(['admin', 'manager'])
                             <div class="col-auto text-end float-end download-grp">
                                 <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
                             </div>  
+                            @endrole
                         </div>
                     </div>
                 </div>
@@ -62,6 +64,7 @@
                                 <th>Status</th>
                                 <th>Pembayaran</th>
                                 <th class="text-end">Action</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -141,17 +144,22 @@
                                             <!-- Tindakan jika tidak ada kasus yang cocok -->
                                     @endswitch
                                 </td>
+                                
                                 <td class="text-end">
-                                    <div class="actions ">
+                                    <div class="actions">
                                         <a href="{{ route('project.detail.show', ['id' => $project->id]) }}" class="btn btn-sm bg-success-light me-2 ">
                                             <i class="feather-eye"></i>
                                         </a>
+                                        @role(['admin', 'manager'])
+
                                         <a href="{{ route('project.edit', ['id' => $project->id]) }}" class="btn btn-sm bg-danger-light me-2">
                                             <i class="feather-edit"></i>
                                         </a>
                                         <a href="{{ route('_project.del', ['id' => $project->id, 'status' => $project->status]) }}" class="btn btn-sm bg-danger-light" onclick="return confirm('Are you sure want to delete this project?')">
                                             <i class="feather-trash-2"></i>
+                                        @endrole
                                         </a>
+                                        
                                     </div>
                                 </td>
                             </tr>
