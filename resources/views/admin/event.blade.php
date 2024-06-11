@@ -103,7 +103,7 @@
     var SITEURL = "{{ url('/') }}";
 
     $('#eventStart, #eventEnd').datetimepicker({
-        format: 'YYYY-MM-DDTHH:mm',
+        format: 'YYYY-MM-DD HH:mm',
         sideBySide: true
     });
 
@@ -130,7 +130,7 @@
         events: SITEURL + "/events/show",
         displayEventTime: true,
         eventRender: function (event, element) {
-            element.css('background-color', '#FF5161');
+            element.css('background-color', '#F58872');
             element.tooltip({
                 title: `<strong>${event.title}</strong><br>${moment(event.start).format('YYYY-MM-DD HH:mm')} - ${moment(event.end).format('YYYY-MM-DD HH:mm')}`,
                 html: true,
