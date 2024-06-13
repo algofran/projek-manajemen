@@ -13,6 +13,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <input type="hidden" name="project_id" value="{{ $project_id->id }}">
+                                <input type="hidden" name="id_inst" value="{{ $project_id->id_inst }}">
                                 <div class="form-group">
                                     <label>Project Status</label>
                                     <div class="border">

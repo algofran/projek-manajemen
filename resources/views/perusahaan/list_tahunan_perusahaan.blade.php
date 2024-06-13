@@ -31,7 +31,7 @@
           <div class="col-sm-12">
               <div class="card card-table">
                   <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
-                    Laporan Keuangan Pertahun {{ $mitra->mitra }}
+                    Dokumen Projek {{ $mitra->mitra }}
                   </div>
               </div>
               <div class="page-header">

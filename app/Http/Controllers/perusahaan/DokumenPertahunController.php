@@ -11,6 +11,7 @@ use App\Models\InstituteProyeks;
 use App\Models\InstituteTahun;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class DokumenPertahunController extends Controller
 {
@@ -28,7 +29,6 @@ class DokumenPertahunController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         $dokumen = InstituteDokumen::orderBy('id')->get();
-        // dd($dokumen);
         $paket = [
             "",
             "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",
@@ -38,7 +38,6 @@ class DokumenPertahunController extends Controller
             "Papua 2 - Serpo SBU Sulawesi & IBT 2022-2025",
             "Konawe - Serpo SBU Sulawesi & IBT 2022-2025"
         ];
-        // dd($laporantahun);
 
         if ($tahun) {
             $laporantahun = InstituteTahun::where('id_inst', $id)->where('tahun', $tahun)
@@ -50,7 +49,6 @@ class DokumenPertahunController extends Controller
         }
         $listtahun = InstituteTahun::all();
 
-
         return view('perusahaan.list_tahunan_perusahaan', compact('mitra', 'employees', 'paket', 'projek', 'laporantahun', 'dokumen', 'tahun', 'listtahun'));
     }
 
@@ -59,11 +57,18 @@ class DokumenPertahunController extends Controller
      */
     public function create(AddLaporanInstituteRequest $request)
     {
-
         $validatedData = $request->validated();
+
+        // Create folder based on year
+        $tahun = $validatedData['tahun'];
+        $folderPath = public_path("PDF{$tahun}");
+        if (!File::exists($folderPath)) {
+            File::makeDirectory($folderPath, 0755, true);
+        }
+
         InstituteTahun::create($validatedData);
 
-        return redirect()->back()->with('success', 'Institute created successfully!');
+        return redirect()->back()->with('success', 'Tahun baru berhasil ditambahkan!');
     }
 
     /**
@@ -71,19 +76,30 @@ class DokumenPertahunController extends Controller
      */
     public function store(AddDokumenIntituteRequest $request)
     {
-        // dd($request);
-        $file           = $request->file('file_path');
-        $nama_file      = $file->getClientOriginalName();
-        $file->move(public_path('PDF'), $nama_file);
 
+        $file = $request->file('file_path');
+        $nama_file = $file->getClientOriginalName();
+
+        // Ambil tahun dari dokumen terkait
+        $id_dokumen = $request->input('id_dokumen');
+        $dokumen = InstituteTahun::findOrFail($id_dokumen);
+        $tahun = $dokumen->tahun;
+
+        // Tentukan folder berdasarkan tahun
+        $path = public_path("PDF/{$tahun}");
+
+        // Pindahkan file ke folder tujuan
+        $file->move($path, $nama_file);
+
+        // Simpan informasi file ke database
         $upload = new InstituteDokumen();
-
-        $upload->id_dokumen      = $request->input('id_dokumen');
-        $upload->file_path       = $nama_file;
+        $upload->id_dokumen = $id_dokumen;
+        $upload->file_path = "{$tahun}/{$nama_file}";
         $upload->license = $request->input('license');
+
         $upload->save();
 
-        return back();
+        return back()->with('success', 'Dokumen berhasil diunggah.');
     }
 
     public function download($id)
@@ -98,38 +114,10 @@ class DokumenPertahunController extends Controller
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $hapus = InstituteDokumen::findOrfail($id);
-        $file = public_path('/PDF/') . $hapus->file_path;
+        $hapus = InstituteDokumen::findOrFail($id);
+        $file = public_path("PDF/{$hapus->file_path}");
 
         if (file_exists($file)) {
             @unlink($file);

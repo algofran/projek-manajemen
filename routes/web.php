@@ -16,6 +16,7 @@ use App\Http\Controllers\project\LaporanPertahunController;
 use App\Http\Controllers\project\ProjectController;
 use App\Http\Controllers\project\ProjectPengeluaranController;
 use App\Http\Controllers\project\ProjectTugasController;
+use App\Http\Controllers\rekapdata\RekapController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,7 @@ Route::group([
 ], function () {
     // Route::get('/dashboard/{year?}', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/getUser', [UserController::class, 'getUser'])->name('admin.dataTable.getUser');
-    Route::get('/dashboard/{year?}', [AdminController::class, 'index'])->name('home');
+    Route::get('/dashboard/{year?}/{month?}', [AdminController::class, 'index'])->name('home');
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/User_list', [UserController::class, 'index'])->name('user');
     Route::get('/hapus_user/{id}', [UserController::class, 'destroy'])->name('_del.user');
@@ -51,7 +52,6 @@ Route::group([
     Route::post('/list_user/add', [UserController::class, 'store'])->name('add_user');
     Route::post('/user/update/{id}', [UserController::class, 'update'])->name('update_user');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('profile_user');
-
     Route::get('/events/show', [UserController::class, 'show'])->name('events.show');
     Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents'])->name('calendar.crud');
 });
@@ -147,4 +147,16 @@ Route::group([
     Route::post('{id}', [PenjualanController::class, 'update'])->name('penjualan.update');
     Route::get('{id}/delete', [PenjualanController::class, 'destroy'])->name('_penjualan.del');
     Route::get('download-penjualan-exel', [PenjualanController::class, 'downloadExel'])->name('download.exel.penjualan');
+});
+
+Route::group([
+    'middleware' => ['auth'],
+    'namespace'  => 'App\Http\Controllers\rekapdata',
+    'prefix'     => 'rekapdata/',
+], function () {
+    Route::get('/rekapdatapendpatan', [RekapController::class, 'pendapatan'])->name('rekapdatapendapatan');
+    Route::get('/rekapdatapengeluaran', [RekapController::class, 'pengeluaran'])->name('rekapdatapengeluaran');
+    Route::get('/menurekap', [RekapController::class, 'menu'])->name('menurekap');
+    Route::get('/download/exel/rekappengeluaran', [RekapController::class, 'downloadExcelPengeluaran'])->name('download.exel.rekappengeluaran');
+    Route::get('/download/exel/rekappendapatan', [RekapController::class, 'downloadExcelPendapatan'])->name('download.exel.rekappendapatan');
 });

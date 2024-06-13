@@ -10,6 +10,7 @@ use App\Models\ListDokumen;
 use App\Models\ProjectList;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; // Untuk File class
 
 class LaporanPertahunController extends Controller
 {
@@ -44,6 +45,15 @@ class LaporanPertahunController extends Controller
     public function create(AddLaporanRequest $request)
     {
         $validatedData = $request->validated();
+
+        // Buat folder berdasarkan tahun
+        $tahun = $validatedData['tahun'];
+        $path = public_path("PDF_project/{$tahun}");
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+        }
+
+        // Simpan data laporan
         ListDokumen::create($validatedData);
 
         return redirect()->back()->with('success', 'projek dokumen list tahun created successfully!');
@@ -54,41 +64,39 @@ class LaporanPertahunController extends Controller
      */
     public function store(AddDokumenRequest $request)
     {
-        $file           = $request->file('file_path');
+        $file = $request->file('file_path');
+        $nama_file = $file->getClientOriginalName();
 
-        //mengambil nama file
-        $nama_file      = $file->getClientOriginalName();
+        // Ambil tahun dari dokumen terkait
+        $id_dokumen = $request->input('id_dokumen');
+        $dokumen = ListDokumen::findOrFail($id_dokumen);
+        $tahun = $dokumen->tahun;
 
-        //memindahkan file ke folder tujuan
-        $file->move(public_path('PDF_project'), $nama_file);
+        // Tentukan folder berdasarkan tahun
+        $path = public_path("PDF_project/{$tahun}");
 
+        // Pindahkan file ke folder tujuan
+        $file->move($path, $nama_file);
 
+        // Simpan informasi file ke database
         $upload = new DokumenTahun();
-
-        $upload->id_dokumen      = $request->input('id_dokumen');
-        $upload->file_path       = $nama_file;
+        $upload->id_dokumen = $id_dokumen;
+        $upload->file_path = "{$tahun}/{$nama_file}";
         $upload->license = $request->input('license');
 
-        //menyimpan data ke database
         $upload->save();
 
-        return back();
+        return redirect()->back()->with('success', 'Dokumen berhasil diupload.');
     }
 
     public function download($id)
     {
-        // Cari dokumen berdasarkan id dokumen
         $dokumen = DokumenTahun::findOrFail($id);
+        $file_path = public_path("PDF_project/{$dokumen->file_path}");
 
-        // Path lengkap ke file
-        $file_path = public_path('PDF_project/') . $dokumen->file_path;
-
-        // Pastikan file ada
         if (file_exists($file_path)) {
-            // Download file
             return response()->download($file_path);
         } else {
-            // File tidak ditemukan
             return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
     }
@@ -122,14 +130,10 @@ class LaporanPertahunController extends Controller
      */
     public function destroy(string $id)
     {
-        // Cari dokumen berdasarkan id dokumen
-        $hapus = DokumenTahun::findOrfail($id);
+        $hapus = DokumenTahun::findOrFail($id);
+        $file = public_path("PDF_project/{$hapus->file_path}");
 
-        $file = public_path('/PDF_project/') . $hapus->file_path;
-
-        // Pastikan dokumen ada
         if (file_exists($file)) {
-
             @unlink($file);
         }
         $hapus->delete();

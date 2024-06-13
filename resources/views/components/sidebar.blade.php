@@ -22,14 +22,12 @@
                   <a href="{{ route('home') }}"><i class="feather-grid"></i><span>Dashboard</span></a>
               </li>
               <li>
-                  <a href="{{ route('events.show') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
-              </li>
-              <li>
                   <a href="{{ route('project.menu') }}"><i class="fas fa-clipboard-list"></i> <span>Project Menu</span></a>
               </li>
               @php
                   $companies = App\Models\InstituteList::all();
               @endphp
+
 
               <li class="submenu">
                   <a href="#"><i class="fas fa-file-invoice-dollar"></i><span>Perusahaan<span class="menu-arrow"></span></span></a>
@@ -50,6 +48,10 @@
                       @endforeach 
                   </ul>
               </li>
+
+              <li>
+                <a href="{{ route('menurekap') }}"><i class="fas fa-calendar-day"></i> <span>Laporan Rekap</span></a>
+            </li>
               
               <li>
                   <a href="{{ route('list_penjualan') }}"><i class="fa fa-shopping-cart"></i><span>penjualan</span></a>
@@ -61,6 +63,9 @@
             </li>
               @endrole
               
+              <li>
+                <a href="{{ route('events.show') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+            </li>
           </ul>
       </div>
   </div>

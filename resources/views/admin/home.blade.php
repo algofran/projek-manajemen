@@ -18,6 +18,18 @@
                     </ul>
                 </div>
             </div>
+            <div class="col-1 text-end mb-3">
+                <div class="dropdown">
+                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
+                        Bulan
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                        @foreach (range(1, 12) as $month)
+                            <li><a class="dropdown-item" href="{{ route('home', ['year' => request('year'), 'month' => $month]) }}">{{ DateTime::createFromFormat('!m', $month)->format('F') }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
         <!-- Tambahkan konten dashboard di sini -->
     </div>
@@ -133,13 +145,13 @@
                     <div class="card-header">
                         <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
                             <li class="nav-item">
-                                <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">Serpo</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#tab-5" data-bs-toggle="tab" class="nav-link">Inconnet</a>
+                                <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">Icon Plus</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#tab-6" data-bs-toggle="tab" class="nav-link ">Telkom Akses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#tab-6" data-bs-toggle="tab" class="nav-link ">PLN</a>
                             </li>
                         </ul>
                     </div>
@@ -147,16 +159,9 @@
                         <div class="tab-content pt-0">
                             <div role="tabpanel" id="tab-4" class="tab-pane fade show active">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingserpo}}</li>
-                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progressserpo}}</li>
-                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishserpo}}</li>
-                                </ul>
-                            </div>
-                            <div role="tabpanel" id="tab-5" class="tab-pane fade">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingiconnet}}</li>
-                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progressiconnet}}</li>
-                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishiconnet}}</li>
+                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingIconplus}}</li>
+                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progressIconplus}}</li>
+                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishIconplus}}</li>
                                 </ul>
                             </div>
                             <div role="tabpanel" id="tab-6" class="tab-pane fade">
@@ -260,8 +265,8 @@
 
 <script>
     var dataTotalPendapatanTelkom = <?php echo $dataTotalPendapatanTelkomJson; ?>;
-    var dataTotalPendapatanSerpo = <?php echo $dataTotalPendapatanSerpoJson; ?>;
-    var dataTotalPendapatanIconnet = <?php echo $dataTotalPendapatanIconnetJson; ?>;
+    var dataTotalPendapatanpln = <?php echo $dataTotalPendapatanplnJson; ?>;
+    var dataTotalPendapatanIcon = <?php echo $dataTotalPendapatanIconJson; ?>;
     var databulan = <?php echo $databulanJson; ?>;
 
     var options = {
@@ -271,12 +276,12 @@
                 data: dataTotalPendapatanTelkom,
             },
             {
-                name: "Serpo",
-                data: dataTotalPendapatanSerpo,
+                name: "PLN",
+                data: dataTotalPendapatanpln,
             },
             {
-                name: "Iconnet",
-                data: dataTotalPendapatanIconnet,
+                name: "Icon Plus",
+                data: dataTotalPendapatanIcon,
             }
         ],
         chart: {
@@ -324,8 +329,8 @@
 
 <script>
     var dataTotalPengeluaranTelkom = <?php echo $dataTotalPengeluaranTelkomJson; ?>;
-    var dataTotalPengeluaranSerpo = <?php echo $dataTotalPengeluaranSerpoJson; ?>;
-    var dataTotalPengeluaranIconnet = <?php echo $dataTotalPengeluaranIconnetJson; ?>;
+    var dataTotalPengeluaranpln = <?php echo $dataTotalPengeluaranplnJson; ?>;
+    var dataTotalPengeluaranIcon = <?php echo $dataTotalPengeluaranIconJson; ?>;
     var databulan = <?php echo $databulanJson; ?>;
 
     var options = {
@@ -335,12 +340,12 @@
                 data: dataTotalPengeluaranTelkom,
             },
             {
-                name: "Serpo",
-                data: dataTotalPengeluaranSerpo,
+                name: "PLN",
+                data: dataTotalPengeluaranpln,
             },
             {
-                name: "Iconnet",
-                data: dataTotalPengeluaranIconnet,
+                name: "Icon Plus",
+                data: dataTotalPengeluaranIcon,
             }
         ],
         chart: {

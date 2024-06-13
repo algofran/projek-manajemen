@@ -23,6 +23,7 @@ class AddMitraPengeluaranRequest extends FormRequest
     {
         return [
             'project_id' => 'required', // Tambahkan aturan validasi sesuai kebutuhan Anda
+            'id_inst' => 'required', // Tambahkan aturan validasi sesuai kebutuhan Anda
             'subject' => 'required',
             'user_id' => 'required',
             'date' => 'required|date',

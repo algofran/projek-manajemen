@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->id();
             $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('id_inst');
             $table->foreign('project_id')->references('id')->on('institute_proyeks');
             $table->text('comment');
             $table->string('subject', 200);

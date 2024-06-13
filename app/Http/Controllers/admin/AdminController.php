@@ -17,178 +17,170 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($year = null)
-    {
-        // Tahun button filter All
-        $tahun = $year;
-        // Tahun button filter All
+    public function index($year = null, $month = null)
+{
+    $tahun = $year;
+    $bulan = $month;
 
-        // Dashboard Total Keseluruhan Project
-        $totalprojek = $this->applyYearFilter(ProjectList::query(), 'start_date', $tahun)->count() + $this->applyYearFilter(InstituteProyeks::query(), 'start_date', $tahun)->count();
-        $pending = $this->applyYearFilter(ProjectList::query()->where('status', 1), 'start_date', $tahun)->count() + $this->applyYearFilter(InstituteProyeks::query()->where('status', 0), 'start_date', $tahun)->count();
-        $onprogress = $this->applyYearFilter(ProjectList::query()->where('status', 2), 'start_date', $tahun)->count() + $this->applyYearFilter(InstituteProyeks::query()->where('status', 1), 'start_date', $tahun)->count();
-        $finish = $this->applyYearFilter(ProjectList::query()->where('status', 3), 'start_date', $tahun)->count() + $this->applyYearFilter(InstituteProyeks::query()->where('status', 2), 'start_date', $tahun)->count();
-        // Dashboard Total Keseluruhan Project
+    // Dashboard Total Keseluruhan Project
+    $totalprojek = $this->applyYearMonthFilter(ProjectList::query(), 'start_date', $tahun, $bulan)->count();
+    $pending = $this->applyYearMonthFilter(ProjectList::query()->where('status', 1), 'start_date', $tahun, $bulan)->count();
+    $onprogress = $this->applyYearMonthFilter(ProjectList::query()->where('status', 2), 'start_date', $tahun, $bulan)->count();
+    $finish = $this->applyYearMonthFilter(ProjectList::query()->where('status', 3), 'start_date', $tahun, $bulan)->count();
 
-        // Progress Activity
-        $pendingserpo = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 0), 'start_date', $tahun)->count();
-        $progressserpo = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 1), 'start_date', $tahun)->count();
-        $finishserpo = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 2), 'start_date', $tahun)->count();
+    // Progress Activity
+    $pendingIconplus = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 0), 'start_date', $tahun, $bulan)->count() +
+                       $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 0), 'start_date', $tahun, $bulan)->count();
+    $progressIconplus = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 1), 'start_date', $tahun, $bulan)->count() +
+                        $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 1), 'start_date', $tahun, $bulan)->count();
+    $finishIconplus = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 2)->where('status', 2), 'start_date', $tahun, $bulan)->count() +
+                      $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 2), 'start_date', $tahun, $bulan)->count();
 
-        $pendingiconnet = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 0), 'start_date', $tahun)->count();
-        $progressiconnet = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 1), 'start_date', $tahun)->count();
-        $finishiconnet = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 1)->where('status', 2), 'start_date', $tahun)->count();
+    $pendingtelkom = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 0), 'start_date', $tahun, $bulan)->count();
+    $progresstelkom = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 1), 'start_date', $tahun, $bulan)->count();
+    $finishtelkom = $this->applyYearMonthFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 2), 'start_date', $tahun, $bulan)->count();
 
-        $pendingtelkom = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 0), 'start_date', $tahun)->count();
-        $progresstelkom = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 1), 'start_date', $tahun)->count();
-        $finishtelkom = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 3)->where('status', 2), 'start_date', $tahun)->count();
-        // Progress Activity
+    // Dashboard Total Keuangan Tiap Project
+    $pendingonhold = $this->applyYearMonthFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun, $bulan)->sum('payment') +
+                     $this->applyYearMonthFilter(InstituteProyeks::query()->where('status', 1), 'start_date', $tahun, $bulan)->sum('tagihan');
+    $jumlahyangSudahTerbayar = $this->applyYearMonthFilter(ProjectList::query()->where('payment_status', 3), 'start_date', $tahun, $bulan)->sum('payment') +
+                               $this->applyYearMonthFilter(InstituteProyeks::query()->where('status', 2), 'start_date', $tahun, $bulan)->sum('tagihan') +
+                               $this->applyYearMonthFilter(Sales::query()->where('status', 1), 'tgl', $tahun, $bulan)->sum('jual');
+    $jumlahYangBelumTerbayar = $this->applyYearMonthFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun, $bulan)->sum('payment') +
+                               $this->applyYearMonthFilter(InstituteProyeks::query()->where('status', 0), 'start_date', $tahun, $bulan)->sum('tagihan') +
+                               $this->applyYearMonthFilter(Sales::query()->where('status', 0), 'tgl', $tahun, $bulan)->sum('jual');
+    $totalProjectExpense = $this->applyYearMonthFilter(ProjectAktivitis::query(), 'date', $tahun, $bulan)->sum('cost') +
+                           $this->applyYearMonthFilter(InstitutePengeluaran::query(), 'date', $tahun, $bulan)->sum('cost') +
+                           $this->applyYearMonthFilter(Sales::query(), 'tgl', $tahun, $bulan)->sum('beli');
+    $grossProjectProfit = $jumlahyangSudahTerbayar - $totalProjectExpense;
 
-        // Dashboard Total Keuangan Tiap Project
-        $pendingonhold = $this->applyYearFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun)->sum('payment') + $this->applyYearFilter(InstituteProyeks::query()->where('status', 1), 'start_date', $tahun)->sum('tagihan');
-        $jumlahyangSudahTerbayar = $this->applyYearFilter(ProjectList::query()->where('payment_status', 3), 'start_date', $tahun)->sum('payment') + $this->applyYearFilter(InstituteProyeks::query()->where('status', 2), 'start_date', $tahun)->sum('tagihan') + $this->applyYearFilter(Sales::query()->where('status', 1), 'tgl', $tahun)->sum('jual');
-        $jumlahYangBelumTerbayar = $this->applyYearFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun)->sum('payment') + $this->applyYearFilter(InstituteProyeks::query()->where('status', 0), 'start_date', $tahun)->sum('tagihan') + $this->applyYearFilter(Sales::query()->where('status', 0), 'tgl', $tahun)->sum('jual');
-        $totalProjectExpense = $this->applyYearFilter(ProjectAktivitis::query(), 'date', $tahun)->sum('cost') + $this->applyYearFilter(InstitutePengeluaran::query(), 'date', $tahun)->sum('cost') + $this->applyYearFilter(Sales::query(), 'tgl', $tahun)->sum('beli');
-        $grossProjectProfit = $this->applyYearFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun)->sum('payment') + $this->applyYearFilter(ProjectList::query()->where('payment_status', 3), 'start_date', $tahun)->sum('payment') + $this->applyYearFilter(ProjectList::query()->where('payment_status', 1), 'start_date', $tahun)->sum('payment') - $this->applyYearFilter(InstituteProyeks::query()->where('status', 0), 'start_date', $tahun)->sum('tagihan') + $this->applyYearFilter(InstituteProyeks::query()->where('status', 2), 'start_date', $tahun)->sum('tagihan') + $this->applyYearFilter(InstitutePengeluaran::query(), 'date', $tahun)->sum('cost') - $this->applyYearFilter(Sales::query()->where('status', 1), 'tgl', $tahun)->sum('jual') + $this->applyYearFilter(Sales::query()->where('status', 0), 'tgl', $tahun)->sum('jual') + $this->applyYearFilter(Sales::query(), 'tgl', $tahun)->sum('jual');
+    $Pengeluaran = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost') + Sales::sum('beli');
+    $Pendapatan = ProjectList::sum('payment') + InstituteProyeks::sum('tagihan') + Sales::sum('jual');
+    $pendapatanbersih = $Pendapatan - $Pengeluaran;
 
-        $Pengeluaran = ProjectAktivitis::sum('cost') + InstitutePengeluaran::sum('cost') + Sales::sum('beli');
-        $Pendapatan = ProjectList::sum('payment') + InstituteProyeks::sum('tagihan') + Sales::sum('jual');
-        $pendapatanbersih = $Pendapatan - $Pengeluaran;
-        $bulan = 12;
+    // Inisialisasi array kosong
+    $dataTotalPendapatanTelkom = [];
+    $dataTotalPendapatanIcon = [];
+    $dataTotalPendapatanpln = [];
+    $dataTotalPengeluaranTelkom = [];
+    $dataTotalPengeluaranIcon = [];
+    $dataTotalPengeluaranpln = [];
+    $databulan = [];
 
-        $databulan = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $dataTotalPendapatanTelkom[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 3)->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
+        $dataTotalPendapatanIcon[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', [1, 2])->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
+        $dataTotalPendapatanpln[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 4)->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
 
-        // Pendapatan
-        $dataTotalPendapatan = [];
+        $dataPengeluaranTelkom = $this->applyYearFilter(
+            InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
+                ->where('id_inst', 3)
+                ->whereMonth('start_date', $i),
+            'start_date',
+            $tahun
+        )->get()->sum('institute_pengeluaran_sum_cost');
+        $dataTotalPengeluaranTelkom[] = $dataPengeluaranTelkom ?: 0;
 
-        for ($i = 1; $i <= $bulan; $i++) {
-            $dataTotalPendapatanTelkom[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 3)->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
-            $dataTotalPendapatanSerpo[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 2)->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
-            $dataTotalPendapatanIconnet[] = $this->applyYearFilter(InstituteProyeks::query()->where('id_inst', 1)->whereMonth('start_date', $i), 'start_date', $tahun)->sum('tagihan');
+        $dataPengeluaranpln = $this->applyYearFilter(
+            InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
+                ->where('id_inst', 4)
+                ->whereMonth('start_date', $i),
+            'start_date',
+            $tahun
+        )->get()->sum('institute_pengeluaran_sum_cost');
+        $dataTotalPengeluaranpln[] = $dataPengeluaranpln ?: 0;
 
-            $databulan[] = $this->ubahAngkaToBulan($i);
-        }
+        $dataPengeluaranIcon = $this->applyYearFilter(
+            InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
+                ->where('id_inst', [1, 2])
+                ->whereMonth('start_date', $i),
+            'start_date',
+            $tahun
+        )->get()->sum('institute_pengeluaran_sum_cost');
+        $dataTotalPengeluaranIcon[] = $dataPengeluaranIcon ?: 0;
 
-        // Penyimpanan data total pendapatan dalam array $data
-        $data['dataTotalPendapatanTelkom'] = $dataTotalPendapatanTelkom;
-        $data['dataTotalPendapatanSerpo'] = $dataTotalPendapatanSerpo;
-        $data['dataTotalPendapatanIconnet'] = $dataTotalPendapatanIconnet;
-        $data['databulan'] = $databulan;
+        $databulan[] = $this->ubahAngkaToBulan($i);
+    }
 
+    // Penyimpanan data total pendapatan dan pengeluaran dalam array $data
+    $data = [
+        'dataTotalPendapatanTelkom' => $dataTotalPendapatanTelkom,
+        'dataTotalPendapatanIcon' => $dataTotalPendapatanIcon,
+        'dataTotalPendapatanpln' => $dataTotalPendapatanpln,
+        'dataTotalPengeluaranTelkom' => $dataTotalPengeluaranTelkom,
+        'dataTotalPengeluaranpln' => $dataTotalPengeluaranpln,
+        'dataTotalPengeluaranIcon' => $dataTotalPengeluaranIcon,
+        'databulan' => $databulan,
+    ];
+
+    //
         // Konversi data ke format JSON
         $dataTotalPendapatanTelkomJson = json_encode($data['dataTotalPendapatanTelkom']);
-        $dataTotalPendapatanSerpoJson = json_encode($data['dataTotalPendapatanSerpo']);
-        $dataTotalPendapatanIconnetJson = json_encode($data['dataTotalPendapatanIconnet']);
-        $databulanJson = json_encode($data['databulan']);
-
-        // Pengeluaran
-        $dataTotalPendapatan = [];
-
-        for ($i = 1; $i <= $bulan; $i++) {
-            $dataPengeluaranTelkom = $this->applyYearFilter(
-                InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
-                    ->where('id_inst', 3)
-                    ->whereMonth('start_date', $i),
-                'start_date',
-                $tahun
-            )->get()->sum('institute_pengeluaran_sum_cost');
-            $dataTotalPengeluaranTelkom[] = $dataPengeluaranTelkom ?: 0;
-
-            $dataPengeluaranSerpo = $this->applyYearFilter(
-                InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
-                    ->where('id_inst', 2)
-                    ->whereMonth('start_date', $i),
-                'start_date',
-                $tahun
-            )->get()->sum('institute_pengeluaran_sum_cost');
-
-            $dataTotalPengeluaranSerpo[] = $dataPengeluaranSerpo ?: 0;
-
-            $dataPengeluaranIconnet = $this->applyYearFilter(
-                InstituteProyeks::withSum('InstitutePengeluaran', 'cost')
-                    ->where('id_inst', 1)
-                    ->whereMonth('start_date', $i),
-                'start_date',
-                $tahun
-            )->get()->sum('institute_pengeluaran_sum_cost');
-
-            $dataTotalPengeluaranIconnet[] = $dataPengeluaranIconnet ?: 0;
-
-
-            $databulan[] = $this->ubahAngkaToBulan($i);
-        }
-
-        // Penyimpanan data total pendapatan dalam array $data
-        $data['dataTotalPengeluaranTelkom'] = $dataTotalPengeluaranTelkom;
-        $data['dataTotalPengeluaranSerpo'] = $dataTotalPengeluaranSerpo;
-        $data['dataTotalPengeluaranIconnet'] = $dataTotalPengeluaranIconnet;
-        $data['databulan'] = $databulan;
-
-        // Konversi data ke format JSON
+        $dataTotalPendapatanIconJson = json_encode($data['dataTotalPendapatanIcon']);
+        $dataTotalPendapatanplnJson = json_encode($data['dataTotalPendapatanpln']);
         $dataTotalPengeluaranTelkomJson = json_encode($data['dataTotalPengeluaranTelkom']);
-        $dataTotalPengeluaranSerpoJson = json_encode($data['dataTotalPengeluaranSerpo']);
-        $dataTotalPengeluaranIconnetJson = json_encode($data['dataTotalPengeluaranIconnet']);
-        // dd($dataTotalPengeluaranSerpoJson);
-
-        // Rendering view
+        $dataTotalPengeluaranIconJson = json_encode($data['dataTotalPengeluaranIcon']);
+        $dataTotalPengeluaranplnJson = json_encode($data['dataTotalPengeluaranpln']);
+        $databulanJson = json_encode($data['databulan']);
+    
+        // Menyertakan data JSON pada tampilan
         return view('admin.home', compact(
+            'databulanJson',
+            'dataTotalPendapatanTelkomJson',
+            'dataTotalPendapatanIconJson',
+            'dataTotalPendapatanplnJson',
+            'dataTotalPengeluaranTelkomJson',
+            'dataTotalPengeluaranIconJson',
+            'dataTotalPengeluaranplnJson',
             'totalprojek',
             'pending',
             'onprogress',
             'finish',
+            'pendingIconplus',
+            'progressIconplus',
+            'finishIconplus',
+            'pendingtelkom',
+            'progresstelkom',
+            'finishtelkom',
             'pendingonhold',
             'jumlahyangSudahTerbayar',
             'jumlahYangBelumTerbayar',
             'totalProjectExpense',
             'grossProjectProfit',
-            'Pendapatan',
-            'Pengeluaran',
-            'data',
-            'dataTotalPendapatanTelkomJson',
-            'dataTotalPendapatanSerpoJson',
-            'dataTotalPendapatanIconnetJson',
-            'dataTotalPengeluaranTelkomJson',
-            'dataTotalPengeluaranSerpoJson',
-            'dataTotalPengeluaranIconnetJson',
-            'databulanJson',
+            'pendapatanbersih',
             'tahun',
-            'pendingserpo',
-            'progressserpo',
-            'finishserpo',
-            'pendingiconnet',
-            'progressiconnet',
-            'finishiconnet',
-            'pendingtelkom',
-            'progresstelkom',
-            'finishtelkom'
+            'bulan'
         ));
+    }
+    
+
+    private function applyYearMonthFilter($query, $column, $year, $month)
+    {
+        if ($year) {
+            $query->whereYear($column, $year);
+        }
+        if ($month) {
+            $query->whereMonth($column, $month);
+        }
+        return $query;
     }
 
     private function applyYearFilter($query, $column, $year)
     {
         if ($year) {
-            return $query->whereYear($column, $year);
+            $query->whereYear($column, $year);
         }
         return $query;
     }
 
-    public function ubahAngkaToBulan($bulanAngka)
+    private function ubahAngkaToBulan($angka)
     {
-        $bulanArray = [
-            '0' => '', '1' => 'Januari',
-            '2' => 'Februari',
-            '3' => 'Maret',
-            '4' => 'April',
-            '5' => 'Mei',
-            '6' => 'Juni',
-            '7' => 'Juli',
-            '8' => 'Agustus',
-            '9' => 'September',
-            '10' => 'Oktober',
-            '11' => 'November',
-            '12' => 'Desember',
+        $bulan = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni',
+            7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
         ];
-        return $bulanArray[$bulanAngka];
+
+        return $bulan[$angka] ?? null;
     }
     /**
      * Show the form for creating a new resource.

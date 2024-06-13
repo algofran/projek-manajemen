@@ -327,7 +327,7 @@
                         </div>
                         @role(['admin', 'manager'])
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="{{ route('_add.pengeluaran', ['id' => $project->id]) }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah Pengeluaran</a>
+                                <a href="{{ route('_add.pengeluaran', ['id' => $project->id, 'id_inst' => $project->id_inst]) }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah Pengeluaran</a>
                             </div>
                         @endrole
 
@@ -391,6 +391,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <input type="hidden" name="project_id" value="{{ $activity->project_id }}">
+                                                        <input type="hidden" name="id_inst" value="{{ $activity->id_inst }}">
                                                         <div class="form-group">
                                                             <label>Project Status</label>
                                                             <div class="border">

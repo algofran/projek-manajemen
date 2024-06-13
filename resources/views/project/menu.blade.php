@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-9 col-lg-10 col-xl-10 col-md-10 my-auto">
-                                                <h5 class="card-title">Laporan Tahunan</h5>
+                                                <h5 class="card-title">Dokumen Projek</h5>
                                             </div>
                                         </div>
                                     </a>

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\InstitutePengeluaran;
 use App\Models\InstituteProyeks;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -21,6 +20,9 @@ class InstitutePengeluaranSeeder extends Seeder
 
         // Mendapatkan semua ID proyek dari tabel institute_proyeks
         $proyekIds = InstituteProyeks::pluck('id')->toArray();
+        
+        // Mendapatkan semua ID institute dari tabel institute_proyeks
+        $instIds = InstituteProyeks::pluck('id_inst')->toArray();
 
         // Mendapatkan semua ID user dari tabel users
         $userIds = User::pluck('id')->toArray();
@@ -34,11 +36,11 @@ class InstitutePengeluaranSeeder extends Seeder
             'Biaya Lainnya'
         ];
 
-
         // Loop untuk membuat beberapa data acak
         for ($i = 0; $i < 120; $i++) {
             InstitutePengeluaran::create([
                 'project_id' => $faker->randomElement($proyekIds),
+                'id_inst' => $faker->randomElement($instIds),
                 'comment' => $faker->paragraph,
                 'subject' => $faker->randomElement($subjects),
                 'date' => $faker->date(),
