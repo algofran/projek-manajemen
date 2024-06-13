@@ -99,100 +99,77 @@
 
 @section('script')
 <script>
-    $(document).ready(function () {
-        var SITEURL = "{{ url('/') }}";
+   $(document).ready(function () {
+    var SITEURL = "{{ url('/') }}";
 
-        // Initialize DateTimePicker
-        $('#eventStart, #eventEnd').datetimepicker({
-        format: 'YYYY-MM-DDTHH:mm', // Sesuaikan dengan format yang benar
-        sideBySide: true // Menampilkan waktu dan tanggal secara bersamaan
+    $('#eventStart, #eventEnd').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true
     });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
-        var calendar = $('#full_calendar_events').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            buttonText: {
-                today: 'Hari Ini',
-                month: 'Bulan',
-                week: 'Minggu',
-                day: 'Hari',
-                list: 'Daftar',
-            },
-            editable: true,
-            events: SITEURL + "/events/show",
-            displayEventTime: true,
-            eventRender: function (event, element, view) {
-                var eventDuration = moment.duration(event.end.diff(event.start));
-                var days = eventDuration.asDays();
-
-                if (days > 1) {
-                    // Render single pin if event spans multiple days
-                    var eventPin = $('<div class="fc-event-container"></div>').css({
-                        'background-color': '#FF5161',
-                        'border-color': event.borderColor,
-                        'color': event.textColor
-                    }).html(event.title);
-
-                    element.append(eventPin);
-                } else {
-                    // Render as usual if event spans only one day
-                    element.tooltip({
-                        title: `<strong>${event.title}</strong><br>${event.start.format('YYYY-MM-DD HH:mm')} - ${event.end.format('YYYY-MM-DD HH:mm')}`,
-                        html: true,
-                        container: 'body'
-                    });
-                    element.click(function() {
-                        console.log('Event clicked:', event);
-                        $('#eventId').val(event.id);
-                        $('#eventName').val(event.title);
-                        $('#eventStart').val(event.start.format('YYYY-MM-DDTHH:mm')); // Format datetime-local
-                        $('#eventEnd').val(event.end.format('YYYY-MM-DDTHH:mm')); // Format datetime-local
-                        $('#saveEvent').text('Update Event');
-                        $('#deleteEvent').show(); // Show delete button when editing event
-                        $('#my_event').modal('show'); // Show modal
-                    });
-
-                    // Change background color to red
-                    element.css('background-color', '#FF5161'); // Soft red
-                }
-            },
-
-            selectable: true,
-            selectHelper: true,
-            select: function (start, end, allDay) {
-                $('#eventForm')[0].reset();
-                $('#eventId').val('');
-                $('#eventStart').val(moment(start).format('YYYY-MM-DDTHH:mm')); // Format datetime-local
-                $('#eventEnd').val(moment(end).format('YYYY-MM-DDTHH:mm')); // Format datetime-local
-                $('#saveEvent').text('Create Event');
-                $('#deleteEvent').hide(); // Hide delete button when creating new
+    var calendar = $('#full_calendar_events').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        buttonText: {
+            today: 'Hari Ini',
+            month: 'Bulan',
+            week: 'Minggu',
+            day: 'Hari',
+            list: 'Daftar',
+        },
+        editable: true,
+        events: SITEURL + "/events/show",
+        displayEventTime: true,
+        eventRender: function (event, element) {
+            element.css('background-color', '#F58872');
+            element.tooltip({
+                title: `<strong>${event.title}</strong><br>${moment(event.start).format('YYYY-MM-DD HH:mm')} - ${moment(event.end).format('YYYY-MM-DD HH:mm')}`,
+                html: true,
+                container: 'body'
+            });
+            element.click(function() {
+                $('#eventId').val(event.id);
+                $('#eventName').val(event.title);
+                $('#eventStart').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
+                $('#eventEnd').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
+                $('#saveEvent').text('Update Event');
+                $('#deleteEvent').show();
                 $('#my_event').modal('show');
-calendar.fullCalendar('unselect');
-},
-eventDrop: function (event, delta) {
-var event_start = event.start; // Format datetime-local
-var event_end = event.end ? event.end : event.start; // Make sure end date is not null
-
-$.ajax({
+            });
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function (start, end) {
+            $('#eventForm')[0].reset();
+            $('#eventId').val('');
+            $('#eventStart').val(moment(start).format('YYYY-MM-DD HH:mm'));
+            $('#eventEnd').val(moment(end).format('YYYY-MM-DD HH:mm'));
+            $('#saveEvent').text('Create Event');
+            $('#deleteEvent').hide();
+            $('#my_event').modal('show');
+            calendar.fullCalendar('unselect');
+        },
+        eventDrop: function (event) {
+            $.ajax({
                 url: SITEURL + "/calendar-crud-ajax",
                 type: "POST",
                 data: {
                     id: event.id,
                     event_name: event.title,
-                    event_start: event_start,
-                    event_end: event_end,
+                    event_start: event.start.format('YYYY-MM-DD HH:mm'),
+                    event_end: event.end ? event.end.format('YYYY-MM-DD HH:mm') : event.start.format('YYYY-MM-DD HH:mm'),
                     type: 'edit'
                 },
-                success: function (response) {
+                success: function () {
                     displayMessage("Event updated");
                 }
             });
@@ -200,10 +177,10 @@ $.ajax({
         eventClick: function (event) {
             $('#eventId').val(event.id);
             $('#eventName').val(event.title);
-            $('#eventStart').val(moment(event.start).format('YYYY-MM-DDTHH:mm')); // Format datetime-local
-            $('#eventEnd').val(moment(event.end ? event.end : event.start).format('YYYY-MM-DDTHH:mm')); // Make sure end date is not null and format datetime-local
+            $('#eventStart').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
+            $('#eventEnd').val(moment(event.end ? event.end : event.start).format('YYYY-MM-DD HH:mm'));
             $('#saveEvent').text('Update Event');
-            $('#deleteEvent').show(); // Show delete button when editing event
+            $('#deleteEvent').show();
             $('#my_event').modal('show');
         }
     });
@@ -214,7 +191,6 @@ $.ajax({
         var start = $('#eventStart').val();
         var end = $('#eventEnd').val();
 
-        // Validate input values
         if (title && start && end) {
             var type = id ? 'edit' : 'create';
             $.ajax({
@@ -227,8 +203,8 @@ $.ajax({
                     event_end: end,
                     type: type
                 },
-                success: function (data) {
-                    displayMessage(type == 'create' ? "Event created." : "Event updated.");
+                success: function () {
+                    displayMessage(type === 'create' ? "Event created." : "Event updated.");
                     $('#my_event').modal('hide');
                     calendar.fullCalendar('refetchEvents');
                 }
@@ -247,7 +223,7 @@ $.ajax({
                     id: id,
                     type: 'delete'
                 },
-                success: function (data) {
+                success: function () {
                     displayMessage("Event deleted.");
                     $('#my_event').modal('hide');
                     calendar.fullCalendar('refetchEvents');
@@ -257,8 +233,9 @@ $.ajax({
     });
 
     function displayMessage(message) {
-        toastr.success(message, 'Event');            
+        toastr.success(message, 'Event');
     }
 });
+
 </script>
 @endsection

@@ -112,7 +112,7 @@
                                 <div class="row">
                                     <div class="col-md-12 text-right">
                                         <button class="btn btn-primary" type="submit">Submit</button>
-                                        <button class="btn btn-danger">Cancel</button>
+                                        <button class="btn btn-danger" type="reset">Cancel</button>
                                     </div>
                                 </div>
                             </footer>
