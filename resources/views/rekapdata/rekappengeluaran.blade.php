@@ -39,7 +39,7 @@
                         </div>
                     </form>
 
-                    <div class="table-responsive col-4 mb-5">
+                    <div class="table-responsive col-4 col-sm-12 mb-5">
                         <table class="table star-student table-hover table-striped">
                             <p class="fw-bolder">Keterangan Laporan</p>
                     <tr>
