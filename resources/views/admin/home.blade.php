@@ -6,7 +6,7 @@
             <div class="col">
                 <h3 class="text-gradient text-danger">Dashboard</h3>
             </div>
-            <div class="col text-end mb-3">
+            <div class="col-auto text-end mb-3">
                 <div class="dropdown">
                     <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Tahun
@@ -18,7 +18,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-1 text-end mb-3">
+            <div class="col-auto text-end mb-3">
                 <div class="dropdown">
                     <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
                         Bulan
