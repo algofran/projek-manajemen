@@ -110,17 +110,19 @@ class RekapController extends Controller
 
     $pengeluaran = $query->orderBy('date')->get();
 
-    return Excel::download(new class($pengeluaran, $startDate, $endDate) implements FromView
+    return Excel::download(new class($pengeluaran, $startDate, $endDate, $dataFilter) implements FromView
     {
         protected $pengeluaran;
         protected $startDate;
         protected $endDate;
+        protected $dataFilter;
 
-        public function __construct($pengeluaran, $startDate, $endDate)
+        public function __construct($pengeluaran, $startDate, $endDate, $dataFilter)
         {
             $this->pengeluaran = $pengeluaran;
             $this->startDate = $startDate;
             $this->endDate = $endDate;
+            $this->dataFilter = $dataFilter;
         }
 
         public function view(): View
@@ -128,7 +130,8 @@ class RekapController extends Controller
             return view('rekapdata.cetakrekappengeluaran', [
                 'pengeluaran' => $this->pengeluaran,
                 'startDate' => $this->startDate,
-                'endDate' => $this->endDate
+                'endDate' => $this->endDate,
+                'dataFilter' => $this->dataFilter
             ]);
         }
     }, 'rekap_pengeluaran.xlsx');
@@ -159,16 +162,18 @@ public function downloadExcelPendapatan(Request $request)
 
     $pendapatan = $query->orderBy('start_date')->get();
 
-    return Excel::download(new class($pendapatan, $startDate, $endDate) implements FromView {
+    return Excel::download(new class($pendapatan, $startDate, $endDate, $dataFilter) implements FromView {
         protected $pendapatan;
         protected $startDate;
         protected $endDate;
+        protected $dataFilter;
 
-        public function __construct($pendapatan, $startDate, $endDate)
+        public function __construct($pendapatan, $startDate, $endDate,  $dataFilter)
         {
             $this->pendapatan = $pendapatan;
             $this->startDate = $startDate;
             $this->endDate = $endDate;
+            $this->dataFilter = $dataFilter;
         }
 
         public function view(): View
@@ -177,6 +182,7 @@ public function downloadExcelPendapatan(Request $request)
                 'pendapatan' => $this->pendapatan,
                 'startDate' => $this->startDate,
                 'endDate' => $this->endDate,
+                'dataFilter' => $this->dataFilter,
                 'paket_tag' => [
                     0 => "Tidak Menggunakan Paket",
                     1 => "Paket 2 - Serpo SBU Sulawesi & IBT 2022-2025",

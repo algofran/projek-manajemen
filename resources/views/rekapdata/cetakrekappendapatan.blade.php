@@ -2,28 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rekap Pendapatan</title>
+    <title>Rekap Pengeluaran</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-section {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .info-section p {
+            margin: 4px 0;
+        }
+        .info-section span {
+            font-weight: bold;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             border: 1px solid #000;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
+            vertical-align: top;
         }
         th {
             background-color: #f2f2f2;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <h2>Rekap Pendapatan</h2>
-    @if($startDate && $endDate)
-        <p><strong>Tanggal Mulai:</strong> {{ $startDate }}</p>
-        <p><strong>Tanggal Selesai:</strong> {{ $endDate }}</p>
-    @endif
+
+    <div class="info-section">
+        <p><span>Dokumen:</span> 
+           @switch($dataFilter)
+               @case(1)
+                   Iconnet
+                   @break
+               @case(2)
+                   Serpo
+                   @break
+                @case(3)
+                   Telkom Akses
+                   @break
+                @case(4)
+                   PLN (Persero)
+                   @break
+               @default
+                   Projek Lainnya
+           @endswitch
+        </p>
+        @if($startDate && $endDate)
+        <p><span>Tanggal Mulai:</span> {{ $startDate }}</p>
+        <p><span>Tanggal Selesai:</span> {{ $endDate }}</p>
+        @endif
+        @php
+        if ($dataFilter == 'projek'){
+            $cost = 'payment';
+        } else {
+            $cost = 'tagihan';
+        }
+        @endphp
+        <p><span>Total Dana:</span> {{ 'Rp ' . number_format($pendapatan->sum($cost), 0, ',', '.') }}</p>
+        <p></p>
+    </div>
+  
 
     <table>
         <thead class="student-thread">
@@ -50,7 +102,7 @@
                     <td>{{ $item->end_date }}</td>
                     @if (request('data') == 'projek' || request('data') == '')
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->payment }}</td>
+                        <td>{{ 'Rp ' . number_format($item->payment, 0, ',', '.') }}</td>
                         <td>{{ $item->description }}</td>
                     @else
                         @php
@@ -58,7 +110,7 @@
                             $item->paket;
                             $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
                         @endphp
-                        <td>{{ $item->tagihan }}</td>
+                        <td>{{ 'Rp ' . number_format($item->tagihan, 0, ',', '.') }}</td>
                         <td>{{ $item->sektor }}</td>
                         <td>{{ $paket }}</td>
                     @endif

@@ -129,6 +129,12 @@
                         </div>
                         <div class="row container">
                             <div class="col-md-3 col-sm-4 col-6">                            
+                                <h6 class="invoice-name">Total Dana</h6>
+                                <p class="justify-content-center bg-success border rounded-pill d-flex text-white">
+                                    {{ 'Rp ' . number_format($tasks->sum('cost'), 0, ',', '.') }}
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">                            
                                 <h6 class="invoice-name">Nama Bank</h6>
                                 <p class="justify-content-center bg-info border rounded-pill d-flex text-white">
                                    {{ $project->bank }}

@@ -123,12 +123,21 @@
                                {{ 'Rp. ' . number_format($project->payment, 0, ',', '.') }}
                             </p>
                         </div>
-                        <div class="col-md-3 col-sm-12 col-6">                            
-                            <h6 class="invoice-name">Nama Bank</h6>
-                            <p class="justify-content-center bg-gradient bg-secondary border rounded-pill d-flex text-white">
-                               BCA
-                            </p>
-                        </div>
+                       
+                            <div class="col-md-3 col-sm-12 col-6">                            
+                                <h6 class="invoice-name">Total Biaya</h6>
+                                <p class="justify-content-center bg-success border rounded-pill d-flex text-white">
+                                    {{ 'Rp ' . number_format($tasks->sum('cost'), 0, ',', '.') }}
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-6">                            
+                                <h6 class="invoice-name">Nama Bank</h6>
+                                <p class="justify-content-center bg-info border rounded-pill d-flex text-white">
+                                   {{ $project->bank }}
+                                </p>
+                            </div>
+                      
+                        
                     </div>
                     
                 </div>

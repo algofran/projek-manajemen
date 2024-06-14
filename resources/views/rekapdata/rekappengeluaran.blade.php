@@ -38,19 +38,43 @@
                             </div>
                         </div>
                     </form>
-                    <div class="page-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="page-title"></h3>
-                            </div>
-                        </div>
-                    </div>
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close me-auto" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+
+                    <div class="table-responsive col-4 mb-5">
+                        <table class="table star-student table-hover table-striped">
+                            <p class="fw-bolder">Keterangan Laporan</p>
+                    <tr>
+                        <td><h6>Dokumen</h6></td><td>:</td><td>
+                           @switch($dataFilter)
+                               @case(1)
+                                   Iconnet
+                                   @break
+                               @case(2)
+                                   Serpo
+                                   @break
+                                @case(3)
+                                   Telkom Akses
+                                   @break
+                                @case(4)
+                                   PLN (Persero)
+                                   @break
+                               @default
+                                   Projek Lainnya
+                           @endswitch
+                        </td>
+                    </tr>
+                    @if($startDate && $endDate)
+                    <tr>
+                        <td><h6>Tanggal Mulai</h6></td><td>:</td><td>{{ $startDate }}</td>
+                    </tr>
+                    <tr>
+                        <td><h6>Tanggal Selesai</h6></td><td>:</td><td>{{ $endDate }}</td>
+                    </tr>
                     @endif
+                    <tr>
+                        <td><h6>Total Dana</h6></td><td>:</td><td>{{ 'Rp'. number_format($pengeluaran->sum('cost'), 0, ',', '.') }}</td>
+                    </tr>
+                    </table>
+                   </div>
                     <div class="table-responsive">
                         <table class="table border-0 star-student table-hover mb-0 datatable table-striped">
                             <thead class="student-thread">
