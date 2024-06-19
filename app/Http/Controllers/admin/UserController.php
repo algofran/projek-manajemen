@@ -208,9 +208,9 @@ class UserController extends Controller
             ->addColumn('since', function ($data) {
                 return $data->updated_at->format('Y');
             })
-            ->addColumn('status', function ($data) {
-                return 'Inactive';
-            })
+            // ->addColumn('status', function ($data) {
+            //     return 'Inactive';
+            // })
             ->filterColumn('role', function ($data, $keyword) {
                 // Meng-handle search untuk kolom role
                 $data->whereHas('roles', function ($query) use ($keyword) {
