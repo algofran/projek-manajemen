@@ -106,7 +106,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <h5 class="card-title">Revenue {{ $year }}</h5>
+                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
                         <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
                             <li class="nav-item">
