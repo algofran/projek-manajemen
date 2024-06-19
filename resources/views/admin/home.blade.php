@@ -106,7 +106,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
+                            <h5 class="card-title">Revenue {{ $year }}</h5>
                         </div>
                         <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
                             <li class="nav-item">
@@ -148,7 +148,7 @@
                                 <a href="#tab-4" data-bs-toggle="tab" class="nav-link active">Icon Plus</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#tab-6" data-bs-toggle="tab" class="nav-link ">Telkom Akses</a>
+                                <a href="#tab-5" data-bs-toggle="tab" class="nav-link ">Telkom Akses</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#tab-6" data-bs-toggle="tab" class="nav-link ">PLN</a>
@@ -164,11 +164,18 @@
                                     <li class="list-group-item text-success fw-bold">Finish : {{$finishIconplus}}</li>
                                 </ul>
                             </div>
-                            <div role="tabpanel" id="tab-6" class="tab-pane fade">
+                            <div role="tabpanel" id="tab-5" class="tab-pane fade">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-danger fw-bold">Pending : {{$pendingtelkom}}</li>
                                     <li class="list-group-item text-warning fw-bold">Progres : {{$progresstelkom}}</li>
                                     <li class="list-group-item text-success fw-bold">Finish : {{$finishtelkom}}</li>
+                                </ul>
+                            </div>
+                            <div role="tabpanel" id="tab-6" class="tab-pane fade">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-danger fw-bold">Pending : {{$pendingpln}}</li>
+                                    <li class="list-group-item text-warning fw-bold">Progres : {{$progresspln}}</li>
+                                    <li class="list-group-item text-success fw-bold">Finish : {{$finishpln}}</li>
                                 </ul>
                             </div>
                         </div>
