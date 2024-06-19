@@ -31,7 +31,6 @@
                             <th class="text-secondary">Email</th>
                             <th class="text-secondary">Phone</th>
                             <th class="text-secondary">Role</th>
-                            <th class="text-secondary">Status</th>
                             <th class="text-secondary">Since</th>
                             @role('admin')
                             <th class="text-secondary text-end">Action</th>
@@ -165,7 +164,6 @@
               { data: 'email', name: 'email' },
               { data: 'phone', name: 'phone' },
               { data: 'role', name: 'role' },
-              { data: 'status', name: 'status' },
               { data: 'since', name: 'since' },
               {
                   data: 'id', 

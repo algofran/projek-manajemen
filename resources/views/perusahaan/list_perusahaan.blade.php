@@ -133,7 +133,7 @@
                                     @endforeach 
                                 </ul>
                                 
-                                <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addmitra'.$item->id }}" class="btn-sm btn-info text-white"><i class="fas fa-plus"> tambah</i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="{{ '#addmitra'.$item->id }}" class="btn-sm btn-info text-white"><i class="fas fa-plus"></i> Tambah</a>
                                 </td>
                                 <td class="text-end">
                                     <div class="actions ">

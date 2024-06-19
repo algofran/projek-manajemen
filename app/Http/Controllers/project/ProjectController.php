@@ -10,6 +10,7 @@ use App\Models\ProjectTask;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
 {
