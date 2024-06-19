@@ -60,6 +60,7 @@
             <p><strong>Nama Manager:</strong> {{ $manager->firstname.' '.$manager->lastname }}</p>
             <p><strong>Tanggal Mulai:</strong> {{ $project->start_date }}</p>
             <p><strong>Tanggal Berakhir:</strong> {{ $project->end_date }}</p>
+            <p><strong>Nilai Kontrak:</strong> {{ 'Rp ' . number_format($project->payment, 0, ',', '.') }}</p>
             <p><strong>Total Dana:</strong>{{ 'Rp ' . number_format($tasks->sum('cost'), 0, ',', '.') }}</p>
             <p></p>
         </div>
