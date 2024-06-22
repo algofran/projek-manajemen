@@ -1,31 +1,43 @@
-FROM php:8.2-apache
+# Menggunakan PHP 8.2 dengan FPM dan Alpine sebagai image dasar
+FROM php:8.2-fpm-alpine
+
+# Menginstall dependensi sistem
+RUN apk update && apk add --no-cache \
+    git \
+    curl \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    zip \
+    unzip \
+    libxml2-dev \
+    oniguruma-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+
+# Menginstall Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 
-# PHP extension
-RUN requirements="zlib1g-dev libicu-dev git curl" \
-    && apt-get update && apt-get install -y $requirements && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install intl \
-    && docker-php-ext-install zip \
-    && apt-get purge --auto-remove -y
+# Menyiapkan direktori kerja
+WORKDIR /var/www
 
-# Apache & PHP configuration
-RUN a2enmod rewrite
-ADD docker/apache/vhost.conf /etc/apache2/sites-enabled/000-default.conf
-ADD docker/php/php.ini /usr/local/etc/php/php.ini
+# Menyalin file aplikasi
+COPY . /var/www
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/bin/composer
+# Menyimpan file konfigurasi PHP
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
-# Add the application
-ADD . /app
-WORKDIR /app
+# Menjalankan Composer untuk menginstall dependensi aplikasi
+RUN composer install --optimize-autoloader --no-dev
 
-# Install dependencies
-RUN composer install -o
+# Memberikan hak akses yang sesuai pada direktori penyimpanan
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www
 
-# Ensure that the production container will run with the www-data user
-RUN chown www-data /app
+# Expose port untuk aplika
 
-CMD ["php artisan serve"]
+EXPOSE 9000
+
+# Mengatur entrypoint default
+CMD ["php-fpm"]
