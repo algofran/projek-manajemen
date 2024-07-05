@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('type');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

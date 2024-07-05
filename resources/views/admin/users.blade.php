@@ -163,7 +163,7 @@
               { data: 'username', name: 'username' },
               { data: 'email', name: 'email' },
               { data: 'phone', name: 'phone' },
-              { data: 'role', name: 'role' },
+              { data: 'role', name: 'role' },   
               { data: 'since', name: 'since' },
               {
                   data: 'id', 

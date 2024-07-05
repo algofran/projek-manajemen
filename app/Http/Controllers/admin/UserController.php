@@ -8,7 +8,9 @@ use App\Models\Events;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -235,5 +237,30 @@ class UserController extends Controller
     public function profile()
     {
         return view('admin.profile');
+    }
+
+    public function uploadProfileImage(Request $request)
+    {
+        $request->validate([
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('profile_image')) {
+            // Simpan file yang diunggah
+            $imageName = $user->id . '_' . time() . '.' . $request->profile_image->extension();
+            $request->profile_image->storeAs('profile_images', $imageName, 'public');
+
+            // Hapus gambar lama jika ada
+            if ($user->profile_image) {
+                Storage::disk('public')->delete($user->profile_image);
+            }
+
+            // Update kolom profile_image
+            $user->update(['profile_image' => 'profile_images/' . $imageName]);
+        }
+
+        return redirect()->back()->with('success', 'Profile image updated successfully.');
     }
 }
