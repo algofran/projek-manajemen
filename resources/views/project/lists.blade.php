@@ -2,20 +2,24 @@
 <div class="div">
   <div class="row">
     <div class="col-sm-12">
-        <div class="card card-table">
-            <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
-                Data Project 
+
+        <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+            <div class="row align-items-center">
+                <div class="col">
+                    <p class="fw-bolder fs-6 text-white my-auto">Daftar Projek</p>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                        <li class="breadcrumb-item text-white">Daftar Projek</li>
+                    </ul>
+                </div> 
             </div>
         </div>
-        <div class="card card-table">
-            <div class="card-body">
+
+        <div class="card card-table rounded-3">
+            <div class="card-header">
                 <div class="page-header">
                     <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="page-title">List Project</h3>
-                        </div>
 
-                        <div class="row">
                             <div class="col">
                                 <div class="mb-4">
                                     <div class="dropdown">
@@ -35,12 +39,15 @@
                                     
                                 </div>
                             </div>
-                            @role(['admin', 'manager'])
-                            <div class="col-auto text-end float-end download-grp">
-                                <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
-                            </div>  
-                            @endrole
-                        </div>
+                            <div class="col-auto ms-end">
+                                @role(['admin', 'manager'])
+                                <div class="col-auto text-end float-end download-grp">
+                                    <a href="{{ route('project.add') }}" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Tambah</a>
+                                </div>  
+                                @endrole
+                            </div>
+                           
+                        
                     </div>
                 </div>
                 

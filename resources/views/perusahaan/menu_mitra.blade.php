@@ -5,11 +5,18 @@
     <div class="row">
         <div class="col-sm-12">
             @foreach($mitra as $item)
-            <div class="card card-table mb-4">
-                <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
-                    Menu {{ $item->mitra }}
+            
+            <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <p class="fw-bolder fs-6 text-white my-auto">Menu {{ $item->mitra }}</p>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                            <li class="breadcrumb-item text-white">Menu {{ $item->mitra }}</li>
+                        </ul>
+                    </div> 
                 </div>
-            </div> <!-- End of card-table -->
+            </div>
                 <div class="row mt-3">
                     <!-- List Mitra -->
                     <div class="col-12 col-lg-6 col-xl-6 mb-3">
@@ -24,7 +31,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-9 col-xl-10 col-md-10 col-lg-10 my-auto">
-                                                <h5 class="card-title">List {{ $item->mitra }}</h5>
+                                                <h5 class="card-title">Daftar Projek {{ $item->mitra }}</h5>
                                             </div>
                                         </div>
                                     </a>

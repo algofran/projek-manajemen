@@ -52,6 +52,17 @@
 </style>
 
 <div class="container">
+    {{-- <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+        <div class="row align-items-center">
+            <div class="col">
+                <p class="fw-bolder fs-6 text-white my-auto">Profil User</p>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                    <li class="breadcrumb-item text-white">Profil User</li>
+                </ul>
+            </div> 
+        </div>
+    </div> --}}
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="text-center py-3 rounded" style="background-color: rgb(230, 230, 230)">

@@ -4,8 +4,16 @@
 <div class="div">
     <div class="row">
         <div class="col-sm-12 container">
-            <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white mb-4">
-                Laporan Rekap
+            <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <p class="fw-bolder fs-6 text-white my-auto">Rekap Pengeluaran</p>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                            <li class="breadcrumb-item text-white">Rekap Pengeluaran</li>
+                        </ul>
+                    </div> 
+                </div>
             </div>
 
             <div class="card card-table">

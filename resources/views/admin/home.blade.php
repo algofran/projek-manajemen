@@ -20,7 +20,8 @@
             </div>
             <div class="col-auto text-end mb-3">
                 <div class="dropdown">
-                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownBulan" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false" {{ request('year') ? '' : 'disabled' }}
+                    >
                         Bulan
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">

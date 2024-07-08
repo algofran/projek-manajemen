@@ -67,9 +67,9 @@
                 <a href="{{ route('events.show') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="{{ route('menukendaraan') }}"><i class="fas fa-calendar-day"></i> <span>Maintance Kendaraan</span></a>
-            </li>
+            </li> --}}
           </ul>
       </div>
   </div>
