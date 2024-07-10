@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\GuideController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
@@ -56,6 +57,13 @@ Route::group([
     Route::get('/events/show', [UserController::class, 'show'])->name('events.show');
     Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents']);
     Route::post('/profile/upload-image', [UserController::class, 'uploadProfileImage'])->name('profile.uploadImage');
+
+
+    Route::get('/Daftar_Panduan', [GuideController::class, 'index'])->name('show.guide');
+    Route::get('/guide', [GuideController::class, 'create'])->name('guide.add');
+    Route::post('/add-guide', [GuideController::class, 'store']);
+    Route::post('/upload', [GuideController::class, 'upload'])->name('guide.create');
+    Route::get('/detail-guide/{id}', [GuideController::class, 'detail'])->name('guide.detail');
 });
 
 Route::group([

@@ -161,7 +161,6 @@ class AdminController extends Controller
         ));
     }
 
-
     private function applyYearMonthFilter($query, $column, $year, $month)
     {
         if ($year) {
