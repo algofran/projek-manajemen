@@ -6,7 +6,7 @@
 
         <div class="blog-view">
             <div class="blog-single-post">
-                <a href="blog.html" class="back-btn"><i class="feather-chevron-left"></i> Back</a>
+                <a href="javascript:history.back()" class="back-btn"><i class="feather-chevron-left"></i> Back</a>
                 <div class="blog-image">
                     <a href="javascript:void(0);"><img alt="" src="data:image/jpeg;base64,{{ $guide->image }}" height="20px" width="10px"  class=""></a>
                 </div>
@@ -25,8 +25,21 @@
                         </ul>
                     </div>
                 </div>
+                
+                <style>
+                    .blog-content img {
+    width: auto !important; /* Menetapkan lebar gambar menjadi otomatis */
+    height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
+    max-width: 100% !important; /* Membatasi lebar maksimum gambar agar tidak melebihi konten yang menampilkannya */
+    height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
+}
+                </style>
                 <div class="blog-content">
+                    
                   {!! $guide->description !!}
+                  {{-- @php
+                      dd($guide->description);
+                  @endphp --}}
                 </div>
             </div>
 

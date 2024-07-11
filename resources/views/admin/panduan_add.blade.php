@@ -10,7 +10,12 @@
         /* Block images */
         max-width: 50%;
         margin: 10px auto;
+        aspect-ratio: unset !important;
     }
+
+    .ck-content figure.image img {
+    aspect-ratio: unset !important; /* Reset aspect-ratio */
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -29,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                     
-                    <form action="{{ url('add-guide') }}" method="POST" enctype="multipart/form-data">
+                    <form id="guide-form" action="{{ url('add-guide') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Title<span class="text-danger">*</span></label>
@@ -40,7 +45,7 @@
                             <div class="row">
                                 <div class="col-2">
                                     <div id="image-preview" class="mb-3"></div> <!-- Preview image element -->
-                                    <img id="default-image" style="filter: hue-rotate(180deg); "  src="{{ asset('assets/image1.png') }}" alt="" width="140px" height="auto" class="mb-3"> <!-- Default image -->
+                                    <img id="default-image" style="filter: hue-rotate(180deg);" src="{{ asset('assets/image1.png') }}" alt="" width="140px" height="auto" class="mb-3"> <!-- Default image -->
                                 </div>
                                 <div class="col-auto my-auto">
                                     <input type="file" name="image" class="upload">
@@ -51,7 +56,7 @@
                             <label>Description</label>
                             <textarea id="editor" name="description"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-outline-danger">Add Post</button>
+                        <button type="submit" id="save" class="btn btn-outline-danger">Add Post</button>
                     </form>
                 </div>
             </div>
@@ -61,10 +66,10 @@
 @endsection
 
 @section('script')
-<script>
-    feather.replace();
 
-    // Function to handle file input change and preview image
+<script>
+      feather.replace();
+
     document.querySelector('.upload').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -88,35 +93,95 @@
             document.getElementById('default-image').style.display = 'block';
         }
     });
+</script>
+<script type="importmap">
+    {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.0/"
+        }
+    }
+</script>
 
-    // Initialize CKEditor
+<script type="module">
+
+      import {
+        ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Underline,
+    Strikethrough,
+    Link,
+    Paragraph,
+    Font,
+    Heading,
+    List,
+    Alignment,
+    Image,
+    ImageCaption,
+    ImageStyle,
+    ImageToolbar,
+    ImageUpload,
+    ImageResize,
+    Table,
+    TableToolbar,
+    MediaEmbed,
+    BlockQuote,
+    Autoformat,
+    CKFinder, CKFinderUploadAdapter
+    } from 'ckeditor5';
+
     ClassicEditor
-        .create(document.querySelector('#editor'), {
-            
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+        .create( document.querySelector( '#editor' ), {
+            plugins: [ Essentials, Bold, Italic, Underline, Strikethrough, Link, Paragraph, Font, Heading, List, Alignment, Image, ImageCaption, ImageStyle, ImageToolbar, ImageUpload, ImageResize, Table, TableToolbar, MediaEmbed, BlockQuote, Autoformat, CKFinder, CKFinderUploadAdapter],
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'link', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+                    'bulletedList', 'numberedList', 'alignment', '|',
+                    'insertTable', 'blockQuote', 'mediaEmbed', 'undo', 'redo', '|',
+                    'imageUpload'
                 ]
             },
-            fontSize: {
-                options: [10, 12, 14, 'default', 18, 20, 22],
-                supportAllValues: true
+            image: {
+                toolbar: [
+                    'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
+                    'toggleImageCaption', 'imageTextAlternative', '|',
+                    'imageResize'
+                ],
+                styles: [
+                    'inline', 'block', 'side'
+                ]
+            },
+            table: {
+                contentToolbar: [
+                    'tableColumn', 'tableRow', 'mergeTableCells'
+                ]
             },
             ckfinder: {
-                uploadUrl: "{{ route('guide.create', ['_token' => csrf_token()]) }}",
-            },
-        })
-        .then(editor => {
-            window.editor = editor;
-        })
-        .catch(error => {
-            console.error(error);
-        });
+                uploadUrl: "{{ route('guide.create', ['_token' => csrf_token()]) }}"
+            }
+        } )
+        .then( editor => {
+        // Setelah editor terinisialisasi
+        editor.model.schema.extend( '$text', { allowAttributes: 'style' } );
+
+        editor.model.schema.addAttributeCheck( context => {
+            if ( context.endsWith( 'img' ) ) {
+                const style = context.getClosest( 'img' ).getAttribute( 'style' );
+
+                if ( style && style.includes( 'aspect-ratio' ) ) {
+                    context.remove( context.getClosest( 'img' ).getAttribute( 'style' ) );
+                }
+            }
+        } );
+
+        console.log( 'Editor was initialized', editor );
+    } )
+        .catch( error => {
+            console.error( 'There was a problem initializing the editor.', error );
+        } );
 </script>
 @endsection

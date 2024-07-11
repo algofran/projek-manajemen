@@ -64,7 +64,9 @@ class GuideController extends Controller
             $request->file('upload')->move(public_path('media'), $fileName);
 
             $url = asset('media/' . $fileName);
-            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+            return response()->json(['fileName' => $fileName, 'uploaded' => true, 'url' => $url]);
         }
+
+        return response()->json(['uploaded' => false, 'message' => 'No file uploaded.'], 400);
     }
 }
