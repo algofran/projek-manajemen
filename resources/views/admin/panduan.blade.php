@@ -41,18 +41,18 @@
                             </div>
                         </li>
                     </ul>
-                    <h3 class="blog-title"><a href="blog-details.html">{{ $item->title }}</a></h3>
+                    <h3 class="blog-title mb-4"><a href="blog-details.html">{{ $item->title }}</a></h3>
                     {{-- <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p> --}}
                 </div>
                 <div class="row">
                     <div class="edit-options">
                         <div class="edit-delete-btn">
                             <a href="edit-blog.html" class="text-success"><i class="feather-edit-3 me-1"></i> Edit</a>
-                            <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="feather-trash-2 me-1"></i> Delete</a>
+                            <a href="{{ route("guide.delete", $item->id) }}" class="text-danger" onclick="return confirm('Are you sure want to delete this item?')"><i class="feather-trash-2 me-1"></i> Delete</a>
                         </div>
-                        <div class="text-end inactive-style">
-                            <a href="javascript:void(0);" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteNotConfirmModal"><i class="feather-eye-off me-1"></i> Inactive</a>
-                        </div>
+                        {{-- <div class="text-end inactive-style">
+                            <a href="" class="text-danger"><i class="feather-eye-off me-1"></i> Inactive</a>
+                        </div> --}}
                     </div>
                 </div>
             </div>

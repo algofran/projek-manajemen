@@ -1,40 +1,94 @@
 @extends('layouts.layout') @section('content')
+<style>
+    .blog-content img {
+        width: auto !important; /* Menetapkan lebar gambar menjadi otomatis */
+        height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
+        max-width: 100% !important; /* Membatasi lebar maksimum gambar agar tidak melebihi konten yang menampilkannya */
+        height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
+    }
+
+    .table {
+        overflow-x: auto; /* Menambahkan scroll horizontal jika konten melebihi lebar kontainer */
+        margin-bottom: 1em; /* Menambahkan margin bawah */
+        width: 100%; /* Pastikan lebar pembungkus adalah 100% */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd; /* Menambahkan border */
+        padding: 12px; /* Menambahkan padding */
+    }
+
+    thead {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #4CAF50; /* Warna latar belakang header */
+        color: white; /* Warna teks header */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9; /* Warna latar belakang baris genap */
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1; /* Warna latar belakang saat hover */
+    }
+
+    th, td {
+        border: 1px solid #ddd; /* Border untuk sel */
+        padding: 8px; /* Padding untuk sel */
+        text-align: left; /* Penyesuaian teks */
+    }
+
+    th {
+        padding-top: 12px; /* Padding atas untuk header */
+        padding-bottom: 12px; /* Padding bawah untuk header */
+        background-color: #4CAF50; /* Warna latar belakang header */
+        color: white; /* Warna teks header */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2; /* Warna latar belakang baris genap */
+    }
+
+    tbody tr:hover {
+        background-color: #ddd; /* Warna latar belakang saat hover */
+    }
+</style>
 
 <div class="div">
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-xl-9">
+  <div class="row justify-content-center mb-4">
+    <div class="col-11">
 
         <div class="blog-view">
             <div class="blog-single-post">
                 <a href="javascript:history.back()" class="back-btn"><i class="feather-chevron-left"></i> Back</a>
-                <div class="blog-image">
-                    <a href="javascript:void(0);"><img alt="" src="data:image/jpeg;base64,{{ $guide->image }}" height="20px" width="10px"  class=""></a>
-                </div>
-                <h3 class="blog-title">{{ $guide->title }}</h3>
                 <div class="blog-info">
+                    <h3 class="blog-title">{{ $guide->title }}</h3>
                     <div class="post-list">
                         <ul>
                             <li>
                                 <div class="post-author">
-                                    <a href="profile.html"><img src="assets/img/profiles/avatar-14.jpg" alt="Post Author"> <span>by Prof. Lester </span></a>
+                                    <span>by {{ $guide->user }} </span>
                                 </div>
                             </li>
-                            <li><i class="feather-clock"></i> Dec 6, 2017</li>
-                            <li><i class="feather-message-square"></i> 40 Comments</li>
-                            <li><i class="feather-grid"></i> Set Theory, Mathematician</li>
+                            <li><i class="feather-clock"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $guide->created_at)->format('j M Y') }}</li>
+                            {{-- <li><i class="feather-message-square"></i> 40 Comments</li>
+                            <li><i class="feather-grid"></i> Set Theory, Mathematician</li> --}}
                         </ul>
                     </div>
                 </div>
-                
-                <style>
-                    .blog-content img {
-    width: auto !important; /* Menetapkan lebar gambar menjadi otomatis */
-    height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
-    max-width: 100% !important; /* Membatasi lebar maksimum gambar agar tidak melebihi konten yang menampilkannya */
-    height: auto !important; /* Menetapkan tinggi gambar menjadi otomatis */
-}
-                </style>
-                <div class="blog-content">
+                <div class="blog-image">
+                    <a href="javascript:void(0);"><img alt="" src="data:image/jpeg;base64,{{ $guide->image }}"></a>
+                </div>
+            
+                <div class="blog-content bg-white p-4 p-xl-5 rounded rounded-3">
                     
                   {!! $guide->description !!}
                   {{-- @php
@@ -43,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="card author-widget clearfix">
+            {{-- <div class="card author-widget clearfix">
                 <div class="card-header">
                     <h4 class="card-title">About Author</h4>
                 </div>
@@ -60,10 +114,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
-            <div class="card blog-comments">
+            {{-- <div class="card blog-comments">
                 <div class="card-header">
                     <h4 class="card-title">Comments (5)</h4>
                 </div>
@@ -154,10 +208,10 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
 
 
-            <div class="card new-comment clearfix">
+            {{-- <div class="card new-comment clearfix">
                 <div class="card-header">
                     <h4 class="card-title">Leave Comment</h4>
                 </div>
@@ -179,8 +233,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-
+            </div> --}}
+{{-- 
             <div class="card blog-share clearfix">
                 <div class="card-header">
                     <h4 class="card-title">Share the post</h4>
@@ -194,7 +248,7 @@
                         <li><a href="#"><i class="feather-youtube"></i></a></li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

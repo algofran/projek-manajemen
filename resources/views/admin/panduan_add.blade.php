@@ -3,7 +3,7 @@
 @section('content')
 <style type="text/css">
     .ck-editor__editable_inline {
-        height: 700px;
+        height: 600px;
     }
 
     .ck-content .image {
@@ -15,6 +15,25 @@
 
     .ck-content figure.image img {
     aspect-ratio: unset !important; /* Reset aspect-ratio */
+
+    .ck-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1em;
+    }
+
+    .ck-content table, .ck-content th, .ck-content td {
+        border: 1px solid #ddd; /* Menambahkan border */
+    }
+
+    .ck-content th, .ck-content td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    .ck-content th {
+        background-color: #f2f2f2;
+    }
 }
 </style>
 <div class="container">
@@ -139,8 +158,7 @@
                 items: [
                     'heading', '|',
                     'bold', 'italic', 'underline', 'strikethrough', 'link', '|',
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
-                    'bulletedList', 'numberedList', 'alignment', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|', 'alignment', '|',
                     'insertTable', 'blockQuote', 'mediaEmbed', 'undo', 'redo', '|',
                     'imageUpload'
                 ]
@@ -156,10 +174,11 @@
                 ]
             },
             table: {
-                contentToolbar: [
-                    'tableColumn', 'tableRow', 'mergeTableCells'
-                ]
-            },
+            contentToolbar: [
+                'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
+            ]
+        },
+
             ckfinder: {
                 uploadUrl: "{{ route('guide.create', ['_token' => csrf_token()]) }}"
             }

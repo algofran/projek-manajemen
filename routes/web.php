@@ -64,6 +64,7 @@ Route::group([
     Route::post('/add-guide', [GuideController::class, 'store']);
     Route::post('/upload', [GuideController::class, 'upload'])->name('guide.create');
     Route::get('/detail-guide/{id}', [GuideController::class, 'detail'])->name('guide.detail');
+    Route::get('/hapus_guide/{id}', [GuideController::class, 'removeImagesFromDescription'])->name('guide.delete');
 });
 
 Route::group([

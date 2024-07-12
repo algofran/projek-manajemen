@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Guide;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,5 +69,38 @@ class GuideController extends Controller
         }
 
         return response()->json(['uploaded' => false, 'message' => 'No file uploaded.'], 400);
+    }
+
+    public function removeImagesFromDescription($id)
+    {
+        $guide = Guide::findOrFail($id);
+
+        // Cari tag <figure> dalam deskripsi
+        $description = $guide->description;
+        preg_match_all('/<figure[^>]*>(.*?)<\/figure>/is', $description, $matches);
+
+        // Jika ada gambar dalam deskripsi
+        if (!empty($matches[0])) {
+            foreach ($matches[0] as $figureTag) {
+                // Ambil nama file gambar dari atribut src dalam tag <img>
+                preg_match('/src="(.*?)"/', $figureTag, $srcMatches);
+                if (!empty($srcMatches[1])) {
+                    $imageUrl = $srcMatches[1];
+                    $imageName = basename($imageUrl);
+
+                    // Hapus file gambar dari media storage
+                    $imagePath = public_path('media/' . $imageName);
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath); // Hapus file dari direktori
+                    }
+                }
+            }
+        }
+
+        // Hapus panduan dari database
+        $guide->delete();
+
+        return redirect()->back()
+            ->with('success', 'Gambar dari deskripsi berhasil dihapus.');
     }
 }
