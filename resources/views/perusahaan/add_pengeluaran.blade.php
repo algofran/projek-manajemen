@@ -4,8 +4,16 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Tambah Tugas</h5>
+                <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <p class="fw-bolder fs-6 text-white my-auto">Tambah Pengeluaran</p>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                                <li class="breadcrumb-item text-white">Tambah Pengeluaran</li>
+                            </ul>
+                        </div> 
+                    </div>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('_add.store') }}" method="post">

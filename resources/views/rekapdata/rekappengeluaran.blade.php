@@ -4,40 +4,54 @@
 <div class="div">
     <div class="row">
         <div class="col-sm-12 container">
-            <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white mb-4">
-                Laporan Rekap
+            <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <p class="fw-bolder fs-6 text-white my-auto">Rekap Pengeluaran</p>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                            <li class="breadcrumb-item text-white">Rekap Pengeluaran</li>
+                        </ul>
+                    </div> 
+                </div>
             </div>
 
             <div class="card card-table">
                 <div class="card-body">
-                    <div class="download-grp text-end ms-auto mb-3">
-                        <a href="{{ route('download.exel.rekappengeluaran', request()->only(['data', 'start_date', 'end_date'])) }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Excel</a>
-                    </div>
-                    <form method="GET" action="{{ route('rekapdatapengeluaran') }}">
-                        <div class="row">
-                            <div class="col-12 col-md-2 col-lg-2 col-xl-2 mb-3">
-                                <select name="data" class="form-select">
-                                    <option value="">Pilih Data</option>
-                                    @foreach ($mitra as $item)
-                                        <option value="{{ $item->id }}" {{ request('data') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->mitra }}
-                                        </option>
-                                    @endforeach
-                                    <option value="projek" {{ request('data') == 'projek' ? 'selected' : '' }}>
-                                        Projek Lain-lain
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-xl-5 col-lg-5 col-md-8 mb-3">
-                                <div class="input-group">
-                                    <input type="date" class="form-control" name="start_date" value="{{ request('start_date') }}">
-                                    <span class="input-group-text">Sampai</span>
-                                    <input type="date" class="form-control" name="end_date" value="{{ request('end_date') }}">
-                                    <button type="submit" class="btn btn-primary ms-2">Filter</button>
+                    <div class="row">
+                        <div class="col-12 col-md-10">
+                            <form method="GET" action="{{ route('rekapdatapengeluaran') }}">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 mb-3">
+                                        <select name="data" class="form-select">
+                                            <option value="">Pilih Data</option>
+                                            @foreach ($mitra as $item)
+                                                <option value="{{ $item->id }}" {{ request('data') == $item->id ? 'selected' : '' }}>
+                                                    {{ $item->mitra }}
+                                                </option>
+                                            @endforeach
+                                            <option value="projek" {{ request('data') == 'projek' ? 'selected' : '' }}>
+                                                Projek Lain-lain
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-xl-7 col-lg-5 col-md-8 mb-3">
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" name="start_date" value="{{ request('start_date') }}">
+                                            <span class="input-group-text">Sampai</span>
+                                            <input type="date" class="form-control" name="end_date" value="{{ request('end_date') }}">
+                                            <button type="submit" class="btn btn-primary ms-2">Filter</button>
+                                        </div>
+                                    </div>
                                 </div>
+                            </form>
+                        </div>
+                        <div class="col-auto ms-end">
+                            <div class="download-grp text-end ms-auto mb-3">
+                                <a href="{{ route('download.exel.rekappengeluaran', request()->only(['data', 'start_date', 'end_date'])) }}" class="btn btn-success me-2"><i class="fas fa-download"></i> Excel</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
                     <div class="table-responsive col-sm-12 col-xl-4 col-md-6 col-lg-5 mb-5">
                         <table class="table star-student table-hover table-striped">

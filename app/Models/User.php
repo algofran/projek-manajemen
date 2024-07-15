@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'type',
+        'profile_image',
         'remember_token',
     ];
 

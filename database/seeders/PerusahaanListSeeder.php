@@ -31,6 +31,13 @@ class PerusahaanListSeeder extends Seeder
             'keterangan' => $faker->paragraph
         ]);
 
+        InstituteList::create([
+            'name' => 'PLN',
+            'institute' => '3',
+            'alamat' => 'Antang Raya',
+            'keterangan' => $faker->paragraph
+        ]);
+
         InstituteMitra::create([
             'id_inst' => '2',
             'mitra' => 'Iconnet',
@@ -46,6 +53,12 @@ class PerusahaanListSeeder extends Seeder
         InstituteMitra::create([
             'id_inst' => '1',
             'mitra' => 'Telkom Akses',
+            'keterangan' => $faker->paragraph
+        ]);
+
+        InstituteMitra::create([
+            'id_inst' => '3',
+            'mitra' => 'PLN (Persero)',
             'keterangan' => $faker->paragraph
         ]);
     }

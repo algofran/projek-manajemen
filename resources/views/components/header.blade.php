@@ -137,7 +137,9 @@
             <div class="user-header">
                
                 <div class="avatar avatar-sm">
-                    @switch($role->id)
+                  
+                    <img class="rounded-circle" src="{{ $user->profile_image ? asset('storage/'.$user->profile_image) : asset('assets/image.png') }}" width="31" alt="no_picture">
+                    {{-- @switch($role->id)
                     @case(1)
                         <img class="rounded-circle" src="{{ asset('assets/admin.png') }}" width="31" alt="Admin">
                         @break
@@ -149,7 +151,7 @@
                         @break
                     @default
                         <img class="rounded-circle" src="{{ asset('assets/default.png') }}" width="31" alt="User">
-                @endswitch
+                @endswitch --}}
                 </div>
                 <div class="user-text">
                     <h6>{{ $user->username }}</h6>

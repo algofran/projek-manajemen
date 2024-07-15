@@ -20,6 +20,9 @@
 <script src="{{ asset('assets-admin/js/datatables.min.js') }}"></script> 
 
 <script src="{{ asset('assets/select/select.js') }}"></script>
-            
-<script src="{{ asset('assets/js/script.js') }}"></script>
 
+<script src="{{ asset('assets/js/script.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/ckeditor.js') }}"></script> --}}
+
+
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script> --}}

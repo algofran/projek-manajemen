@@ -20,7 +20,8 @@
             </div>
             <div class="col-auto text-end mb-3">
                 <div class="dropdown">
-                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownBulan" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false" {{ request('year') ? '' : 'disabled' }}
+                    >
                         Bulan
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
@@ -106,7 +107,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-6">
-                            <h5 class="card-title">Revenue {{ $year }}</h5>
+                            <h5 class="card-title">Revenue {{ $tahun }}</h5>
                         </div>
                         <ul role="tablist" class="nav nav-tabs card-header-tabs-primary justify-content-center">
                             <li class="nav-item">

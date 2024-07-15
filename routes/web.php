@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\GuideController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\kendaraan\KendaraanController;
 use App\Http\Controllers\penjualan\PenjualanController;
 use App\Http\Controllers\perusahaan\DokumenPertahunController;
 use App\Http\Controllers\perusahaan\InstituteDataController;
@@ -54,6 +56,15 @@ Route::group([
     Route::get('/user/profile', [UserController::class, 'profile'])->name('profile_user');
     Route::get('/events/show', [UserController::class, 'show'])->name('events.show');
     Route::post('/calendar-crud-ajax', [UserController::class, 'calendarEvents']);
+    Route::post('/profile/upload-image', [UserController::class, 'uploadProfileImage'])->name('profile.uploadImage');
+
+
+    Route::get('/Daftar_Panduan', [GuideController::class, 'index'])->name('show.guide');
+    Route::get('/guide', [GuideController::class, 'create'])->name('guide.add');
+    Route::post('/add-guide', [GuideController::class, 'store']);
+    Route::post('/upload', [GuideController::class, 'upload'])->name('guide.create');
+    Route::get('/detail-guide/{id}', [GuideController::class, 'detail'])->name('guide.detail');
+    Route::get('/hapus_guide/{id}', [GuideController::class, 'removeImagesFromDescription'])->name('guide.delete');
 });
 
 Route::group([
@@ -159,4 +170,14 @@ Route::group([
     Route::get('/menurekap', [RekapController::class, 'menu'])->name('menurekap');
     Route::get('/download/exel/rekappengeluaran', [RekapController::class, 'downloadExcelPengeluaran'])->name('download.exel.rekappengeluaran');
     Route::get('/download/exel/rekappendapatan', [RekapController::class, 'downloadExcelPendapatan'])->name('download.exel.rekappendapatan');
+});
+
+Route::group([
+    'middleware' => ['auth'],
+    'namespace'  => 'App\Http\Controllers\kendaraan',
+    'prefix'     => 'kendaraan/',
+], function () {
+    Route::get('/Maintance_Kendaraan', [KendaraanController::class, 'index'])->name('menukendaraan');
+    Route::get('/Laporan_Data', [KendaraanController::class, 'laporan'])->name('laporan.kendaraan');
+    Route::get('/BBM', [KendaraanController::class, 'bbm'])->name('bbm.kendaraan');
 });

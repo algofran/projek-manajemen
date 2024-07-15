@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head> --}}
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-inner slimscroll">
+  <div class="sidebar-inner slimscroll row">
       <div id="sidebar-menu" class="sidebar-menu">
-          <ul>
+          <ul class="">
               <li class="menu-title">
                   <span>Main Menu</span>
               </li>
@@ -66,9 +66,23 @@
               <li>
                 <a href="{{ route('events.show') }}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
             </li>
+
+            {{-- <li>
+                <a href="{{ route('menukendaraan') }}"><i class="fas fa-calendar-day"></i> <span>Maintance Kendaraan</span></a>
+            </li> --}}
+
+            
+            
+            <li class="menu-title mt-5">
+              <span>Panduan</span>
+          </li>
+          <li>
+            <a href="{{ route('show.guide') }}" class="text-primary"><i class="fa fa-search-plus"></i><span>Read the guide</span></a>
+        </li>
           </ul>
       </div>
   </div>
+  
 </div>
 
 {{-- <script src="assets/js/jquery-3.6.0.min.js"></script>

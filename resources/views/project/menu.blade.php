@@ -4,11 +4,17 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="card card-table">
-                <div class="card-header fw-bolder fs-6 bg-danger bg-gradient text-white">
-                    Menu Project
+            <div class="page-header container py-3 bg-danger bg-gradient text-white rounded">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <p class="fw-bolder fs-6 text-white my-auto">Menu Projek</p>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:history.back()" style="text-decoration-line: underline; font-style: italic">Kembali</a></li>
+                            <li class="breadcrumb-item text-white">Menu Projek</li>
+                        </ul>
+                    </div> 
                 </div>
-            </div> <!-- End of card-table -->
+            </div>
             
                 <div class="row mt-3">
                     <!-- List Project -->
@@ -25,7 +31,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-9 col-lg-10 col-xl-10 col-md-10 my-auto">
-                                                    <h5 class="card-title">List Project</h5>
+                                                    <h5 class="card-title">Daftar Projek</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,7 +58,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-9 col-lg-10 col-xl-10 col-md-10 my-auto">
-                                                    <h5 class="card-title">Tambah Project</h5>
+                                                    <h5 class="card-title">Tambah Projek</h5>
                                                 </div>
                                             </div>
                                         </div>
