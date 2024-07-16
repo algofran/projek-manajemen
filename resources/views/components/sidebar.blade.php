@@ -71,14 +71,20 @@
                 <a href="{{ route('menukendaraan') }}"><i class="fas fa-calendar-day"></i> <span>Maintance Kendaraan</span></a>
             </li> --}}
 
-            
+{{--             
             
             <li class="menu-title mt-5">
               <span>Panduan</span>
           </li>
           <li>
             <a href="{{ route('show.guide') }}" class="text-primary"><i class="fa fa-search-plus"></i><span>Read the guide</span></a>
+        </li> --}}
+        <li class="menu-title mt-5">
+            <span>Panduan</span>
         </li>
+        <li>
+          <a href="{{ route('informasi') }}" class="text-primary"><i class="fa fa-search-plus"></i><span>Read the information</span></a>
+      </li>
           </ul>
       </div>
   </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\GuideController;
+use App\Http\Controllers\admin\InformasiController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
@@ -65,6 +66,15 @@ Route::group([
     Route::post('/upload', [GuideController::class, 'upload'])->name('guide.create');
     Route::get('/detail-guide/{id}', [GuideController::class, 'detail'])->name('guide.detail');
     Route::get('/hapus_guide/{id}', [GuideController::class, 'removeImagesFromDescription'])->name('guide.delete');
+
+    Route::get('/Informasi', [InformasiController::class, 'index'])->name('informasi');
+    Route::get('/Informasi/Tambah', [InformasiController::class, 'create'])->name('informasi.create');
+    Route::post('/Tambah_Informasi', [InformasiController::class, 'store'])->name('informasi.store');
+    Route::get('/Informasi_Edit/{id}', [InformasiController::class, 'edit'])->name('informasi.edit');
+    Route::post('/Informasi_update/{id}', [InformasiController::class, 'update'])->name('informasi.update');
+    // Route::post('/upload', [InformasiController::class, 'upload'])->name('informasi.upload');
+    Route::get('/detail-guide/{id}', [InformasiController::class, 'detail'])->name('informasi.detail');
+    Route::get('/hapus_informasi/{id}', [InformasiController::class, 'destroy'])->name('informasi.delete');
 });
 
 Route::group([
