@@ -70,16 +70,16 @@
             <div class="blog-single-post">
                 <a href="javascript:history.back()" class="back-btn"><i class="feather-chevron-left"></i> Back</a>
                 <div class="blog-info bg-white pt-3 px-3 rounded-3">
-                   
                     <div class="row">
                         <div class="col-10">
                             <h3 class="blog-title">{{ $guide->title }}</h3>
                         </div>
                         <div class="col-auto">
-                            <i class="feather-clock"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $guide->created_at)->format('j M Y') }}
+                            <p class="fw-light">
+                                <i class="feather-clock"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $guide->created_at)->format('j M Y') }}
+                            </p>
                         </div>
                     </div>
-                   
                     <div class="post-list">
                         
                     </div>
@@ -87,7 +87,6 @@
                 <div class="blog-image">
                     <a href="javascript:void(0);"><img alt="" src="data:image/jpeg;base64,{{ $guide->image }}"></a>
                 </div>
-            
                 <div class=" p-4 p-xl-5 rounded rounded-3 bg-white">
                     <div class="post-author">
                         <h4>by {{ $guide->user }} </h4>
@@ -215,7 +214,7 @@
             </div> --}}
 
 
-            {{-- <div class="card new-comment clearfix">
+            <div class="card new-comment clearfix mt-3">
                 <div class="card-header">
                     <h4 class="card-title">Leave Comment</h4>
                 </div>
@@ -237,7 +236,7 @@
                         </div>
                     </form>
                 </div>
-            </div> --}}
+            </div>
 {{-- 
             <div class="card blog-share clearfix">
                 <div class="card-header">

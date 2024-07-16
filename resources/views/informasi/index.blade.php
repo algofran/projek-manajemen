@@ -34,14 +34,12 @@
                                             {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('j M Y') }}
                                         </span>
                                         <h6 class="post-title">{{ $item->user }}</h6>
-                                    
                                     </span>
-                                   
                                 </a>
                             </div>
                         </li>
                     </ul>
-                    <h3 class="blog-title mb-4"><a href="blog-details.html">{{ $item->title }}</a></h3>
+                    <h3 class="blog-title mb-4"><a href="{{ route('informasi.detail', ['id' => $item->id]) }}">{{ $item->title }}</a></h3>
                     {{-- <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p> --}}
                 </div>
                 <div class="row">
@@ -58,8 +56,6 @@
             </div>
         </div>
     @endforeach
-    
-        
     </div>
 </div>
 @endsection @section('script')
