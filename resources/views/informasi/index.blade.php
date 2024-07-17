@@ -20,26 +20,21 @@
         @foreach ($guides as $item)
         <div class="col-md-6 col-xl-4 col-sm-12 d-flex">
             <div class="blog grid-blog flex-fill">
+                <span class="post-date"><i class="far fa-clock"></i>
+                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('j M Y') }}
+                </span>
                 <div class="blog-image">
                     <a href="{{ route('informasi.detail', ['id' => $item->id]) }}"><img class="img-fluid" src="data:image/jpeg;base64,{{ $item->image }}" alt="Post Image" style="width: 100%; height: 200px;"></a>
                 </div>
                 <div class="blog-content">
-                    <ul class="entry-meta meta-item">
-                        <li>
-                            <div class="post-author">
-                                <a href="{{ route('informasi.detail', ['id' => $item->id]) }}">
-                                    <img src="assets/img/profiles/avatar-01.jpg" alt="Post Author">
-                                    <span>
-                                        <span class="post-date"><i class="far fa-clock"></i>
-                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('j M Y') }}
-                                        </span>
-                                        <h6 class="post-title">{{ $item->user }}</h6>
-                                    </span>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <h3 class="blog-title mb-4"><a href="{{ route('informasi.detail', ['id' => $item->id]) }}">{{ $item->title }}</a></h3>
+                   
+                <div class="post-author">
+                    <a href="{{ route('informasi.detail', ['id' => $item->id]) }}">
+                        <p class="post-title fs-6">{{ $item->user }}</p>
+                    </a>
+                </div>
+                   
+                    <p class="blog-title mb-4 fs-6"><a href="{{ route('informasi.detail', ['id' => $item->id]) }}">{{ $item->title }}</a></p>
                     {{-- <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p> --}}
                 </div>
                 <div class="row">
