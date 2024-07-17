@@ -24,7 +24,7 @@ class PenjualanController extends Controller
         $beli = $request->input('beli');
         $jual = $request->input('jual');
         $status = $request->input('status');
-        $employees = User::where('type', '>', 0)->orderBy('firstname')->get();
+        $employees = User::where('type', '>', 0)->oldest()->get();
 
 
         return view('Penjualan.lists_penjualan', compact('i', 'pay', 'sales', 'employees', 'tgl', 'pembeli', 'keterangan', 'beli', 'jual', 'status'));
