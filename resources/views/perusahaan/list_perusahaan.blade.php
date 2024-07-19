@@ -86,7 +86,7 @@
                     
                                                     <div class="modal-body">  
                                                         <div class="col-md-10">
-                                                            <input type="" class="form-control @error('id_inst') is-invalid @enderror" placeholder="" value="{{ old('id_inst',$data->id_inst) }}" name="id_inst" 
+                                                            <input type="hidden" class="form-control @error('id_inst') is-invalid @enderror" placeholder="" value="{{ old('id_inst',$data->id_inst) }}" name="id_inst" 
                                                             ="">
                                                             @error('id_inst')
                                                                 <span class="invalid-feedback" role="alert">
