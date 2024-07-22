@@ -123,14 +123,14 @@
                                         <td>{{ $item->end_date }}</td>
                                         @if (request('data') == 'projek' || request('data') == '')
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->payment }}</td>
+                                            <td>{{ 'Rp.'. number_format($item->payment, 0, ',', '.') }}</td>
                                             <td>{{ $item->description }}</td>
                                         @else
                                             @php
                                                 $tagIndex = $item->paket;
                                                 $paket = isset($paket_tag[$tagIndex]) ? $paket_tag[$tagIndex] : "";
                                             @endphp
-                                            <td>{{ $item->tagihan }}</td>
+                                            <td>{{ 'Rp.'. number_format($item->tagihan, 0, ',', '.') }}</td>
                                             <td>{{ $item->sektor }}</td>
                                             <td>{{ $paket }}</td>
                                         @endif

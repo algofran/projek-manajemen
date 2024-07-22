@@ -7,7 +7,6 @@
     <title>Cetak Halaman</title>
     <style>
         body {
-            /* font-family: Arial, sans-serif; */
             margin: 0;
             padding: 0;
         }
@@ -24,7 +23,6 @@
             margin-bottom: 20px;
         }
 
-        /* Mengurangi margin atas dan bawah untuk tag <p> */
         .header p {
             margin: 5px 0;
         }
@@ -81,7 +79,7 @@
                     @endphp
                     @switch($bayar)
                         @case('Belum Terbayar')
-                            <span> {{ $bayar }}</span>
+                            <span> Belum Terbayar</span>
                             @break
                         @case('Sudah Terbayar')
                             <span>{{ $bayar }}</span>

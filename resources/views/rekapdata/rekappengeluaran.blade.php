@@ -106,7 +106,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $item->date }}</td>
                                     <td>{{ $item->subject }}</td>
-                                    <td>{{ $item->cost }}</td>
+                                    <td>{{ 'Rp.'. number_format($item->cost, 0, ',', '.') }}</td>
                                     <td>{{ $item->comment }}</td>
                                 </tr>
                                 @endforeach

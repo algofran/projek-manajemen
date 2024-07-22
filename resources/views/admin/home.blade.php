@@ -7,29 +7,35 @@
                 <h3 class="text-gradient text-danger">Dashboard</h3>
             </div>
             <div class="col-auto text-end mb-3">
-                <div class="dropdown">
-                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tahun
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        @for ($year = date('Y'); $year >= 2012; $year--)
-                            <li><a class="dropdown-item" href="{{ route('home', ['year' => $year]) }}">{{ $year }}</a></li>
-                        @endfor
-                    </ul>
+                <div class="row">
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tahun
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                @for ($year = date('Y'); $year >= 2012; $year--)
+                                    <li><a class="dropdown-item" href="{{ route('home', ['year' => $year]) }}">{{ $year }}</a></li>
+                                @endfor
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownBulan" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false" {{ request('year') ? '' : 'disabled' }}
+                            >
+                                Bulan
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                @foreach (range(1, 12) as $month)
+                                    <li><a class="dropdown-item" href="{{ route('home', ['year' => request('year'), 'month' => $month]) }}">{{ DateTime::createFromFormat('!m', $month)->format('F') }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-auto text-end mb-3">
-                <div class="dropdown">
-                    <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownBulan" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false" {{ request('year') ? '' : 'disabled' }}
-                    >
-                        Bulan
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                        @foreach (range(1, 12) as $month)
-                            <li><a class="dropdown-item" href="{{ route('home', ['year' => request('year'), 'month' => $month]) }}">{{ DateTime::createFromFormat('!m', $month)->format('F') }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
+               
+               
             </div>
         </div>
         <!-- Tambahkan konten dashboard di sini -->
@@ -102,7 +108,7 @@
     @endphp --}}
     
     <div class="row">
-        <div class="col-md-12 col-lg-8">
+        <div class="col-md-12 col-lg-12 col-xl-8">
             <div class="card card-chart shadow">
                 <div class="card-header">
                     <div class="row align-items-center">
@@ -187,7 +193,7 @@
     </div>
 
     <div class="row ">
-        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-lg-12 col-12 mx-auto">
             <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
@@ -202,7 +208,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-lg-12 col-12 mx-auto">
             <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
@@ -217,7 +223,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-lg-12 col-12 mx-auto">
             <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
@@ -232,7 +238,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-lg-12 col-12 mx-auto">
             <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">
@@ -247,7 +253,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-sm-8 col-14 mx-auto">
+        <div class="col-xl-4 col-sm-8 col-lg-12 col-12 mx-auto">
             <div class="card bg-comman w-100 shadow equal-height">
                 <div class="card-body">
                     <div class="db-widgets d-flex justify-content-between align-items-center">

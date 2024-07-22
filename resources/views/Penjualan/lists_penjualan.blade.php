@@ -42,9 +42,9 @@
                                     <tr>
                                         <th>Tanggal</th>
                                         <th>Pembeli</th>
-                                        <th>Keterangan</th>
                                         <th>Jumlah</th>
                                         <th>Status</th>
+                                        <th>Keterangan</th>
                                         @role(['admin', 'manager'])
                                         <th class="text-end">Action</th>
                                         @endrole
@@ -55,7 +55,6 @@
                                     <tr>
                                         <td>{{ $data->tgl }}</td>
                                         <td>{{ ucwords($data->pembeli) }}</td>
-                                        <td>{{ $data->keterangan }}</td>
                                         <td>Rp. {{ number_format($data->jual, 0, ',', '.') }}</td>
                                         <td>
                                             @php
@@ -72,6 +71,7 @@
                                                     <!-- Tindakan jika tidak ada kasus yang cocok -->
                                             @endswitch
                                         </td>
+                                        <td>{{ $data->keterangan }}</td>
                                         <td class="text-end">
                                             @role(['admin', 'manager'])
                                             <div class="actions ">

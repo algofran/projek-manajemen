@@ -119,8 +119,8 @@
                 </div>
             </div> --}}
 
-
-            {{-- <div class="card blog-comments">
+{{-- 
+            <div class="card blog-comments">
                 <div class="card-header">
                     <h4 class="card-title">Comments (5)</h4>
                 </div>
@@ -214,7 +214,7 @@
             </div> --}}
 
 
-            <div class="card new-comment clearfix mt-3">
+            {{-- <div class="card new-comment clearfix mt-3">
                 <div class="card-header">
                     <h4 class="card-title">Leave Comment</h4>
                 </div>
@@ -236,7 +236,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 {{-- 
             <div class="card blog-share clearfix">
                 <div class="card-header">
