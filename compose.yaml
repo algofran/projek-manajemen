@@ -59,7 +59,7 @@ services:
           cpus: "1"
           memory: 1g
     ports:
-      - 3306:3306
+      - 3307:3306
     networks:
       - backend
 
