@@ -11,7 +11,7 @@ services:
           cpus: "1"
           memory: 512m
     ports:
-      - "8082:8080" # Port Adminer
+      - "8085:8080" # Port Adminer
     networks:
       - backend
 
@@ -69,7 +69,7 @@ services:
     restart: always
     user: root # Untuk akses volume dengan izin
     ports:
-      - "8083:8080" # Port Jenkins
+      - "8086:8080" # Port Jenkins
       - "50000:50000" # Port agen Jenkins
     volumes:
       - jenkins_home:/var/jenkins_home
