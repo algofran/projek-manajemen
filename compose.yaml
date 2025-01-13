@@ -30,7 +30,7 @@ services:
     depends_on:
       - mysql
     ports:
-      - "9100:9000" # Port PHP-FPM untuk Laravel
+      - "9000:9000" # Port PHP-FPM untuk Laravel
 
   nginx:
     image: nginx:latest
