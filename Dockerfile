@@ -37,7 +37,7 @@ RUN chown -R www-data:www-data /var/www \
 
 # Expose port untuk aplika
 
-EXPOSE 9100
+EXPOSE 9000
 
 # Mengatur entrypoint default
 CMD ["php-fpm"]
