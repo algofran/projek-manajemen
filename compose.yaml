@@ -37,7 +37,7 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "8080:80" # Port untuk HTTP
+      - "8081:80" # Port untuk HTTP
       - "443:443" # Port HTTPS baru
     volumes:
       - .:/var/www
@@ -70,7 +70,7 @@ services:
     container_name: jenkins
     restart: always
     ports:
-      - "8081:8080" # Port Jenkins
+      - "8082:8080" # Port Jenkins
     volumes:
       - jenkins_home:/var/jenkins_home
     environment:
