@@ -1,5 +1,5 @@
 # Menggunakan PHP 8.2 dengan FPM dan Alpine sebagai image dasar
-FROM php:8.2-fpm-alpine
+FROM php:8.2-fpm
 
 # Menginstall dependensi sistem
 RUN apk update && apk add --no-cache \
