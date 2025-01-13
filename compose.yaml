@@ -60,7 +60,7 @@ services:
           cpus: "1"
           memory: 1g
     ports:
-      - "3307:3306" # Port MySQL
+      - "3306:3306" # Port MySQL
     networks:
       - backend
 
