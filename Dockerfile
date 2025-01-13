@@ -18,6 +18,7 @@ RUN apk update && apk add --no-cache \
 # Menginstall Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN docker-php-ext-install pdo_mysql
 
 # Menyiapkan direktori kerja
 WORKDIR /var/www
