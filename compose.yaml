@@ -45,7 +45,7 @@ services:
     volumes:
       - .:/var/www # Memasukkan seluruh aplikasi ke Nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf # Konfigurasi Nginx
-      - ./docker/nginx/ssl:/etc/nginx/ssl # Sertifikat SSL
+      - ./docker/nginx/ssl:/etc/nginx/ssl # Tambahkan volume untuk sertifikat
     depends_on:
       - app
     networks:
