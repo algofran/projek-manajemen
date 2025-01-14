@@ -51,6 +51,14 @@ services:
     networks:
       - backend
 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./docker/nginx/ssl:/etc/letsencrypt
+      - ./docker/nginx/ssl:/var/lib/letsencrypt
+    entrypoint: /bin/sh -c "trap exit TERM; while :; do sleep 2073600; done"
+
   # MySQL untuk database Laravel
   mysql:
     image: mysql:8.0.32
