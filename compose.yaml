@@ -40,7 +40,7 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "80:80"
+      - "8084:80"
     volumes:
       - .:/var/www # Memasukkan seluruh aplikasi ke Nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf # Konfigurasi Nginx
@@ -63,7 +63,7 @@ services:
           cpus: "1"
           memory: 1g
     ports:
-      - "3306:3306" # Port MySQL
+      - "3307:3306" # Port MySQL
     networks:
       - backend
 
