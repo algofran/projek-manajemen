@@ -21,7 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Menyiapkan direktori kerja
 WORKDIR /var/www
 
-# Menyalin file aplikasi Laravel ke container
+# Menyalin seluruh file aplikasi Laravel ke dalam container
 COPY . /var/www
 
 # Menyimpan file konfigurasi PHP
@@ -41,4 +41,4 @@ EXPOSE 9000
 CMD ["php-fpm"]
 
 # Mengatur entrypoint default lainnya (boleh diaktifkan jika diperlukan)
-# CMD ["php", "artisan", "serve", "host=0.0.0.0","port=9000"]
+# CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=9000"]
