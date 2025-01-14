@@ -1,89 +1,54 @@
-version: "3.9" # Versi Docker Compose yang sesuai
-
+version: "3.9"
 services:
-  # Adminer untuk akses database
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 512m
-    ports:
-      - "8085:8080" # Port Adminer
-    networks:
-      - backend
-
-  # Laravel app dengan PHP-FPM
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: laravel-app
     container_name: laravel-app
-    working_dir: /var/www
     volumes:
       - .:/var/www
-      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     networks:
-      - backend
+      - laravel_network
     depends_on:
       - mysql
-    ports:
-      - "9000:9000" # Port PHP-FPM
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=management
+      - DB_USERNAME=root
+      - DB_PASSWORD=oceanli0611
 
-  # Nginx untuk reverse proxy Laravel
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    restart: always
-    ports:
-      - "8001:80" # Port untuk mengakses aplikasi Laravel
-    volumes:
-      - .:/var/www
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - app
-    networks:
-      - backend
-
-  # MySQL untuk database Laravel
   mysql:
     image: mysql:8.0.32
-    container_name: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    container_name: mysql-container
     environment:
-      MYSQL_ROOT_PASSWORD: admin123
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1g
-    ports:
-      - 3306:3306
-    networks:
-      - backend
-
-  # Jenkins untuk CI/CD
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    restart: always
-    user: root # Agar volume memiliki izin akses
-    ports:
-      - "8086:8080" # Port Jenkins
-      - "50000:50000" # Port agen Jenkins
+      MYSQL_ROOT_PASSWORD: oceanli0611
+      MYSQL_DATABASE: management
     volumes:
-      - jenkins_home:/var/jenkins_home # Volume untuk Jenkins
+      - mysql-data:/var/lib/mysql
     networks:
-      - backend
+      - laravel_network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - .:/var/www
+    ports:
+      - "80:80"
+    networks:
+      - laravel_network
+
+  adminer: # Menambahkan Adminer
+    image: adminer
+    container_name: adminer-container
+    ports:
+      - "8080:8080" # Port Adminer yang akan diakses melalui browser
+    networks:
+      - laravel_network
 
 networks:
-  backend:
-    driver: bridge # Menggunakan jaringan bridge
+  laravel_network:
+    driver: bridge
 
 volumes:
-  jenkins_home: # Volume untuk Jenkins
+  mysql-data:
