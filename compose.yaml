@@ -35,8 +35,19 @@ services:
       - .:/var/www
     ports:
       - "80:80"
+    depends_on:
+      - php-fpm
     networks:
       - laravel_network
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel-network
 
   adminer: # Menambahkan Adminer
     image: adminer
