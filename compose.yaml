@@ -40,17 +40,17 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "8090:80" # Port HTTP
-      - "9443:443" # Port HTTPS
+      - "80:80" # Port HTTP di-host
+      - "443:443" # Port HTTPS di-host
     volumes:
       - .:/var/www # Memasukkan seluruh aplikasi ke Nginx
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf # Konfigurasi Nginx
-      - ./docker/nginx/ssl:/etc/nginx/ssl # Tambahkan volume untuk sertifikat
     depends_on:
       - app
     networks:
       - backend
 
+  # Certbot untuk SSL
   certbot:
     image: certbot/certbot
     container_name: certbot
