@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   app:
     build:
@@ -11,10 +12,10 @@ services:
     depends_on:
       - mysql
     environment:
-      - DB_HOST=mysql
-      - DB_DATABASE=management
-      - DB_USERNAME=root
-      - DB_PASSWORD=oceanli0611
+      DB_HOST: mysql
+      DB_DATABASE: management
+      DB_USERNAME: root
+      DB_PASSWORD: oceanli0611
 
   mysql:
     image: mysql:8.0.32
@@ -44,16 +45,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: php-fpm-container
     volumes:
       - .:/var/www
     networks:
-      - laravel-network
+      - laravel_network
 
-  adminer: # Menambahkan Adminer
+  adminer:
     image: adminer
     container_name: adminer-container
     ports:
-      - "8080:8080" # Port Adminer yang akan diakses melalui browser
+      - "8080:8080"
     networks:
       - laravel_network
 
