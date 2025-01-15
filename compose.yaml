@@ -13,7 +13,7 @@ services:
     command: |
       bash -c "composer install && php artisan key:generate && php-fpm"
     networks:
-      - laravel_network # Use consistent network name
+      - laravel_network # Pastikan layanan ini berada di jaringan yang sama
     depends_on:
       - mysql
     environment:
@@ -22,18 +22,7 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: oceanli0611
     ports:
-      - "9000:9000" # Exposing PHP-FPM port for Nginx to connect
-
-  mysql:
-    image: mysql:8.0.32
-    container_name: mysql-container
-    environment:
-      MYSQL_ROOT_PASSWORD: oceanli0611
-      MYSQL_DATABASE: management
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - laravel_network # Ensure mysql is in the same network
+      - "9000:9000" # Port PHP-FPM yang terhubung dengan Nginx
 
   nginx:
     image: nginx:latest
@@ -42,23 +31,12 @@ services:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - .:/var/www
     ports:
-      - "80:80" # Exposing Nginx to port 80
+      - "80:80"
     depends_on:
       - app
     networks:
-      - laravel_network # Ensure nginx is in the same network
-
-  adminer:
-    image: adminer
-    container_name: adminer-container
-    ports:
-      - "8081:8080" # Exposing Adminer interface to port 8081
-    networks:
-      - laravel_network # Ensure adminer is in the same network
+      - laravel_network # Pastikan layanan ini berada di jaringan yang sama
 
 networks:
-  laravel_network: # Ensure all containers use the same network
+  laravel_network:
     driver: bridge
-
-volumes:
-  mysql-data:
