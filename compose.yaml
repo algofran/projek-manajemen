@@ -13,7 +13,7 @@ services:
     command: |
       bash -c "composer install && php artisan key:generate && php-fpm"
     networks:
-      - laravel_network
+      - backend
     depends_on:
       - mysql
     environment:
@@ -21,6 +21,8 @@ services:
       DB_DATABASE: management
       DB_USERNAME: root
       DB_PASSWORD: oceanli0611
+    ports:
+      - "9000:9000" # Port PHP-FPM
 
   mysql:
     image: mysql:8.0.32
@@ -31,7 +33,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - laravel_network
+      - backend
 
   nginx:
     image: nginx:latest
@@ -44,7 +46,7 @@ services:
     depends_on:
       - app
     networks:
-      - laravel_network
+      - backend
 
   adminer:
     image: adminer
@@ -52,7 +54,7 @@ services:
     ports:
       - "8081:8080"
     networks:
-      - laravel_network
+      - backend
 
 networks:
   laravel_network:
