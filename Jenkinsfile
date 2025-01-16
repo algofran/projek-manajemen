@@ -13,6 +13,20 @@ pipeline {
             }
         }
 
+        stage('Setup Environment') {
+            steps {
+                script {
+                    // Ganti konfigurasi database pada .env
+                    sh '''
+                    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_PASSWORD=/DB_USERNAME=oceanli0611/g' ${PROJECT_DIR}/.env
+                    '''
+                }
+            }
+        }
+
         stage('Build and Start Containers') {
             steps {
                 script {
@@ -25,20 +39,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Setup Environment') {
-            steps {
-                script {
-                    // Ganti konfigurasi database pada .env
-                    sh '''
-                    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
-                    sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
-                    sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
-                    '''
-                }
-            }
-        }
-
     }
     post {
         success {
