@@ -42,9 +42,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Build dan jalankan docker-compose
-                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down || true
-                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
+                    docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml down
+                    docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml up -d --build
                     '''
                 }
             }
