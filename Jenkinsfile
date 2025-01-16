@@ -41,21 +41,20 @@ pipeline {
         }
 
         stage('Run Migrations and Seed') {
-            steps {
-                script {
-                    // Menjalankan migrasi dan seed tanpa menggunakan sh -c, langsung pada PHP
-                    sh '''
-                    # Mengecek apakah container Laravel aktif sebelum menjalankan perintah
-                    if [ $(docker ps -q -f name=${CONTAINER_APP}) ]; then
-                        docker exec -i ${CONTAINER_APP} php artisan migrate --force
-                        docker exec -i ${CONTAINER_APP} php artisan db:seed --force
-                    else
-                        echo "Container ${CONTAINER_APP} tidak berjalan!"
-                    fi
-                    '''
-                }
-            }
+    steps {
+        script {
+            // Menunggu beberapa detik untuk memberi waktu MySQL siap
+            sleep time: 30, unit: 'SECONDS'
+
+            // Menjalankan migrasi dan seed menggunakan docker-compose exec
+            sh '''
+            docker-compose exec -T laravel-app php artisan migrate --force
+            docker-compose exec -T laravel-app php artisan db:seed --force
+            '''
         }
+    }
+}
+
     }
     post {
         success {

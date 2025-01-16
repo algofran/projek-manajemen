@@ -44,7 +44,7 @@ COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Membuat .env dari .env.example dan menjalankan artisan key:generate
-RUN cp /var/www/.env.example /var/www/.env && php artisan key:generate
+RUN cp /var/www/.env.example /var/www/.env
 
 # Expose port untuk aplikasi
 EXPOSE 9000
