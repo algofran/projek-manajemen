@@ -18,7 +18,7 @@ pipeline {
                     // Menjalankan docker-compose dengan file docker-compose.dev.yml
                     sh '''
                     # Menjalankan docker-compose dengan file dev configuration
-                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yml -p dev up -d
+                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml -p dev up -d
                     '''
                 }
             }
