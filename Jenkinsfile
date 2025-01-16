@@ -42,8 +42,21 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml down
-                    docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml up -d --build
+                    # Stop dan hapus container jika ada
+                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down
+                    # Build dan jalankan container
+                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
+                    '''
+                }
+            }
+        }
+        stage('Fix Permissions') {
+            steps {
+                script {
+                    sh '''
+                    # Perbaiki izin direktori storage dan cache
+                    docker exec -i ${CONTAINER_APP} chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+                    docker exec -i ${CONTAINER_APP} chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
                     '''
                 }
             }
@@ -62,7 +75,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Menjalankan migrasi dan seed
+                    # Generate key, migrasi, dan seed
                     docker exec -i ${CONTAINER_APP} php artisan key:generate
                     docker exec -i ${CONTAINER_APP} php artisan migrate --force
                     docker exec -i ${CONTAINER_APP} php artisan db:seed --force
