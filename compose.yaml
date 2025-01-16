@@ -38,7 +38,7 @@ services:
     ports:
       - "80:80" # Port untuk mengakses aplikasi Laravel
     volumes:
-      - .:/root/.jenkins/workspace/Aplikasi # Mount ke lokasi aplikasi Laravel
+      - - /root/.jenkins/workspace/Aplikasi:/var/www # Mount ke lokasi aplikasi Laravel
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
