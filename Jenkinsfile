@@ -12,35 +12,46 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Setup Environment') {
             steps {
                 script {
-                    // Menjalankan docker-compose dengan file docker-compose.dev.yml
+                    // Ganti konfigurasi database pada .env
                     sh '''
-                    # Menjalankan docker-compose dengan file dev configuration
-                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml -p dev up -d
+                    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_PASSWORD=/DB_PASSWORD=oceanli0611/g' ${PROJECT_DIR}/.env
                     '''
                 }
             }
         }
+
         stage('Build and Start Containers') {
             steps {
                 script {
+                    // Build dan jalankan docker-compose
                     sh '''
-                    # Build dan jalankan docker-compose
+                    # Memastikan untuk menurunkan container terlebih dahulu jika ada, lalu build dan jalankan
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down || true
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
                     '''
                 }
             }
         }
+
         stage('Run Migrations and Seed') {
             steps {
                 script {
+                    // Menjalankan migrasi dan seed tanpa menggunakan sh -c, langsung pada PHP
                     sh '''
-                    # Menjalankan migrasi dan seed tanpa menggunakan sh -c, langsung pada PHP
-                    docker exec -i ${CONTAINER_APP} php artisan migrate --force
-                    docker exec -i ${CONTAINER_APP} php artisan db:seed --force
+                    # Mengecek apakah container Laravel aktif sebelum menjalankan perintah
+                    if [ $(docker ps -q -f name=${CONTAINER_APP}) ]; then
+                        docker exec -i ${CONTAINER_APP} php artisan migrate --force
+                        docker exec -i ${CONTAINER_APP} php artisan db:seed --force
+                    else
+                        echo "Container ${CONTAINER_APP} tidak berjalan!"
+                    fi
                     '''
                 }
             }

@@ -5,11 +5,6 @@ services:
     image: adminer
     container_name: adminer
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 512m
     ports:
       - 8081:8080
     networks:
@@ -25,8 +20,6 @@ services:
     volumes:
       - .:/var/www
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-    networks:
-      - backend
     depends_on:
       - mysql
     environment:
@@ -36,6 +29,8 @@ services:
       DB_PASSWORD: oceanli0611
     ports:
       - "9000:9000" # Port PHP-FPM
+    networks:
+      - backend
 
   nginx:
     image: nginx:latest
@@ -59,11 +54,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: oceanli0611
       MYSQL_DATABASE: management
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1g
+    ports:
+      - "3306:3306" # Port untuk mengakses MySQL (optional)
     networks:
       - backend
 
