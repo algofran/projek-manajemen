@@ -45,12 +45,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Tunggu container Laravel siap
-                    sleep 10
-
                     # Jalankan migrasi dan seed database di dalam container Laravel
-                    docker exec -i ${CONTAINER_APP} bash -c "php artisan migrate --force"
-                    docker exec -i ${CONTAINER_APP} bash -c "php artisan db:seed --force"
+                    docker exec -i ${CONTAINER_APP} sh -c "php artisan migrate --force"
+                    docker exec -i ${CONTAINER_APP} sh -c "php artisan db:seed --force"
                     '''
                 }
             }
