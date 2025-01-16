@@ -39,13 +39,15 @@ COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
-# Expose port untuk aplikasi
-EXPOSE 9000
-
-# Menjalankan migrasi dan seeding database secara opsional
-# Menggunakan entrypoint untuk memastikan proses Laravel berjalan sesuai
+# Menyalin entrypoint dan memberikan hak akses eksekusi
 COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Membuat .env dari .env.example dan menjalankan artisan key:generate
+RUN cp /var/www/.env.example /var/www/.env && php artisan key:generate
+
+# Expose port untuk aplikasi
+EXPOSE 9000
 
 # Mengatur entrypoint default untuk menjalankan PHP-FPM
 CMD ["entrypoint.sh"]
