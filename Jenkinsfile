@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Periksa apakah file .env sudah ada
+                    # Pastikan .env.example ada dan buat file .env jika belum ada
                     if [ ! -f ${PROJECT_DIR}/.env ]; then
                         echo ".env file tidak ditemukan, membuat .env dari .env.example"
                         if [ -f ${PROJECT_DIR}/.env.example ]; then
@@ -29,7 +29,7 @@ pipeline {
                         echo ".env file sudah ada, melanjutkan dengan konfigurasi."
                     fi
 
-                    # Update konfigurasi di file .env
+                    # Ganti konfigurasi database pada .env
                     sed -i "s/^DB_HOST=.*/DB_HOST=${CONTAINER_MYSQL}/" ${PROJECT_DIR}/.env
                     sed -i "s/^DB_DATABASE=.*/DB_DATABASE=management/" ${PROJECT_DIR}/.env
                     sed -i "s/^DB_USERNAME=.*/DB_USERNAME=root/" ${PROJECT_DIR}/.env
@@ -38,13 +38,22 @@ pipeline {
                 }
             }
         }
-
         stage('Build and Start Containers') {
             steps {
                 script {
                     sh '''
                     docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml down
                     docker-compose -f /root/.jenkins/workspace/Aplikasi/compose.yaml up -d --build
+                    '''
+                }
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh '''
+                    # Jalankan composer install di dalam container
+                    docker exec -i ${CONTAINER_APP} composer install --no-dev --optimize-autoloader
                     '''
                 }
             }
