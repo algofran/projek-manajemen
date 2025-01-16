@@ -28,8 +28,6 @@ services:
       DB_PASSWORD: oceanli0611
     ports:
       - "9000:9000"
-    networks:
-      - backend
 
   nginx:
     image: nginx:latest
