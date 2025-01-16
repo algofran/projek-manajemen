@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_COMPOSE = "/usr/local/bin/docker-compose" // Path docker-compose
-        PROJECT_DIR = "/root/.jenkins/workspace/Aplikasi" // Path direktori Laravel
+        PROJECT_DIR = "${WORKSPACE}/Aplikasi" // Path direktori Laravel, gunakan WORKSPACE untuk path fleksibel
         CONTAINER_APP = "laravel-app" // Nama container Laravel
         CONTAINER_MYSQL = "mysql" // Nama container MySQL
     }

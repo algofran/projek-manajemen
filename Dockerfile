@@ -21,24 +21,23 @@ RUN apk update && apk add --no-cache \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Menyiapkan direktori kerja
-WORKDIR ~/.jenkins/workspace/Aplikasi
-
-# Menyalin seluruh file aplikasi Laravel ke dalam container terlebih dahulu
-COPY . ~/.jenkins/workspace/Aplikasi
+WORKDIR /var/www
 
 # Menyalin file Composer terlebih dahulu untuk meng-cache dependensi (mengoptimalkan build layer)
-COPY composer.json composer.lock ~/.jenkins/workspace/Aplikasi
+COPY composer.json composer.lock /var/www/
 
 # Menjalankan Composer untuk menginstall dependensi aplikasi
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Menyalin seluruh file aplikasi Laravel ke dalam container
+COPY . /var/www
 
 # Menyimpan file konfigurasi PHP
-# Memastikan file php.ini ada di lokasi yang benar dalam container (/usr/local/etc/php/conf.d/)
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Memberikan hak akses yang sesuai pada direktori penyimpanan
-RUN chown -R www-data:www-data ~/.jenkins/workspace/Aplikasi \
-    && chmod -R 755 ~/.jenkins/workspace/Aplikasi/storage ~/.jenkins/workspace/Aplikasibootstrap/cache
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
 # Menyalin entrypoint dan memberikan hak akses eksekusi
 COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh

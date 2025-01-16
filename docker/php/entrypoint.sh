@@ -1,4 +1,6 @@
-# Periksa koneksi ke database sebelum menjalankan migrasi
+#!/bin/bash
+
+# Menunggu database siap sebelum melanjutkan
 echo "Menunggu database siap..."
 until php artisan db:wait; do
     sleep 2
@@ -6,13 +8,10 @@ done
 
 # Jalankan migrasi database
 echo "Menjalankan migrasi database..."
-php artisan key:generate
-
-# Jalankan migrasi database
-echo "Menjalankan migrasi database..."
+php artisan key:generate --force
 php artisan migrate --force
 
-# Jalankan seeding database
+# Jalankan seeding database jika diperlukan
 echo "Menjalankan seeding database..."
 php artisan db:seed --force
 
