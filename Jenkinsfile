@@ -41,19 +41,25 @@ pipeline {
         }
 
         stage('Run Migrations and Seed') {
-    steps {
-        script {
-            // Menunggu beberapa detik untuk memberi waktu MySQL siap
-            sleep time: 30, unit: 'SECONDS'
+            steps {
+                script {
+                    // Menunggu beberapa detik untuk memberi waktu MySQL siap
+                    sleep time: 30, unit: 'SECONDS'
 
-            // Menjalankan migrasi dan seed menggunakan docker-compose exec
-            sh '''
-            docker-compose exec -T laravel-app php artisan migrate --force
-            docker-compose exec -T laravel-app php artisan db:seed --force
-            '''
+                    // Menghasilkan kunci aplikasi Laravel
+                    sh '''
+                    docker-compose exec -T laravel-app php artisan key:generate
+                    '''
+
+                    // Menjalankan migrasi dan seed menggunakan docker-compose exec
+                    sh '''
+                    docker-compose exec -T laravel-app php artisan migrate --force
+                    docker-compose exec -T laravel-app php artisan db:seed --force
+                    '''
+                }
+            }
         }
-    }
-}
+
 
     }
     post {
