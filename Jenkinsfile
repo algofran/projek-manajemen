@@ -45,9 +45,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Jalankan migrasi dan seed database di dalam container Laravel
-                    docker exec -i ${CONTAINER_APP} sh -c "php artisan migrate --force"
-                    docker exec -i ${CONTAINER_APP} sh -c "php artisan db:seed --force"
+                    # Menjalankan migrasi dan seed tanpa menggunakan sh -c, langsung pada PHP
+                    docker exec -i ${CONTAINER_APP} php artisan migrate --force
+                    docker exec -i ${CONTAINER_APP} php artisan db:seed --force
                     '''
                 }
             }
