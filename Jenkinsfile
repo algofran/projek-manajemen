@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Pastikan .env.example ada dan buat file .env jika belum ada
+                    # Periksa apakah file .env sudah ada
                     if [ ! -f ${PROJECT_DIR}/.env ]; then
                         echo ".env file tidak ditemukan, membuat .env dari .env.example"
                         if [ -f ${PROJECT_DIR}/.env.example ]; then
@@ -29,15 +29,16 @@ pipeline {
                         echo ".env file sudah ada, melanjutkan dengan konfigurasi."
                     fi
 
-                    # Ganti konfigurasi database pada .env
-                    sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g" ${PROJECT_DIR}/.env
-                    sed -i "s/DB_DATABASE=laravel/DB_DATABASE=management/g" ${PROJECT_DIR}/.env
-                    sed -i "s/DB_USERNAME=root/DB_USERNAME=root/g" ${PROJECT_DIR}/.env
-                    sed -i "s/DB_PASSWORD=/DB_PASSWORD=oceanli0611/g" ${PROJECT_DIR}/.env
+                    # Update konfigurasi di file .env
+                    sed -i "s/^DB_HOST=.*/DB_HOST=${CONTAINER_MYSQL}/" ${PROJECT_DIR}/.env
+                    sed -i "s/^DB_DATABASE=.*/DB_DATABASE=management/" ${PROJECT_DIR}/.env
+                    sed -i "s/^DB_USERNAME=.*/DB_USERNAME=root/" ${PROJECT_DIR}/.env
+                    sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=oceanli0611/" ${PROJECT_DIR}/.env
                     '''
                 }
             }
         }
+
         stage('Build and Start Containers') {
             steps {
                 script {
