@@ -75,7 +75,15 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Generate key, migrasi, dan seed
+                    echo "Menunggu MySQL agar siap..."
+                    for i in {1..20}; do
+                        if docker exec -i ${CONTAINER_MYSQL} mysqladmin ping --silent; then
+                            echo "MySQL siap!"
+                            break
+                        fi
+                        echo "MySQL belum siap, mencoba lagi ($i)..."
+                        sleep 5
+                    done
                     docker exec -i ${CONTAINER_APP} php artisan key:generate
                     docker exec -i ${CONTAINER_APP} php artisan migrate --force
                     docker exec -i ${CONTAINER_APP} php artisan db:seed --force
