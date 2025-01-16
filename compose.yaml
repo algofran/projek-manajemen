@@ -17,7 +17,7 @@ services:
     image: laravel-app
     container_name: laravel-app
     volumes:
-      - /root/.jenkins/workspace/Aplikasi:/var/www
+      - /root/.jenkins/workspace/Aplikasi:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     depends_on:
       - mysql
@@ -27,7 +27,7 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: oceanli0611
     ports:
-      - "9000:9000" # Port PHP-FPM
+      - "9000:9000"
     networks:
       - backend
 
@@ -36,9 +36,9 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "80:80" # Port untuk mengakses aplikasi Laravel
+      - "80:80"
     volumes:
-      - /root/.jenkins/workspace/Aplikasi:/var/www
+      - /root/.jenkins/workspace/Aplikasi:/var/www/html
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
@@ -54,7 +54,7 @@ services:
       MYSQL_ROOT_PASSWORD: oceanli0611
       MYSQL_DATABASE: management
     ports:
-      - "3306:3306" # Port untuk mengakses MySQL (optional)
+      - "3306:3306"
     networks:
       - backend
 
