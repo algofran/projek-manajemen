@@ -16,10 +16,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Buat file .env dari .env.example jika belum ada
-                    if [ ! -f ${PROJECT_DIR}/.env ]; then
-                        cp ${PROJECT_DIR}/.env.example ${PROJECT_DIR}/.env
-                    fi
+                    # Buat file .env
+                    cp ${PROJECT_DIR}/.env.example ${PROJECT_DIR}/.env
 
                     # Ganti konfigurasi database pada .env
                     sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g" ${PROJECT_DIR}/.env
