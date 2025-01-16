@@ -17,14 +17,14 @@ RUN apk update && apk add --no-cache \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
+WORKDIR /root/.jenkins/workspace/Aplikasi
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /root/.jenkins/workspace/Aplikasi \
+    && chmod -R 755 /root/.jenkins/workspace/Aplikasi/storage /root/.jenkins/workspace/Aplikasi/bootstrap/cache
 
 COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

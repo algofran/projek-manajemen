@@ -12,12 +12,12 @@ services:
 
   app:
     build:
-      context: /root/.jenkins/workspace/Aplikasi
+      context: .
       dockerfile: Dockerfile
     image: laravel-app
     container_name: laravel-app
     volumes:
-      - /root/.jenkins/workspace/Aplikasi:/var/www/html
+      - .:/root/.jenkins/workspace/Aplikasi
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     depends_on:
       - mysql
@@ -38,7 +38,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /root/.jenkins/workspace/Aplikasi:/var/www/html
+      - .:/root/.jenkins/workspace/Aplikasi
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
