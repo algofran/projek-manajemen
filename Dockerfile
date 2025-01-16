@@ -13,6 +13,8 @@ RUN apk update && apk add --no-cache \
     libxml2-dev \
     oniguruma-dev \
     libzip-dev \
+    bash \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Menginstall Composer
@@ -21,24 +23,29 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Menyiapkan direktori kerja
 WORKDIR /var/www
 
+# Menyalin file Composer terlebih dahulu untuk meng-cache dependensi (mengoptimalkan build layer)
+COPY composer.json composer.lock /var/www/
+
+# Menjalankan Composer untuk menginstall dependensi aplikasi
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
 # Menyalin seluruh file aplikasi Laravel ke dalam container
 COPY . /var/www
 
 # Menyimpan file konfigurasi PHP
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
-# Menjalankan Composer untuk menginstall dependensi aplikasi
-RUN composer install --optimize-autoloader --no-dev
-
 # Memberikan hak akses yang sesuai pada direktori penyimpanan
 RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www
+    && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
 # Expose port untuk aplikasi
 EXPOSE 9000
 
-# Mengatur entrypoint default untuk menjalankan PHP-FPM
-CMD ["php-fpm"]
+# Menjalankan migrasi dan seeding database secara opsional
+# Menggunakan entrypoint untuk memastikan proses Laravel berjalan sesuai
+COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Mengatur entrypoint default lainnya (boleh diaktifkan jika diperlukan)
-# CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=9000"]
+# Mengatur entrypoint default untuk menjalankan PHP-FPM
+CMD ["entrypoint.sh"]
