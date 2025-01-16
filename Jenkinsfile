@@ -1,8 +1,10 @@
 pipeline {
     agent any
     environment {
-        DOCKER_COMPOSE = "/usr/local/bin/compose" // Path docker-compose
+        DOCKER_COMPOSE = "/usr/local/bin/docker-compose" // Path docker-compose
         PROJECT_DIR = "/var/www/aplikasi" // Path direktori Laravel
+        CONTAINER_APP = "laravel-app" // Nama container Laravel
+        CONTAINER_MYSQL = "mysql" // Nama container MySQL
     }
     stages {
         stage('Checkout') {
@@ -10,7 +12,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Run Dev Environment') {
+        stage('Setup Environment') {
             steps {
                 script {
                     // Menjalankan docker-compose dengan file docker-compose.dev.yml
@@ -21,13 +23,24 @@ pipeline {
                 }
             }
         }
+        stage('Build and Start Containers') {
+            steps {
+                script {
+                    sh '''
+                    # Build dan jalankan docker-compose
+                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down || true
+                    ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
+                    '''
+                }
+            }
+        }
         stage('Run Migrations and Seed') {
             steps {
                 script {
                     sh '''
                     # Menjalankan migrasi dan seed tanpa menggunakan sh -c, langsung pada PHP
-                    docker exec -i ${PROJECT_DIR}_app php artisan migrate --force
-                    docker exec -i ${PROJECT_DIR}_app php artisan db:seed --force
+                    docker exec -i ${CONTAINER_APP} php artisan migrate --force
+                    docker exec -i ${CONTAINER_APP} php artisan db:seed --force
                     '''
                 }
             }
