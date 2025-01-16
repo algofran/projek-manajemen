@@ -23,17 +23,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Menyiapkan direktori kerja
 WORKDIR /var/www
 
+# Menyalin seluruh file aplikasi Laravel ke dalam container terlebih dahulu
+COPY . /var/www
+
 # Menyalin file Composer terlebih dahulu untuk meng-cache dependensi (mengoptimalkan build layer)
 COPY composer.json composer.lock /var/www/
 
 # Menjalankan Composer untuk menginstall dependensi aplikasi
 RUN composer install
 
-# Menyalin seluruh file aplikasi Laravel ke dalam container
-COPY . /var/www
-
 # Menyimpan file konfigurasi PHP
-# Memastikan file php.ini ada di lokasi yang benar dalam container ( /usr/local/etc/php/conf.d/ )
+# Memastikan file php.ini ada di lokasi yang benar dalam container (/usr/local/etc/php/conf.d/)
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Memberikan hak akses yang sesuai pada direktori penyimpanan
