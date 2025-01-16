@@ -13,24 +13,6 @@ pipeline {
             }
         }
 
-        stage('Setup Environment') {
-            steps {
-                script {
-                    // Ganti konfigurasi database pada .env
-                    sh '''
-                    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
-                    sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
-                    sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
-                    # Hanya mengganti DB_PASSWORD jika belum ada nilai password
-                    if ! grep -q "DB_PASSWORD=" ${PROJECT_DIR}/.env; then
-                        echo "DB_PASSWORD=oceanli0611" >> ${PROJECT_DIR}/.env
-                    fi
-                    '''
-                }
-            }
-        }
-
-
         stage('Build and Start Containers') {
             steps {
                 script {
@@ -44,26 +26,18 @@ pipeline {
             }
         }
 
-        stage('Run Migrations and Seed') {
+        stage('Setup Environment') {
             steps {
                 script {
-                    // Menunggu beberapa detik untuk memberi waktu MySQL siap
-                    sleep time: 30, unit: 'SECONDS'
-
-                    // Menghasilkan kunci aplikasi Laravel
+                    // Ganti konfigurasi database pada .env
                     sh '''
-                    docker-compose exec -T laravel-app php artisan key:generate
-                    '''
-
-                    // Menjalankan migrasi dan seed menggunakan docker-compose exec
-                    sh '''
-                    docker-compose exec -T laravel-app php artisan migrate --force
-                    docker-compose exec -T laravel-app php artisan db:seed --force
+                    sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
+                    sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
                     '''
                 }
             }
         }
-
 
     }
     post {

@@ -6,6 +6,10 @@ done
 
 # Jalankan migrasi database
 echo "Menjalankan migrasi database..."
+php artisan key:generate
+
+# Jalankan migrasi database
+echo "Menjalankan migrasi database..."
 php artisan migrate --force
 
 # Jalankan seeding database
