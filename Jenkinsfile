@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_COMPOSE = "/usr/local/bin/docker-compose" // Path docker-compose
-        PROJECT_DIR = "${WORKSPACE}/Aplikasi" // Path direktori Laravel, gunakan WORKSPACE untuk path fleksibel
+        PROJECT_DIR = "/root/.jenkins/workspace/Aplikasi" // Path direktori Laravel
         CONTAINER_APP = "laravel-app" // Nama container Laravel
         CONTAINER_MYSQL = "mysql" // Nama container MySQL
     }
@@ -19,7 +19,12 @@ pipeline {
                     # Pastikan .env.example ada dan buat file .env jika belum ada
                     if [ ! -f ${PROJECT_DIR}/.env ]; then
                         echo ".env file tidak ditemukan, membuat .env dari .env.example"
-                        cp ${PROJECT_DIR}/.env.example ${PROJECT_DIR}/.env
+                        if [ -f ${PROJECT_DIR}/.env.example ]; then
+                            cp ${PROJECT_DIR}/.env.example ${PROJECT_DIR}/.env
+                        else
+                            echo "Error: .env.example tidak ditemukan. Pastikan file ini ada di repository."
+                            exit 1
+                        fi
                     else
                         echo ".env file sudah ada, melanjutkan dengan konfigurasi."
                     fi
@@ -49,6 +54,7 @@ pipeline {
                 script {
                     sh '''
                     # Menjalankan migrasi dan seed
+                    docker exec -i ${CONTAINER_APP} php artisan key:generate
                     docker exec -i ${CONTAINER_APP} php artisan migrate --force
                     docker exec -i ${CONTAINER_APP} php artisan db:seed --force
                     '''
