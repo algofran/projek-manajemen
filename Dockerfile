@@ -27,7 +27,7 @@ WORKDIR /var/www
 COPY composer.json composer.lock /var/www/
 
 # Menjalankan Composer untuk menginstall dependensi aplikasi
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN composer install
 
 # Menyalin seluruh file aplikasi Laravel ke dalam container
 COPY . /var/www
