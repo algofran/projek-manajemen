@@ -33,6 +33,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-di
 COPY . /var/www
 
 # Menyimpan file konfigurasi PHP
+# Memastikan file php.ini ada di lokasi yang benar dalam container ( /usr/local/etc/php/conf.d/ )
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Memberikan hak akses yang sesuai pada direktori penyimpanan
