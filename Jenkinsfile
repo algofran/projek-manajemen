@@ -21,11 +21,15 @@ pipeline {
                     sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${CONTAINER_MYSQL}/g' ${PROJECT_DIR}/.env
                     sed -i 's/DB_DATABASE=laravel/DB_DATABASE=management/g' ${PROJECT_DIR}/.env
                     sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' ${PROJECT_DIR}/.env
-                    sed -i 's/DB_PASSWORD=/DB_PASSWORD=oceanli0611/g' ${PROJECT_DIR}/.env
+                    # Hanya mengganti DB_PASSWORD jika belum ada nilai password
+                    if ! grep -q "DB_PASSWORD=" ${PROJECT_DIR}/.env; then
+                        echo "DB_PASSWORD=oceanli0611" >> ${PROJECT_DIR}/.env
+                    fi
                     '''
                 }
             }
         }
+
 
         stage('Build and Start Containers') {
             steps {
