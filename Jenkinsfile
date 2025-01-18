@@ -76,7 +76,7 @@ pipeline {
                 script {
                     sh '''
                     echo "Menunggu MySQL agar siap..."
-                    for i in {1..30}; do
+                    for i in {1..60}; do
                         if docker exec -i ${CONTAINER_MYSQL} mysqladmin ping --silent; then
                             echo "MySQL siap!"
                             break
