@@ -76,21 +76,27 @@ pipeline {
                 script {
                     sh '''
                     echo "Menunggu MySQL agar siap..."
-                    for i in {1..60}; do
-                        if docker exec -i ${CONTAINER_MYSQL} mysqladmin ping --silent; then
-                            echo "MySQL siap!"
-                            break
+                    MAX_TRIES=12
+                    TRIES=0
+                    until docker exec -i ${CONTAINER_MYSQL} mysqladmin ping --silent; do
+                        if [ "$TRIES" -ge "$MAX_TRIES" ]; then
+                            echo "MySQL tidak siap dalam waktu yang ditentukan. Gagal."
+                            exit 1
                         fi
-                        echo "MySQL belum siap, mencoba lagi ($i)..."
+                        echo "MySQL belum siap, mencoba lagi... (${TRIES}/${MAX_TRIES})"
+                        TRIES=$((TRIES + 1))
                         sleep 5
                     done
-                    docker exec -i ${CONTAINER_APP} php artisan key:generate
-                    docker exec -i ${CONTAINER_APP} php artisan migrate --force
-                    docker exec -i ${CONTAINER_APP} php artisan db:seed --force
+
+                    echo "Menjalankan perintah Artisan..."
+                    docker exec -i ${CONTAINER_APP} php artisan key:generate || echo "Gagal membuat app key"
+                    docker exec -i ${CONTAINER_APP} php artisan migrate --force || (echo "Migration gagal, cek log!" && exit 1)
+                    docker exec -i ${CONTAINER_APP} php artisan db:seed --force || (echo "Seeder gagal, cek log!" && exit 1)
                     '''
                 }
             }
         }
+
     }
     post {
         success {
