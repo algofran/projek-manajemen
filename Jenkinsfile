@@ -46,6 +46,7 @@ pipeline {
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down
                     # Build dan jalankan container
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
+                    sleep 30  # Tambahkan jeda waktu di sini
                     '''
                 }
             }
@@ -75,19 +76,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "Menunggu MySQL agar siap..."
-                    MAX_TRIES=12
-                    TRIES=0
-                    until docker exec -i ${CONTAINER_MYSQL} mysqladmin ping --silent; do
-                        if [ "$TRIES" -ge "$MAX_TRIES" ]; then
-                            echo "MySQL tidak siap dalam waktu yang ditentukan. Gagal."
-                            exit 1
-                        fi
-                        echo "MySQL belum siap, mencoba lagi... (${TRIES}/${MAX_TRIES})"
-                        TRIES=$((TRIES + 1))
-                        sleep 5
-                    done
-
                     echo "Menjalankan perintah Artisan..."
                     docker exec -i ${CONTAINER_APP} php artisan key:generate || echo "Gagal membuat app key"
                     docker exec -i ${CONTAINER_APP} php artisan migrate --force || (echo "Migration gagal, cek log!" && exit 1)
