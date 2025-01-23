@@ -61,7 +61,7 @@
                         <p class="text-white text-center">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
-                            </script> Andi Amalia Ramadani
+                            </script> Mell
                         </p>
                     </div>
                     <div class="col-md-6">
