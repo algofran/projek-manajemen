@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    environment {
+        CONTAINER_NAME = 'laravel-app'
+        BRANCH = 'penelitian'
+    }
+    stages {
+        stage('Git Pull') {
+            steps {
+                sh '''
+                docker exec -i ${CONTAINER_NAME} bash -c "cd /var/www && git pull origin ${BRANCH}"
+                '''
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh '''
+                docker exec -i ${CONTAINER_NAME} bash -c "cd /var/www && php artisan test"
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build and tests completed successfully!'
+        }
+        failure {
+            echo 'Something went wrong. Check the logs.'
+        }
+    }
+}
