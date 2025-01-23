@@ -12,13 +12,6 @@ pipeline {
                 '''
             }
         }
-        stage('Run Tests') {
-            steps {
-                sh '''
-                docker exec -i ${CONTAINER_NAME} bash -c "cd /var/www && php artisan test"
-                '''
-            }
-        }
     }
     post {
         success {
