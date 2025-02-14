@@ -61,7 +61,7 @@
                         <p class="text-white text-center">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
-                            </script> Amalia
+                            </script> Amelia Ramadani
                         </p>
                     </div>
                     <div class="col-md-6">
