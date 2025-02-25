@@ -69,7 +69,7 @@
                             Copyright ©
                             <script>
                                 document.write(new Date().getFullYear())
-                            </script> Amalia Ramadani
+                            </script> Sule
                         </p>
                     </div>
                     <div class="col-md-6">
