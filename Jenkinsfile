@@ -46,7 +46,7 @@ pipeline {
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down
                     # Build dan jalankan container
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
-                    sleep 10
+                  
                     '''
                 }
             }
@@ -84,7 +84,6 @@ pipeline {
                 }
             }
         }
-
     }
     post {
         success {
