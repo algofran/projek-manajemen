@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout scm6
             }
         }
         stage('Setup Environment') {
@@ -46,7 +46,7 @@ pipeline {
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml down
                     # Build dan jalankan container
                     ${DOCKER_COMPOSE} -f ${PROJECT_DIR}/compose.yaml up -d --build
-                    sleep 20
+                    sleep 5
                     '''
                 }
             }
