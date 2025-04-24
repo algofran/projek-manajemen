@@ -69,7 +69,7 @@
                             Copyright ©
                             <script>
                                 document.write(new Date().getFullYear())
-                            </script> Sule
+                            </script>
                         </p>
                     </div>
                     <div class="col-md-6">
