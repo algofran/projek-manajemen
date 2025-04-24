@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                             <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n10"
-                                style="background-image:url('{{ asset('assets/img/img-05.jpg') }}')"></div>
+                                style="background-image:url('{{ asset('assets/img/img-06.jpg') }}')"></div>
                         </div>
                     </div>
                 </div>
